@@ -1,10 +1,22 @@
 {
 	"homepage": "https://www.curseforge.com/minecraft/mc-mods/laser-mod",
 	"1.12.2": {
-		"0.2": "going into beta"
+		"0.1": "going into beta"
 	},
-	"promos": {
-		"1.12.2-latest": "0.2",
-		"1.12.2-recommended": "0.2"
+	"version": {
+		"1.12.2-latest": "0.1",
+		"1.12.2-recommended": "0.1"
+	}
+	"message": {
+		"1.12.2": [
+			{
+				"text": "Hello!!"
+			},
+			{
+				"text": "Click Here",
+				"url": "https://www.curseforge.com/minecraft/mc-mods/laser-mod",
+				"hover": "Jo"
+			}
+		]
 	}
 }
