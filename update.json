@@ -6,12 +6,5 @@
 	"version": {
 		"1.12.2-latest": "0.1",
 		"1.12.2-recommended": "0.1"
-	},
-	"message": {
-		"1.12.2": [
-			{
-				"text": "text"
-			}
-		]
 	}
 }
