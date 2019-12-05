@@ -9,14 +9,6 @@
 	},
 	"message": {
 		"1.12.2": [
-			{
-				"text": "§mHello!!"
-			},
-			{
-				"text": "§m§1Click Here",
-				"url": "https://www.curseforge.com/minecraft/mc-mods/laser-mod",
-				"hover": "hello YO"
-			}
 		]
 	}
 }
