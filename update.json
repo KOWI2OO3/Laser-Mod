@@ -15,9 +15,7 @@
 			{
 				"text": "§m§1Click Here",
 				"url": "https://www.curseforge.com/minecraft/mc-mods/laser-mod",
-				"hover": {
-						"text" : "hello YO"
-					}
+				"hover": "hello YO"
 			}
 		]
 	}
