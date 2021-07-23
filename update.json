@@ -2,7 +2,6 @@
 	"homepage": "https://www.curseforge.com/minecraft/mc-mods/laser-mod",
 	"message": {
 		"1.12": "a new version is out for minecraft 1.16!",
-		"1.16": "Hello #player, your minecraft version is #mc and your laser mod version is #version (new version: #check_version)#link"
 	},
 	"1.16": {
 		"0.1": "Updated to 1.16!"
