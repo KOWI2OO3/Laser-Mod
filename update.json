@@ -1,6 +1,9 @@
 {
 	"homepage": "https://www.curseforge.com/minecraft/mc-mods/laser-mod",
-	"message": "Hello World!",
+	"message": {
+		"1.12": "a new version is out for minecraft 1.16!",
+		"1.16": "Hello World!"
+	},
 	"1.12.2": {
 		"0.1": "going into beta"
 	},
