@@ -10,9 +10,9 @@
 		"0.1": "going into beta"
 	},
 	"version": {
-		"1.16-latest": "1.16 - 0.1",
-		"1.16-recommended": "1.16 - 0.1",
-		"1.12.2-latest": "0.1 Patch 4.1",
-		"1.12.2-recommended": "0.1 Patch 4.1"
+		"1.16-latest": "0.1",
+		"1.16-recommended": "0.1",
+		"1.12.2-latest": "1.16 - 0.1",
+		"1.12.2-recommended": "1.16 - 0.1"
 	}
 }
