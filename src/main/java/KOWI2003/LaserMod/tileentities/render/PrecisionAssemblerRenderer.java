@@ -2,7 +2,7 @@ package KOWI2003.LaserMod.tileentities.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.blocks.BlockHorizontal;
 import KOWI2003.LaserMod.init.ModItems;
@@ -55,7 +55,7 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 				progress = 1;
 			matrix.translate(0.22, 0.0615f, -0.444);
 			matrix.pushPose();
-			matrix.mulPose(Axis.ZP.rotationDegrees(180));
+			matrix.mulPose(Vector3f.ZP.rotationDegrees(180));
 			String msg = Math.round(Math.abs(progress - 1) * 100) + "%";
 			matrix.translate(0.45f/2f - 0.05f*(msg.length()/2f), -0.09f, -0.003);
 			RenderUtils.renderString(matrix, msg, 0, 0, 0, 0.01f, 1.0f, 1.0f, 1.0f, false);
@@ -72,17 +72,17 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 			float scaler = 0.15f;
 			if(te.handler.getStackInSlot(slot).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.268f, 0.75f, 0.063f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
 			}else if(te.handler.getStackInSlot(slot).getItem() instanceof ItemLaserToolBase || te.handler.getStackInSlot(slot).getItem() == ModItems.LaserToolShell.get()) {
 				scaler = 0.7f;
 				matrix.translate(-0.570f, 0.058f, 0.115f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
-				matrix.mulPose(Axis.YP.rotationDegrees(36.1f));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else if(te.handler.getStackInSlot(slot).getItem() == ModItems.LaserCrystal.get()) {
 				scaler = scaler/2f;
 				matrix.translate(-0.480f, 0.36f, 0.165f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
-				matrix.mulPose(Axis.YP.rotationDegrees(36.1f));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else {
 				matrix.translate(-0.268f, 0.107f, -0.255f);
 			}
@@ -96,17 +96,17 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 			matrix.translate(0, 0, -0.27f * slot);
 			if(te.handler.getStackInSlot(slot).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.268f, 0.75f, 0.063f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
 			}else if(te.handler.getStackInSlot(slot).getItem() instanceof ItemLaserToolBase || te.handler.getStackInSlot(slot).getItem() == ModItems.LaserToolShell.get()) {
 				scaler = 0.7f;
 				matrix.translate(-0.570f, 0.058f, 0.115f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
-				matrix.mulPose(Axis.YP.rotationDegrees(36.1f));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else if(te.handler.getStackInSlot(slot).getItem() == ModItems.LaserCrystal.get()) {
 				scaler = scaler/2f;
 				matrix.translate(-0.480f, 0.36f, 0.165f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
-				matrix.mulPose(Axis.YP.rotationDegrees(36.1f));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else {
 				matrix.translate(-0.268f, 0.107f, -0.255f);
 			}
@@ -120,17 +120,17 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 			matrix.translate(0, 0, -0.27f * slot);
 			if(te.handler.getStackInSlot(slot).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.268f, 0.75f, 0.063f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
 			}else if(te.handler.getStackInSlot(slot).getItem() instanceof ItemLaserToolBase || te.handler.getStackInSlot(slot).getItem() == ModItems.LaserToolShell.get()) {
 				scaler = 0.7f;
 				matrix.translate(-0.570f, 0.058f, 0.115f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
-				matrix.mulPose(Axis.YP.rotationDegrees(36.1f));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else if(te.handler.getStackInSlot(slot).getItem() == ModItems.LaserCrystal.get()) {
 				scaler = scaler/2f;
 				matrix.translate(-0.480f, 0.36f, 0.165f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
-				matrix.mulPose(Axis.YP.rotationDegrees(36.1f));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else {
 				matrix.translate(-0.268f, 0.107f, -0.255f);
 			}
@@ -145,17 +145,17 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 			matrix.translate(-0.378f, 0, -0.07f);
 			if(te.handler.getStackInSlot(slot).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.268f, 0.75f, 0.063f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
 			}else if(te.handler.getStackInSlot(slot).getItem() instanceof ItemLaserToolBase || te.handler.getStackInSlot(slot).getItem() == ModItems.LaserToolShell.get()) {
 				scaler = 0.7f;
 				matrix.translate(-0.570f, 0.058f, 0.115f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
-				matrix.mulPose(Axis.YP.rotationDegrees(36.1f));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else if(te.handler.getStackInSlot(slot).getItem() == ModItems.LaserCrystal.get()) {
 				scaler = scaler/2f;
 				matrix.translate(-0.480f, 0.36f, 0.165f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
-				matrix.mulPose(Axis.YP.rotationDegrees(36.1f));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else {
 				matrix.translate(-0.268f, 0.107f, -0.255f);
 			}
@@ -170,17 +170,17 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 			matrix.translate(-0.455f, -0.015f, -0.45f);
 			if(te.handler.getStackInSlot(slot).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.268f, 0.75f, 0.063f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
 			}else if(te.handler.getStackInSlot(slot).getItem() instanceof ItemLaserToolBase || te.handler.getStackInSlot(slot).getItem() == ModItems.LaserToolShell.get()) {
 				scaler = 0.7f;
 				matrix.translate(-0.570f, 0.058f, 0.115f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
-				matrix.mulPose(Axis.YP.rotationDegrees(36.1f));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else if(te.handler.getStackInSlot(slot).getItem() == ModItems.LaserCrystal.get()) {
 				scaler = scaler/2f;
 				matrix.translate(-0.480f, 0.36f, 0.165f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
-				matrix.mulPose(Axis.YP.rotationDegrees(36.1f));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else {
 				matrix.translate(-0.268f, 0.107f, -0.255f);
 			}

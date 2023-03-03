@@ -2,7 +2,7 @@ package KOWI2003.LaserMod.tileentities.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.blocks.BlockHorizontal;
@@ -59,7 +59,7 @@ public class LaserControllerRender implements BlockEntityRenderer<TileEntityLase
 		//Screens
 		matrix.pushPose();
 		{	
-			matrix.mulPose(Axis.ZN.rotationDegrees(180f));
+			matrix.mulPose(Vector3f.ZN.rotationDegrees(180f));
 			matrix.translate(-0.695, -0.72, 0);
 			
 			String mode = "NULL";

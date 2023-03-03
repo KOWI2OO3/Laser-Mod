@@ -1,9 +1,8 @@
 package KOWI2003.LaserMod.tileentities.render.models;
 
-import org.joml.Vector3f;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.utils.MathUtils;

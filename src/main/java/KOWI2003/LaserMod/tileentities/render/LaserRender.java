@@ -1,15 +1,13 @@
 package KOWI2003.LaserMod.tileentities.render;
 
-import org.joml.Matrix4f;
-import org.joml.Vector3f;
-
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
-import com.mojang.math.Axis;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.blocks.BlockLaser;
@@ -71,8 +69,8 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 						
 						matrix.translate(.5f, .5f, .5f);
 					
-						matrix.mulPose(Axis.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-						matrix.mulPose(Axis.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
+						matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
+						matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
 						
 						matrix.translate(-.5, -.5, 0); matrix2 = matrix.last().pose();
 						
@@ -99,8 +97,8 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 		
 							matrix.translate(.5f, .5f, .5f);
 						
-							matrix.mulPose(Axis.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-							matrix.mulPose(Axis.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
+							matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
+							matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
 
 							matrix.translate(-.5, -1, -.5);
 
@@ -151,8 +149,8 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 						
 						matrix.translate(.5f, .5f, .5f);
 						
-						matrix.mulPose(Axis.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-						matrix.mulPose(Axis.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
+						matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
+						matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
 						
 						rotationLogic(matrix, te);
 						
@@ -186,8 +184,8 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 					
 						matrix.translate(.5f, .5f, .5f);
 					
-						matrix.mulPose(Axis.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-						matrix.mulPose(Axis.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
+						matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
+						matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
 						
 						rotationLogic(matrix, te);
 						
@@ -241,13 +239,13 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 		
 		if(facing.getAxis().isHorizontal()) {
 			right = new Vector3f(-facing.getStepZ(), facing.getStepY(), facing.getStepX());
-			normal = new Vector3f(right);
+			normal = right.copy();
 			normal.cross(facing.step());
 			normal = new Vector3f(Math.abs(normal.x()), Math.abs(normal.y()), Math.abs(normal.z()));
 			toPlayer = toPlayer.multiply(new Vec3(Math.abs(right.x() + normal.x()), Math.abs(right.y() + normal.y()), Math.abs(right.z() + normal.z())));
 		}else {
 			right = new Vector3f(-facing.getStepY(), facing.getStepX(), facing.getStepZ());
-			normal = new Vector3f(right);
+			normal = right.copy();
 			normal.cross(facing.step());
 			toPlayer = toPlayer.multiply(new Vec3(Math.abs(right.x() + normal.x()), Math.abs(right.y() + normal.y()), Math.abs(right.z() + normal.z())));
 		}
@@ -274,7 +272,7 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 			}
 		}
 		
-		matrix.mulPose(Axis.YP.rotationDegrees(angle));
+		matrix.mulPose(Vector3f.YP.rotationDegrees(angle));
 	}
 	
 public static class LaserRenderType extends RenderType {

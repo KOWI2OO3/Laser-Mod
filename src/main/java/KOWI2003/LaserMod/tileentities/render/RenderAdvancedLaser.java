@@ -1,12 +1,10 @@
 package KOWI2003.LaserMod.tileentities.render;
 
-import org.joml.Matrix4f;
-import org.joml.Vector3f;
-
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.blocks.BlockLaser;
 import KOWI2003.LaserMod.blocks.BlockRotatable;
@@ -54,8 +52,8 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 			
 			matrix.translate(.5f, .5f, .5f);
 			
-			matrix.mulPose(Axis.XP.rotationDegrees(te.getBlockState().getValue(BlockLaser.FACING).step().y() * 90f - 90f));
-			matrix.mulPose(Axis.ZP.rotationDegrees((Math.abs(te.getBlockState().getValue(BlockLaser.FACING).step().y())-1) * (te.getBlockState().getValue(BlockLaser.FACING).toYRot() + 180f)));
+			matrix.mulPose(Vector3f.XP.rotationDegrees(te.getBlockState().getValue(BlockLaser.FACING).step().y() * 90f - 90f));
+			matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(te.getBlockState().getValue(BlockLaser.FACING).step().y())-1) * (te.getBlockState().getValue(BlockLaser.FACING).toYRot() + 180f)));
 			
 			matrix.translate(-.5, -.5, 0);
 			matrix.translate(1, -1.15, .5);
@@ -103,14 +101,14 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 					
 						matrix.translate(.5f, .5f, .5f);
 					
-						matrix.mulPose(Axis.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-						matrix.mulPose(Axis.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
+						matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
+						matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
 						
 						matrix.translate(-.5, -.5, 0);
 						
 						matrix.translate(origin.x(), origin.y(), origin.z());
-						matrix.mulPose(Axis.ZP.rotation(rotation.y));
-						matrix.mulPose(Axis.XP.rotation(rotation.x));
+						matrix.mulPose(Vector3f.ZP.rotation(rotation.y));
+						matrix.mulPose(Vector3f.XP.rotation(rotation.x));
 						matrix.translate(-.5f, 0.05f, 0);
 						
 						buffer.vertex(matrix2, ll, 0F, 0F).color(r,g, b, a).uv(0, 0).endVertex();
@@ -136,14 +134,14 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 		
 							matrix.translate(.5f, .5f, .5f);
 						
-							matrix.mulPose(Axis.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-							matrix.mulPose(Axis.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
+							matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
+							matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
 							
 							matrix.translate(-.5f, -.5f, -.5f);
 							
 							matrix.translate(origin.x(), origin.y(), origin.z());
-							matrix.mulPose(Axis.ZP.rotation(rotation.y));
-							matrix.mulPose(Axis.XP.rotation(rotation.x));
+							matrix.mulPose(Vector3f.ZP.rotation(rotation.y));
+							matrix.mulPose(Vector3f.XP.rotation(rotation.x));
 							matrix.translate(-.5f, 0.05f, 0);
 							
 							distance += .5d;
@@ -193,14 +191,14 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 						
 						matrix.translate(.5f, .5f, .5f);
 						
-						matrix.mulPose(Axis.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-						matrix.mulPose(Axis.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
+						matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
+						matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
 						
 						matrix.translate(-.5, -.5, 0);
 						
 						matrix.translate(origin.x(), origin.y(), origin.z());
-						matrix.mulPose(Axis.ZP.rotation(rotation.y));
-						matrix.mulPose(Axis.XP.rotation(rotation.x));
+						matrix.mulPose(Vector3f.ZP.rotation(rotation.y));
+						matrix.mulPose(Vector3f.XP.rotation(rotation.x));
 						matrix.translate(-.5f, 0.05f, 0);
 						matrix.translate(.5f, .5f, 0);
 						rotationLogic(matrix, te);
@@ -234,14 +232,14 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 					
 						matrix.translate(.5f, .5f, .5f);
 					
-						matrix.mulPose(Axis.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-						matrix.mulPose(Axis.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
+						matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
+						matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
 						
 						matrix.translate(-.5, -.5, 0);
 						
 						matrix.translate(origin.x(), origin.y(), origin.z());
-						matrix.mulPose(Axis.ZP.rotation(rotation.y));
-						matrix.mulPose(Axis.XP.rotation(rotation.x));
+						matrix.mulPose(Vector3f.ZP.rotation(rotation.y));
+						matrix.mulPose(Vector3f.XP.rotation(rotation.x));
 						matrix.translate(-.5f, 0.05f, 0);
 						matrix.translate(.5f, .5f, 0);
 						rotationLogic(matrix, te);
@@ -298,13 +296,13 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 		
 		if(facing.getAxis().isHorizontal()) {
 			right = new Vector3f(-facing.getStepZ(), facing.getStepY(), facing.getStepX());
-			normal = new Vector3f(right);
+			normal = right.copy();
 			normal.cross(facing.step());
 			normal = new Vector3f(Math.abs(normal.x()), Math.abs(normal.y()), Math.abs(normal.z()));
 			toPlayer = toPlayer.multiply(new Vec3(Math.abs(right.x() + normal.x()), Math.abs(right.y() + normal.y()), Math.abs(right.z() + normal.z())));
 		}else {
 			right = new Vector3f(-facing.getStepY(), facing.getStepX(), facing.getStepZ());
-			normal = new Vector3f(right);
+			normal = right.copy();
 			normal.cross(facing.step());
 			toPlayer = toPlayer.multiply(new Vec3(Math.abs(right.x() + normal.x()), Math.abs(right.y() + normal.y()), Math.abs(right.z() + normal.z())));
 		}
@@ -331,6 +329,6 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 			}
 		}
 		
-		matrix.mulPose(Axis.YP.rotationDegrees(angle));
+		matrix.mulPose(Vector3f.YP.rotationDegrees(angle));
 	}
 }

@@ -2,7 +2,7 @@ package KOWI2003.LaserMod.tileentities.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.blocks.BlockHorizontal;
 import KOWI2003.LaserMod.init.ModItems;
@@ -53,7 +53,7 @@ public class InfuserRenderer implements BlockEntityRenderer<TileEntityInfuser> {
 				progress = 1;
 			matrix.translate(0.22, 0.0615f, -0.444);
 			matrix.pushPose();
-			matrix.mulPose(Axis.ZP.rotationDegrees(180));
+			matrix.mulPose(Vector3f.ZP.rotationDegrees(180));
 			String msg = Math.round(Math.abs(progress - 1) * 100) + "%";
 			matrix.translate(0.45f/2f - 0.05f*(msg.length()/2f), -0.09f, -0.003);
 			RenderUtils.renderString(matrix, msg, 0, 0, -.001f, 0.01f, 1.0f, 1.0f, 1.0f, false);
@@ -68,7 +68,7 @@ public class InfuserRenderer implements BlockEntityRenderer<TileEntityInfuser> {
 		if(!te.handler.getStackInSlot(0).isEmpty()) {
 			if(te.handler.getStackInSlot(0).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.285f, 0.75f, 0.04f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
 			}else {
 				matrix.translate(-0.2825f, 0.107f, -0.275f);
 			}
@@ -81,11 +81,11 @@ public class InfuserRenderer implements BlockEntityRenderer<TileEntityInfuser> {
 			matrix.translate(-0.25, -0.01f, -0.43f);
 			if(te.handler.getStackInSlot(1).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.285f, 0.75f, 0.04f);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
 			}else if(te.handler.getStackInSlot(1).getItem() instanceof ItemLaserToolBase) {
 				scaler = .2f;
 				matrix.translate(0.22f, 0.106f, -0.505f);
-				matrix.mulPose(Axis.YP.rotationDegrees(-45f));
+				matrix.mulPose(Vector3f.YP.rotationDegrees(-45f));
 //				scaler = 0.7f;
 //				matrix.translate(-0.585f, 0.058f, 0.085f);
 //				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
@@ -111,7 +111,7 @@ public class InfuserRenderer implements BlockEntityRenderer<TileEntityInfuser> {
 //					matrix.mulPose(Vector3f.XP.rotationDegrees(-90));
 //					matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 				}else {
-					matrix.mulPose(Axis.XP.rotationDegrees(-90));
+					matrix.mulPose(Vector3f.XP.rotationDegrees(-90));
 					matrix.translate(-0.78, -0.365f, -0.13f);
 				}
 			}
