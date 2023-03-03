@@ -5,10 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
-
-import com.mojang.math.Axis;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.LaserProperties.Properties;
 import KOWI2003.LaserMod.init.ModTileTypes;
@@ -113,13 +111,13 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 	
 	public Vector3f UP() {
 		Vector3f up = new Vector3f(0, 1, 0);
-		up = MathUtils.rotateVector(up, new Vector3f(), Axis.XP.rotationDegrees(getDirection().step().y() * 90f - 90f));
+		up = MathUtils.rotateVector(up, new Vector3f(), Vector3f.XP.rotationDegrees(getDirection().step().y() * 90f - 90f));
 		return up;
 	}
 	
 	public Vector3f RIGHT() {
 		Vector3f up = new Vector3f(0, 0, 1);
-		up = MathUtils.rotateVector(up, new Vector3f(), Axis.XP.rotationDegrees(getDirection().step().y() * 90f - 90f));
+		up = MathUtils.rotateVector(up, new Vector3f(), Vector3f.XP.rotationDegrees(getDirection().step().y() * 90f - 90f));
 		return up;
 	}
 	
@@ -128,7 +126,7 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 	}
 	
 	public void setDirection(Vector3f direction) {
-		Vector3f dir = new Vector3f(direction);
+		Vector3f dir = direction.copy();
 		dir.sub(getLaserPosVector());
 		dir.normalize();
 //		Vector3f rotation = MathUtils.forwardToEuler(dir, MathUtils.normalVectorFrom(dir));
@@ -280,8 +278,8 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 		
 		Vec2 rotation = getRotation();
 		dir = MathUtils.rotateVector(dir, new Vector3f(), new Vector3f((float)rotation.x, 0, (float)rotation.y));
-		Quaternionf rot1 = Axis.XP.rotationDegrees(facing.step().y() * 90f - 90f);
-		Quaternionf rot2 = Axis.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f));
+		Quaternion rot1 = Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f);
+		Quaternion rot2 = Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f));
 		
 		dir = MathUtils.rotateVector(dir, new Vector3f(), rot2);
 		dir = MathUtils.rotateVector(dir, new Vector3f(), rot1);

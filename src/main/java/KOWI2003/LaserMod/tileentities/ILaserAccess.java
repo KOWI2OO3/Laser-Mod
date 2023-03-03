@@ -2,7 +2,7 @@ package KOWI2003.LaserMod.tileentities;
 
 import java.util.List;
 
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.LaserProperties;
 import net.minecraft.core.BlockPos;

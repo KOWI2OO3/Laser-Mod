@@ -1,7 +1,7 @@
 package KOWI2003.LaserMod.utils.math;
 
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 
 public class Matrix3 {
 
@@ -24,14 +24,14 @@ public class Matrix3 {
 		m22 = len >= 9 ? values[8] : 0;
 	}
 	
-	public Quaternionf toQuaternion() {
+	public Quaternion toQuaternion() {
 		double w = Math.sqrt(1.0 + m00 + m11 + m22) / 2.0f;
 		double w4 = (4.0 * w);
 		double x = (m21 - m12) / w4;
 		double y = (m02 - m20) / w4;
 		double z = (m10 - m01) / w4;
 		
-		Quaternionf quat = new Quaternionf().identity();
+		Quaternion quat = Quaternion.ONE;
 		quat.set((float)x, (float)y, (float)z, (float)w);
 		return quat;
 	}
@@ -43,7 +43,7 @@ public class Matrix3 {
 	}
 	
 	public static Matrix3 fromDirections(Vector3f forward, Vector3f up) {
-		Vector3f right = new Vector3f(forward);
+		Vector3f right = forward.copy();
 		right.cross(up);
 		return new Matrix3(new float[] {right.x(), up.x(), forward.x(),
 										right.y(), up.y(), forward.y(),

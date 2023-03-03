@@ -19,9 +19,6 @@ import java.nio.ByteBuffer;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import org.joml.Matrix3f;
-import org.joml.Matrix4f;
-import org.joml.Vector3f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
@@ -41,7 +38,9 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
-import com.mojang.math.Axis;
+import com.mojang.math.Matrix3f;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.blocks.BlockRotatable;
@@ -908,7 +907,7 @@ public class RenderUtils {
 
 				matrix.translate(0.5, height + 0.11, 0.5);
 				matrix.translate(-0.5, -0.5, -0.5);
-				matrix.mulPose(Axis.XP.rotationDegrees(90));
+				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
 				matrix.translate(0.5, 0.5, -0.5 - 0.03125);
 			}  	
 			
@@ -957,22 +956,22 @@ public class RenderUtils {
 	}
 	
 	public static void rotateMatrix(PoseStack matrix, Direction facing) {
-		matrix.mulPose(Axis.YP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
+		matrix.mulPose(Vector3f.YP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
 	}
 	
 	public static void rotateMatrixForBlock(PoseStack matrix, Direction facing) {
 		matrix.translate(0.5f, 0.5f, 0.5f);
-		matrix.mulPose(Axis.YP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
+		matrix.mulPose(Vector3f.YP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
 		matrix.translate(-0.5f, -0.5f, -0.5f);
 	}
 	
 	public static void rotateMatrix(PoseStack matrix, float angle) {
-		matrix.mulPose(Axis.YP.rotationDegrees(angle));
+		matrix.mulPose(Vector3f.YP.rotationDegrees(angle));
 	}
 	
 	public static void rotateMatrixForBlock(PoseStack matrix, float angle) {
 		matrix.translate(0.5f, 0.5f, 0.5f);
-		matrix.mulPose(Axis.YP.rotationDegrees(angle));
+		matrix.mulPose(Vector3f.YP.rotationDegrees(angle));
 		matrix.translate(-0.5f, -0.5f, -0.5f);
 	}
 	
@@ -990,13 +989,13 @@ public class RenderUtils {
 		
 		if(facing.getAxis().isHorizontal()) {
 			right = new Vector3f(-facing.getStepZ(), facing.getStepY(), facing.getStepX());
-			normal = new Vector3f(right);
+			normal = right.copy();
 			normal.cross(facing.step());
 			normal = new Vector3f(Math.abs(normal.x()), Math.abs(normal.y()), Math.abs(normal.z()));
 			toPlayer = toPlayer.multiply(new Vec3(Math.abs(right.x() + normal.x()), Math.abs(right.y() + normal.y()), Math.abs(right.z() + normal.z())));
 		}else {
 			right = new Vector3f(-facing.getStepY(), facing.getStepX(), facing.getStepZ());
-			normal = new Vector3f(right);
+			normal = right.copy();
 			normal.cross(facing.step());
 			toPlayer = toPlayer.multiply(new Vec3(Math.abs(right.x() + normal.x()), Math.abs(right.y() + normal.y()), Math.abs(right.z() + normal.z())));
 		}
@@ -1023,7 +1022,7 @@ public class RenderUtils {
 			}
 		}
 		
-		matrix.mulPose(Axis.YP.rotationDegrees(angle));
+		matrix.mulPose(Vector3f.YP.rotationDegrees(angle));
 	}
 	
 	public static void renderString(PoseStack matrix, String msg, float x, float y, float z, float scale, 
@@ -1107,7 +1106,7 @@ public class RenderUtils {
 			model.young = isChild;
 			
 			matrix.translate(x, y, z);
-			matrix.mulPose(Axis.ZP.rotationDegrees(180));
+			matrix.mulPose(Vector3f.ZP.rotationDegrees(180));
 			matrix.scale(scale, scale, scale);
 			RenderSystem.enableTexture();
 			matrix.pushPose();

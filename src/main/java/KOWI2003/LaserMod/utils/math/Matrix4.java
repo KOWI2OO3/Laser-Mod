@@ -1,9 +1,11 @@
 package KOWI2003.LaserMod.utils.math;
 
-import org.joml.Matrix4f;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
+import java.nio.FloatBuffer;
+
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
+import com.mojang.math.Vector4f;
 
 import net.minecraft.core.Direction.Axis;
 
@@ -15,25 +17,28 @@ public class Matrix4 {
 	public float m30, m31, m32, m33;
 	
 	public Matrix4(Matrix4f m) {
-		m00 = m.m00();
-		m10 = m.m10();
-		m20 = m.m20();
-		m30 = m.m30();
+		FloatBuffer buffer = FloatBuffer.allocate(16);
+		m.store(buffer);
+		float[] values = buffer.array();
+		m00 = values[0];
+		m10 = values[1];
+		m20 = values[2];
+		m30 = values[3];
 
-		m01 = m.m01();
-		m11 = m.m11();
-		m21 = m.m21();
-		m31 = m.m31();
+		m01 = values[4];
+		m11 = values[5];
+		m21 = values[6];
+		m31 = values[7];
 		
-		m02 = m.m02();
-		m12 = m.m12();
-		m22 = m.m22();
-		m32 = m.m32();
+		m02 = values[8];
+		m12 = values[9];
+		m22 = values[10];
+		m32 = values[11];
 		
-		m03 = m.m03();
-		m13 = m.m13();
-		m23 = m.m23();
-		m33 = m.m33();
+		m03 = values[12];
+		m13 = values[13];
+		m23 = values[14];
+		m33 = values[15];
 	}
 	
 	public Matrix4(float[] values) {
@@ -87,40 +92,41 @@ public class Matrix4 {
 		m30 = toCopy.m30; m31 = toCopy.m31; m32 = toCopy.m32; m33 = toCopy.m33;
 	}
 	
-	public Matrix4(Quaternionf quat) {
+	public Matrix4(Quaternion quat) {
 		quat.normalize();
-		m00 = 1 - 2 * quat.y() * quat.y() - 2 * quat.z() * quat.z();	// 1 - 2yy - 2zz
-		m01 = 2 * quat.x() * quat.y() - 2 * quat.w() * quat.z();		// 2xy - 2wz
-		m02 = 2 * quat.x() * quat.z() + 2 * quat.w() * quat.y();		// 2xz + 2wy
+		m00 = 1 - 2 * quat.j() * quat.j() - 2 * quat.k() * quat.k();	// 1 - 2yy - 2zz
+		m01 = 2 * quat.i() * quat.j() - 2 * quat.r() * quat.k();		// 2xy - 2wz
+		m02 = 2 * quat.i() * quat.k() + 2 * quat.r() * quat.j();		// 2xz + 2wy
 		
-		m10 = 2 * quat.x() * quat.y() + 2 * quat.w() * quat.z();		// 2xy + 2wz
-		m11 = 1 - 2 * quat.x() * quat.x() - 2 * quat.z() * quat.z();	// 1 - 2xx - 2zz
-		m12 = 2 * quat.y() * quat.z() - 2 * quat.w() * quat.x();		// 2yz - 2wx
+		m10 = 2 * quat.i() * quat.j() + 2 * quat.r() * quat.k();		// 2xy + 2wz
+		m11 = 1 - 2 * quat.i() * quat.i() - 2 * quat.k() * quat.k();	// 1 - 2xx - 2zz
+		m12 = 2 * quat.j() * quat.k() - 2 * quat.r() * quat.i();		// 2yz - 2wx
 		
-		m20 = 2 * quat.x() * quat.z() - 2 * quat.w() * quat.y();		// 2xz - 2wy
-		m21 = 2 * quat.y() * quat.z() + 2 * quat.w() * quat.x();		// 2yz + 2wx
-		m22 = 1 - 2 * quat.x() * quat.x() - 2 * quat.y() * quat.y();	// 1 - 2xx - 2yy
+		m20 = 2 * quat.i() * quat.k() - 2 * quat.r() * quat.j();		// 2xz - 2wy
+		m21 = 2 * quat.j() * quat.k() + 2 * quat.r() * quat.i();		// 2yz + 2wx
+		m22 = 1 - 2 * quat.i() * quat.i() - 2 * quat.j() * quat.j();	// 1 - 2xx - 2yy
 		
 		m33 = 1;
 		m03 = m13 = m23 = m30 = m31 = m32 = 0;
 	}
 	
-	public Quaternionf toQuaternion() {
+	public Quaternion toQuaternion() {
 		double w = Math.sqrt(1.0 + m00 + m11 + m22) / 2.0f;
 		double w4 = (4.0 * w);
 		double x = (m21 - m12) / w4;
 		double y = (m02 - m20) / w4;
 		double z = (m10 - m01) / w4;
 		
-		Quaternionf quat = new Quaternionf((float)x, (float)y, (float)z, (float)w);
+		Quaternion quat = new Quaternion((float)x, (float)y, (float)z, (float)w);
 		return quat;
 	}
 	
 	public Matrix4f toMatrix4f() {
-		return new Matrix4f(m00, m01, m02, m03,
+		return new Matrix4f(new float[] 
+				{m00, m01, m02, m03,
 				 m10, m11, m12, m13,
 				 m20, m21, m22, m23,
-				 m30, m31, m32, m33);
+				 m30, m31, m32, m33});
 	}
 	
 	public Matrix4 add(Matrix4 matrix) {
@@ -182,7 +188,7 @@ public class Matrix4 {
 		return combine(createRotation(angle, axis));
 	}
 	
-	public Matrix4 rotate(Quaternionf quat) {
+	public Matrix4 rotate(Quaternion quat) {
 		return combine(new Matrix4(quat));
 	}
 	

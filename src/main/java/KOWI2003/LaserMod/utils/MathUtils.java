@@ -3,13 +3,11 @@ package KOWI2003.LaserMod.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.joml.Matrix4f;
-import org.joml.Quaternionf;
-import org.joml.Vector3d;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
-
-import com.mojang.math.Axis;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3d;
+import com.mojang.math.Vector3f;
+import com.mojang.math.Vector4f;
 
 import KOWI2003.LaserMod.utils.math.Matrix3;
 import KOWI2003.LaserMod.utils.math.Matrix4;
@@ -21,11 +19,11 @@ import net.minecraft.world.phys.Vec3;
 
 public class MathUtils {
 
-	public static Vector3d ToEuler(Quaternionf q) {
-		float x = q.x();
-		float y = q.y();
-		float z = q.z();
-		float w = q.w();
+	public static Vector3d ToEuler(Quaternion q) {
+		float x = q.i();
+		float y = q.j();
+		float z = q.k();
+		float w = q.r();
 		float t0 = 2.0f * (w * x + y * z);
 		float t1 = 1.0f * (x * x + y * y);
 		double roll = Math.atan2(t0, t1);
@@ -39,7 +37,7 @@ public class MathUtils {
 		return new Vector3d(yaw, pitch, roll);
 	}
 	
-	public static Quaternionf ToQuaternion(Vector3f eulerAngles) {
+	public static Quaternion ToQuaternion(Vector3f eulerAngles) {
 		double c1 = Math.cos(eulerAngles.x() / 2f);
 		double c2 = Math.cos(eulerAngles.y() / 2f);
 		double c3 = Math.cos(eulerAngles.z() / 2f);
@@ -52,30 +50,31 @@ public class MathUtils {
 		double z = c1 * c2 * s3 + s1 * s2 * c3;
 		double w = c1 * c2 * c3 - s1 * s2 * s3;
 		
-		return new Quaternionf((float)x, (float)y, (float)z, (float)w);
+		return new Quaternion((float)x, (float)y, (float)z, (float)w);
 	}
 	
-	public static Quaternionf getQuaternionRotationBetweenVectors(Vector3f v1, Vector3f v2) {
-		Vector3f a = v1.cross(v2);
-		return new Quaternionf(a.x(), a.y(), a.z(), (float) (Math.sqrt(getLenghtSqr(v1) * getLenghtSqr(v2)) + v1.dot(v2)));
+	public static Quaternion getQuaternionRotationBetweenVectors(Vector3f v1, Vector3f v2) {
+		Vector3f a = v1.copy();
+		a.cross(v2);
+		return new Quaternion(a.x(), a.y(), a.z(), (float) (Math.sqrt(getLenghtSqr(v1) * getLenghtSqr(v2)) + v1.dot(v2)));
 //		q.xyz = a;
 //		q.w = sqrt((v1.Length ^ 2) * (v2.Length ^ 2)) + dotproduct(v1, v2);
 	}
 	
 	public static Vector3f getPosWithRotation(ModelPart render) {
 		Matrix4f mat = new Matrix4f();
-		mat = mat.identity();
-		mat = mat.translate(new Vector3f((render.x), (render.y), (render.z)));
+		mat.setIdentity();
+		mat.translate(new Vector3f((render.x), (render.y), (render.z)));
 		if (render.zRot != 0.0F) {
-			mat = mat.rotate(Axis.ZP.rotation(render.zRot));
+			mat.multiply(Vector3f.ZP.rotation(render.zRot));
 		}
 		
 		if (render.yRot != 0.0F) {
-			mat = mat.rotate(Axis.YP.rotation(render.yRot));
+			mat.multiply(Vector3f.YP.rotation(render.yRot));
 		}
 		
 		if (render.xRot != 0.0F) {
-			mat = mat.rotate(Axis.XP.rotation(render.xRot));
+			mat.multiply(Vector3f.XP.rotation(render.xRot));
 		}
 		
 	    ModelPart.Cube cube = render.getRandomCube(RandomSource.create());
@@ -83,53 +82,67 @@ public class MathUtils {
         Vector4f vector4f = new Vector4f((cube.maxX + cube.minX) / 2f,
         		(cube.maxY + cube.minY) / 2f,
         		(cube.maxZ + cube.minZ) / 2f, 1.0F);
-        vector4f = vector4f.mulTranspose(mat);
+        vector4f.transform(mat);
 		return new Vector3f(vector4f.x(), vector4f.y(), vector4f.z());
 	}
 	
-	public static Vector3f rotateVector(Vector3f vec, Quaternionf rotation) {
-		Matrix4f mat = new Matrix4f().identity().translate(vec).rotate(rotation);
-		Vector4f vec4f = new Vector4f(0, 0, 0, 1.0f).mulTranspose(mat);
+	public static Vector3f rotateVector(Vector3f vec, Quaternion rotation) {
+		Matrix4f mat = new Matrix4f();
+		mat.setIdentity();
+		mat.translate(vec);
+		mat.multiply(rotation);
+		Vector4f vec4f = new Vector4f(0, 0, 0, 1.0f);
+		vec4f.transform(mat);
 		return new Vector3f(vec4f.x(), vec4f.y(), vec4f.z()); 
 	}
 	
-	public static Vector3f rotateVector(Vector3f vec, Vector3f origin, Quaternionf rotation) {
-		Matrix4f mat = new Matrix4f().identity().translate(origin).rotate(rotation);
-		Vector4f vec4f = new Vector4f(vec.x(), vec.y(), vec.z(), 1.0f).mulTranspose(mat);
+	public static Vector3f rotateVector(Vector3f vec, Vector3f origin, Quaternion rotation) {
+		Matrix4f mat = new Matrix4f();
+		mat.setIdentity();
+		mat.translate(origin);
+		mat.multiply(rotation);
+		Vector4f vec4f = new Vector4f(0, 0, 0, 1.0f);
+		vec4f.transform(mat);
 		return new Vector3f(vec4f.x(), vec4f.y(), vec4f.z()); 
 	}
 	
 	public static Vector3f rotateVector(Vector3f vec, Vector3f rotation) {
-		Matrix4f mat = new Matrix4f().identity().translate(vec);
+		Matrix4f mat = new Matrix4f();
+		mat.setIdentity();
+		mat.translate(vec);
 		if (rotation.z() != 0.0F) {
-			mat = mat.rotate(Axis.ZP.rotation(rotation.z()));
+			mat.multiply(Vector3f.ZP.rotation(rotation.z()));
 		}
 		
 		if (rotation.y() != 0.0F) {
-			mat = mat.rotate(Axis.YP.rotation(rotation.y()));
+			mat.multiply(Vector3f.YP.rotation(rotation.y()));
 		}
 		
 		if (rotation.x() != 0.0F) {
-			mat = mat.rotate(Axis.XP.rotation(rotation.x()));
+			mat.multiply(Vector3f.XP.rotation(rotation.x()));
 		}
-		Vector4f vec4f = new Vector4f(0, 0, 0, 1.0f).mulTranspose(mat);
+		Vector4f vec4f = new Vector4f(0, 0, 0, 1.0f);
+		vec4f.transform(mat);
 		return new Vector3f(vec4f.x(), vec4f.y(), vec4f.z()); 
 	}
 	
 	public static Vector3f rotateVector(Vector3f vec, Vector3f origin, Vector3f rotation) {
-		Matrix4f mat = new Matrix4f().identity().translate(origin);
+		Matrix4f mat = new Matrix4f();
+		mat.setIdentity();
+		mat.translate(origin);
 		if (rotation.z() != 0.0F) {
-			mat = mat.rotate(Axis.ZP.rotation(rotation.z()));
+			mat.multiply(Vector3f.ZP.rotation(rotation.z()));
 		}
 		
 		if (rotation.y() != 0.0F) {
-			mat = mat.rotate(Axis.YP.rotation(rotation.y()));
+			mat.multiply(Vector3f.YP.rotation(rotation.y()));
 		}
 		
 		if (rotation.x() != 0.0F) {
-			mat = mat.rotate(Axis.XP.rotation(rotation.x()));
+			mat.multiply(Vector3f.XP.rotation(rotation.x()));
 		}
-		Vector4f vec4f = new Vector4f(vec.x(), vec.y(), vec.z(), 1.0f).mulTranspose(mat);
+		Vector4f vec4f = new Vector4f(vec.x(), vec.y(), vec.z(), 1.0f);
+		vec4f.transform(mat);
 		return new Vector3f(vec4f.x(), vec4f.y(), vec4f.z()); 
 	}
 	
@@ -251,7 +264,7 @@ public class MathUtils {
 		return toVector3f(ToEuler(forwardToQuaternion(forward, up)));
 	}
 	
-	public static Quaternionf forwardToQuaternion(Vector3f forward, Vector3f up) {
+	public static Quaternion forwardToQuaternion(Vector3f forward, Vector3f up) {
 		return Matrix3.fromDirections(forward, up).toQuaternion();
 	}
 	
@@ -260,7 +273,7 @@ public class MathUtils {
 		return new Vector3f((float)Math.toRadians(eular.x()), (float)Math.toRadians(eular.y()), (float)Math.toRadians(eular.z()));
 	}
 	
-	public static Quaternionf quaternionFromMatrix(Matrix4f m) {
+	public static Quaternion QuaternionromMatrix(Matrix4f m) {
 		return new Matrix4(m).toQuaternion();
 	}
 	
@@ -272,7 +285,7 @@ public class MathUtils {
 	
 	public static Vector3f normalize(Vector3f vec) {
 		float total = vec.x() + vec.y() + vec.z();
-		Vector3f v = new Vector3f(vec);
+		Vector3f v = vec.copy();
 		v.mul(1/total);
 		return v;
 	}
@@ -330,8 +343,9 @@ public class MathUtils {
 	}
 	
 	public static Vector3f transpose(Vector3f vec, Matrix4f matrix) {
-		matrix = matrix.translate(vec);
-		Vector4f vec4 = new Vector4f(0, 0, 0, 1).mulTranspose(matrix);
-		return new Vector3f(vec4.x, vec4.y, vec4.z);
+		matrix.translate(vec);
+		Vector4f vec4 = new Vector4f(0, 0, 0, 1);
+		vec4.transform(matrix);
+		return new Vector3f(vec4.x(), vec4.y(), vec4.z());
 	}
 }
