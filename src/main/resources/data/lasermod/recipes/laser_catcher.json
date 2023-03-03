@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+		"ccc",
+        "glc",
+        "ccc"
+    ],
+    "key":
+    {
+        "c":
+        {
+            "item": "minecraft:cobblestone"
+        },
+        "l":
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        "g":
+        {
+            "item": "minecraft:glass"
+        }
+    },
+    "result":
+    {
+        "item": "lasermod:laser_catcher",
+        "count": 1
+    }
+}

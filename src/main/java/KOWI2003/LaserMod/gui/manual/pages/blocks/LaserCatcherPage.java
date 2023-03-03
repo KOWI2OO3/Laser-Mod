@@ -1,0 +1,20 @@
+package KOWI2003.LaserMod.gui.manual.pages.blocks;
+
+import KOWI2003.LaserMod.gui.manual.ManualHandler;
+import KOWI2003.LaserMod.gui.manual.data.GuiContext;
+import KOWI2003.LaserMod.init.ModBlocks;
+
+public class LaserCatcherPage extends GuiContext {
+
+	public LaserCatcherPage(String id) {
+		super(id);
+		setParent(ManualHandler.BlocksHeader);
+		setTitle(ModBlocks.LaserCatcher.get());
+	}
+	
+	@Override
+	public void init() {
+		super.init();
+	}
+
+}

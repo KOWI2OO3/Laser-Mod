@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "lasermod:laser",
+    "lasermod:laser_catcher",
+    "lasermod:infuser",
+    "lasermod:mod_station",
+    "lasermod:laser_projector",
+    "lasermod:laser_controller",
+    "lasermod:mirror",
+    "lasermod:precision_assembler",
+    "lasermod:advanced_laser",
+    "lasermod:laser_crafter",
+    "lasermod:device_hub"
+  ]
+}

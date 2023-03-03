@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+		" ii",
+        "ixi",
+        "iri"
+    ],
+    "key":
+    {
+        "x":
+        {
+            "tag": "forge:gems/diamond"
+        },
+        "i":
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        "r":
+        {
+            "item": "minecraft:redstone"
+        }
+    },
+    "result":
+    {
+        "item": "lasermod:precision_assembler",
+        "count": 1
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=south": { "model": "lasermod:crystallizer", "y": 180 },
+        "facing=west": { "model": "lasermod:crystallizer", "y": 270 },
+        "facing=north": { "model": "lasermod:crystallizer" },
+        "facing=east": { "model": "lasermod:crystallizer", "y": 90 }
+    }
+}

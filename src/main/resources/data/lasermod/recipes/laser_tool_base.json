@@ -1,0 +1,33 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+		"ili",
+        "ici",
+        "idi"
+    ],
+    "key":
+    {
+        "d":
+        {
+            "tag": "forge:gems/diamond"
+        },
+        "i":
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        "l":
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        "c":
+        {
+            "item": "lasermod:printed_circuit_board"
+        }
+    },
+    "result":
+    {
+        "item": "lasermod:laser_tool_base",
+        "count": 1
+    }
+}

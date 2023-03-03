@@ -1,0 +1,33 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+		"  g",
+        "ixi",
+        "iri"
+    ],
+    "key":
+    {
+        "x":
+        {
+            "tag": "forge:gems/diamond"
+        },
+        "i":
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        "r":
+        {
+            "item": "minecraft:redstone"
+        },
+        "g":
+        {
+            "item": "minecraft:glass"
+        }
+    },
+    "result":
+    {
+        "item": "lasermod:infuser",
+        "count": 1
+    }
+}
