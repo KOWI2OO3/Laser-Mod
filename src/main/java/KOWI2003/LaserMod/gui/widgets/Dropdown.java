@@ -7,7 +7,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.LiteralContents;
 
 public class Dropdown extends Button {
 
@@ -18,7 +19,7 @@ public class Dropdown extends Button {
 	boolean extended;
 	
 	public Dropdown(int posX, int posY, int width, int height, String... list) {
-		super(posX, posY, width, height, new TextComponent(""), (button) -> {
+		super(posX, posY, width, height, MutableComponent.create(new LiteralContents("")), (button) -> {
 			((Dropdown)button).extended = !((Dropdown)button).extended;
 		});
 		this.posX = posX;
@@ -39,7 +40,7 @@ public class Dropdown extends Button {
 	
 	@Override
 	public Component getMessage() {
-		return new TextComponent(getCurrentSelected());
+		return MutableComponent.create(new LiteralContents(getCurrentSelected()));
 	}
 	
 	@Override
@@ -78,7 +79,7 @@ public class Dropdown extends Button {
 	public void setList(String... list) {
 		buttons = new ArrayList<Button>();
 		for(int i = 0; i < list.length; i++) {
-			buttons.add(new Button(posX, (i+1) * height + posY, width, height, new TextComponent(list[i]), (button) ->  {
+			buttons.add(new Button(posX, (i+1) * height + posY, width, height, MutableComponent.create(new LiteralContents(list[i])), (button) ->  {
 				currentIndex = this.buttons.indexOf(button);
 			}));
 		}
@@ -87,7 +88,7 @@ public class Dropdown extends Button {
 	public void setList(List<String> list) {
 		buttons = new ArrayList<Button>();
 		for(int i = 0; i < list.size(); i++) {
-			buttons.add(new Button(posX, (i+1) * height + posY, width, height, new TextComponent(list.get(i)), (button) ->  {
+			buttons.add(new Button(posX, (i+1) * height + posY, width, height, MutableComponent.create(new LiteralContents(list.get(i))), (button) ->  {
 				currentIndex = this.buttons.indexOf(button);
 			}));
 		}
@@ -104,7 +105,7 @@ public class Dropdown extends Button {
 	}
 	
 	public void addElement(String element) {
-		buttons.add(new Button(posX, (buttons.size()) * height + posY, width, height, new TextComponent(element), (button) ->  {
+		buttons.add(new Button(posX, (buttons.size()) * height + posY, width, height, MutableComponent.create(new LiteralContents(element)), (button) ->  {
 			currentIndex = this.buttons.indexOf(button);
 		}));
 	}

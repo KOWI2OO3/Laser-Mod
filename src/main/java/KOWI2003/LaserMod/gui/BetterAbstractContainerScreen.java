@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -27,9 +27,7 @@ public abstract class BetterAbstractContainerScreen<T extends AbstractContainerM
 		super.clearWidgets();
 	}
 	
-	
-	@Override
-	protected <K extends GuiEventListener & Renderable & NarratableEntry> K addRenderableWidget(K widget) {
+	protected <K extends GuiEventListener & Widget & NarratableEntry> K addRenderableWidget(K widget) {
 		if(widget instanceof AbstractWidget) buttons.add((AbstractWidget)widget);
 		return super.addRenderableWidget(widget);
 	}

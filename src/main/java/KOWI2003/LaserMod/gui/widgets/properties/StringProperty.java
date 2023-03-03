@@ -27,7 +27,7 @@ public class StringProperty extends DataProperty<String> {
 	@Override
 	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		text.render(matrix, mouseX, mouseY, partialTicks);
-		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", getX() + 2, getY(), 80f, 10, 0xffffff);
+		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", x + 2, y, 80f, 10, 0xffffff);
 //		drawString(matrix, Minecraft.getInstance().font, getDisplayName() + ": ", x + 2, y + Minecraft.getInstance().font.lineHeight/2, 0xffffff);
 	}
 	

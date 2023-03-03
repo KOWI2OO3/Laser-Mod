@@ -18,7 +18,8 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Button.OnPress;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.resources.ResourceLocation;
 
 public class PartSelector extends AbstractWidget {
@@ -33,7 +34,7 @@ public class PartSelector extends AbstractWidget {
 	TileEntityLaserProjector te;
 	
 	public PartSelector(int x, int y, int width, int height, TileEntityLaserProjector te) {
-		super(x, y, width, height, new TextComponent("parts"));
+		super(x, y, width, height, MutableComponent.create(new LiteralContents("parts")));
 		this.te = te;
 		init();
 	}
@@ -55,7 +56,7 @@ public class PartSelector extends AbstractWidget {
 	
 	public int addButton(int uvX, int uvY, int offset, OnPress action) {
 		int padding = 2;
-		ButtonTexture button = new ButtonTexture(buttons.size() % 3 * (20 + padding) + padding, offset + padding, uvX, uvY, 20, 20, new TextComponent(" "), action, WIDGETS);
+		ButtonTexture button = new ButtonTexture(buttons.size() % 3 * (20 + padding) + padding, offset + padding, uvX, uvY, 20, 20, MutableComponent.create(new LiteralContents(" ")), action, WIDGETS);
 		buttons.add(button);
 		return offset += (button.getHeight() + padding) * (buttons.size() % 3 > 0 ? 0 : 1);
 	}

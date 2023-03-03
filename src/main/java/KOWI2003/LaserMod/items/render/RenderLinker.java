@@ -1,7 +1,7 @@
 package KOWI2003.LaserMod.items.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.init.ModItems;
 import KOWI2003.LaserMod.items.ItemLinker;
@@ -42,7 +42,7 @@ public class RenderLinker extends BlockEntityWithoutLevelRenderer {
 		matrix.translate(0.5, 0.5, 0.5);
 		Minecraft.getInstance().getItemRenderer().renderStatic(new ItemStack(ModItems.LinkerModel.get()), transformType, combinedLight, combinedOverlay, matrix, buffer, 0);
 		
-		matrix.mulPose(Axis.ZN.rotationDegrees(180));
+		matrix.mulPose(Vector3f.ZN.rotationDegrees(180));
 		matrix.translate(-0.085, -0.14, -0.035);
 		
 		BlockPos pos = ItemLinker.getPos(stack);

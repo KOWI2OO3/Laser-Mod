@@ -24,7 +24,7 @@ public class ItemProperty extends DataProperty<ItemStack> {
 	public ItemProperty(int x, int y, int width, int height, String displayName, ItemStack value, GuiLaserProjector gui) {
 		super(x, y, width, height, displayName, value);
 		this.gui = gui;
-		openMenu = Button.builder(MutableComponent.create(new LiteralContents("Edit")), (button) -> {onOpenMenu();}).bounds(x + 35, y, width - 40, height).build();
+		openMenu = new Button(x + 35, y, width - 40, height, MutableComponent.create(new LiteralContents("Edit")), (button) -> {onOpenMenu();});
 	}
 	
 	void onOpenMenu() {
@@ -47,7 +47,7 @@ public class ItemProperty extends DataProperty<ItemStack> {
 	@Override
 	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		openMenu.render(matrix, mouseX, mouseY, partialTicks);
-		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", getX() + 2, getY(), 35f, 10, 0xffffff);
+		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", x + 2, y, 35f, 10, 0xffffff);
 //		drawString(matrix, Minecraft.getInstance().font, getDisplayName() + ": ", x + 2, y + Minecraft.getInstance().font.lineHeight/2, 0xffffff);
 	}
 	

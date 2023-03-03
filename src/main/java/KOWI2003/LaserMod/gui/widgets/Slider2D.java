@@ -8,7 +8,8 @@ import KOWI2003.LaserMod.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
 
@@ -26,12 +27,12 @@ public class Slider2D extends Button {
 	
 	public Slider2D(int x, int y, int widht, int height,
 			OnPress action) {
-		super(x, y, widht, height, new TextComponent(""), action);
+		super(x, y, widht, height, MutableComponent.create(new LiteralContents("")), action);
 	}
 	
 	public Slider2D(int x, int y, int widht, int height, String internalName,
 			OnPress action) {
-		super(x, y, widht, height, new TextComponent(""), action);
+		super(x, y, widht, height, MutableComponent.create(new LiteralContents("")), action);
 		this.internalName = internalName;
 	}
 	

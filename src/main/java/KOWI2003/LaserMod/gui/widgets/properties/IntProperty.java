@@ -34,17 +34,17 @@ public class IntProperty extends DataProperty<Integer> {
 		intText = new EditBox(Minecraft.getInstance().font, x+10 + localX, y + 2, 50, 16, MutableComponent.create(new LiteralContents("intText")));
 		intText.setValue(String.format("%.02f", value));
 		
-		Raise = Button.builder( MutableComponent.create(new LiteralContents(">")), (button) -> {
+		Raise = new Button(x + localX + 60, y, 10, 20, MutableComponent.create(new LiteralContents(">")), (button) -> {
 			this.value += (Utils.isCtrlDown() ? 1 : (Utils.isShiftDown() ? 10 : 100));
 			intText.setValue(String.format("%.02f", this.value));
 			setHasChanged();
-		}).bounds(x + localX + 60, y, 10, 20).build();
+		});
 		
-		Lower = Button.builder(MutableComponent.create(new LiteralContents("<")), (button) -> {
+		Lower = new Button(x + localX, y, 10, 20, MutableComponent.create(new LiteralContents("<")), (button) -> {
 			this.value -= (Utils.isCtrlDown() ? 1 : (Utils.isShiftDown() ? 10 : 100));
 			intText.setValue(String.format("%.02f", this.value));
 			setHasChanged();
-		}).bounds(x + localX, y, 10, 20).build();
+		});
 		
 	}
 	
@@ -61,7 +61,7 @@ public class IntProperty extends DataProperty<Integer> {
 			Raise.render(matrix, mouseX, mouseY, partialTicks);
 			Lower.render(matrix, mouseX, mouseY, partialTicks);
 		}
-		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", getX() + 2, getY(), 35f, 10, 0xffffff);
+		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", x + 2, y, 35f, 10, 0xffffff);
 //		drawString(matrix, Minecraft.getInstance().font, getDisplayName() + ": ", x + 2, y + Minecraft.getInstance().font.lineHeight/2, 0xffffff);
 	}
 	

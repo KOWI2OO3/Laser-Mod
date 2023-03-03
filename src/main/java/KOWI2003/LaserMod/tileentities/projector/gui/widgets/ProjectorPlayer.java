@@ -3,7 +3,7 @@ package KOWI2003.LaserMod.tileentities.projector.gui.widgets;
 import com.mojang.authlib.GameProfile;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.blocks.BlockHorizontal;
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorPlayerData;
@@ -81,7 +81,7 @@ public class ProjectorPlayer extends ProjectorWidget {
 		BlockEntity te = context.getTileentity();
 		matrix.pushPose();
 		
-		matrix.mulPose(Axis.YP.rotationDegrees(rotation));
+		matrix.mulPose(Vector3f.YP.rotationDegrees(rotation));
 		
 		matrix.translate(x, y, z);
 		
@@ -100,7 +100,7 @@ public class ProjectorPlayer extends ProjectorWidget {
 				String text = "Unable To Find Player!";
 				RenderSystem.disableCull();
 				RenderUtils.rotateMatrixForBlock(matrix, te.getBlockState().getValue(BlockHorizontal.FACING));
-				matrix.mulPose(Axis.ZP.rotationDegrees(180f));
+				matrix.mulPose(Vector3f.ZP.rotationDegrees(180f));
 				matrix.translate(-0.5f - text.length()/2f * 0.015f*5f, -1.1 - (0.015f*5f/2f) - .3f*2.2f, 0.5f);
 				matrix.scale(0.015f, 0.015f, 0.005f);
 				RenderUtils.renderString(matrix, text, 0, 0, 0, 1.0f, new float[] {.6f, 0.0f, 0.0f, 1.0f}, false);

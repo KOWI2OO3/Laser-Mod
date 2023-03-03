@@ -3,16 +3,15 @@ package KOWI2003.LaserMod.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joml.Matrix4f;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
+import com.mojang.math.Vector4f;
 
 import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.blocks.BlockHorizontal;
@@ -40,7 +39,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
@@ -121,7 +120,7 @@ public class GuiLaserProjector extends Screen {
 		this.minecraft = Minecraft.getInstance();
 		centreView();
 		
-		nextTemplate = Button.builder(MutableComponent.create(new LiteralContents(">")), (button) -> {
+		nextTemplate = new Button(0, 0, 20, 20, MutableComponent.create(new LiteralContents(">")), (button) -> {
 			int index = te.template.ordinal();
 			index++;
 			if(index >= ProjectorTemplates.values().length)
@@ -129,9 +128,9 @@ public class GuiLaserProjector extends Screen {
 			PacketHandler.sendToServer(new PacketTemplateProjector(te.getBlockPos(), ProjectorTemplates.values()[index]));
 			setSelectedWidget(null);
 			hoveringWidget = null;
-		}).bounds(0, 0, 20, 20).build();
+		});
 		
-		prevTemplate = Button.builder(MutableComponent.create(new LiteralContents("<")), (button) -> {
+		prevTemplate = new Button(0, 0, 20, 20, MutableComponent.create(new LiteralContents("<")), (button) -> {
 			int index = te.template.ordinal();
 			index--;
 			if(index < 0)
@@ -139,7 +138,7 @@ public class GuiLaserProjector extends Screen {
 			PacketHandler.sendToServer(new PacketTemplateProjector(te.getBlockPos(), ProjectorTemplates.values()[index]));
 			setSelectedWidget(null);
 			hoveringWidget = null;
-		}).bounds(0, 0, 20, 20).build();
+		});
 
 		
 		
@@ -183,7 +182,7 @@ public class GuiLaserProjector extends Screen {
 	}
 	
 	@Override
-	protected <T extends GuiEventListener & Renderable & NarratableEntry> T addRenderableWidget(T widget) {
+	protected <T extends GuiEventListener & Widget & NarratableEntry> T addRenderableWidget(T widget) {
 		if(widget instanceof AbstractWidget) buttons.add((AbstractWidget)widget);
 		return super.addRenderableWidget(widget);
 	}
@@ -211,29 +210,29 @@ public class GuiLaserProjector extends Screen {
 		int posx = width / 2;
 		int posy = height / 2;
 		
-		nextTemplate.setX(posx+55);
-		nextTemplate.setY(posy-112);
+		nextTemplate.x = (posx+55);
+		nextTemplate.y = (posy-112);
 		
-		prevTemplate.setX(posx-72);
-		prevTemplate.setY(posy-112);
+		prevTemplate.x = (posx-72);
+		prevTemplate.y = (posy-112);
 		
-		gridToggle.setX(posx + 38);
-		gridToggle.setY(posy + 91);
+		gridToggle.x = (posx + 38);
+		gridToggle.y = (posy + 91);
 		
-		toggle3D.setX(gridToggle.getX() + 30);
-		toggle3D.setY(gridToggle.getY());
+		toggle3D.x = (gridToggle.x + 30);
+		toggle3D.y = (gridToggle.y);
 		
-		toggleSurrounding.setX(toggle3D.getX() + 30);
-		toggleSurrounding.setY(toggle3D.getY());
+		toggleSurrounding.x = (toggle3D.x + 30);
+		toggleSurrounding.y = (toggle3D.y);
 
-		centreView.setX(gridToggle.getX() - 30);
-		centreView.setY(gridToggle.getY());
+		centreView.x = (gridToggle.x - 30);
+		centreView.y = (gridToggle.y);
 		
-		properties.setX(posx + 128);
-		properties.setY(posy - 80);
+		properties.x = (posx + 128);
+		properties.y = (posy - 80);
 		
-		parts.setX(posx - 200);
-		parts.setY(posy - 80);
+		parts.x = (posx - 200);
+		parts.y = (posy - 80);
 		
 		for (AbstractWidget widget : buttons) {
 			WidgetBase data = null;
@@ -243,8 +242,8 @@ public class GuiLaserProjector extends Screen {
 				data = ((ManualComponent<?>)widget).getData();
 			}
 			if(data != null) {
-				widget.setX(posx + data.X);
-				widget.setY(posy + data.Y);
+				widget.x = (posx + data.X);
+				widget.y = (posy + data.Y);
 			}
 			
 			if(widget instanceof ManualComponent<?>)
@@ -335,7 +334,7 @@ public class GuiLaserProjector extends Screen {
 		Matrix4f ortho = RenderSystem.getProjectionMatrix();
 		
 		//Setup Projection Matrix
-		RenderSystem.setProjectionMatrix(new Matrix4f().perspective((float) Math.toRadians(60f), 
+		RenderSystem.setProjectionMatrix(Matrix4f.perspective((float) Math.toRadians(60f), 
 				(float)this.minecraft.getWindow().getWidth() / (float)this.minecraft.getWindow().getHeight()
 				, 10F, 1000f));
 		
@@ -361,8 +360,8 @@ public class GuiLaserProjector extends Screen {
 			matrix.translate(0, 0, - 10000f);
 			matrix.translate(x, y, z);
 
-			matrix.mulPose(Axis.XP.rotationDegrees(rotY));
-			matrix.mulPose(Axis.YP.rotationDegrees(-rotX));
+			matrix.mulPose(Vector3f.XP.rotationDegrees(rotY));
+			matrix.mulPose(Vector3f.YP.rotationDegrees(-rotX));
 			
 			if(useGrid)
 				renderGrid(matrix, partialTicks, mouseX, mouseY, guiLeft, guiTop);
@@ -399,12 +398,12 @@ public class GuiLaserProjector extends Screen {
 		RenderUtils.renderGrid(matrix, stepSize, new float[] {-halfSize, -halfSize, 0}, new float[] {doubleSize, doubleSize, 1}, new float[] {tint, tint, tint});
 		if(is3D) {
 			matrix.pushPose();
-			matrix.mulPose(Axis.YP.rotationDegrees(90));
+			matrix.mulPose(Vector3f.YP.rotationDegrees(90));
 			RenderUtils.renderGrid(matrix, stepSize, new float[] {-halfSize, -halfSize, 0}, new float[] {doubleSize, doubleSize, 1}, new float[] {tint, tint, tint});
 			matrix.popPose();
 			matrix.pushPose();
-			matrix.mulPose(Axis.XP.rotationDegrees(90));
-			matrix.mulPose(Axis.ZP.rotationDegrees(270));
+			matrix.mulPose(Vector3f.XP.rotationDegrees(90));
+			matrix.mulPose(Vector3f.ZP.rotationDegrees(270));
 			RenderUtils.renderGrid(matrix, stepSize, new float[] {-halfSize, -halfSize, 0}, new float[] {doubleSize, doubleSize, 1}, new float[] {tint, tint, tint});
 			matrix.popPose();
 		}
@@ -440,7 +439,7 @@ public class GuiLaserProjector extends Screen {
 	}
 	
 	void renderWidgets(PoseStack matrix, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
-		matrix.mulPose(Axis.YP.rotationDegrees(180f));
+		matrix.mulPose(Vector3f.YP.rotationDegrees(180f));
 		
 		RenderContext<TileEntityLaserProjector> context = getRenderContext(matrix, partialTicks);
 		
@@ -472,7 +471,7 @@ public class GuiLaserProjector extends Screen {
 	void renderSurroudings(PoseStack matrix, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
 		matrix.pushPose();
 		float rot = te.getBlockState().getValue(BlockHorizontal.FACING).toYRot();
-		matrix.mulPose(Axis.YP.rotationDegrees(rot));
+		matrix.mulPose(Vector3f.YP.rotationDegrees(rot));
 		matrix.scale(40, 40, 40);
 		matrix.translate(-.5f, -.5f, -.5f);
 		BufferSource buffer =  Minecraft.getInstance().renderBuffers().bufferSource();
@@ -531,9 +530,9 @@ public class GuiLaserProjector extends Screen {
 	public Matrix4f getWorldToClip(PoseStack matrix) {
 		Matrix4f projMat = new Matrix4f(RenderSystem.getProjectionMatrix());
 		Matrix4f viewMat = new Matrix4f(matrix.last().pose());
-		projMat = projMat.mul(new Matrix4f().identity().scale(1, -1, 1))
-			.mul(new Matrix4f(RenderSystem.getModelViewMatrix()))
-			.mul(viewMat);
+		projMat.multiply(Matrix4f.createScaleMatrix(1, -1, 1));
+		projMat.multiply(new Matrix4f(RenderSystem.getModelViewMatrix()));
+		projMat.multiply(viewMat);
 		return projMat;
 	}
 	
@@ -557,20 +556,20 @@ public class GuiLaserProjector extends Screen {
 			matrix.pushPose();
 			matrix = wid.getRenderMatrix(matrix);
 			if(debug)
-				RenderUtils.renderOutline(matrix, wid.getX(), wid.getY(), wid.getZ(), wid.getWidth(), wid.getHeight(), wid.getDepth(), new float[] {1, 0, 1});
+				RenderUtils.renderOutline(matrix, wid.x, wid.y, wid.getZ(), wid.getWidth(), wid.getHeight(), wid.getDepth(), new float[] {1, 0, 1});
 			Matrix4f WorldToClip = getWorldToClip(matrix);
 			matrix.popPose();
 			
 			
-			Vector4f TLF = new Vector4f(wid.getX(), wid.getY(), wid.getZ(), 1);
-			Vector4f TRF = new Vector4f(wid.getX() + wid.getWidth(), wid.getY(), wid.getZ(), 1);
-			Vector4f BLF = new Vector4f(wid.getX(), wid.getY() + wid.getHeight(), wid.getZ(), 1);
-			Vector4f BRF = new Vector4f(wid.getX() + wid.getWidth(), wid.getY() + wid.getHeight(), wid.getZ(), 1);
+			Vector4f TLF = new Vector4f(wid.x, wid.y, wid.getZ(), 1);
+			Vector4f TRF = new Vector4f(wid.x + wid.getWidth(), wid.y, wid.getZ(), 1);
+			Vector4f BLF = new Vector4f(wid.x, wid.y + wid.getHeight(), wid.getZ(), 1);
+			Vector4f BRF = new Vector4f(wid.x + wid.getWidth(), wid.y + wid.getHeight(), wid.getZ(), 1);
 			
-			Vector4f TLB = new Vector4f(wid.getX(), wid.getY(), wid.getZ() + wid.getDepth(), 1);
-			Vector4f TRB = new Vector4f(wid.getX() + wid.getWidth(), wid.getY(), wid.getZ() + wid.getDepth(), 1);
-			Vector4f BLB = new Vector4f(wid.getX(), wid.getY() + wid.getHeight(), wid.getZ() + wid.getDepth(), 1);
-			Vector4f BRB = new Vector4f(wid.getX() + wid.getWidth(), wid.getY() + wid.getHeight(), wid.getZ() + wid.getDepth(), 1);
+			Vector4f TLB = new Vector4f(wid.x, wid.y, wid.getZ() + wid.getDepth(), 1);
+			Vector4f TRB = new Vector4f(wid.x + wid.getWidth(), wid.y, wid.getZ() + wid.getDepth(), 1);
+			Vector4f BLB = new Vector4f(wid.x, wid.y + wid.getHeight(), wid.getZ() + wid.getDepth(), 1);
+			Vector4f BRB = new Vector4f(wid.x + wid.getWidth(), wid.y + wid.getHeight(), wid.getZ() + wid.getDepth(), 1);
 			
 			transposeToScreen(TLF, WorldToClip);
 			transposeToScreen(TRF, WorldToClip);
@@ -596,8 +595,9 @@ public class GuiLaserProjector extends Screen {
 	}
 	
 	Vector4f transposeToScreen(Vector4f vec, Matrix4f WorldToClip) {
-		vec = vec.mulTranspose(WorldToClip);
-		return vec.mul(1/vec.w());
+		vec.transform(WorldToClip);
+		vec.mul(1/vec.w());
+		return vec;
 	}
 	
 	public RenderContext<TileEntityLaserProjector> getRenderContext(PoseStack matrix, float partialTicks) {
@@ -770,10 +770,10 @@ public class GuiLaserProjector extends Screen {
 	}
 	
 	public void renderCheckBox(PoseStack matrix, Checkbox checkbox) {
-		int posx = checkbox.getX();
-		int posy = checkbox.getY();
-		checkbox.setX(0);
-		checkbox.setY(0);
+		int posx = checkbox.x;
+		int posy = checkbox.y;
+		checkbox.x = (0);
+		checkbox.y = (0);
 		matrix.pushPose();
 		matrix.translate(posx, posy, 0);
 		float scale = 0.5f;

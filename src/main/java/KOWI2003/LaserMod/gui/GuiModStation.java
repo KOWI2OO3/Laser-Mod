@@ -60,12 +60,12 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 		this.playerInv = playerInv;
 		this.player = playerInv.player;
 		
-		InsertUpgarde = Button.builder(MutableComponent.create(new LiteralContents("Insert")), (button) ->  {
+		InsertUpgarde = new Button(60, 0, 40, 20, MutableComponent.create(new LiteralContents("Insert")), (button) ->  {
 			PacketHandler.sendToServer(new PacketModStation(te.getBlockPos(), "", true));
 			te.addUpgrade();
 			if(te.handler.getStackInSlot(0).getItem() instanceof ILaserUpgradable)
 				upgrades.replaceList(getFormalUpgradeName(LaserItemUtils.getProperties(te.handler.getStackInSlot(0)).getUpgrades()));
-		}).bounds(60, 0, 40, 20).build();
+		});
 		
 		upgrades = new UpgradeList(0, 0, 63, 20, null, (button) -> {
 			PacketHandler.sendToServer(new PacketModStation(te.getBlockPos(), getUpgradeName(button.getMessage().getString()), false));
@@ -108,18 +108,18 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 		
 		upgrades.setPos(posx-78, posy - 74);
 		
-		InsertUpgarde.setX(posx);
-		InsertUpgarde.setY(posy - 45);
+		InsertUpgarde.x = (posx);
+		InsertUpgarde.y = (posy - 45);
 
 		int x = -164;
 		int y = 40;
 		
-		this.Red.setX(posx + x);
-		this.Red.setY(posy + 1 - y);
-		this.Green.setX(posx + x);
-		this.Green.setY(posy + 21 - y);
-		this.Blue.setX(posx + x);
-		this.Blue.setY(posy + 41 - y);
+		this.Red.x = (posx + x);
+		this.Red.y = (posy + 1 - y);
+		this.Green.x = (posx + x);
+		this.Green.y = (posy + 21 - y);
+		this.Blue.x = (posx + x);
+		this.Blue.y = (posy + 41 - y);
 
 		Red.setWidth(75);
 		Green.setWidth(75);

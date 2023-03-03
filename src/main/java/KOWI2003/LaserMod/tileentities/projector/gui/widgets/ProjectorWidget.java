@@ -1,7 +1,7 @@
 package KOWI2003.LaserMod.tileentities.projector.gui.widgets;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorWidgetData;
 import KOWI2003.LaserMod.tileentities.projector.gui.RenderContext;
@@ -54,7 +54,7 @@ public class ProjectorWidget {
 	}
 
 	public PoseStack getRenderMatrix(PoseStack matrix) {
-		matrix.mulPose(Axis.YP.rotationDegrees(data.rotation));
+		matrix.mulPose(Vector3f.YP.rotationDegrees(data.rotation));
 		return matrix;
 	}
 	

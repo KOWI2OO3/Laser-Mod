@@ -2,7 +2,7 @@ package KOWI2003.LaserMod.items.upgrades;
 
 import java.util.List;
 
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.network.PacketDeltaMovment;
@@ -69,7 +69,9 @@ public class UpgradeMove extends ItemUpgradeBase {
 				entity.setDeltaMovement(entity.getDeltaMovement().x, entity.getDeltaMovement().y + 0.05f, entity.getDeltaMovement().z);
 			}
 			
-			Vector3f dir = te.getForward().normalize().mul(speed);
+			Vector3f dir = te.getForward();
+			dir.normalize();
+			dir.mul(speed);
 			Vec3 vec = new Vec3(dir);
 			entity.setDeltaMovement(entity.getDeltaMovement().add(vec));
 			if(entity instanceof Player)

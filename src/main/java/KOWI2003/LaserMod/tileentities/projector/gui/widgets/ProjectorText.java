@@ -2,7 +2,7 @@ package KOWI2003.LaserMod.tileentities.projector.gui.widgets;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorTextData;
 import KOWI2003.LaserMod.tileentities.projector.gui.RenderContext;
@@ -41,7 +41,7 @@ public class ProjectorText extends ProjectorWidget {
 	public PoseStack getRenderMatrix(PoseStack matrix) {
 		matrix = super.getRenderMatrix(matrix);
 		matrix.translate(x, y, z);
-		matrix.mulPose(Axis.ZP.rotationDegrees(180f));
+		matrix.mulPose(Vector3f.ZP.rotationDegrees(180f));
 		
 		if(isCentered)
 			matrix.translate(-getScale()*(Minecraft.getInstance().font.width(text)/2f), -Minecraft.getInstance().font.lineHeight * getScale()/2f, 0);

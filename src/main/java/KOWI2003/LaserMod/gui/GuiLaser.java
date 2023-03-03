@@ -54,8 +54,8 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 		this.playerInv = playerInv;
 		this.player = playerInv.player;
 
-		options = Button.builder(MutableComponent.create(new TranslatableContents("container.lasermod.laser.button.options")), (button) -> 
-			toggleMenu()).bounds(width + getGuiLeft() + 260 - 30, getGuiTop() + 100, 50, 20).build();
+		options = new Button(width + getGuiLeft() + 260 - 30, getGuiTop() + 100, 50, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.button.options")), (button) -> 
+			toggleMenu());
 		
 		Red = new ForgeSlider(0, 0, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")), MutableComponent.create(new LiteralContents("")), 0f, 1f, te.red, .01f, 0, true);
 		Green = new ForgeSlider(0, 40, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")), MutableComponent.create(new LiteralContents("")), 0f, 1f, te.green, .01f, 0, true);
@@ -65,13 +65,13 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 		Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
 		Blue.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")));
 		
-		modePrev = Button.builder(MutableComponent.create(new TranslatableContents("<")), (button) -> {
+		modePrev = new Button(0, 0, 20, 20, MutableComponent.create(new TranslatableContents("<")), (button) -> {
 			PacketHandler.sendToServer(new PacketLaserMode(te.getBlockPos(), false));
-		}).bounds(0, 0, 20, 20).build();
+		});
 		
-		modeNext = Button.builder(MutableComponent.create(new TranslatableContents(">")), (button) -> {
+		modeNext = new Button(modePrev.x + modePrev.getWidth() + 60, modePrev.y, modePrev.getWidth(), modePrev.getHeight(), MutableComponent.create(new TranslatableContents(">")), (button) -> {
 			PacketHandler.sendToServer(new PacketLaserMode(te.getBlockPos(), true));
-		}).bounds(modePrev.getX() + modePrev.getWidth() + 60, modePrev.getY(), modePrev.getWidth(), modePrev.getHeight()).build();
+		});
 		
 		gimbalSlider = new Slider2D(0, 0, 100, 100, (o) -> {});
 		gimbalSlider.setSliderStartValues(0.5f, 0.5f, 15f);
@@ -111,32 +111,32 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 		int posx = width / 2;
 		int posy = height / 2;
 		
-		this.options.setX(posx + 30);
-		this.options.setY(posy - 25);
+		this.options.x = (posx + 30);
+		this.options.y = (posy - 25);
 		
-		this.modePrev.setX(posx + 91);
-		this.modePrev.setY(posy - 40);
+		this.modePrev.x = (posx + 91);
+		this.modePrev.y = (posy - 40);
 		
-		this.modeNext.setX(modePrev.getX() + modePrev.getWidth() + 30);
-		this.modeNext.setY(modePrev.getY());
+		this.modeNext.x = (modePrev.x + modePrev.getWidth() + 30);
+		this.modeNext.y = (modePrev.y);
 		
 		int x = 89;
 		int y = 10;
 		
-		this.Red.setX(posx + x);
-		this.Red.setY(posy + 1 - y);
-		this.Green.setX(posx + x);
-		this.Green.setY(posy + 21 - y);
-		this.Blue.setX(posx + x);
-		this.Blue.setY(posy + 41 - y);
+		this.Red.x = (posx + x);
+		this.Red.y = (posy + 1 - y);
+		this.Green.x = (posx + x);
+		this.Green.y = (posy + 21 - y);
+		this.Blue.x = (posx + x);
+		this.Blue.y = (posy + 41 - y);
 
 		Red.setWidth(75);
 		Green.setWidth(75);
 		Blue.setWidth(75);
 		
 		if(te instanceof TileEntityAdvancedLaser) {
-			gimbalSlider.setX(posx-81);
-			gimbalSlider.setY(posy-65);
+			gimbalSlider.x = (posx-81);
+			gimbalSlider.y = (posy-65);
 			gimbalSlider.setWidth(50);
 			gimbalSlider.setHeight(50);
 		}
@@ -180,12 +180,12 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 			this.blit(matrix, i + 175, j, 175, 0, 81, imageHeight);
 			
 			if(te.getProperties().hasUpgarde("mode")) {
-				ScreenUtils.blitWithBorder(matrix, Button.WIDGETS_LOCATION, modePrev.getX(), modePrev.getY() - modePrev.getHeight(), 0, 46, 
-						modeNext.getX() + modeNext.getWidth() - modePrev.getX(),modePrev.getHeight(), 200, 20, 2, 3, 2, 2, this.getBlitOffset());
+				ScreenUtils.blitWithBorder(matrix, Button.WIDGETS_LOCATION, modePrev.x, modePrev.y - modePrev.getHeight(), 0, 46, 
+						modeNext.x + modeNext.getWidth() - modePrev.x,modePrev.getHeight(), 200, 20, 2, 3, 2, 2, this.getBlitOffset());
 				
 				Component modeText = MutableComponent.create(new LiteralContents(te.mode.getFormalName())).copy().setStyle(title.getStyle());
-				drawCenteredString(matrix, font, modeText, modePrev.getX() + 
-						(modeNext.getX() + modeNext.getWidth() - modePrev.getX())/2, modePrev.getY() - modePrev.getHeight()/2 - font.lineHeight/2, Utils.getHexIntFromRGB(1f, 1f, 1f));
+				drawCenteredString(matrix, font, modeText, modePrev.x + 
+						(modeNext.x + modeNext.getWidth() - modePrev.x)/2, modePrev.y - modePrev.getHeight()/2 - font.lineHeight/2, Utils.getHexIntFromRGB(1f, 1f, 1f));
 				Component text = MutableComponent.create(new LiteralContents("Laser Mode:")).copy().setStyle(title.getStyle());
 				font.draw(matrix, text, getGuiLeft() + 185, getGuiTop() + 10, Utils.getHexIntFromRGB(0.3f, 0.3f, 0.3f));
 			}

@@ -1,12 +1,10 @@
 package KOWI2003.LaserMod.items.render;
 
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
-
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
+import com.mojang.math.Vector4f;
 
 import KOWI2003.LaserMod.init.ModItems;
 import KOWI2003.LaserMod.tileentities.render.LaserRender.LaserRenderType;
@@ -79,13 +77,14 @@ public class RenderMultiTool extends BlockEntityWithoutLevelRenderer {
 //			matrix.mulPose(Vector3f.ZP.rotationDegrees(2.5f));
 //		}
 		
-		Vector4f forward = new Vector4f(0, 0, 1, 1).mulTranspose(matrix.last().pose());
+		Vector4f forward = new Vector4f(0, 0, 1, 1);
+		forward.transform(matrix.last().pose());
 		
-		Quaternionf rotation = MathUtils.getQuaternionRotationBetweenVectors(new Vector3f(forward.x, forward.y, forward.z), new Vector3f((float)dir.x, (float)dir.y, (float)dir.z));
+		Quaternion rotation = MathUtils.getQuaternionRotationBetweenVectors(new Vector3f(forward.x(), forward.y(), forward.z()), new Vector3f((float)dir.x, (float)dir.y, (float)dir.z));
 		
 		RenderUtils.renderQuad(buffer.getBuffer(LaserRenderType.LASER_RENDER), matrix, new float[] {pos[0], pos[1] - size/2f, pos[2]}, 
 				new float[] {l, size, size}, new float[] {0, 0, 1, 1}, new float[] {color[0], color[1], color[2], 0.5f}, combinedLight, combinedOverlay);
-		matrix.mulPose(Axis.XP.rotationDegrees(90));
+		matrix.mulPose(Vector3f.XP.rotationDegrees(90));
 		RenderUtils.renderQuad(buffer.getBuffer(LaserRenderType.LASER_RENDER), matrix, new float[] {pos[0], pos[1] - size/2f, pos[2]}, 
 				new float[] {l, size, size}, new float[] {0, 0, 1, 1}, new float[] {color[0], color[1], color[2], 0.5f}, combinedLight, combinedOverlay);
 		

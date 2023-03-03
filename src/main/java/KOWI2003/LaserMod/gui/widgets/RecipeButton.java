@@ -10,7 +10,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 
@@ -27,13 +28,13 @@ public class RecipeButton extends Button {
 	
 	public RecipeButton(int x, int y, int width, int height,
 			Recipe<?> recipe, IRecipePressable action) {
-		this(x, y, width, height, new TextComponent("Null"), action);
+		this(x, y, width, height, MutableComponent.create(new LiteralContents("Null")), action);
 		setRecipe(recipe);
 	}
 	
 	public void setRecipe(Recipe<?> recipe) {
 		recipeID = recipe;
-		setMessage(recipe == null ? new TextComponent("Null") : recipe.getResultItem().getHoverName());
+		setMessage(recipe == null ? MutableComponent.create(new LiteralContents("Null")) : recipe.getResultItem().getHoverName());
 	}
 	
 	@Override
@@ -80,7 +81,7 @@ public class RecipeButton extends Button {
 		String message = getMessage().getString();
 		if(message.length() > 12)
 			message = message.substring(0, 12) + "...";
-		drawString(matrix, fontrenderer, new TextComponent(message), 0, 0, j);
+		drawString(matrix, fontrenderer, MutableComponent.create(new LiteralContents(message)), 0, 0, j);
 		matrix.popPose();
 		
 		if (this.isHovered) {

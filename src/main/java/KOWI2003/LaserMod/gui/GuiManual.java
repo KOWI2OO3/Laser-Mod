@@ -24,7 +24,7 @@ import KOWI2003.LaserMod.gui.manual.widgets.ManualTextBox;
 import KOWI2003.LaserMod.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
@@ -60,7 +60,7 @@ public class GuiManual extends Screen {
 	}
 	
 	@Override
-	protected <T extends GuiEventListener & Renderable & NarratableEntry> T addRenderableWidget(T widget) {
+	protected <T extends GuiEventListener & Widget & NarratableEntry> T addRenderableWidget(T widget) {
 		if(widget instanceof AbstractWidget) buttons.add((AbstractWidget)widget);
 		return super.addRenderableWidget(widget);
 	}
@@ -112,8 +112,8 @@ public class GuiManual extends Screen {
 				data = ((ManualComponent<?>)widget).getData();
 			}
 			if(data != null) {
-				widget.setX(posx + data.X);
-				widget.setY(posy + data.Y);
+				widget.x = (posx + data.X);
+				widget.y = (posy + data.Y);
 			}
 			
 			if(widget instanceof ManualComponent<?>)

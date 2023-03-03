@@ -10,9 +10,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.gui.GuiUtils;
+import net.minecraftforge.client.gui.ScreenUtils;
 
 public class UpgradeList extends Button {
 
@@ -23,7 +24,7 @@ public class UpgradeList extends Button {
 			Component title, OnPress pressable, String... strings) {
 		super(x, y, width, height, title, pressable);
 		for (int i = 0; i < strings.length; i++) {
-			buttons.add(new Button(x, y + i * height, width, height, new TextComponent(strings[i]), pressable));
+			buttons.add(new Button(x, y + i * height, width, height, MutableComponent.create(new LiteralContents(strings[i])), pressable));
 		}
 	}
 	
@@ -40,7 +41,7 @@ public class UpgradeList extends Button {
 	public void replaceList(String... names) {
 		buttons.clear();
 		for (int i = 0; i < names.length; i++) {
-			buttons.add(new Button(x, y + i * height, width, height, new TextComponent(names[i]), onPress));
+			buttons.add(new Button(x, y + i * height, width, height, MutableComponent.create(new LiteralContents(names[i])), onPress));
 		}
 		if(buttons.size() > 3)
 			cropList();
@@ -95,14 +96,14 @@ public class UpgradeList extends Button {
 	}
 	
 	public void AddElement(String name) {
-		buttons.add(new Button(x, y + buttons.size() * height, width, height, new TextComponent(name), onPress));
+		buttons.add(new Button(x, y + buttons.size() * height, width, height, MutableComponent.create(new LiteralContents(name)), onPress));
 		if(buttons.size() > 3)
 			cropList();
 	}
 	
 	public void AddElements(String... names) {
 		for (int i = 0; i < names.length; i++) {
-			buttons.add(new Button(x, y + (i + buttons.size()) * height, width, height, new TextComponent(names[i]), onPress));
+			buttons.add(new Button(x, y + (i + buttons.size()) * height, width, height, MutableComponent.create(new LiteralContents(names[i])), onPress));
 		}
 		if(buttons.size() > 3)
 			cropList();
@@ -119,7 +120,7 @@ public class UpgradeList extends Button {
 	    RenderSystem.enableDepthTest();
 	    //button.blit(matrix, button.x, button.y, 0, 46 + i * 20, button.getWidth() / 2, button.getHeight());
 	    //button.blit(matrix, button.x + button.getWidth() / 2, button.y, 200 - button.getWidth() / 2, 46 + i * 20, button.getWidth() / 2, button.getHeight());
-	    GuiUtils.drawContinuousTexturedBox(matrix, TEXTURE, button.x, button.y, 0, (i*20) + 46, 
+	    ScreenUtils.blitWithBorder(matrix, TEXTURE, button.x, button.y, 0, (i*20) + 46, 
 	    		button.getWidth(), button.getHeight(), 200, 20, 2, 3, 2, 2, this.getBlitOffset());
 		
 	    minecraft.getTextureManager().bindForSetup(WIDGETS_LOCATION);
