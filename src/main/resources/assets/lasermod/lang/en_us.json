@@ -19,13 +19,14 @@
 	"item.lasermod.silicon_plate": "Silicon Upgrade Plate",
 	"item.lasermod.printed_circuit_board": "Printed Circuit Board",
 	"item.lasermod.silicon": "Silicon",
+	"item.lasermod.manual": "Manual",
 
 	"item.lasermod.laser_pickaxe": "Laser Pickaxe",
 	"item.lasermod.laser_sword": "Laser Sword",
 	"item.lasermod.laser_shovel": "Laser Shovel",
 	"item.lasermod.laser_axe": "Laser Axe",
 	"item.lasermod.laser_hoe": "Laser Hoe",
-	"item.lasermod.laser_multitool": "Laser Omni Tool",
+	"item.lasermod.laser_multitool": "Laser Omni Tool (§4WIP§r)",
 
 	"item.lasermod.laser_helmet": "Laser Helmet",
 	"item.lasermod.laser_chestplate": "Laser Chestplate",

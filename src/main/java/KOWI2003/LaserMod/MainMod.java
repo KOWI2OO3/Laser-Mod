@@ -36,6 +36,7 @@ public class MainMod {
 		
 		@Override
 		public void fillItemList(NonNullList<ItemStack> list) {
+			list.add(new ItemStack(ModItems.Manual.get()));
 			ModBlocks.tabBlocks.forEach(block -> list.add(new ItemStack(block.get())));
 			ModItems.tabStacks.forEach(item -> list.add(item.get().getDefaultInstance()));
 		}

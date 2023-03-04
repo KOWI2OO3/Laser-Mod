@@ -626,9 +626,9 @@ public class Utils {
 		List<String> list = new LinkedList<>();
 		try {
 			int textWidth = Minecraft.getInstance().font.width(s);
-//			int splitStep = s.length() / (int) Math.ceil((double)textWidth / (double)width);
-			int estLineCount = (int)Math.floor((double)textWidth / (double)width);
-			int splitStep = (s.length() / estLineCount)-1;
+			int splitStep = (s.length()-1) / (int) Math.ceil((double)textWidth / (double)(width));
+//			int estLineCount = (int)Math.floor((double)textWidth / (double)width);
+//			int splitStep = (s.length() / estLineCount)-1;
 			boolean isDone = false;
 			int offset = 0;
 //			int line = 0;
@@ -639,7 +639,7 @@ public class Utils {
 					end = s.length()-1;
 					isDone = true;
 				}
-				end = s.lastIndexOf(" ", offset + splitStep);
+				end = s.lastIndexOf(" ", offset + (int)(splitStep*1.2));
 				if(offset >= s.length() || end >= s.length())
 					break;
 				String str = (String) s.substring(offset, end);

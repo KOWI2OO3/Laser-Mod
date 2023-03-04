@@ -52,6 +52,11 @@ public class PrecisionAssemblerRecipeHandler {
 		registerRecipe(1, ModItems.LaserShovel.get().getDefaultInstance() ,new ItemStack(ModItems.LaserToolShell.get()), new ItemStack(Items.IRON_SHOVEL), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()));
 		registerRecipe(1, ModItems.LaserHoe.get().getDefaultInstance() ,new ItemStack(ModItems.LaserToolShell.get()), new ItemStack(Items.IRON_HOE), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()));
 		
+		registerRecipe(1, ModItems.LaserHelmet.get().getDefaultInstance() ,new ItemStack(Items.IRON_HELMET), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()));
+		registerRecipe(1, ModItems.LaserChestplate.get().getDefaultInstance() ,new ItemStack(Items.IRON_CHESTPLATE), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()));
+		registerRecipe(1, ModItems.LaserLeggings.get().getDefaultInstance() ,new ItemStack(Items.IRON_LEGGINGS), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()));
+		registerRecipe(1, ModItems.LaserBoots.get().getDefaultInstance() , new ItemStack(Items.IRON_BOOTS), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()));
+		
 		registerRecipe(1, new ItemStack(ModBlocks.LaserProjector.get()), new ItemStack(ModBlocks.Laser.get()), new ItemStack(Items.IRON_INGOT), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(ModItems.LaserCrystal.get()));
 		registerRecipe(1, new ItemStack(ModBlocks.ModStation.get()), new ItemStack(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE), new ItemStack(Items.IRON_INGOT), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Items.IRON_INGOT));
 		registerRecipe(1, ModItems.Linker.get().getDefaultInstance(), new ItemStack(Items.IRON_INGOT), new ItemStack(Items.IRON_INGOT), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Items.REDSTONE));

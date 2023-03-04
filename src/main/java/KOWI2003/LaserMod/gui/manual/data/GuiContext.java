@@ -29,6 +29,8 @@ public class GuiContext {
 	
 	public void init() {
 		try {
+			components.clear();
+			
 			if(ManualHandler.hasNext(page)) 
 				addComponent(new FlipPageComponent("next", 100, 45, 20, 20, ManualHandler.getByPage(page+1).getId(), ButtonIconType.NextArrow));
 			if(ManualHandler.hasPrev(page)) 

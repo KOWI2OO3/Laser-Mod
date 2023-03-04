@@ -14,7 +14,7 @@ public class ManualItem extends ManualComponent<ItemComponent> {
 	@Override
 	public void renderComponent(PoseStack stack, int mouseX, int mouseY) {
 		
-		RenderUtils.Gui.renderItem(data.stack, data.X + super.getX(), data.Y + super.getX(), data.size);
+		RenderUtils.Gui.renderItem(data.stack, data.X + super.getX(), data.Y + super.getY(), data.size);
 		
 	}
 

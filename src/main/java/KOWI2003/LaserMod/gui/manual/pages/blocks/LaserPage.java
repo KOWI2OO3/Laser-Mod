@@ -19,14 +19,14 @@ public class LaserPage extends GuiContext {
 	public void init() {
 		super.init();
 		
-		addComponent(new ItemComponent("item", -80, -55, new ItemStack(ModBlocks.Laser.get()), 5f));
+		addComponent(new ItemComponent("item", -45, -15, new ItemStack(ModBlocks.Laser.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", -100, -30, 200, 0, new float[] {.5f, .5f, .5f}, "The most simple laser, it can be placed in any direction. supply it with a redstone signal to turn it on.", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "The most simple laser, it can be placed in any direction. supply it with a redstone signal to turn it on.", null));
 
-		addComponent(new TextBoxComponent("info", -100, 1, 200, 0, new float[] {.5f, .5f, .5f}, "The Laser can be modified using upgrades, when you open the laser's gui you will be able to place the upgrades in it.", null));
+		addComponent(new TextBoxComponent("info", 0, 1, 200, 0, new float[] {.4f, .4f, .4f}, "The Laser can be modified using upgrades, when you open the laser's gui you will be able to place the upgrades inside.", null));
 
-		addComponent(new TextBoxComponent("info", -100, 30, 45, 0, null, "Also Check: ", null));
-		addPageSelector(-100 + 35, 30, 0, ManualHandler.UpgradesHeader, "upgrades");
+		addPageSelector(-100 + 35, 30, 0, ManualHandler.UpgradesHeader, "Upgrades");
+		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "Also Check: ", null));
 	}
 	
 }

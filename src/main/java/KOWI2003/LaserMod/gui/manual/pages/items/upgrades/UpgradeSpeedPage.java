@@ -5,6 +5,7 @@ import KOWI2003.LaserMod.gui.manual.data.GuiContext;
 import KOWI2003.LaserMod.gui.manual.data.widget.ItemComponent;
 import KOWI2003.LaserMod.gui.manual.data.widget.TextBoxComponent;
 import KOWI2003.LaserMod.init.ModUpgrades;
+import net.minecraft.world.item.ItemStack;
 
 public class UpgradeSpeedPage extends GuiContext {
 	
@@ -12,10 +13,19 @@ public class UpgradeSpeedPage extends GuiContext {
 		super(id);
 		setParent(ManualHandler.UpgradesHeader);
 		setTitle(ModUpgrades.Speed.get().getName(ModUpgrades.Speed.get().getDefaultInstance()).getString());
+	}
+	
+	@Override
+	public void init() {
+		super.init();
 		
-		addComponent(new ItemComponent("item", -70, -43, ModUpgrades.Speed.get().getDefaultInstance(), 5));
-		addComponent(new TextBoxComponent("text", -50, 36, 100, 60, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet nisl suscipit adipiscing bibendum est. Nascetur ridiculus mus mauris vitae ultricies leo integer. Viverra orci sagittis eu volutpat odio facilisis. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur. Congue quisque egestas diam in arcu cursus euismod quis viverra. Ultrices sagittis orci a scelerisque purus semper eget. Dis parturient montes nascetur ridiculus. Ante in nibh mauris cursus mattis molestie a iaculis at. Morbi tristique senectus et netus. Vestibulum morbi blandit cursus risus at ultrices. Fusce ut placerat orci nulla pellentesque dignissim. Condimentum id venenatis a condimentum vitae. Nibh mauris cursus mattis molestie a iaculis at erat pellentesque. Urna molestie at elementum eu facilisis sed odio morbi.\r\n"
-				+ "\r\n"
-				+ "At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Ac orci phasellus egestas tellus. Gravida arcu ac tortor dignissim convallis aenean. Tellus at urna condimentum mattis. Ut pharetra sit amet aliquam. Diam ut venenatis tellus in metus. Habitant morbi tristique senectus et netus et malesuada fames. Lacus laoreet non curabitur gravida. Sed vulputate odio ut enim blandit volutpat maecenas volutpat. Tempor nec feugiat nisl pretium. Sem fringilla ut morbi tincidunt augue interdum velit. Maecenas volutpat blandit aliquam etiam. Non quam lacus suspendisse faucibus interdum posuere. At varius vel pharetra vel turpis nunc. Tempor nec feugiat nisl pretium fusce id velit. Ultrices in iaculis nunc sed augue lacus viverra vitae congue. Sagittis eu volutpat odio facilisis mauris sit amet massa. Diam volutpat commodo sed egestas egestas fringilla. Id leo in vitae turpis massa sed elementum tempus.\r\n", null));
+		addComponent(new ItemComponent("item", -45, -5, new ItemStack(ModUpgrades.Speed.get()), 10f));
+		
+		addComponent(new TextBoxComponent("info", 0, -35, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "An simple upgrade to increase speed", null));
+
+		addComponent(new TextBoxComponent("info", 0, -15, 200, 0, new float[] {.4f, .4f, .4f}, "When applied to an device, like an infuser or precision assembler, it will make the device faster at crafting", null));
+
+		addComponent(new TextBoxComponent("info", 0, 15, 200, 0, new float[] {.4f, .4f, .4f}, "When applied to laser tools it acts as efficiency", null));
+
 	}
 }

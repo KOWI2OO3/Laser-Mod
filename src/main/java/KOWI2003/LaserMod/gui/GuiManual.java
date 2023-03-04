@@ -68,6 +68,7 @@ public class GuiManual extends Screen {
 	@Override
 	protected void init() {
 		super.init();
+		gui.init();
 		clearWidgets();
   
 		for (WidgetBase base : gui.getComponents()) {
@@ -111,6 +112,7 @@ public class GuiManual extends Screen {
 			}else if(widget instanceof ManualComponent<?>) {
 				data = ((ManualComponent<?>)widget).getData();
 			}
+			
 			if(data != null) {
 				widget.x = (posx + data.X);
 				widget.y = (posy + data.Y);
@@ -122,6 +124,7 @@ public class GuiManual extends Screen {
 	}
 	
 	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+		init();
 		this.renderBackground(matrix);
 		renderBg(matrix, partialTicks, mouseX, mouseY);
 		super.render(matrix, mouseX, mouseY, partialTicks);

@@ -12,7 +12,6 @@ import KOWI2003.LaserMod.items.ItemDefault;
 import KOWI2003.LaserMod.items.ItemIRGlasses;
 import KOWI2003.LaserMod.items.ItemLaserArmorBase;
 import KOWI2003.LaserMod.items.ItemLaserArmorBase.LaserArmorMaterial;
-import KOWI2003.LaserMod.items.ItemLaserDirector;
 import KOWI2003.LaserMod.items.ItemLaserMutliTool;
 import KOWI2003.LaserMod.items.ItemLaserTool;
 import KOWI2003.LaserMod.items.ItemLinker;
@@ -67,7 +66,6 @@ public class ModItems {
 	
 	public static final RegistryObject<Item> IR_Glasses = register("ir_glasses", () -> new ItemIRGlasses());
 	public static final RegistryObject<Item> Linker = register("linker", () -> new ItemLinker());
-	public static final RegistryObject<Item> LaserDirector = registerHidden("laser_director", () -> new ItemLaserDirector());
     
 	public static final RegistryObject<Item> Silicon = register("silicon", () -> new ItemDefault());
 	public static final RegistryObject<Item> SiliconBase = register("silicon_plate", () -> new ItemDefault());
