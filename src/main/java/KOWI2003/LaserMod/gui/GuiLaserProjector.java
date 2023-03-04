@@ -334,12 +334,12 @@ public class GuiLaserProjector extends Screen {
 		Matrix4f ortho = RenderSystem.getProjectionMatrix();
 		
 		//Setup Projection Matrix
-		RenderSystem.setProjectionMatrix(Matrix4f.perspective((float) Math.toRadians(60f), 
+		RenderSystem.setProjectionMatrix(Matrix4f.perspective(Math.toRadians(60f), 
 				(float)this.minecraft.getWindow().getWidth() / (float)this.minecraft.getWindow().getHeight()
 				, 10F, 1000f));
 		
 		//Saving Model Matrix
-		Matrix4f modelmatrixSaved = new Matrix4f(RenderSystem.getModelViewStack().last().pose());
+		Matrix4f modelmatrixSaved = RenderSystem.getModelViewStack().last().pose().copy();
 		
 		//Setup new Identity Model matrix
         PoseStack modelMatrix = RenderSystem.getModelViewStack();
@@ -502,7 +502,7 @@ public class GuiLaserProjector extends Screen {
 					float[] color = Utils.getFloatRGBAFromHexInt(Minecraft.getInstance().getBlockColors().getColor(state, level, pos, 0));
 					
 //					renderer.renderBatched(state, pos, level, matrix, buffer.getBuffer(RenderType.translucent()), true, new Random(), modelData); //--> has shadows on the blocks that have an block next tot them in the world
-					modelRenderer.renderModel(matrix.last(), buffer.getBuffer(ItemBlockRenderTypes.getRenderType(state, false)), state, model, color[0], color[1], color[2], 15728880, OverlayTexture.NO_OVERLAY, modelData, RenderType.cutout());
+					modelRenderer.renderModel(matrix.last(), buffer.getBuffer(ItemBlockRenderTypes.getRenderType(state, false)), state, model, color[0], color[1], color[2], 15728880, OverlayTexture.NO_OVERLAY, modelData, RenderType.translucent());
 //					renderer.renderSingleBlock(state, matrix, buffer, 15728880, OverlayTexture.NO_OVERLAY, modelData); //--> Crashes when an block with tintindex is visible like the laser
 					if(tile != null)
 						tileRenderer.render(tile, partialTicks, matrix, buffer);
@@ -528,10 +528,10 @@ public class GuiLaserProjector extends Screen {
 	}
 	
 	public Matrix4f getWorldToClip(PoseStack matrix) {
-		Matrix4f projMat = new Matrix4f(RenderSystem.getProjectionMatrix());
-		Matrix4f viewMat = new Matrix4f(matrix.last().pose());
+		Matrix4f projMat = RenderSystem.getProjectionMatrix().copy();
+		Matrix4f viewMat = matrix.last().pose().copy();
 		projMat.multiply(Matrix4f.createScaleMatrix(1, -1, 1));
-		projMat.multiply(new Matrix4f(RenderSystem.getModelViewMatrix()));
+		projMat.multiply(RenderSystem.getModelViewMatrix().copy());
 		projMat.multiply(viewMat);
 		return projMat;
 	}
@@ -556,20 +556,20 @@ public class GuiLaserProjector extends Screen {
 			matrix.pushPose();
 			matrix = wid.getRenderMatrix(matrix);
 			if(debug)
-				RenderUtils.renderOutline(matrix, wid.x, wid.y, wid.getZ(), wid.getWidth(), wid.getHeight(), wid.getDepth(), new float[] {1, 0, 1});
+				RenderUtils.renderOutline(matrix, wid.getX(), wid.getY(), wid.getZ(), wid.getWidth(), wid.getHeight(), wid.getDepth(), new float[] {1, 0, 1});
 			Matrix4f WorldToClip = getWorldToClip(matrix);
 			matrix.popPose();
 			
 			
-			Vector4f TLF = new Vector4f(wid.x, wid.y, wid.getZ(), 1);
-			Vector4f TRF = new Vector4f(wid.x + wid.getWidth(), wid.y, wid.getZ(), 1);
-			Vector4f BLF = new Vector4f(wid.x, wid.y + wid.getHeight(), wid.getZ(), 1);
-			Vector4f BRF = new Vector4f(wid.x + wid.getWidth(), wid.y + wid.getHeight(), wid.getZ(), 1);
+			Vector4f TLF = new Vector4f(wid.getX(), wid.getY(), wid.getZ(), 1);
+			Vector4f TRF = new Vector4f(wid.getX() + wid.getWidth(), wid.getY(), wid.getZ(), 1);
+			Vector4f BLF = new Vector4f(wid.getX(), wid.getY() + wid.getHeight(), wid.getZ(), 1);
+			Vector4f BRF = new Vector4f(wid.getX() + wid.getWidth(), wid.getY() + wid.getHeight(), wid.getZ(), 1);
 			
-			Vector4f TLB = new Vector4f(wid.x, wid.y, wid.getZ() + wid.getDepth(), 1);
-			Vector4f TRB = new Vector4f(wid.x + wid.getWidth(), wid.y, wid.getZ() + wid.getDepth(), 1);
-			Vector4f BLB = new Vector4f(wid.x, wid.y + wid.getHeight(), wid.getZ() + wid.getDepth(), 1);
-			Vector4f BRB = new Vector4f(wid.x + wid.getWidth(), wid.y + wid.getHeight(), wid.getZ() + wid.getDepth(), 1);
+			Vector4f TLB = new Vector4f(wid.getX(), wid.getY(), wid.getZ() + wid.getDepth(), 1);
+			Vector4f TRB = new Vector4f(wid.getX() + wid.getWidth(), wid.getY(), wid.getZ() + wid.getDepth(), 1);
+			Vector4f BLB = new Vector4f(wid.getX(), wid.getY() + wid.getHeight(), wid.getZ() + wid.getDepth(), 1);
+			Vector4f BRB = new Vector4f(wid.getX() + wid.getWidth(), wid.getY() + wid.getHeight(), wid.getZ() + wid.getDepth(), 1);
 			
 			transposeToScreen(TLF, WorldToClip);
 			transposeToScreen(TRF, WorldToClip);

@@ -39,6 +39,7 @@
 	"item.lasermod.upgrade_mode": "Mode Upgrade",
 	"item.lasermod.upgrade_damage": "Damage Upgrade",
 	"item.lasermod.upgrade_no_damage": "No Damage Upgrade",
+	"item.lasermod.upgrade_silence": "Silence Upgrade",
 	"item.lasermod.upgrade_pull": "Pull Upgrade",
 	"item.lasermod.upgrade_push": "Push Upgrade",
 	"item.lasermod.upgrade_distance": "Distance Upgrade",

@@ -66,7 +66,7 @@ public class ProjectorItem extends ProjectorWidget {
 	
 	@Override
 	public float getZ() {
-		return -getDepth()/2f + 0.5f;
+		return super.getZ() -getDepth()/2f + 0.5f;
 	}
 	
 	@Override

@@ -77,10 +77,11 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 					"textures/gui/mod_widgets.png")
 		);
 		
+		
 
 		Red = new ForgeSlider(0, 0, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")), MutableComponent.create(new LiteralContents("")), 0, 1, te.getColor()[0], 0.001d, 0, true);
 		Green = new ForgeSlider(0, 40, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")), MutableComponent.create(new LiteralContents("")), 0, 1, te.getColor()[0], 0.001d, 0, true);
-		Green = new ForgeSlider(0, 80, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")), MutableComponent.create(new LiteralContents("")), 0, 1, te.getColor()[0], 0.001d, 0, true);
+		Blue = new ForgeSlider(0, 80, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")), MutableComponent.create(new LiteralContents("")), 0, 1, te.getColor()[0], 0.001d, 0, true);
 		
 		Red.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")));
 		Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
@@ -88,18 +89,18 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 	}
 	
 	protected void init() {
-      super.init();
-      this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2 + 37;
-      this.inventoryLabelY = this.imageHeight - 91;
+		super.init();
+		this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2 + 37;
+		this.inventoryLabelY = this.imageHeight - 91;
       
-      ChangeSizeButtonLocationUpdate();
+		ChangeSizeButtonLocationUpdate();
       
-      clearWidgets();
-      addRenderableWidget(InsertUpgarde);
-      addRenderableWidget(upgrades);
-      addRenderableWidget(Red);
-      addRenderableWidget(Green);
-      addRenderableWidget(Blue);
+		clearWidgets();
+		addRenderableWidget(InsertUpgarde);
+		addRenderableWidget(upgrades);
+		addRenderableWidget(Red);
+		addRenderableWidget(Green);
+		addRenderableWidget(Blue);
 	}
 
 	public void ChangeSizeButtonLocationUpdate() {
@@ -134,6 +135,12 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 	
 	protected void renderBg(PoseStack matrix, float partialTicks, int mouseX, int mouseY) {
 //		this.minecraft.getTextureManager().bindForSetup(TEXTURE);
+
+		Red.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")));
+		Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
+		Blue.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")));
+		
+		matrix.pushPose();
 		RenderUtils.bindTexture(TEXTURE);
 		int i = (this.width - this.imageWidth) / 2;
 		int j = (this.height - this.imageHeight) / 2;
@@ -193,6 +200,8 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 		
 		if(!te.handler.getStackInSlot(0).isEmpty())
 			renderStats(matrix, mouseX, mouseY);
+
+		matrix.popPose();
 	}
 	
 	public String[] getFormalUpgradeName(List<ItemUpgradeBase> bases) {
@@ -277,8 +286,8 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 	}
 	
 	@Override
-	public boolean mouseClicked(double p_231044_1_, double p_231044_3_, int p_231044_5_) {
-		boolean i = super.mouseClicked(p_231044_1_, p_231044_3_, p_231044_5_);
+	public boolean mouseClicked(double mouseX, double mouseY, int button) {
+		boolean i = super.mouseClicked(mouseX, mouseY, button);
 		Red.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")));
 		Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
 		Blue.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")));
@@ -318,9 +327,9 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 	
 	@Override
 	public boolean mouseReleased(double p_231048_1_, double p_231048_3_, int p_231048_5_) {
-		for (AbstractWidget widget : buttons) {
-			widget.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_);
-		}
+//		for (AbstractWidget widget : buttons) {
+//			widget.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_);
+//		}
 		return super.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_);
 	}
 }

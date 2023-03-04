@@ -40,8 +40,9 @@ public class ContainerLaser extends AbstractContainerMenu {
 	    			@Override
 	    			public void onTake(Player player, ItemStack stack) {
 	    				if(stack.getItem() instanceof ItemUpgradeBase) {
-//	    					boolean removed =  te.remove((ItemUpgradeBase)stack.getItem(), false);
-	    					//return removed ? stack : ItemStack.EMPTY;
+	    					if(!te.remove((ItemUpgradeBase)stack.getItem(), false))
+	    						return;
+//	    					return removed ? stack : ItemStack.EMPTY;
 	    				}
 	    				super.onTake(player, stack);
 	    			}

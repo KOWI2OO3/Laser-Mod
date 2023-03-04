@@ -13,6 +13,7 @@ import KOWI2003.LaserMod.config.ModConfig;
 import KOWI2003.LaserMod.container.ContainerLaser;
 import KOWI2003.LaserMod.init.ModSounds;
 import KOWI2003.LaserMod.init.ModTileTypes;
+import KOWI2003.LaserMod.init.ModUpgrades;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.utils.MathUtils;
 import KOWI2003.LaserMod.utils.TileEntityUtils;
@@ -94,7 +95,8 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 				soundCooldown--;
 				if(soundCooldown <= 0) {
 					soundCooldown = 29;
-					level.playSound(null, getPos(), ModSounds.LASER_ACTIVE.get(), SoundSource.BLOCKS, 0.1F, 1F);
+					if(!properties.hasUpgarde((ItemUpgradeBase)ModUpgrades.Silence.get()))
+						level.playSound(null, getPos(), ModSounds.LASER_ACTIVE.get(), SoundSource.BLOCKS, 0.1F, 1F);
 				}
 			}
 		}
@@ -110,10 +112,10 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		active = value;
 		if(!active) {
 			handleTurnOffForInteractable();
-			if(ModConfig.useSounds)
+			if(ModConfig.useSounds && !properties.hasUpgarde((ItemUpgradeBase)ModUpgrades.Silence.get()))
 				level.playSound(null, getBlockPos(), ModSounds.LASER_DEACTIVATE.get(), SoundSource.BLOCKS, 1.0f, 0.68f);
 		}else
-			if(ModConfig.useSounds)
+			if(ModConfig.useSounds && !properties.hasUpgarde((ItemUpgradeBase)ModUpgrades.Silence.get()))
 				level.playSound(null, getBlockPos(), ModSounds.LASER_ACTIVATE.get(), SoundSource.BLOCKS, 1.0f, 0.68f);
 		soundCooldown = 29;
 		sync();

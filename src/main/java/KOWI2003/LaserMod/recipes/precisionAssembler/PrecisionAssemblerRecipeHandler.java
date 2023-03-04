@@ -33,6 +33,7 @@ public class PrecisionAssemblerRecipeHandler {
 		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage4.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Items.DIAMOND_SWORD)));
 		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage5.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Items.NETHERITE_SWORD)));
 		registerRecipeShapeless(1, new ItemStack(ModUpgrades.NoDamage.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(ItemTags.WOOL));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Silence.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(ItemTags.WOOL), Ingredient.of(ItemTags.WOOL), Ingredient.of(ItemTags.WOOL));
 		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Push.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Blocks.PISTON)));
 		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Pull.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Blocks.STICKY_PISTON)));
 		registerRecipe(1, new ItemStack(ModUpgrades.Distance.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Blocks.GLASS), ItemStack.EMPTY, new ItemStack(Blocks.GLASS));
