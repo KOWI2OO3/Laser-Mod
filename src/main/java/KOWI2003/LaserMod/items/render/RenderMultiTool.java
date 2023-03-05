@@ -2,6 +2,7 @@ package KOWI2003.LaserMod.items.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Matrix4f;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import com.mojang.math.Vector4f;
@@ -17,9 +18,10 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.Vec3;
 
 public class RenderMultiTool extends BlockEntityWithoutLevelRenderer {
 
@@ -38,6 +40,7 @@ public class RenderMultiTool extends BlockEntityWithoutLevelRenderer {
 		this.dispatcher = p_172550_;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void renderByItem(ItemStack stack, TransformType transformType, PoseStack matrix,
 			MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
@@ -53,14 +56,14 @@ public class RenderMultiTool extends BlockEntityWithoutLevelRenderer {
 		
 		matrix.pushPose();
 		
-		Vec3 start = Minecraft.getInstance().player.position().add(new Vec3(0, Minecraft.getInstance().player.getEyeHeight(), 0));
-		Vec3 dir = Minecraft.getInstance().player.getForward();
-		//TODO remember to render the actual laser just like the normal laser mode on the laser block :D
-		
 		float l = 10;
 		
 		CompoundTag tag = stack.getTag();
 		l = tag.getFloat("distance");
+		
+		Player player = Minecraft.getInstance().player;
+		
+		Vector4f end = new Vector4f(new Vector3f(.45f, .4f, l+1));
 		
 		float[] pos = new float[] {0, 0, 0};
 		float size = 0.05f;
@@ -69,18 +72,36 @@ public class RenderMultiTool extends BlockEntityWithoutLevelRenderer {
 
 		matrix.translate(.5, -0.065, 0);
 		
-//		if(transformType == TransformType.FIRST_PERSON_RIGHT_HAND) {
-//			matrix.mulPose(Vector3f.YP.rotationDegrees(3.25f));
-//			matrix.mulPose(Vector3f.ZP.rotationDegrees(2.5f));
-//		}else if(transformType == TransformType.FIRST_PERSON_LEFT_HAND) {
-//			matrix.mulPose(Vector3f.YP.rotationDegrees(-3.25f));
-//			matrix.mulPose(Vector3f.ZP.rotationDegrees(2.5f));
-//		}
+		PoseStack localToWorld = new PoseStack();
+		BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(stack, player.level, player, 0);
+		Vector3f translation = model.getTransforms().getTransform(transformType).translation;
 		
-		Vector4f forward = new Vector4f(0, 0, 1, 1);
-		forward.transform(matrix.last().pose());
+		localToWorld.translate(-translation.x(), -translation.y(), -translation.z());
 		
-		Quaternion rotation = MathUtils.getQuaternionRotationBetweenVectors(new Vector3f(forward.x(), forward.y(), forward.z()), new Vector3f((float)dir.x, (float)dir.y, (float)dir.z));
+		localToWorld.mulPose(Vector3f.YP.rotationDegrees(-90));
+		
+		Matrix4f worldToLocal = new Matrix4f(localToWorld.last().pose());
+		worldToLocal.invert();
+		
+		end.transform(worldToLocal);
+		
+		Vector3f direction = new Vector3f(end);
+		double s1 = MathUtils.getLenghtSqr(direction);
+		direction.normalize();
+		
+//		float s = .1f;
+//		RenderUtils.renderCube(matrix, end.x()-s/2f, end.y()-s/2f, end.z()-s/2f, s, s, s, 1, 0, 0);
+		
+		Vector4f forward = new Vector4f(.1f, 0, 0, 1);
+		double s2 = MathUtils.getLenghtSqr(new Vector3f(forward));
+		forward.normalize();
+		
+		l = (float) Math.sqrt(s1 + s2);
+		
+		Quaternion rotation = MathUtils.getQuaternionRotationBetweenVectors(new Vector3f(forward), direction);
+		rotation.normalize();
+		
+		matrix.mulPose(rotation);
 		
 		RenderUtils.renderQuad(buffer.getBuffer(LaserRenderType.LASER_RENDER), matrix, new float[] {pos[0], pos[1] - size/2f, pos[2]}, 
 				new float[] {l, size, size}, new float[] {0, 0, 1, 1}, new float[] {color[0], color[1], color[2], 0.5f}, combinedLight, combinedOverlay);

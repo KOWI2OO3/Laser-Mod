@@ -33,6 +33,7 @@ import KOWI2003.LaserMod.gui.manual.pages.items.upgrades.UpgradeModePage;
 import KOWI2003.LaserMod.gui.manual.pages.items.upgrades.UpgradeNoDamagePage;
 import KOWI2003.LaserMod.gui.manual.pages.items.upgrades.UpgradePullPage;
 import KOWI2003.LaserMod.gui.manual.pages.items.upgrades.UpgradePushPage;
+import KOWI2003.LaserMod.gui.manual.pages.items.upgrades.UpgradeSilencePage;
 import KOWI2003.LaserMod.gui.manual.pages.items.upgrades.UpgradeSpeedPage;
 import KOWI2003.LaserMod.gui.manual.pages.subpages.BlocksPage;
 import KOWI2003.LaserMod.gui.manual.pages.subpages.IntegrationPage;
@@ -86,6 +87,7 @@ public class ManualHandler {
 	public static GuiContext UpgradeMode;
 	public static GuiContext UpgradeDamage;
 	public static GuiContext UpgradeNoDamage;
+	public static GuiContext UpgradeSilence;
 	public static GuiContext UpgradePush;
 	public static GuiContext UpgradePull;
 	public static GuiContext UpgradeDistance;
@@ -133,6 +135,7 @@ public class ManualHandler {
 		UpgradeMode = registerGuiContext(new UpgradeModePage("upgrade_mode"));
 		UpgradeDamage = registerGuiContext(new UpgradeDamagePage("upgrade_damage"));
 		UpgradeNoDamage = registerGuiContext(new UpgradeNoDamagePage("upgrade_no_damage"));
+		UpgradeSilence = registerGuiContext(new UpgradeSilencePage("upgrade_silence"));
 		UpgradePush = registerGuiContext(new UpgradePushPage("upgrade_push"));
 		UpgradePull = registerGuiContext(new UpgradePullPage("upgrade_pull"));
 		UpgradeDistance = registerGuiContext(new UpgradeDistancePage("upgrade_distance"));

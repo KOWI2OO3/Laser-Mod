@@ -15,10 +15,13 @@ public class EventHandler {
 		MinecraftForge.EVENT_BUS.register(new WorldJoinEvent());
 		MinecraftForge.EVENT_BUS.register(new LaserBlockBreakEvent());
 		MinecraftForge.EVENT_BUS.register(new LaserArmorEvents());
-		MinecraftForge.EVENT_BUS.register(new LaserMultiToolEvents());
 		MinecraftForge.EVENT_BUS.register(new LaserToolEvents());
 		MinecraftForge.EVENT_BUS.register(new ConfigSyncEvent());
 		MinecraftForge.EVENT_BUS.register(new GeneralEvents());
+	}
+	
+	public static void registerClientEvents() {
+		MinecraftForge.EVENT_BUS.register(new LaserMultiToolEvents());
 	}
 	
 }

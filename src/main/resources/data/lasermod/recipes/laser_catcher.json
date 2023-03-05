@@ -10,7 +10,7 @@
     {
         "c":
         {
-            "item": "minecraft:cobblestone"
+            "tag": "stone_crafting_materials"
         },
         "l":
         {
@@ -18,7 +18,7 @@
         },
         "g":
         {
-            "item": "minecraft:glass"
+            "tag": "forge:glass"
         }
     },
     "result":

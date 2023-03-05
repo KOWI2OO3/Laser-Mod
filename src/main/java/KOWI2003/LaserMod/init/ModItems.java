@@ -52,11 +52,11 @@ public class ModItems {
 	public static final RegistryObject<Item> LaserCrystal = register("laser_crystal", () -> new ItemDefault());
 	public static final RegistryObject<Item> LaserToolShell = register("laser_tool_base", () -> new ItemLaserTool());
 	
-	public static final RegistryObject<Item> LaserSword = register("laser_sword", () -> new ToolLaserSword(new Item.Properties(), 8f, 6f, 1000));
-	public static final RegistryObject<Item> LaserPickaxe = register("laser_pickaxe", () -> new ToolLaserPickaxe(new Item.Properties(), 8f, 3f, 1000, 2));
-	public static final RegistryObject<Item> LaserAxe = register("laser_axe", () -> new ToolLaserAxe(new Item.Properties(), 8f, 3f, 1000));
-	public static final RegistryObject<Item> LaserShovel = register("laser_shovel", () -> new ToolLaserShovel(new Item.Properties(), 8f, 3f, 1000));
-	public static final RegistryObject<Item> LaserHoe = register("laser_hoe", () -> new ToolLaserHoe(new Item.Properties(), 8f, 6f, 1000));
+	public static final RegistryObject<Item> LaserSword = register("laser_sword", () -> new ToolLaserSword(new Item.Properties(), 8f, 6f, 2000));
+	public static final RegistryObject<Item> LaserPickaxe = register("laser_pickaxe", () -> new ToolLaserPickaxe(new Item.Properties(), 8f, 3f, 2000, 2));
+	public static final RegistryObject<Item> LaserAxe = register("laser_axe", () -> new ToolLaserAxe(new Item.Properties(), 8f, 3f, 2000));
+	public static final RegistryObject<Item> LaserShovel = register("laser_shovel", () -> new ToolLaserShovel(new Item.Properties(), 8f, 3f, 2000));
+	public static final RegistryObject<Item> LaserHoe = register("laser_hoe", () -> new ToolLaserHoe(new Item.Properties(), 8f, 6f, 2000));
 	public static final RegistryObject<Item> LaserMultiTool = register("laser_multitool", () -> new ItemLaserMutliTool(new Item.Properties(), 1000));
 	
 	public static final RegistryObject<Item> LaserHelmet = register("laser_helmet", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.HEAD, new Item.Properties()));
@@ -77,7 +77,14 @@ public class ModItems {
 	public static final RegistryObject<Item> LaserChestplateOpened = registerHidden("hi4-lco", () -> new ItemLaserToolOpend()); //Hidden Item 4 - Laser Chestplate Opened
 	public static final RegistryObject<Item> LaserLegginsOpened = registerHidden("hi5-llo", () -> new ItemLaserToolOpend()); //Hidden Item 5 - Laser Leggings Opened
 	public static final RegistryObject<Item> LaserBootsOpened = registerHidden("hi6-lbo", () -> new ItemLaserToolOpend()); //Hidden Item 6 - Laser Boots Opened
-	public static final RegistryObject<Item> LaserMultiToolmodel = registerHidden("hi7-lmt", () -> new HiddenItem(new Item.Properties())); //Hidden Item 6 - Laser Boots Opened
+	public static final RegistryObject<Item> LaserMultiToolmodel = registerHidden("hi7-lmt", () -> new HiddenItem(new Item.Properties())); //Hidden Item 7 - Laser Multi Tool
+	
+	public static final RegistryObject<Item> LaserPickaxeOpen = registerHidden("hi-lpo", () -> new ItemLaserToolOpend()); //Hidden Item - Laser Pickaxe Opened
+	public static final RegistryObject<Item> LaserSwordOpen = registerHidden("hi-lswo", () -> new ItemLaserToolOpend()); //Hidden Item - Laser Sword Opened
+	public static final RegistryObject<Item> LaserAxeOpen = registerHidden("hi-lao", () -> new ItemLaserToolOpend()); //Hidden Item - Laser Axe Opened
+	public static final RegistryObject<Item> LaserShovelOpen = registerHidden("hi-lso", () -> new ItemLaserToolOpend()); //Hidden Item - Laser Shovel Opened
+	public static final RegistryObject<Item> LaserHoeOpen = registerHidden("hi-lho", () -> new ItemLaserToolOpend()); //Hidden Item - Laser Hoe Opened
+	public static final RegistryObject<Item> LaserMultiToolOpen = registerHidden("hi-lmto", () -> new ItemLaserToolOpend()); //Hidden Item - Laser Multi Tool
 	
 	private static RegistryObject<Item> register(String name, final Supplier<? extends Item> item) {
 		RegistryObject<Item> toReturn = ITEMS.register(name, item);
@@ -141,11 +148,13 @@ public class ModItems {
 	
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
+	@SuppressWarnings("deprecation")
 	public static void registerBlockColors(RegisterColorHandlersEvent.Item event){
 		event.getItemColors().register(new ColorHandler.Item(), 
 				ModItems.LaserPickaxe.get(), ModItems.LaserSword.get(), ModItems.LaserHoe.get(), ModItems.LaserAxe.get(), ModItems.LaserShovel.get(), ModItems.LaserMultiTool.get(),
 				ModItems.LaserToolOpened.get(), ModItems.LaserHelmetOpened.get(), ModItems.LaserChestplateOpened.get(), ModItems.LaserLegginsOpened.get(), ModItems.LaserBootsOpened.get(),
 				ModItems.LaserToolShell.get(),
-				ModItems.LaserHelmet.get(), ModItems.LaserChestplate.get(), ModItems.LaserLeggings.get(), ModItems.LaserBoots.get());
+				ModItems.LaserHelmet.get(), ModItems.LaserChestplate.get(), ModItems.LaserLeggings.get(), ModItems.LaserBoots.get(),
+				LaserPickaxeOpen.get(), LaserSwordOpen.get(), LaserAxeOpen.get(), LaserShovelOpen.get(), LaserHoeOpen.get());
 	}
 }

@@ -22,7 +22,7 @@ public class MainPage extends GuiContext {
 		offset = addPageSelector(x, y, offset, ManualHandler.BlocksHeader, "Blocks", true);
 		offset = addPageSelector(x, y, offset, ManualHandler.ItemsHeader, "Items", true);
 		offset = addPageSelector(x, y, offset, ManualHandler.UpgradesHeader, "Upgrades", true);
-		offset = addPageSelector(x, y, offset, ManualHandler.IntegrationHeader, "Integration", true);
+//		offset = addPageSelector(x, y, offset, ManualHandler.IntegrationHeader, "Integration", true);
 		
 	}
 }

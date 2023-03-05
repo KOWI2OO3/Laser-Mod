@@ -15,6 +15,8 @@ import KOWI2003.LaserMod.init.ModSounds;
 import KOWI2003.LaserMod.init.ModTileTypes;
 import KOWI2003.LaserMod.init.ModUpgrades;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
+import KOWI2003.LaserMod.network.PacketHandler;
+import KOWI2003.LaserMod.network.PacketLaser;
 import KOWI2003.LaserMod.utils.MathUtils;
 import KOWI2003.LaserMod.utils.TileEntityUtils;
 import KOWI2003.LaserMod.utils.Utils;
@@ -24,6 +26,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
@@ -164,7 +167,16 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 	
 	public void setColor(float red, float green, float blue) {
 		setColor(0, new float[] {red, green, blue});
+		
 		TileEntityUtils.syncColorToClient(this);
+		
+		if(!level.isClientSide) {
+			List<? extends Player> entities = level.players();
+			for (Player player : entities) {
+				if(player instanceof ServerPlayer && player.level == level)
+					PacketHandler.sendToClient(new PacketLaser(getPos(), red, green, blue), (ServerPlayer) player);
+			}
+		}
 	}
 	
 	@Override

@@ -10,6 +10,8 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemManual extends ItemDefault {
 
@@ -20,15 +22,20 @@ public class ItemManual extends ItemDefault {
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		if(level.isClientSide) {
-			if(!ManualHandler.isInitialized())
-				ManualHandler.initContext();
-//			Minecraft.getInstance().setScreen(new GuiManual(ManualHandler.MAIN));
-			GuiContext data = new MainPage("main");
-			data.init();
-			ManualHandler.initContext();
-			Minecraft.getInstance().setScreen(new GuiManual(data));
+			handleClient();
 		}
 		return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	void handleClient() {
+		if(!ManualHandler.isInitialized())
+			ManualHandler.initContext();
+//		Minecraft.getInstance().setScreen(new GuiManual(ManualHandler.MAIN));
+		GuiContext data = GuiManual.openMenu == null ? new MainPage("main") : GuiManual.openMenu; // from Gui.OpenMenu
+		data.init();
+		ManualHandler.initContext();
+		Minecraft.getInstance().setScreen(new GuiManual(data));
 	}
 	
 }

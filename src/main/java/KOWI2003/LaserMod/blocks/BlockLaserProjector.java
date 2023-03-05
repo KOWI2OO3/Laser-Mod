@@ -23,6 +23,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockLaserProjector extends BlockHorizontal {
 
@@ -37,10 +39,15 @@ public class BlockLaserProjector extends BlockHorizontal {
 		BlockEntity te = world.getBlockEntity(pos);
 		if(te instanceof TileEntityLaserProjector) {
 			if(world.isClientSide)
-				Minecraft.getInstance().setScreen(new GuiLaserProjector((TileEntityLaserProjector)te));
+				handleClient(te);
 			return InteractionResult.SUCCESS;
 		}
 		return InteractionResult.SUCCESS;
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	private void handleClient(BlockEntity te) {
+		Minecraft.getInstance().setScreen(new GuiLaserProjector((TileEntityLaserProjector)te));
 	}
 	
 	@Override

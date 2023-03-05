@@ -3,7 +3,7 @@ package KOWI2003.LaserMod.tileentities;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.init.ModBlocks;
 import KOWI2003.LaserMod.init.ModTileTypes;

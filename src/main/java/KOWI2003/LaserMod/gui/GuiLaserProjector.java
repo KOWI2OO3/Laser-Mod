@@ -468,6 +468,7 @@ public class GuiLaserProjector extends Screen {
 		matrix.popPose();
 	}
 	
+	@SuppressWarnings("deprecation")
 	void renderSurroudings(PoseStack matrix, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
 		matrix.pushPose();
 		float rot = te.getBlockState().getValue(BlockHorizontal.FACING).toYRot();

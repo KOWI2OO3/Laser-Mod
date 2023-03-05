@@ -43,12 +43,15 @@ public class GuiManual extends Screen {
 	protected int imageWidth = 176;
 	protected int imageHeight = 166;
 	
+	public static GuiContext openMenu;
+	
 	public GuiManual(GuiContext gui) {
 		super(MutableComponent.create(new LiteralContents(gui.getId())));
 		buttons = new ArrayList<>();
 		this.minecraft = Minecraft.getInstance();
 		
 		this.gui = gui;
+		openMenu = gui;
 		
 //		System.out.println(gui.page + " -> " + ManualHandler.hasPrev(gui.page) + " : " + ManualHandler.hasNext(gui.page));
 	}
@@ -124,7 +127,7 @@ public class GuiManual extends Screen {
 	}
 	
 	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
-		init();
+//		init(); //Debugging command
 		this.renderBackground(matrix);
 		renderBg(matrix, partialTicks, mouseX, mouseY);
 		super.render(matrix, mouseX, mouseY, partialTicks);

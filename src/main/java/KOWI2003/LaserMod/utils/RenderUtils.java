@@ -219,7 +219,8 @@ public class RenderUtils {
 		public static void renderItem(ItemStack stack, float x, float y, float scale) {
 			renderItem(new PoseStack(), stack, x, y, 0, scale, ItemTransforms.TransformType.GUI);
 		}
-		
+
+		@SuppressWarnings("deprecation")
 		public static void renderItem(PoseStack matrix, ItemStack stack, float x, float y, float z, float scale, TransformType transform) {
 			RenderSystem.enableDepthTest();
 			BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(stack, (Level)null, (LivingEntity)null, 0);

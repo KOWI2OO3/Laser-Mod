@@ -42,6 +42,8 @@ public class ModTileTypes {
     
     public static void optionalRegistry() {
     	ModChecker.check();
+    	if(ModChecker.isComputercraftLoaded) LASER_CONTROLLER = buildType("laser_controller", BlockEntityType.Builder.of(TileEntityRemoteCC::new, ModBlocks.LaserController.get()));
+    	else LASER_CONTROLLER = buildType("laser_controller", BlockEntityType.Builder.of(TileEntityLaserController::new, ModBlocks.LaserController.get()));
     	if(ModChecker.isComputercraftLoaded) LASER_CONTROLLER_CC = buildType("laser_controller_cc", BlockEntityType.Builder.of(TileEntityRemoteCC::new, ModBlocks.LaserController.get()));
     	if(ModChecker.isComputercraftLoaded) DEVICE_HUB = buildType("device_hub", BlockEntityType.Builder.of(TileEntityDeviceHub::new, ModBlocks.DeviceHub.get()));
     }
@@ -52,7 +54,7 @@ public class ModTileTypes {
     	INFUSER = buildType("infuser", BlockEntityType.Builder.of(TileEntityInfuser::new, ModBlocks.Infuser.get()));
     	MOD_STATION = buildType("mod_station", BlockEntityType.Builder.of(TileEntityModStation::new, ModBlocks.ModStation.get()));
     	LASER_PROJECTOR = buildType("laser_projector", BlockEntityType.Builder.of(TileEntityLaserProjector::new, ModBlocks.LaserProjector.get()));
-    	LASER_CONTROLLER = buildType("laser_controller", BlockEntityType.Builder.of(TileEntityLaserController::new, ModBlocks.LaserController.get()));
+//    	LASER_CONTROLLER = buildType("laser_controller", BlockEntityType.Builder.of(TileEntityLaserController::new, ModBlocks.LaserController.get()));
     	MIRROR = buildType("mirror", BlockEntityType.Builder.of(TileEntityMirror::new, ModBlocks.Mirror.get()));
     	ADVANCED_LASER = buildType("advanced_laser", BlockEntityType.Builder.of(TileEntityAdvancedLaser::new, ModBlocks.AdvancedLaser.get()));
     	PRECISION_ASSEMBLER = buildType("precision_assembler", BlockEntityType.Builder.of(TileEntityPrecisionAssembler::new, ModBlocks.PrecisionAssembler.get()));

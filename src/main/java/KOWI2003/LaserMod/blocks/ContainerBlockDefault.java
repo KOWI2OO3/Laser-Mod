@@ -30,24 +30,28 @@ public abstract class ContainerBlockDefault extends BaseEntityBlock {
 	}
 	
 	@Override
+	@SuppressWarnings("deprecation")
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player,
 			InteractionHand hand, BlockHitResult raytraceResult) {
 		return super.use(state, world, pos, player, hand, raytraceResult);
 	}
 	
 	@Override
+	@SuppressWarnings("deprecation")
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos,
 			CollisionContext context) {
 		return super.getShape(state, world, pos, context);
 	}
 	
 	@Override
+	@SuppressWarnings("deprecation")
 	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos,
 			CollisionContext context) {
 		return super.getCollisionShape(state, world, pos, context);
 	}
 	
 	@Override
+	@SuppressWarnings("deprecation")
 	public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos,
 			CollisionContext context) {
 		return super.getVisualShape(state, world, pos, context);
@@ -58,6 +62,8 @@ public abstract class ContainerBlockDefault extends BaseEntityBlock {
 	
 	@Override
 	public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+		if(!player.isCreative())
+			popResource(world, pos, new ItemStack(this));
 		super.playerWillDestroy(world, pos, state, player);
 	}
 	

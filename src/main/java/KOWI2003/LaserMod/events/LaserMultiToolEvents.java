@@ -2,6 +2,7 @@ package KOWI2003.LaserMod.events;
 
 import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.LaserProperties.Properties;
+import KOWI2003.LaserMod.config.ModConfig;
 import KOWI2003.LaserMod.init.ModItems;
 import KOWI2003.LaserMod.items.ItemLaserMutliTool;
 import KOWI2003.LaserMod.network.PacketFireLaserBullet;
@@ -27,18 +28,23 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+@OnlyIn(Dist.CLIENT)
 public class LaserMultiToolEvents {
 
 	static float totalOffset = 0; //the offset an head has after shooting
 	ItemStack lastStack = ItemStack.EMPTY;
 	
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public void onClickInput(InputEvent.InteractionKeyMappingTriggered event) 
 	{
 		Player player = Minecraft.getInstance().player;
@@ -58,6 +64,9 @@ public class LaserMultiToolEvents {
 		event.setCanceled(true);
 		event.setSwingHand(false);
 		
+		if(isAttacking)
+			return;
+		
 		//Spawn Entity -- Cooldown?
 		ItemStack stack = player.getMainHandItem();
 		PacketHandler.sendToServer(new PacketFireLaserBullet(stack));
@@ -67,8 +76,14 @@ public class LaserMultiToolEvents {
 			stack = LaserItemUtils.setCharge(stack, LaserItemUtils.getCharge(stack)-1);
 			PacketHandler.sendToServer(new PacketLaserToolTagUpdate(slot, stack.getTag()));
 		}
-//		totalOffset -= 2;
+		
+		isAttacking = true;
+		
+		if(ModConfig.GetConfig().useMultiToolRecoil)
+			totalOffset -= 2;
 	}
+	
+	public static boolean isAttacking = false;
 	
 	public static BlockPos currentPos;
 	static float destroyProgress = 0;
@@ -80,7 +95,11 @@ public class LaserMultiToolEvents {
 	}
 
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public void onTick(ClientTickEvent event) {
+		if(isAttacking && !Minecraft.getInstance().options.keyAttack.isDown())
+			isAttacking = false;
+		
 		Player player = Minecraft.getInstance().player;
 		if(player != null) {
 			ItemStack riddanceStack = ItemStack.EMPTY;
@@ -134,13 +153,21 @@ public class LaserMultiToolEvents {
 					}
 				}
 			}
-			
-//			if(totalOffset != 0) {
-//				totalOffset += .1f;
-//				player.setXRot(player.getXRot() + (totalOffset+1f)/1f);
-//				if(totalOffset > 0)
-//					totalOffset = 0;
-//			}
+		}
+	}
+	
+	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
+	public void lastRender(RenderLevelStageEvent event) {
+		Player player = Minecraft.getInstance().player;
+		
+		if(ModConfig.GetConfig().useMultiToolRecoil) {
+			if(totalOffset != 0) {
+				totalOffset += 0.025f * event.getPartialTick();
+				player.setXRot(player.getXRot() + (totalOffset+1f)/50f);
+				if(totalOffset > 0)
+					totalOffset = 0;
+			}
 		}
 	}
 	
@@ -153,8 +180,8 @@ public class LaserMultiToolEvents {
 			
 			float max = 10;
 			LaserProperties properties = LaserItemUtils.getProperties(stack);
-			if(properties.hasUpgarde("capacity"))
-				max *= properties.getUpgarde("capacity").getTier();
+			if(properties.hasUpgarde("distance"))
+				max *= properties.getUpgarde("distance").getTier();
 			
 			for(float i = 0; i < max; i+=.2f) {
 				Vec3 position = pos.add(direction.scale(i));
@@ -220,6 +247,7 @@ public class LaserMultiToolEvents {
 	@SubscribeEvent
 	public void onRenderPlayer(RenderPlayerEvent.Pre event) {
 		Player player = event.getEntity();
+		
 		InteractionHand hand = getHandWithItem(player);
 		if(hand != null) {
 			ItemStack stack = player.getItemInHand(hand);

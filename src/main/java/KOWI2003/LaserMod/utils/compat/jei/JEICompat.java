@@ -37,15 +37,15 @@ public class JEICompat implements IModPlugin {
 		final IJeiHelpers helpers = registry.getJeiHelpers();
 		final IGuiHelper gui = helpers.getGuiHelper();
 		
-		registry.addRecipeCategories(new InfuserRecipeCategory(gui), new PrecisionRecipeCategory(gui));
+		registry.addRecipeCategories(new PrecisionRecipeCategory(gui), new InfuserRecipeCategory(gui));
 		
 		IModPlugin.super.registerCategories(registry);
 	}
 	
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addRecipeCatalyst(new ItemStack(ModBlocks.Infuser.get()), RecipeCategories.INFUSER);
 		registration.addRecipeCatalyst(new ItemStack(ModBlocks.PrecisionAssembler.get()), RecipeCategories.PRECISION_ASSEMBLER);
+		registration.addRecipeCatalyst(new ItemStack(ModBlocks.Infuser.get()), RecipeCategories.INFUSER);
 		
 		IModPlugin.super.registerRecipeCatalysts(registration);
 	}
@@ -53,9 +53,9 @@ public class JEICompat implements IModPlugin {
 	@Override
 	public void registerRecipes(IRecipeRegistration registry) {
 		final IJeiHelpers helpers = registry.getJeiHelpers();
-		
-		registry.addRecipes(RecipeCategories.INFUSER, InfuserRecipeMaker.getRecipes(helpers));
+
 		registry.addRecipes(RecipeCategories.PRECISION_ASSEMBLER, PrecisionAssemblerRecipeHandler.getAllRecipes());
+		registry.addRecipes(RecipeCategories.INFUSER, InfuserRecipeMaker.getRecipes(helpers));
 		
 		IModPlugin.super.registerRecipes(registry);
 	}
@@ -65,9 +65,9 @@ public class JEICompat implements IModPlugin {
 		
 		registry.addGuiContainerHandler(GuiLaser.class, new LaserGuiSlotMover());
 		registry.addGuiContainerHandler(GuiModStation.class, new ModStationGuiSlotMover());
-		
-		registry.addRecipeClickArea(GuiInfuser.class, 64, 60, 45, 9, RecipeCategories.INFUSER);
+
 		registry.addRecipeClickArea(GuiPrecisionAssembler.class, 76, 35, 45, 9, RecipeCategories.PRECISION_ASSEMBLER);
+		registry.addRecipeClickArea(GuiInfuser.class, 64, 60, 45, 9, RecipeCategories.INFUSER);
 		
 		IModPlugin.super.registerGuiHandlers(registry);
 	}

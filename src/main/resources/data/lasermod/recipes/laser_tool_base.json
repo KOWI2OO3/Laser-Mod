@@ -14,16 +14,21 @@
         },
         "i":
         {
-            "item": "minecraft:iron_ingot"
+            "tag": "forge:ingots/iron"
         },
         "l":
         {
             "item": "lasermod:laser_crystal"
         },
         "c":
-        {
-            "item": "lasermod:printed_circuit_board"
-        }
+        [
+            {
+                "tag": "forge:chip"
+            },
+            {
+                "tag": "forge:chip_basic"
+            }
+        ]
     },
     "result":
     {

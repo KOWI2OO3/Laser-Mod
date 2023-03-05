@@ -52,6 +52,8 @@ public class PrecisionAssemblerRecipeHandler {
 		registerRecipe(1, ModItems.LaserShovel.get().getDefaultInstance() ,new ItemStack(ModItems.LaserToolShell.get()), new ItemStack(Items.IRON_SHOVEL), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()));
 		registerRecipe(1, ModItems.LaserHoe.get().getDefaultInstance() ,new ItemStack(ModItems.LaserToolShell.get()), new ItemStack(Items.IRON_HOE), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()));
 		
+		registerRecipe(1, ModItems.LaserMultiTool.get().getDefaultInstance() , ModItems.LaserSword.get().getDefaultInstance(), ModItems.LaserPickaxe.get().getDefaultInstance(), ModItems.LaserAxe.get().getDefaultInstance(), ModItems.LaserShovel.get().getDefaultInstance());
+		
 		registerRecipe(1, ModItems.LaserHelmet.get().getDefaultInstance() ,new ItemStack(Items.IRON_HELMET), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()));
 		registerRecipe(1, ModItems.LaserChestplate.get().getDefaultInstance() ,new ItemStack(Items.IRON_CHESTPLATE), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()));
 		registerRecipe(1, ModItems.LaserLeggings.get().getDefaultInstance() ,new ItemStack(Items.IRON_LEGGINGS), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(ModItems.LaserCrystal.get()));

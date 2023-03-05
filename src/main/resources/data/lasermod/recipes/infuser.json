@@ -14,7 +14,7 @@
         },
         "i":
         {
-            "item": "minecraft:iron_ingot"
+            "tag": "forge:ingots/iron"
         },
         "r":
         {
@@ -22,7 +22,7 @@
         },
         "g":
         {
-            "item": "minecraft:glass"
+            "tag": "forge:glass"
         }
     },
     "result":

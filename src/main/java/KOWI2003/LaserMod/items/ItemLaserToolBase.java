@@ -38,6 +38,10 @@ public class ItemLaserToolBase extends LaserItem {
 		this.defaultModifiers = builder.build();
 	}
 	
+	public TagKey<Block> getBlockTag() {
+		return blocks;
+	}
+	
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
 		ItemStack stack = entity.getItemInHand(hand);
@@ -112,7 +116,7 @@ public class ItemLaserToolBase extends LaserItem {
 	  if(isExtended(stack)) {
 	      return state.is(this.blocks) ? getProperties(stack).getProperty(LaserProperties.Properties.SPEED) * 4 : 1.0F;
 	  }
-	  return state.requiresCorrectToolForDrops() ? 0f : 1f;
+	  return state.requiresCorrectToolForDrops() ? 0f : 1.0f;
 	}
 	
 	@Override

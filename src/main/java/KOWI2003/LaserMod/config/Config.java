@@ -10,6 +10,8 @@ public class Config {
 		public float redstoneChargeValue;
 		
 		public int defaultLaserDamage;
+
+		public boolean useMultiToolRecoil;
 		
 		@Expose(serialize = false, deserialize = false)
 		public int defaultLaserDistance;
@@ -19,6 +21,7 @@ public class Config {
 	private Config() {
 		redstoneChargeValue = 15f;
 		defaultLaserDamage = 3;
+		useMultiToolRecoil = true;
 		defaultLaserDistance = 10;
 		updateChecker = new UpdateCheckerConfig();
 	}

@@ -33,6 +33,12 @@ public class ContainerModStation extends AbstractContainerMenu {
 			public boolean mayPlace(ItemStack stack) {
 				return stack.getItem() instanceof ILaserUpgradable;
 			}
+			
+			@Override
+			public void setChanged() {
+				te.sync();
+				super.setChanged();
+			}
 		});
 		this.addSlot(new SlotItemHandler(te.handler, 1, 134, 54) {
 			@Override

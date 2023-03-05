@@ -6,12 +6,14 @@ import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.LaserProperties.Properties;
 import KOWI2003.LaserMod.entities.EntityLaserBullet;
 import KOWI2003.LaserMod.init.ModEntities;
+import KOWI2003.LaserMod.init.ModSounds;
 import KOWI2003.LaserMod.init.ModUpgrades;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.items.LaserItem;
 import KOWI2003.LaserMod.utils.LaserItemUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.projectile.AbstractArrow.Pickup;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkDirection;
@@ -68,6 +70,7 @@ public class PacketFireLaserBullet {
 	    		bullet.setNoGravity(true);
 	    		
 	    		sender.level.addFreshEntity(bullet);
+	    		sender.level.playSound(null, bullet.position().x, bullet.position().y, bullet.position().z, ModSounds.LASER_DEACTIVATE.get(), SoundSource.PLAYERS, 100, 2);
 	        }
 	    });
 	    ctx.get().setPacketHandled(true);

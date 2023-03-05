@@ -8,7 +8,6 @@ import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.config.ConfigSerializer;
 import KOWI2003.LaserMod.config.ModConfig;
 import KOWI2003.LaserMod.utils.Utils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -44,7 +43,6 @@ public class PacketSyncConfig {
 	        if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
         		ConfigSerializer.GetInstance().setActiveConfig(temporaryInstance);
         		Utils.getLogger().info("Done Syncing LaserMod Config Data From Server!");
-				System.out.println(Minecraft.getInstance().player.getName().getString() + ": " + new Gson().toJson(Config.GetInstance()));
 	        }else {
 	        	ServerPlayer sender = ctx.get().getSender();
 	        	PacketHandler.sendToClient(new PacketSyncConfig(), sender);

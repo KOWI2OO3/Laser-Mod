@@ -8,14 +8,12 @@
 	"block.lasermod.mirror": "Mirror",
 	"block.lasermod.advanced_laser": "Advanced Laser (§4WIP§r)",
 	"block.lasermod.precision_assembler": "Precision Assembler",
-	"block.lasermod.laser_crafter": "Laser Crafter (§4WIP§r)",
 	"block.lasermod.device_hub": "Device Hub (§4WIP§r)",
 
 	"item.lasermod.laser_crystal": "Laser Crystal",
 	"item.lasermod.laser_tool_base": "Laser Tool Shell",
 	"item.lasermod.ir_glasses": "IR Glasses",
 	"item.lasermod.linker": "Linker",
-	"item.lasermod.laser_director": "Laser Redirector (§4WIP§r)",
 	"item.lasermod.silicon_plate": "Silicon Upgrade Plate",
 	"item.lasermod.printed_circuit_board": "Printed Circuit Board",
 	"item.lasermod.silicon": "Silicon",
@@ -26,7 +24,7 @@
 	"item.lasermod.laser_shovel": "Laser Shovel",
 	"item.lasermod.laser_axe": "Laser Axe",
 	"item.lasermod.laser_hoe": "Laser Hoe",
-	"item.lasermod.laser_multitool": "Laser Omni Tool (§4WIP§r)",
+	"item.lasermod.laser_multitool": "Laser Omni Tool",
 
 	"item.lasermod.laser_helmet": "Laser Helmet",
 	"item.lasermod.laser_chestplate": "Laser Chestplate",

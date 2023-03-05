@@ -141,6 +141,7 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 		        else if(te.mode == MODE.BEAM) {
 		        	 matrix.pushPose();
 				        
+		        	 RenderSystem.setShaderColor(1, 1, 1, 1);
 		        	 ll = 0.3f;
 		        	 lr = 0.7f;
 		        	 
@@ -163,16 +164,16 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 						
 						a += 0.25;
 						
-						buffer.vertex(matrix2, ll, 0f, 0f).color(r, g, b, a).uv(uMin, 0).endVertex();
-						buffer.vertex(matrix2, ll, (float) distance, 0f).color(r, g, b, a).uv(uMin + 10f, 0).endVertex();
-						buffer.vertex(matrix2, lr, (float) distance, 0f).color(r, g, b, a).uv(uMin + 10f, 1).endVertex();
-						buffer.vertex(matrix2, lr, 0f, 0f).color(r, g, b, a).uv(uMin, 1).endVertex();
+						buffer.vertex(matrix2, ll, 0f, 0f).color(r, g, b, a).uv(uMin, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
+						buffer.vertex(matrix2, ll, (float) distance, 0f).color(r, g, b, a).uv(uMin + 10f, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
+						buffer.vertex(matrix2, lr, (float) distance, 0f).color(r, g, b, a).uv(uMin + 10f, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
+						buffer.vertex(matrix2, lr, 0f, 0f).color(r, g, b, a).uv(uMin, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
 						
 					matrix.popPose();
 		        }else if(te.mode == MODE.NEW_POWER) { 
 		        	 matrix.pushPose();
 		        	 
-		        	 	VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_BEAM);
+		        	 	VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER);
 						Matrix4f matrix2 = matrix.last().pose();
 							
 						thickness *= 2f;
@@ -335,17 +336,20 @@ public static class LaserRenderType extends RenderType {
 	}
 	
 	public static RenderType getDebugRenderType() {
-		return create("debug", 
-				DefaultVertexFormat.POSITION_COLOR_TEX, VertexFormat.Mode.QUADS, 256, 
-				false, true,
-				RenderType.CompositeState.builder()
-				.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
-				.setWriteMaskState(COLOR_WRITE)
-				.setTextureState(TexStatePOWER)
-				.setCullState(NO_CULL)
-				.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-				.setLightmapState(LIGHTMAP)
-				.createCompositeState(false));
+//		RenderType.entityTranslucent(null)r
+		return create("debug",
+				DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, 
+				 false, true,
+					RenderType.CompositeState.builder()
+//					.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
+					.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
+					.setWriteMaskState(COLOR_DEPTH_WRITE)
+					.setTextureState(TexStatePOWER_NEW)
+					.setCullState(NO_CULL)
+					.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+					.setLightmapState(NO_LIGHTMAP)
+					.setOutputState(TRANSLUCENT_TARGET)
+					.createCompositeState(false));
 	}
 	
 	private static final TextureStateShard TexStatePOWER = new TextureStateShard(new ResourceLocation(Reference.MODID, "textures/render/laser_power_old_double.png"), false, false);
@@ -353,15 +357,17 @@ public static class LaserRenderType extends RenderType {
 	private static final TextureStateShard TexStateBEAM = new TextureStateShard(new ResourceLocation(Reference.MODID, "textures/render/laser_power_old_beam.png"), false, true);
 	
 	public static final RenderType LASER_RENDER_POWER_NEW = create("laser_power_new",
-			DefaultVertexFormat.POSITION_COLOR_TEX, VertexFormat.Mode.QUADS, 256, 
+			DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, 
 			 false, true,
 				RenderType.CompositeState.builder()
+//				.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
 				.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
-				.setWriteMaskState(COLOR_WRITE)
+				.setWriteMaskState(COLOR_DEPTH_WRITE)
 				.setTextureState(TexStatePOWER_NEW)
 				.setCullState(NO_CULL)
 				.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-				.setLightmapState(LIGHTMAP)
+				.setLightmapState(NO_LIGHTMAP)
+				.setOutputState(TRANSLUCENT_TARGET)
 				.createCompositeState(false));
 	
 	public static final RenderType LASER_RENDER_POWER = create("laser_power",

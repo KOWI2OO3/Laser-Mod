@@ -75,9 +75,7 @@ public class BlockInfuser extends BlockHorizontal {
 					popResource(world, pos, stack);
 			}
 		}
-		if(!player.isCreative())
-			popResource(world, pos, new ItemStack(this));
-//		super.playerWillDestroy(world, pos, state, player);
+		super.playerWillDestroy(world, pos, state, player);
 	}
 	
 	private VoxelShape generateShape()

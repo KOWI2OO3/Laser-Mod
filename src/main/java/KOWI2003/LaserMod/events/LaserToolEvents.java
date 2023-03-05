@@ -14,6 +14,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.level.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,6 +23,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class LaserToolEvents {
 
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public void onClickInput(InputEvent.InteractionKeyMappingTriggered event) 
 	{
 		Player player = Minecraft.getInstance().player;
@@ -32,10 +35,14 @@ public class LaserToolEvents {
 	}
 	
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public void onBlockBreak(BreakEvent event) {
-		Player player = Minecraft.getInstance().player;
+		Player player = event.getPlayer();
 		if(player.getMainHandItem().getItem() instanceof ItemLaserToolBase && 
 				((ItemLaserToolBase)player.getMainHandItem().getItem()).getProperties(player.getMainHandItem()).hasUpgarde("mining") && !player.isShiftKeyDown() && LaserItemUtils.getCharge(player.getMainHandItem()) > 0) {
+			
+			if(!LaserItemUtils.isExtended(player.getMainHandItem()))
+				return;
 			
 			if(side == Direction.UP)
 				side = Direction.getNearest(player.getForward().x, player.getForward().y, player.getForward().z);
@@ -64,7 +71,8 @@ public class LaserToolEvents {
 					for(int k = topLeft.getZ(); k <= bottomRight.getZ(); k++) {
 						BlockPos pos = currentPosition.offset(new BlockPos(i, j, k));
 						ItemLaserToolBase tool = (ItemLaserToolBase)player.getMainHandItem().getItem();
-						if(tool.getDestroySpeed(player.getMainHandItem(), player.level.getBlockState(pos)) > 1.0f) {
+						
+						if(player.level.getBlockState(pos).is(tool.getBlockTag()) || tool.getDestroySpeed(player.getMainHandItem(), player.level.getBlockState(pos)) > 1.0f) {
 							PacketHandler.sendToServer(new PacketMultiToolLaserBreakBlock(pos, InteractionHand.MAIN_HAND));
 							charge--;
 						}
@@ -83,7 +91,8 @@ public class LaserToolEvents {
 	static BlockPos currentPosition = null;
 	static float progress = 0;
 	static Direction side = Direction.UP;
-	
+
+	@OnlyIn(Dist.CLIENT)
 	private void onAttack(InputEvent.InteractionKeyMappingTriggered event, ItemStack stack, Player player) {
 		
 	}

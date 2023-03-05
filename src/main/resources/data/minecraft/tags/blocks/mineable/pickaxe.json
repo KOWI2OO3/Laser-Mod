@@ -1,5 +1,5 @@
 {
-  "replace": false,
+	"replace": false,
   "values": [
     "lasermod:laser",
     "lasermod:laser_catcher",
@@ -9,8 +9,6 @@
     "lasermod:laser_controller",
     "lasermod:mirror",
     "lasermod:precision_assembler",
-    "lasermod:advanced_laser",
-    "lasermod:laser_crafter",
-    "lasermod:device_hub"
+    "lasermod:advanced_laser"
   ]
 }

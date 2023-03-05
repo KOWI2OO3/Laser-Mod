@@ -29,6 +29,7 @@ public class UpgradesPage extends GuiContext {
 		offset = addPageSelector(x, y, offset, ManualHandler.UpgradeMode, ModUpgrades.Mode.get().getDefaultInstance());
 		offset = addPageSelector(x, y, offset, ManualHandler.UpgradeDamage, ModUpgrades.Damage3.get().getDefaultInstance());
 		offset = addPageSelector(x, y, offset, ManualHandler.UpgradeNoDamage, ModUpgrades.NoDamage.get().getDefaultInstance());
+		offset = addPageSelector(x, y, offset, ManualHandler.UpgradeSilence, ModUpgrades.Silence.get().getDefaultInstance());
 		
 		offset = 10;
 		x += 70;

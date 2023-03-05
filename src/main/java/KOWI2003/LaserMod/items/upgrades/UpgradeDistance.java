@@ -6,7 +6,7 @@ public class UpgradeDistance extends ItemUpgradeBase {
 
 	public UpgradeDistance(String name, int tier) {
 		super(name, tier);
-		AbilityNames = new String[] {"Reach"};
+		AbilityNames = new String[] {"Reach " + getTierLevelForAbilityName()};
 		abilityNameColor = new float[] {.6f, .3f, .8f};
 		setCanBeUsedForLaser(true);
 		setCanBeUsedForLaserTool(LaserTools.OMNI);

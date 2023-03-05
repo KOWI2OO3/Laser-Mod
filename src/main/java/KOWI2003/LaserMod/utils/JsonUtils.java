@@ -18,6 +18,7 @@ import com.google.gson.stream.JsonWriter;
 
 public class JsonUtils {
 
+	@SuppressWarnings("deprecation")
 	public static JsonObject getJsonObj(File file) {
 		JsonReader reader;
 		try {
@@ -30,6 +31,7 @@ public class JsonUtils {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static JsonElement getJsonElement(File file) {
 		JsonReader reader;
 		try {

@@ -21,7 +21,9 @@ public class UpgradeMiningPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -5, new ItemStack(ModUpgrades.Mining.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -20, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "An upgrade which, when applied to an laser, will allow it to break blocks in the world", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "An upgrade which, when applied to an laser, will allow it to break blocks in the world", null));
+
+		addComponent(new TextBoxComponent("info", 0, -5, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "When applied to an laser pickaxe, shovel or axe, it will act as Hammering, which will break an area of 3x3 blocks when mining. To mine a single block with this upgrade just sneak while breaking.", null));
 
 	}	
 	

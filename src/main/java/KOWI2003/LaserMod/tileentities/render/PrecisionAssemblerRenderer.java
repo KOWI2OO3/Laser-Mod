@@ -6,7 +6,6 @@ import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.blocks.BlockHorizontal;
 import KOWI2003.LaserMod.init.ModItems;
-import KOWI2003.LaserMod.items.ItemLaserToolBase;
 import KOWI2003.LaserMod.tileentities.TileEntityPrecisionAssembler;
 import KOWI2003.LaserMod.utils.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -73,11 +72,6 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 			if(te.handler.getStackInSlot(slot).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.268f, 0.75f, 0.063f);
 				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
-			}else if(te.handler.getStackInSlot(slot).getItem() instanceof ItemLaserToolBase || te.handler.getStackInSlot(slot).getItem() == ModItems.LaserToolShell.get()) {
-				scaler = 0.7f;
-				matrix.translate(-0.570f, 0.058f, 0.115f);
-				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
-				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else if(te.handler.getStackInSlot(slot).getItem() == ModItems.LaserCrystal.get()) {
 				scaler = scaler/2f;
 				matrix.translate(-0.480f, 0.36f, 0.165f);
@@ -97,11 +91,6 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 			if(te.handler.getStackInSlot(slot).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.268f, 0.75f, 0.063f);
 				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
-			}else if(te.handler.getStackInSlot(slot).getItem() instanceof ItemLaserToolBase || te.handler.getStackInSlot(slot).getItem() == ModItems.LaserToolShell.get()) {
-				scaler = 0.7f;
-				matrix.translate(-0.570f, 0.058f, 0.115f);
-				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
-				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else if(te.handler.getStackInSlot(slot).getItem() == ModItems.LaserCrystal.get()) {
 				scaler = scaler/2f;
 				matrix.translate(-0.480f, 0.36f, 0.165f);
@@ -121,11 +110,6 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 			if(te.handler.getStackInSlot(slot).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.268f, 0.75f, 0.063f);
 				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
-			}else if(te.handler.getStackInSlot(slot).getItem() instanceof ItemLaserToolBase || te.handler.getStackInSlot(slot).getItem() == ModItems.LaserToolShell.get()) {
-				scaler = 0.7f;
-				matrix.translate(-0.570f, 0.058f, 0.115f);
-				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
-				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else if(te.handler.getStackInSlot(slot).getItem() == ModItems.LaserCrystal.get()) {
 				scaler = scaler/2f;
 				matrix.translate(-0.480f, 0.36f, 0.165f);
@@ -146,11 +130,6 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 			if(te.handler.getStackInSlot(slot).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.268f, 0.75f, 0.063f);
 				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
-			}else if(te.handler.getStackInSlot(slot).getItem() instanceof ItemLaserToolBase || te.handler.getStackInSlot(slot).getItem() == ModItems.LaserToolShell.get()) {
-				scaler = 0.7f;
-				matrix.translate(-0.570f, 0.058f, 0.115f);
-				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
-				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else if(te.handler.getStackInSlot(slot).getItem() == ModItems.LaserCrystal.get()) {
 				scaler = scaler/2f;
 				matrix.translate(-0.480f, 0.36f, 0.165f);
@@ -171,11 +150,6 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 			if(te.handler.getStackInSlot(slot).getItem() == Items.REDSTONE) {
 				matrix.translate(-0.268f, 0.75f, 0.063f);
 				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
-			}else if(te.handler.getStackInSlot(slot).getItem() instanceof ItemLaserToolBase || te.handler.getStackInSlot(slot).getItem() == ModItems.LaserToolShell.get()) {
-				scaler = 0.7f;
-				matrix.translate(-0.570f, 0.058f, 0.115f);
-				matrix.mulPose(Vector3f.XP.rotationDegrees(90));
-				matrix.mulPose(Vector3f.YP.rotationDegrees(36.1f));
 			}else if(te.handler.getStackInSlot(slot).getItem() == ModItems.LaserCrystal.get()) {
 				scaler = scaler/2f;
 				matrix.translate(-0.480f, 0.36f, 0.165f);

@@ -16,6 +16,8 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -24,6 +26,7 @@ public class WorldJoinEvent {
     private final String PREFIX = ChatFormatting.GOLD + "-> ";
     
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public void onEvent(PlayerLoggedInEvent event) {
 		try {
 			if(ModConfig.GetConfig().updateChecker.useUpdateChecker) {

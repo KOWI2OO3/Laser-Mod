@@ -25,6 +25,8 @@ public class ConfigSerializer {
 		else
 			writeToFile();
 		instance = this;
+		
+		updateConfigToFile();
 	}
 	
 	public void updateConfigToFile() {
