@@ -3,6 +3,12 @@
 	"message": {
 		"1.12": "a new version is out for minecraft 1.16!"
 	},
+	"1.19": {
+		"1.0": "Full Version Release on 1.19"
+	},
+	"1.18.2": {
+		"1.0": "Full Version Release on 1.18"
+	},
 	"1.16": {
 		"0.1": "Updated to 1.16!"
 	},
@@ -10,6 +16,10 @@
 		"0.1": "going into beta"
 	},
 	"version": {
+		"1.19-latest": "1.0",
+		"1.19-recommended": "1.0",
+		"1.18-latest": "1.0",
+		"1.18-recommended": "1.0",
 		"[1.15.2, 1.16.5]-latest": "0.1 - Multiplayer Patch",
 		"[1.15.2, 1.16.5]-recommended": "0.1 - Multiplayer Patch",
 		"1.16-latest": "0.1 - Multiplayer Patch",
