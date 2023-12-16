@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+import oshi.util.tuples.Pair;
 
 public class InfuserRecipeChargingTool implements IInfuserRecipe {
 
@@ -47,12 +48,12 @@ public class InfuserRecipeChargingTool implements IInfuserRecipe {
 	}
 	
 	@Override
-	public Ingredient[] getInputs(TileEntityInfuser te) {
+	public Pair<Ingredient, Integer>[] getInputs(TileEntityInfuser te) {
 		int stackSize = getRequiredRedstone(te);
 		ItemStack toolStack = new ItemStack(Blocks.VOID_AIR);
 		if(te.handler.getStackInSlot(1).getItem() instanceof IChargable)
 			toolStack = te.handler.getStackInSlot(1);
-		return new Ingredient[] {Ingredient.of(new ItemStack(Items.REDSTONE, stackSize)), Ingredient.of(toolStack)};
+		return new Pair[] {new Pair<>(Ingredient.of(new ItemStack(Items.REDSTONE)), stackSize), new Pair<>(Ingredient.of(toolStack), 1)};
 	}
 	
 	@Override
@@ -72,7 +73,7 @@ public class InfuserRecipeChargingTool implements IInfuserRecipe {
 //		return new ItemStack(ModItems.LaserSword);
 		return new ItemStack(Blocks.AIR);
 	}
-
+	
 	@Override
 	public Ingredient[] getInputs() {
 		return new Ingredient[] {Ingredient.of(new ItemStack(Items.REDSTONE)), 

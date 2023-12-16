@@ -4,7 +4,7 @@ license="All Rights Reserved unless otherwise explicitly stated"
 
 [[mods]]
 modId="lasermod"
-version="1.19-1.0"
+version="1.0.1"
 displayName="KOWI's Laser Mod"
 logoFile="logo.png"
 authors="KOWI2003"

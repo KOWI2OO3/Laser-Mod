@@ -12,6 +12,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import oshi.util.tuples.Pair;
 
 public class InfuserRecipeHandler {
 
@@ -85,7 +86,7 @@ public class InfuserRecipeHandler {
 	}
 	
 	public static void handleRecipeEnd(IInfuserRecipe recipe, TileEntityInfuser te) {
-		Object[] inputs = recipe.getInputs(te);
+		Pair<Ingredient, Integer>[] inputs = recipe.getInputs(te);
 		ItemStack output = recipe.getOutput(te);
 		if(te.handler.getStackInSlot(2).getItem() == output.getItem())
 			te.handler.setStackInSlot(2, new ItemStack(te.handler.getStackInSlot(2).getItem(), 
@@ -94,17 +95,10 @@ public class InfuserRecipeHandler {
 			te.handler.setStackInSlot(2, output.copy());
 		
 		if(inputs.length >= 2) {
-			if(inputs[0] != null) {
-				if(inputs[0] instanceof ItemStack)
-					te.handler.extractItem(0, ((ItemStack)inputs[0]).getCount(), false);
-				else
-					te.handler.extractItem(0, 1, false);
-			}if(inputs[1] != null) {
-				if(inputs[1] instanceof ItemStack)
-					te.handler.extractItem(1, ((ItemStack)inputs[1]).getCount(), false);
-				else
-					te.handler.extractItem(1, 1, false);
-			}
+			if(inputs[0] != null && !inputs[0].getA().isEmpty())
+				te.handler.extractItem(0, inputs[0].getB(), false);
+			if(inputs[1] != null && !inputs[1].getA().isEmpty())
+				te.handler.extractItem(1, inputs[1].getB(), false);
 		}
 	}
 	

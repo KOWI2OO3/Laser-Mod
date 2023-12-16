@@ -63,7 +63,7 @@ public class TileEntityMirror extends SyncableBlockEntity implements ILaserInter
 				laser = null;
 			else {
 				BlockPos pos = BlockPos.of(i);
-				if(pos != null) {
+				if(pos != null && level != null) {
 					BlockEntity blockentity = level.getBlockEntity(pos);
 					if(blockentity instanceof TileEntityLaser)
 						laser = (TileEntityLaser)blockentity;

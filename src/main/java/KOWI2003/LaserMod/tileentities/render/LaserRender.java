@@ -15,6 +15,7 @@ import KOWI2003.LaserMod.blocks.BlockRotatable;
 import KOWI2003.LaserMod.init.ModItems;
 import KOWI2003.LaserMod.tileentities.TileEntityLaser;
 import KOWI2003.LaserMod.tileentities.TileEntityLaser.MODE;
+import KOWI2003.LaserMod.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -92,7 +93,7 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 		        }else if(te.mode == MODE.POWER) {
 		        	matrix.pushPose();
 		        	 
-		        		VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.getDebugRenderType());
+		        		VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_POWER);
 						Matrix4f matrix2 = matrix.last().pose();
 		
 							matrix.translate(.5f, .5f, .5f);
@@ -338,18 +339,17 @@ public static class LaserRenderType extends RenderType {
 	public static RenderType getDebugRenderType() {
 //		RenderType.entityTranslucent(null)r
 		return create("debug",
-				DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, 
-				 false, true,
-					RenderType.CompositeState.builder()
-//					.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
-					.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
-					.setWriteMaskState(COLOR_DEPTH_WRITE)
-					.setTextureState(TexStatePOWER_NEW)
-					.setCullState(NO_CULL)
-					.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-					.setLightmapState(NO_LIGHTMAP)
-					.setOutputState(TRANSLUCENT_TARGET)
-					.createCompositeState(false));
+			DefaultVertexFormat.POSITION_COLOR_TEX, VertexFormat.Mode.QUADS, 256, 
+			 false, true,
+			 RenderType.CompositeState.builder()
+			.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
+			.setWriteMaskState(COLOR_WRITE)
+			.setTextureState(TexStatePOWER)
+			.setCullState(NO_CULL)
+			.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+			.setLightmapState(NO_LIGHTMAP)
+			.setOutputState(TRANSLUCENT_TARGET)
+			.createCompositeState(false));
 	}
 	
 	private static final TextureStateShard TexStatePOWER = new TextureStateShard(new ResourceLocation(Reference.MODID, "textures/render/laser_power_old_double.png"), false, false);
@@ -362,8 +362,8 @@ public static class LaserRenderType extends RenderType {
 				RenderType.CompositeState.builder()
 //				.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
 				.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
-				.setWriteMaskState(COLOR_DEPTH_WRITE)
-				.setTextureState(TexStatePOWER_NEW)
+				.setWriteMaskState(COLOR_WRITE)
+				.setTextureState(TexStatePOWER)
 				.setCullState(NO_CULL)
 				.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
 				.setLightmapState(NO_LIGHTMAP)
@@ -374,12 +374,11 @@ public static class LaserRenderType extends RenderType {
 			DefaultVertexFormat.POSITION_COLOR_TEX, VertexFormat.Mode.QUADS, 256, 
 			 false, true,
 			 RenderType.CompositeState.builder()
-			 .setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
+			 .setShaderState(RENDERTYPE_LIGHTNING_SHADER)
 			 .setWriteMaskState(COLOR_WRITE)
 			 .setTextureState(TexStatePOWER)
 			 .setCullState(NO_CULL)
 			 .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-			 .setShaderState(RENDERTYPE_SOLID_SHADER)
 			 .createCompositeState(false));
 	
 	public static final RenderType LASER_RENDER_BEAM = create("laser_beam",
