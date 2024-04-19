@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": { "model": "lasermod:block/laser_controller", "y": 0 },
+		"facing=east": { "model": "lasermod:block/laser_controller", "y": -270 },
+		"facing=south": { "model": "lasermod:block/laser_controller", "y": 180 },
+		"facing=west": { "model": "lasermod:block/laser_controller", "y": -90 }
+	}
+}

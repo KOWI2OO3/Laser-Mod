@@ -1,0 +1,20 @@
+{
+  "block.laser.activate": {
+    "subtitle": "subtitle.lasermod.laser_activate",
+    "sounds": [
+      "lasermod:laser_activate"
+    ]
+  },
+  "block.laser.active": {
+    "subtitle": "subtitle.lasermod.laser_active",
+    "sounds": [
+      "lasermod:laser_active"
+    ]
+  },
+  "block.laser.deactivate": {
+    "subtitle": "subtitle.lasermod.laser_deactivate",
+    "sounds": [
+      "lasermod:laser_deactivate"
+    ]
+  }
+}

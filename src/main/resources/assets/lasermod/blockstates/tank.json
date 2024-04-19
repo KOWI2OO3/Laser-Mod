@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "down=false,facing=north,up=false": { "model": "lasermod:tank" },
+		"down=false,facing=east,up=false": { "model": "lasermod:tank", "y": 90 },
+		"down=false,facing=south,up=false": { "model": "lasermod:tank", "y": 180 },
+		"down=false,facing=west,up=false": { "model": "lasermod:tank", "y": 270 },
+		"down=false,facing=north,up=true": { "model": "lasermod:tank_top" },
+		"down=false,facing=east,up=true": { "model": "lasermod:tank_top", "y": 90 },
+		"down=false,facing=south,up=true": { "model": "lasermod:tank_top", "y": 180 },
+		"down=false,facing=west,up=true": { "model": "lasermod:tank_top", "y": 270 },
+		"down=true,facing=north,up=false": { "model": "lasermod:tank_bottom" },
+		"down=true,facing=east,up=false": { "model": "lasermod:tank_bottom", "y": 90 },
+		"down=true,facing=south,up=false": { "model": "lasermod:tank_bottom", "y": 180 },
+		"down=true,facing=west,up=false": { "model": "lasermod:tank_bottom", "y": 270 },
+		"down=true,facing=north,up=true": { "model": "lasermod:tank_both" },
+		"down=true,facing=east,up=true": { "model": "lasermod:tank_both", "y": 90 },
+		"down=true,facing=south,up=true": { "model": "lasermod:tank_both", "y": 180 },
+		"down=true,facing=west,up=true": { "model": "lasermod:tank_both", "y": 270 }
+    }
+}

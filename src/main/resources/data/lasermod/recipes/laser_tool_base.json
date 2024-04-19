@@ -1,0 +1,38 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+		"ili",
+        "ici",
+        "idi"
+    ],
+    "key":
+    {
+        "d":
+        {
+            "tag": "forge:gems/diamond"
+        },
+        "i":
+        {
+            "tag": "forge:ingots/iron"
+        },
+        "l":
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        "c":
+        [
+            {
+                "tag": "forge:chip"
+            },
+            {
+                "tag": "forge:chip_basic"
+            }
+        ]
+    },
+    "result":
+    {
+        "item": "lasermod:laser_tool_base",
+        "count": 1
+    }
+}

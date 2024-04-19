@@ -1,0 +1,38 @@
+{
+    "parent": "block/cube",
+
+    "textures": {
+        "0": "block/piston_inner",
+        "1": "lasermod:blocks/laser_catcher_activated_dot_bw",
+		"2": "block/piston_bottom",
+		"particle": "block/piston_bottom"
+    },
+    "elements": [
+        {
+            "name": "Main",
+            "from": [ 0.0, 0.0, 0.0 ], 
+            "to": [ 16.0, 16.0, 16.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "east": { "texture": "#2", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "south": { "texture": "#2", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "west": { "texture": "#2", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "up": { "texture": "#2", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "down": { "texture": "#2", "uv": [ 0.0, 0.0, 16.0, 16.0 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.0, 7.0, -0.01 ], 
+            "to": [ 9.0, 9.0, 1.0 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 7.0, 7.0, 9.0, 9.0 ], "tintindex": 0 },
+                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 2.0 ], "tintindex": 0 },
+                "south": { "texture": "#1", "uv": [ 0.0, 0.0, 2.0, 2.0 ], "tintindex": 0 },
+                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 2.0 ], "tintindex": 0 },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 2.0, 1.0 ], "tintindex": 0 },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 2.0, 1.0 ], "tintindex": 0 }
+            }
+        }
+    ]
+}

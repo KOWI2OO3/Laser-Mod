@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"facing=north": { "model": "lasermod:block/precision_assembler", "y": 180 },
+		"facing=east": { "model": "lasermod:block/precision_assembler", "y": -90 },
+		"facing=south": { "model": "lasermod:block/precision_assembler", "y": 0 },
+		"facing=west": { "model": "lasermod:block/precision_assembler", "y": -270 }
+	}
+	
+}
