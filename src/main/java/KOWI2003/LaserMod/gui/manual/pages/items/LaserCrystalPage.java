@@ -21,11 +21,11 @@ public class LaserCrystalPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -5, new ItemStack(ModItems.LaserCrystal.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "The base material used to create anything laser related", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.items.crystal.info.base", null));
 
-		addComponent(new TextBoxComponent("info", 0, -10, 200, 0, new float[] {.4f, .4f, .4f}, "This crystal has the ability to bend light into a straight beam of light", null));
+		addComponent(new TextBoxComponent("info", 0, -10, 200, 0, new float[] {.4f, .4f, .4f}, "manual.items.crystal.info.extra", null));
 
-		addComponent(new TextBoxComponent("info", 0, 10, 204, 0, new float[] {.4f, .4f, .4f}, "L.A.S.E.R standing for Light Amplification by Stimulated Emission of Radiation", null));
+		addComponent(new TextBoxComponent("info", 0, 10, 204, 0, new float[] {.4f, .4f, .4f}, "manual.items.crystal.info.trivia", null));
 
 //		addPageSelector(-100 + 33, 30, 0, ManualHandler.UpgradesHeader, "Upgrades");
 //		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "Also Check: ", null));

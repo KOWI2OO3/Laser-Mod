@@ -21,11 +21,11 @@ public class UpgradePushPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -5, new ItemStack(ModUpgrades.Push.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "When applied to an laser, it will push all the entities in the beam away from the laser origin", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.upgrades.push.info.base", null));
 
-		addComponent(new TextBoxComponent("info", 0, -10, 200, 0, new float[] {.4f, .4f, .4f}, "When applied to laser tools, it acts as knockback, pushing entities that have been hit further back", null));
+		addComponent(new TextBoxComponent("info", 0, -10, 200, 0, new float[] {.4f, .4f, .4f}, "manual.upgrades.push.info.context.tools", null));
 
-		addComponent(new TextBoxComponent("info", 0, 15, 200, 0, new float[] {.4f, .4f, .4f}, "NOTE: Having both push and pull upgrades installed on the same device negates the effect of both", new float[] {.7f, .2f, .2f}));
+		addComponent(new TextBoxComponent("info", 0, 15, 200, 0, new float[] {.4f, .4f, .4f}, "manual.upgrades.push.info.note", new float[] {.7f, .2f, .2f}));
 
 	}
 	

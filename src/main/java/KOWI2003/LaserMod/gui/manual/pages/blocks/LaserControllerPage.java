@@ -21,12 +21,12 @@ public class LaserControllerPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -8, new ItemStack(ModBlocks.LaserController.get()), 8f));
 		
-		addComponent(new TextBoxComponent("info", 0, -35, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "This device is used to control laser from an distance without needing an redstone signal!", null));
+		addComponent(new TextBoxComponent("info", 0, -35, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.blocks.controller.info.basic", null));
 
-		addComponent(new TextBoxComponent("info", 0, -10, 200, 0, new float[] {.4f, .4f, .4f}, "Link an laser to the controller using an [REFERENCE], when linked you can flip the big lever to turn it on and off. ", null));
+		addComponent(new TextBoxComponent("info", 0, -10, 200, 0, new float[] {.4f, .4f, .4f}, "manual.blocks.controller.info.extra", null));
 		
-		addPageSelector(-100 + 33, 35, 0, ManualHandler.Linker, "Linker");
-		addComponent(new TextBoxComponent("info", -100, 35, 100, 0, null, "Also Check: ", null));
+		addPageSelector(-100 + width("manual.misc.see") / 2 + 3, 35, 0, ManualHandler.Linker);
+		addComponent(new TextBoxComponent("info", -100, 35, 100, 0, null, "manual.misc.see", null));
 	}
 
 }

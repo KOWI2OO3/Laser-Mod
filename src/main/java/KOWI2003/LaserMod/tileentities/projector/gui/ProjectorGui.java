@@ -72,15 +72,15 @@ public class ProjectorGui<T extends BlockEntity> {
 	
 	public static ProjectorWidget getWidget(ProjectorWidgetData data) {
 		switch (data.type) {
-			case TEXT:
+			case Text:
 				return new ProjectorText((ProjectorTextData)data);
-			case TEXT_BOX:
+			case TextBox:
 				return new ProjectorTextBox((ProjectorTextBoxData)data);
-			case ITEM:
+			case Item:
 				return new ProjectorItem((ProjectorItemData)data);
-			case PLAYER:
+			case Player:
 				return new ProjectorPlayer((ProjectorPlayerData)data);
-			case SHAPE:
+			case Shape:
 				return new ProjectorShape((ProjectorShapeData)data);
 			default:
 				return null;

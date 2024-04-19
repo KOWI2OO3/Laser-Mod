@@ -21,15 +21,14 @@ public class InfuserPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -15, new ItemStack(ModBlocks.Infuser.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "This device is used to craft some of the base materials used for lasers", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.blocks.infuser.info.basic", null));
 
-		addComponent(new TextBoxComponent("info", 0, 1, 200, 0, new float[] {.4f, .4f, .4f}, "It can also be used to charge laser tools and armor!", null));
-
-		addPageSelector(-100 + 35, 30, 0, ManualHandler.LaserCrystal, "Laser Crystal");
-
-		addPageSelector(-100 + 75, 30, 0, ManualHandler.LaserTools, "Laser Tools");
-		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "Also Check: ", null));
-		addComponent(new TextBoxComponent("info", -100 + 68, 30, 100, 0, null, ", ", null));
+		addComponent(new TextBoxComponent("info", 0, 1, 200, 0, new float[] {.4f, .4f, .4f}, "manual.blocks.infuser.info.extra", null));
+		
+		addPageSelector(-100 + width("manual.misc.see") / 2 + 3, 30, 0, ManualHandler.LaserCrystal);
+		addPageSelector(-100 + width("manual.misc.see") / 2 + 6 + width(ManualHandler.LaserCrystal.getTitle())/2, 30, 0, ManualHandler.LaserTools);
+		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "manual.misc.see", null));
+		addComponent(new TextBoxComponent("info", -100 + width("manual.misc.see") / 2 + 1 + width(ManualHandler.LaserCrystal.getTitle())/2, 30, 100, 0, null, ", ", null));
 		
 	}
 

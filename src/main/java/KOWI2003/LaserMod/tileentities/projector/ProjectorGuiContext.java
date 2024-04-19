@@ -2,6 +2,7 @@ package KOWI2003.LaserMod.tileentities.projector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorWidgetData;
 import KOWI2003.LaserMod.utils.Utils;
@@ -26,6 +27,26 @@ public class ProjectorGuiContext implements INBTSerializable<CompoundTag> {
 	public List<ProjectorWidgetData> getWidgets() {
 		return widgets;
 	}
+
+	public ProjectorWidgetData getWidget(UUID id) {
+		List<ProjectorWidgetData> widgets = this.widgets.stream().filter(widget -> widget.id.equals(id)).toList();
+		if(widgets.size() > 0)
+			return widgets.get(0);
+		return null;
+	}
+	
+	public boolean removeWidget(ProjectorWidgetData data) {
+		return removeWidget(data.id);
+	}
+
+	public boolean removeWidget(UUID id) {
+		return widgets.remove(getWidget(id));
+	}
+
+	public UUID addWidget(ProjectorWidgetTypes type) {
+		var data = type.getData();
+		return widgets.add(data) ? data.id : null;
+	}
 	
 	@Override
 	public CompoundTag serializeNBT() {
@@ -46,7 +67,7 @@ public class ProjectorGuiContext implements INBTSerializable<CompoundTag> {
 			if(elementTag instanceof CompoundTag) {
 				CompoundTag widgetTag = (CompoundTag)elementTag;
 				ProjectorWidgetData data = ProjectorWidgetData.deserializeFromNBT(widgetTag);
-				if(data != null && data.type != ProjectorWidgetTypes.NONE)
+				if(data != null && data.type != ProjectorWidgetTypes.None)
 					widgets.add(data);
 			}
 		}

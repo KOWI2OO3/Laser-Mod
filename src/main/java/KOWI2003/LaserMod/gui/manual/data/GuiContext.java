@@ -6,8 +6,11 @@ import java.util.List;
 import KOWI2003.LaserMod.gui.manual.ManualHandler;
 import KOWI2003.LaserMod.gui.manual.data.widget.FlipPageComponent;
 import KOWI2003.LaserMod.gui.manual.data.widget.FlipPageComponent.ButtonIconType;
+import KOWI2003.LaserMod.utils.Utils;
 import KOWI2003.LaserMod.gui.manual.data.widget.PageSelector;
 import KOWI2003.LaserMod.gui.manual.data.widget.TextBoxComponent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
@@ -63,6 +66,10 @@ public class GuiContext {
 		return page;
 	}
 	
+	public int addPageSelector(int x, int y, int offset, GuiContext gui) {
+		return addPageSelector(x, y, offset, gui, gui.getTitle());
+	}
+
 	public int addPageSelector(int x, int y, int offset, GuiContext gui, String text) {
 		addComponent(new PageSelector(text.replace(" ", "").toLowerCase(), x, offset+y, 20, 20, gui.getId(), 
 				text, new float[] {}, new float[] {.6f, .6f, 1f}, false));
@@ -86,7 +93,7 @@ public class GuiContext {
 	
 	public int addPageSelector(int x, int y, int offset, GuiContext gui, ItemStack stack) {
 		addComponent(new PageSelector(stack.getItem().getName(stack).getString().replace(" ", "").toLowerCase(), x, offset+y, 20, 20, gui.getId(), 
-				stack.getItem().getName(stack).getString(), stack, new float[] {}, new float[] {.6f, .6f, 1f}, false));
+				gui.getTitle(), stack, new float[] {}, new float[] {.6f, .6f, 1f}, false));
 		offset += 10;
 		return offset;
 	}
@@ -104,6 +111,21 @@ public class GuiContext {
 		offset += 10;
 		return offset;
 	}
+
+	public int addPageSelector(int x, int y, int offset, GuiContext gui, String text, float[] textColor, float[] textHoverColor, boolean centered) {
+		addComponent(new PageSelector(text.replace(" ", "").toLowerCase(), x, offset+y, 20, 20, gui.getId(), 
+				text, textColor, textHoverColor == null || textHoverColor.length < 3 ? new float[] {.6f, .6f, 1f} : textHoverColor, centered));
+		offset += 10;
+		return offset;
+	}
+
+	public int addPageSelector(int x, int y, int offset, GuiContext gui, String text, float[] textColor, boolean centered) {
+		textColor = Utils.parseColor(textColor);
+		addComponent(new PageSelector(text.replace(" ", "").toLowerCase(), x, offset+y, 20, 20, gui.getId(), 
+				text, textColor, new float[] {.6f, .6f, 1f}, centered));
+		offset += 10;
+		return offset;
+	}
 	
 	public void setParent(GuiContext parent) {
 		this.parent = parent;
@@ -115,5 +137,21 @@ public class GuiContext {
 	
 	public void setTitle(ItemLike item) {
 		setTitle(item.asItem().getName(item.asItem().getDefaultInstance()).getString());
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	protected String getTranslation(String txt) {
+		return Component.translatable(txt).getString();
+	}
+
+	protected int width(String txt) {
+		return Minecraft.getInstance().font.width(Component.translatable(txt));
+	}
+
+	public GuiContext getParent() {
+		return parent;
 	}
 }

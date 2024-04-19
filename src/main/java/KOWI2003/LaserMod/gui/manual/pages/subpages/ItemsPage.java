@@ -9,7 +9,7 @@ public class ItemsPage extends GuiContext {
 	public ItemsPage(String id) {
 		super(id);
 		setParent(ManualHandler.MAIN);
-		setTitle("Items");
+		setTitle("manual.items.header");
 	}
 	
 	@Override
@@ -24,8 +24,8 @@ public class ItemsPage extends GuiContext {
 		
 		int offset = 10;
 		offset = addPageSelector(x, y, offset, ManualHandler.LaserCrystal, ModItems.LaserCrystal.get().getDefaultInstance());
-		offset = addPageSelector(x, y, offset, ManualHandler.LaserTools, "Laser Tools", ModItems.LaserToolShell.get().getDefaultInstance());
-		offset = addPageSelector(x, y, offset, ManualHandler.LaserArmor, "Laser Armor", ModItems.LaserChestplate.get().getDefaultInstance());
+		offset = addPageSelector(x, y, offset, ManualHandler.LaserTools, ModItems.LaserToolShell.get().getDefaultInstance());
+		offset = addPageSelector(x, y, offset, ManualHandler.LaserArmor, ModItems.LaserChestplate.get().getDefaultInstance());
 		offset = addPageSelector(x, y, offset, ManualHandler.IRGlasses, ModItems.IR_Glasses.get().getDefaultInstance());
 		offset = addPageSelector(x, y, offset, ManualHandler.Linker, ModItems.Linker.get().getDefaultInstance());
 	}

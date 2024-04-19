@@ -1,5 +1,8 @@
 package KOWI2003.LaserMod.gui.manual.data.widget;
 
+import java.util.List;
+import java.util.function.Supplier;
+
 import KOWI2003.LaserMod.gui.manual.ManualWidgetTypes;
 import KOWI2003.LaserMod.gui.manual.data.WidgetBase;
 
@@ -9,6 +12,8 @@ public class TextBoxComponent extends WidgetBase {
 	public float[] TextColor;
 	
 	public boolean centred = false;
+
+	public List<Supplier<String>> arguments;
 	
 	public TextBoxComponent(String name, int x, int y, int width, int height, String tooltip, float[] tooltipColor,
 			float[] backgroundColor, String text, float[] textColor) {
@@ -75,5 +80,22 @@ public class TextBoxComponent extends WidgetBase {
 		TextColor = textColor;
 		type = ManualWidgetTypes.TextBox;
 		centred = Centred;
+	}
+
+	public TextBoxComponent withArgument(Supplier<String> argument) {
+		this.arguments = List.of(argument);
+		return this;
+	}
+
+	public TextBoxComponent withArgument(List<Supplier<String>> arguments) {
+		this.arguments = arguments;
+		return this;
+	}
+
+	public Object[] getArguments() {
+		Object[] result = new Object[arguments.size()];
+		for (int i = 0; i < result.length; i++)
+			result[i] = arguments.get(i).get();
+		return result;
 	}
 }

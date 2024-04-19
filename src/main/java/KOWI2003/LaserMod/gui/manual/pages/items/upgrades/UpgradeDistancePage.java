@@ -21,11 +21,11 @@ public class UpgradeDistancePage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -5, new ItemStack(ModUpgrades.Distance.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "When applied to an laser, it increases the maximum distance of the laser", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.upgrades.distance.info.base", null));
 
-		addComponent(new TextBoxComponent("info", 0, -14, 200, 0, new float[] {.4f, .4f, .4f}, "When applied to an Laser Omni Tool, it increases the maximum reach (distance) of the tool", null));
+		addComponent(new TextBoxComponent("info", 0, -14, 200, 0, new float[] {.4f, .4f, .4f}, "manual.upgrades.distance.info.context.tools", null));
 
-		addComponent(new TextBoxComponent("info", -20, 28, 247, 0, new float[] {.4f, .4f, .4f}, "This upgrade has multiple tiers, every tier higher increases the effect of the upgrade", new float[] {.7f, .2f, .2f}));
+		addComponent(new TextBoxComponent("info", -20, 28, 247, 0, new float[] {.4f, .4f, .4f}, "manual.upgrades.distance.info.note", new float[] {.7f, .2f, .2f}));
 
 	}
 

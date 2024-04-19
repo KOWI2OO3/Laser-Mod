@@ -21,11 +21,11 @@ public class UpgradeSpeedPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -5, new ItemStack(ModUpgrades.Speed.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -35, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "An simple upgrade to increase speed", null));
+		addComponent(new TextBoxComponent("info", 0, -35, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.upgrades.speed.info.base", null));
 
-		addComponent(new TextBoxComponent("info", 0, -15, 200, 0, new float[] {.4f, .4f, .4f}, "When applied to an device, like an infuser or precision assembler, it will make the device faster at crafting", null));
+		addComponent(new TextBoxComponent("info", 0, -15, 200, 0, new float[] {.4f, .4f, .4f}, "manual.upgrades.speed.info.context.machine", null));
 
-		addComponent(new TextBoxComponent("info", 0, 15, 200, 0, new float[] {.4f, .4f, .4f}, "When applied to laser tools it acts as efficiency", null));
+		addComponent(new TextBoxComponent("info", 0, 15, 200, 0, new float[] {.4f, .4f, .4f}, "manual.upgrades.speed.info.context.tools", null));
 
 	}
 }

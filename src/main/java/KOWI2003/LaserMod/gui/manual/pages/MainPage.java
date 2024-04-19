@@ -17,12 +17,11 @@ public class MainPage extends GuiContext {
 		
 		int offset = 0;
 		int x = -110;
-		x = -5;
+		x = -1;
 		int y = -35;
-		offset = addPageSelector(x, y, offset, ManualHandler.BlocksHeader, "Blocks", true);
-		offset = addPageSelector(x, y, offset, ManualHandler.ItemsHeader, "Items", true);
-		offset = addPageSelector(x, y, offset, ManualHandler.UpgradesHeader, "Upgrades", true);
-//		offset = addPageSelector(x, y, offset, ManualHandler.IntegrationHeader, "Integration", true);
-		
+		offset = addPageSelector(x, y, offset, ManualHandler.BlocksHeader, ManualHandler.BlocksHeader.getTitle(), true);
+		offset = addPageSelector(x, y, offset, ManualHandler.ItemsHeader, ManualHandler.ItemsHeader.getTitle(), true);
+		offset = addPageSelector(x, y, offset, ManualHandler.UpgradesHeader, ManualHandler.UpgradesHeader.getTitle(), true);
+		offset = addPageSelector(x, y, offset, ManualHandler.IntegrationHeader, ManualHandler.IntegrationHeader.getTitle(), true);
 	}
 }

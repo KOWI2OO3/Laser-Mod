@@ -17,11 +17,11 @@ public class ProjectorTextData extends ProjectorWidgetData {
 //	public float[] textColor = new float[] {1, 1, 1};
 	
 	public ProjectorTextData() {
-		super(ProjectorWidgetTypes.TEXT);
+		super(ProjectorWidgetTypes.Text);
 	}
 
 	public ProjectorTextData(float x, float y, float z, String text) {
-		super(x, y, z, 1, 1, 1, ProjectorWidgetTypes.TEXT);
+		super(x, y, z, 1, 1, 1, ProjectorWidgetTypes.Text);
 		this.text = text;
 	}
 	

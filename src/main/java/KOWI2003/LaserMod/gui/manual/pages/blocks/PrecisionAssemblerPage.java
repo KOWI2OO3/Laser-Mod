@@ -21,15 +21,16 @@ public class PrecisionAssemblerPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -15, new ItemStack(ModBlocks.PrecisionAssembler.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "This device is used to craft most of the more complex items in the mod", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.blocks.assembler.info.basic", null));
 
-		addComponent(new TextBoxComponent("info", 0, 1, 200, 0, new float[] {.4f, .4f, .4f}, "One of the main uses is to craft upgrades for the various items and blocks!", null));
+		addComponent(new TextBoxComponent("info", 0, 1, 200, 0, new float[] {.4f, .4f, .4f}, "manual.blocks.assembler.info.extra", null));
 
-		addPageSelector(-100 + 35, 30, 0, ManualHandler.UpgradesHeader, "Upgrades");
-
-		addPageSelector(-100 + 63, 30, 0, ManualHandler.LaserTools, "Laser Tools");
-		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "Also Check: ", null));
-		addComponent(new TextBoxComponent("info", -100 + 57, 30, 100, 0, null, ", ", null));
+		int offset = width("manual.misc.see") / 2 + 3;
+		addPageSelector(-100 + offset, 30, 0, ManualHandler.UpgradesHeader);
+		offset += width(ManualHandler.UpgradesHeader.getTitle()) / 2 + 3;
+		addComponent(new TextBoxComponent("info", -100 + offset - 6, 30, 100, 0, null, ", ", null));
+		addPageSelector(-100 + offset, 30, 0, ManualHandler.LaserTools);
+		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "manual.misc.see", null));
 	}
 
 }

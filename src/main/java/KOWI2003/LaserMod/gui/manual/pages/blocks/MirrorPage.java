@@ -21,12 +21,12 @@ public class MirrorPage extends GuiContext {
 
 		addComponent(new ItemComponent("item", -45, -10, new ItemStack(ModBlocks.Mirror.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "This is only an simple mirror, what did you expect here?", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.blocks.mirror.sub.info.basic", null));
 
-		addComponent(new TextBoxComponent("info", 0, 1, 200, 0, new float[] {.4f, .4f, .4f}, "When an laser hits the mirror, it will redirect the laser into an different direction.", null));
+		addComponent(new TextBoxComponent("info", 0, 1, 200, 0, new float[] {.4f, .4f, .4f}, "manual.blocks.mirror.sub.info.extra", null));
 
-		addPageSelector(-100 + 33, 30, 0, ManualHandler.Laser, "Laser");
-		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "Also Check: ", null));
+		addPageSelector(-100 + width("manual.misc.see") / 2 + 3, 30, 0, ManualHandler.Laser);
+		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "manual.misc.see", null));
 		
 	}
 

@@ -9,7 +9,7 @@ public class UpgradesPage extends GuiContext {
 	public UpgradesPage(String id) {
 		super(id);
 		setParent(ManualHandler.MAIN);
-		setTitle("Upgrades");
+		setTitle("manual.upgrades.header");
 	}
 	
 	@Override

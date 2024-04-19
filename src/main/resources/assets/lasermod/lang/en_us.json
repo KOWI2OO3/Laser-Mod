@@ -234,6 +234,33 @@
 	"manual.integration.cc.widget.getType.desc": "gets the widgets type, which will be one of %2$s",
 	
 	"manual.integration.cc.widget.getId.name": "getId§d() §f: §3string",
-	"manual.integration.cc.widget.getId.desc": "gets the id of the widget"
+	"manual.integration.cc.widget.getId.desc": "gets the id of the widget",
+	
+	"manual.integration.cc.widget.setX.name": "setX§d(§bxValue §f: §3number§d)§r",
+	"manual.integration.cc.widget.setX.desc": "sets the X position of the widget, which is the left and right axis",
+	
+	"manual.integration.cc.widget.setY.name": "setY§d(§byValue §f: §3number§d)§r",
+	"manual.integration.cc.widget.setY.desc": "sets the Y position of the widget, which is the up and down axis",
+	
+	"manual.integration.cc.widget.setZ.name": "setZ§d(§bzValue §f: §3number§d)§r",
+	"manual.integration.cc.widget.setZ.desc": "sets the Z position of the widget, which is the back and front axis",
+	
+	"manual.integration.cc.widget.setWidth.name": "setWidth§d(§bwidth §f: §3number§d)§r",
+	"manual.integration.cc.widget.setWidth.desc": "sets the width of the widget, which is only applicable on widget that allow non linear scaling. §bThis only works on shapes§r",
+	
+	"manual.integration.cc.widget.setHeight.name": "setHeight§d(§bheight §f: §3number§d)§r",
+	"manual.integration.cc.widget.setHeight.desc": "sets the height of the widget, which is only applicable on widget that allow non linear scaling. §bThis only works on shapes§r",
+	
+	"manual.integration.cc.widget.setDepth.name": "setDepth§d(§bdepth §f: §3number§d)§r",
+	"manual.integration.cc.widget.setDepth.desc": "sets the depth of the widget. the depth defines the size in the z-axis of shapes, which is only applicable on widget that allow non linear scaling. §bThis only works on shapes§r",
+	
+	"manual.integration.cc.widget.setRotation.name": "setRotation§d(§brotation §f: §3number§d)§r",
+	"manual.integration.cc.widget.setRotation.desc": "sets the rotation of the widget around the y axis in degrees",
+	
+	"manual.integration.cc.widget.setScale.name": "setScale§d(§bscale §f: §3number§d)§r",
+	"manual.integration.cc.widget.setScale.desc": "sets the linear scale of the widget, which means it scales the x, y and z axis all at the same time (this works for all widgets)",
+	
+	"manual.integration.cc.widget.setAlpha.name": "setAlpha§d(§balpha §f: §3number§d)§r",
+	"manual.integration.cc.widget.setAlpha.desc": "sets the alpha of the widget, which describes how translucent the widget is. Note this is from 0-1 where 1 is fully solid and 0 is invisible"
 	
 }

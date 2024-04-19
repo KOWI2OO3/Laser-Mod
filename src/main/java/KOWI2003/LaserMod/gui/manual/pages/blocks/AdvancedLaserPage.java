@@ -21,14 +21,14 @@ public class AdvancedLaserPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -15, new ItemStack(ModBlocks.AdvancedLaser.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -35, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "An advanced version of the simple laser, it can be placed in any direction. supply it with a redstone signal to turn it on.", null));
+		addComponent(new TextBoxComponent("info", 0, -35, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.blocks.adv_laser.info.basic", null));
 
-		addComponent(new TextBoxComponent("info", 0, -9, 200, 0, new float[] {.4f, .4f, .4f}, "It can also be upgraded like the simple laser, but this device has de ability to rotate its laser emitter, to shoot it out at an angle!", null));
+		addComponent(new TextBoxComponent("info", 0, -9, 200, 0, new float[] {.4f, .4f, .4f}, "manual.blocks.adv_laser.info.extra", null));
 
-		addComponent(new TextBoxComponent("info", 0, 20, 200, 0, new float[] {.4f, .4f, .4f}, "NOTE: This feature is Work In Progress, so it might not fucntion correctly for you!", new float[] {.7f, .2f, .2f}));
+		addComponent(new TextBoxComponent("info", 0, 20, 200, 0, new float[] {.4f, .4f, .4f}, "manual.blocks.adv_laser.info.note", new float[] {.7f, .2f, .2f}));
 		
-		addPageSelector(-100 + 33, 30, 0, ManualHandler.UpgradesHeader, "Upgrades");
-		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "Also Check: ", null));
+		addPageSelector(-100 + width("manual.misc.see") / 2 + 3, 30, 0, ManualHandler.UpgradesHeader);
+		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "manual.misc.see", null));
 	}
 
 }

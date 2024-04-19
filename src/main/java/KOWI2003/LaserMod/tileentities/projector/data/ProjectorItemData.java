@@ -14,11 +14,11 @@ public class ProjectorItemData extends ProjectorWidgetData {
 	public boolean onSurface = false;
 	
 	public ProjectorItemData() {
-		super(ProjectorWidgetTypes.ITEM);
+		super(ProjectorWidgetTypes.Item);
 	}
 	
 	public ProjectorItemData(float x, float y, float z, float size, ItemStack stack) {
-		super(x, y, z, size, size, size, ProjectorWidgetTypes.ITEM);
+		super(x, y, z, size, size, size, ProjectorWidgetTypes.Item);
 		this.item = stack;
 	}
 	

@@ -21,11 +21,11 @@ public class UpgradeColorPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -5, new ItemStack(ModUpgrades.Color.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "This upgrade allows you to color whatever it is applied to", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.upgrades.color.info.base", null));
 
-		addComponent(new TextBoxComponent("info", 0, -10, 200, 0, new float[] {.4f, .4f, .4f}, "can be applied to lasers, to color the laser comming out of it", null));
-		addComponent(new TextBoxComponent("info", 0, 5, 200, 0, new float[] {.4f, .4f, .4f}, "can be applied to laser tool, to modify the color of the tool", null));
-		addComponent(new TextBoxComponent("info", 0, 20, 200, 0, new float[] {.4f, .4f, .4f}, "can be applied to laser armor, to modify the color of the armor piece", null));
+		addComponent(new TextBoxComponent("info", 0, -10, 200, 0, new float[] {.4f, .4f, .4f}, "manual.upgrades.color.info.context.laser", null));
+		addComponent(new TextBoxComponent("info", 0, 5, 200, 0, new float[] {.4f, .4f, .4f}, "manual.upgrades.color.info.context.tools", null));
+		addComponent(new TextBoxComponent("info", 0, 20, 200, 0, new float[] {.4f, .4f, .4f}, "manual.upgrades.color.info.context.armor", null));
 
 
 	}

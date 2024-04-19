@@ -10,7 +10,7 @@ public class LaserToolsPage extends GuiContext {
 
 	public LaserToolsPage(String id) {
 		super(id);
-		setTitle("Laser Tools");
+		setTitle("manual.items.category.tools");
 		setParent(ManualHandler.ItemsHeader);
 	}
 
@@ -20,12 +20,11 @@ public class LaserToolsPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -50, -5, ModItems.LaserPickaxe.get().getDefaultInstance(), 10));
 		
-		addComponent(new TextBoxComponent("info", -20, -35, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "Special Tools created of an base which holds the laser crystal,"
-				+ " and when activated acts like the corresponding tool", null));
-		addComponent(new TextBoxComponent("info", -20, -8, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "Laser Tools can be upgraded using an modification station and upgrades", null));
-		addComponent(new TextBoxComponent("info", -20, 10, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "To activate the tools, rightclick while holding them in your hand", null));
+		addComponent(new TextBoxComponent("info", -20, -35, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.items.tools.info.base", null));
+		addComponent(new TextBoxComponent("info", -20, -8, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.items.tools.info.extra", null));
+		addComponent(new TextBoxComponent("info", -20, 10, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.items.tools.info.usage", null));
 
-		addPageSelector(-100 + 33, 35, 0, ManualHandler.UpgradesHeader, "Upgrades");
-		addComponent(new TextBoxComponent("info", -100, 35, 100, 0, null, "Also Check: ", null));
+		addPageSelector(-100 + width("manual.misc.see") / 2 + 3, 35, 0, ManualHandler.UpgradesHeader, "Upgrades");
+		addComponent(new TextBoxComponent("info", -100, 35, 100, 0, null, "manual.misc.see", null));
 	}
 }

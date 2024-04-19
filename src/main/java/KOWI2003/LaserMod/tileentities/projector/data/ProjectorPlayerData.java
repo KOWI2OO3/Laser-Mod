@@ -20,7 +20,7 @@ public class ProjectorPlayerData extends ProjectorWidgetData {
 	public boolean child = false;
 	
 	public ProjectorPlayerData() {
-		super(ProjectorWidgetTypes.PLAYER);
+		super(ProjectorWidgetTypes.Player);
 		updateProfile();
 	}
 	
@@ -39,7 +39,7 @@ public class ProjectorPlayerData extends ProjectorWidgetData {
 	
 	public ProjectorPlayerData(float x, float y, float z, float size,
 			boolean liveModel, boolean isChild, String username) {
-		super(x, y, z, size, size, size, ProjectorWidgetTypes.PLAYER);
+		super(x, y, z, size, size, size, ProjectorWidgetTypes.Player);
 		this.liveModel = liveModel;
 		this.child = isChild;
 		this.username = username;

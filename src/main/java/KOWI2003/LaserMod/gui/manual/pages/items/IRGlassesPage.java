@@ -21,7 +21,7 @@ public class IRGlassesPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -5, new ItemStack(ModItems.IR_Glasses.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -20, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "These simple infrared glasses, when worn, can show invisible lasers to the wearer", null));
+		addComponent(new TextBoxComponent("info", 0, -20, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.items.ir_glasses.info.base", null));
 
 //		addComponent(new TextBoxComponent("info", 0, 1, 200, 0, new float[] {.4f, .4f, .4f}, "It can also be upgraded like the simple laser, but this device has de ability to rotate its laser emitter, to shoot it out at an angle!", null));
 

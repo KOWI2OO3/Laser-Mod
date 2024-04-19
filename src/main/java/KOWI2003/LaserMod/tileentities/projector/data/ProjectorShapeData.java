@@ -14,11 +14,11 @@ public class ProjectorShapeData extends ProjectorWidgetData {
 	public ShapeType type = ShapeType.Cube;
 	
 	public ProjectorShapeData() {
-		super(ProjectorWidgetTypes.SHAPE);
+		super(ProjectorWidgetTypes.Shape);
 	}
 	
 	public ProjectorShapeData(float x, float y, float z, float width, float height, float depth) {
-		super(x, y, z, width, height, depth, ProjectorWidgetTypes.SHAPE);
+		super(x, y, z, width, height, depth, ProjectorWidgetTypes.Shape);
 	}
 	
 	@Override

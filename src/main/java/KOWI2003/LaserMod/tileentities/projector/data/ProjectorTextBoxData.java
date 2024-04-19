@@ -11,12 +11,12 @@ public class ProjectorTextBoxData extends ProjectorWidgetData {
 	public boolean isCentered = false;
 
 	public ProjectorTextBoxData() {
-		super(ProjectorWidgetTypes.TEXT_BOX);
+		super(ProjectorWidgetTypes.TextBox);
 	}
 
 	public ProjectorTextBoxData(float x, float y, float z, float size,
 			String text, float[] textColor, boolean isCentered) {
-		super(x, y, z, size, size, size, ProjectorWidgetTypes.TEXT_BOX);
+		super(x, y, z, size, size, size, ProjectorWidgetTypes.TextBox);
 		this.text = text;
 		this.isCentered = isCentered;
 		this.textColor = Utils.parseColor(textColor);

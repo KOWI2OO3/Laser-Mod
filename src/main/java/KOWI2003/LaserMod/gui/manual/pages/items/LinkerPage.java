@@ -21,11 +21,11 @@ public class LinkerPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -8, new ItemStack(ModItems.Linker.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "An simple handheld device used for linking an laser to an laser controller.", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.items.linker.info.base", null));
 
-		addComponent(new TextBoxComponent("info", 0, 1, 200, 0, new float[] {.4f, .4f, .4f}, "while sneaking, rightclick on an laser to save it in the linker, then rightclick on an laser controller, to link the laser and the controller together", null));
+		addComponent(new TextBoxComponent("info", 0, 1, 200, 0, new float[] {.4f, .4f, .4f}, "manual.items.linker.info.extra", null));
 
-		addPageSelector(-100 + 33, 30, 0, ManualHandler.LaserController, "Laser Controller");
-		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "Also Check: ", null));
+		addPageSelector(-100 + width("manual.misc.see") / 2 + 3, 30, 0, ManualHandler.LaserController);
+		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "manual.misc.see", null));
 	}
 }

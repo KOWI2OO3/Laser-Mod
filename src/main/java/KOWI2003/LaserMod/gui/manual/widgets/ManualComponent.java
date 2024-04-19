@@ -9,7 +9,7 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.contents.TranslatableContents;
 
 public class ManualComponent<T extends WidgetBase> extends AbstractWidget {
 
@@ -26,7 +26,7 @@ public class ManualComponent<T extends WidgetBase> extends AbstractWidget {
 	}
 	
 	private ManualComponent(int x, int y, int width, int heigth, String name) {
-		this(x, y, width, heigth, MutableComponent.create(new LiteralContents(name)));
+		this(x, y, width, heigth, MutableComponent.create(new TranslatableContents(name)));
 	}
 
 	@Override

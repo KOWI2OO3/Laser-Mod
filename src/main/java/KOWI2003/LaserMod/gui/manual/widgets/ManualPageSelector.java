@@ -8,6 +8,7 @@ import KOWI2003.LaserMod.gui.manual.data.widget.PageSelector;
 import KOWI2003.LaserMod.utils.RenderUtils;
 import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 
 public class ManualPageSelector extends ManualComponent<PageSelector> {
 
@@ -32,10 +33,12 @@ public class ManualPageSelector extends ManualComponent<PageSelector> {
 				RenderUtils.Gui.renderItem(data.item, super.getX() - 10 - Minecraft.getInstance().font.width(data.Text)/2, getY(), 1);
 		}
 		
-		if(data.centered) {
-			drawCenteredString(stack, Minecraft.getInstance().font, data.Text, super.getX() + (data.item != null ? 10 : 0), getY() + 10 - Minecraft.getInstance().font.lineHeight/2, Utils.getHexIntFromRGB(color));
-		}else
-			drawString(stack, Minecraft.getInstance().font, data.Text, super.getX() + (data.item != null ? 20 : 0), getY() + 10 - Minecraft.getInstance().font.lineHeight/2, Utils.getHexIntFromRGB(color));
+		
+		int localOffset = 0;
+		if(data.centered)
+			localOffset = (int)Math.min(width/2f, Minecraft.getInstance().font.width(Component.translatable(data.Text)) / 2f);
+
+		Minecraft.getInstance().font.drawWordWrap(Component.translatable(data.Text), super.getX() + (data.item != null ? 20 : 0) - localOffset, super.getY() + 10 - Minecraft.getInstance().font.lineHeight/2, width - 5, Utils.getHexIntFromRGB(color));
 	}
 	
 	@Override

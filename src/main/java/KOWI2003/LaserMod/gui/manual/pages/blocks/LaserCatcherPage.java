@@ -21,11 +21,10 @@ public class LaserCatcherPage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -7, new ItemStack(ModBlocks.LaserCatcher.get()), 8f));
 		
-		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "An simple device that gives off a redstone signal when an laser hits the receiver", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.blocks.laser_catcher.info.basic", null));
 
-		
-		addPageSelector(-100 + 35, 30, 0, ManualHandler.Laser, "Laser");
-		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "Also Check: ", null));
+		addPageSelector(-100 + width("manual.misc.see") / 2 + 3, 30, 0, ManualHandler.Laser, ModBlocks.Laser.get().getName().getString());
+		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "manual.misc.see", null));
 	}
 
 }

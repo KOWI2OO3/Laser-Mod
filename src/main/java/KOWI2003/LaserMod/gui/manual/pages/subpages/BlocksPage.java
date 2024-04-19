@@ -10,7 +10,7 @@ public class BlocksPage extends GuiContext {
 	public BlocksPage(String id) {
 		super(id);
 		setParent(ManualHandler.MAIN);
-		setTitle("Blocks");
+		setTitle("manual.blocks.header");
 	}
 	
 	@Override

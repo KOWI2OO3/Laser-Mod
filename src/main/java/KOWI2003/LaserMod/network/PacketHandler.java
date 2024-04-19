@@ -131,6 +131,12 @@ public class PacketHandler {
 		.decoder(PacketLaserToolTagUpdate::new)
 		.consumerMainThread(PacketLaserToolTagUpdate::handle)
 		.add();
+
+		INSTANCE.messageBuilder(PacketSyncTileEntity.class, nextID())
+		.encoder(PacketSyncTileEntity::toBytes)
+		.decoder(PacketSyncTileEntity::new)
+		.consumerMainThread(PacketSyncTileEntity::handle)
+		.add();
 	}
 	
 	public static void sendToClient(Object packet, ServerPlayer player) {

@@ -2,6 +2,7 @@ package KOWI2003.LaserMod.utils;
 
 import KOWI2003.LaserMod.network.PacketHandler;
 import KOWI2003.LaserMod.network.PacketSyncIColor;
+import KOWI2003.LaserMod.network.PacketSyncTileEntity;
 import KOWI2003.LaserMod.tileentities.IColorable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -55,6 +56,13 @@ public class TileEntityUtils {
             markBlockForUpdate(world, pos);
             world.markAndNotifyBlock(pos, world.getChunkAt(pos), world.getBlockState(pos), world.getBlockState(pos), 4, 4);
         }
+    }
+
+	public static void syncToServer(BlockEntity tileEntity)
+    {
+        Level world = tileEntity.getLevel();
+        if(world != null)
+            PacketHandler.sendToServer(new PacketSyncTileEntity(tileEntity));
     }
 	
 	public static String StringCommands(Player player, String s) {

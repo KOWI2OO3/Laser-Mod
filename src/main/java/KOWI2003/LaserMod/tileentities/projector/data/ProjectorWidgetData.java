@@ -1,11 +1,15 @@
 package KOWI2003.LaserMod.tileentities.projector.data;
 
+import java.util.UUID;
+
 import KOWI2003.LaserMod.gui.widgets.DataProperties.RangeProperty;
 import KOWI2003.LaserMod.tileentities.projector.ProjectorWidgetTypes;
 import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.nbt.CompoundTag;
 
 public class ProjectorWidgetData {
+	
+	public UUID id = UUID.randomUUID();
 
 	public float x = 0;
 	public float y = 0;
@@ -56,6 +60,7 @@ public class ProjectorWidgetData {
 		tag.putFloat("Scale", scale);
 		tag.putFloat("Alpha", alpha);
 		tag.putInt("internalId", internalID);
+		tag.putString("Id", id.toString());
 		return writeToNBT(tag);
 	}
 	
@@ -83,6 +88,7 @@ public class ProjectorWidgetData {
 		alpha = Utils.conditionalGetFloat("Alpha", tag, 1);
 		internalID = Utils.conditionalGetInt("internalId", tag, hashCode());
 		scale = Utils.conditionalGetFloat("Scale", tag, 1);
+		id = UUID.fromString(Utils.conditionalGetString("Id", tag, UUID.randomUUID().toString()));
 	}
 	
 	@Override

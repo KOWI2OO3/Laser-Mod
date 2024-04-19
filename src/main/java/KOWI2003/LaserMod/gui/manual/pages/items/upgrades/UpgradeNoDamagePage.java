@@ -21,9 +21,9 @@ public class UpgradeNoDamagePage extends GuiContext {
 		
 		addComponent(new ItemComponent("item", -45, -5, new ItemStack(ModUpgrades.NoDamage.get()), 10f));
 		
-		addComponent(new TextBoxComponent("info", 0, -15, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "This upgrade when applied to an laser, will disable the damage dealt, so entities can safely stand inside the laser", null));
+		addComponent(new TextBoxComponent("info", 0, -15, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.upgrades.no_damage.info.base", null));
 
-		addComponent(new TextBoxComponent("info", 0, 10, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "NOTE: This upgrade negates the effects of the damage upgrade!", new float[] {.7f, .2f, .2f}));
+		addComponent(new TextBoxComponent("info", 0, 10, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "manual.upgrades.no_damage.info.note", new float[] {.7f, .2f, .2f}));
 
 	}
 	

@@ -10,12 +10,12 @@ import KOWI2003.LaserMod.tileentities.projector.data.ProjectorTextData;
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorWidgetData;
 
 public enum ProjectorWidgetTypes {
-	NONE(ProjectorWidgetData.class), 
-	TEXT(ProjectorTextData.class), 
-	TEXT_BOX(ProjectorTextBoxData.class), 
-	ITEM(ProjectorItemData.class),
-	PLAYER(ProjectorPlayerData.class),
-	SHAPE(ProjectorShapeData.class);
+	None(ProjectorWidgetData.class), 
+	Text(ProjectorTextData.class), 
+	TextBox(ProjectorTextBoxData.class), 
+	Item(ProjectorItemData.class),
+	Player(ProjectorPlayerData.class),
+	Shape(ProjectorShapeData.class);
 	
 	public Class<? extends ProjectorWidgetData> clazz;
 
@@ -29,7 +29,7 @@ public enum ProjectorWidgetTypes {
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
-			return new ProjectorWidgetData(NONE);
+			return new ProjectorWidgetData(None);
 		}
 	}
 }

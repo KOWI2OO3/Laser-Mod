@@ -23,9 +23,9 @@ public class UpgradeFirePage extends GuiContext {
 		
 //		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {0.4f, 0.4f, 0.4f}, "When applied to an laser will set fire to entities and flamable blocks that are in the way of the laser", null));
 
-		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {.4f, .4f, .4f}, "When applied to laser tools acts as fire aspect, setting fire to entities hit with the tool, or as auto melt which automatically smelts an block when broken if it can be smelted", null));
+		addComponent(new TextBoxComponent("info", 0, -30, 200, 0, new float[] {.4f, .4f, .4f}, "manual.upgrades.fire.info.base", null));
 
-		addComponent(new TextBoxComponent("info", 0, 5, 204, 0, new float[] {.4f, .4f, .4f}, "When applied to laser armor, it acts as an fire aspect throns, when an entity hits an wearer of laser armor with this upgrade it will catch on fire", null));
+		addComponent(new TextBoxComponent("info", 0, 5, 204, 0, new float[] {.4f, .4f, .4f}, "manual.upgrades.fire.info.context.laser", null));
 
 	}
 	
