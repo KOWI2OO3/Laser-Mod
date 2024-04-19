@@ -74,3 +74,6 @@ run
 
 # Files from Forge MDK
 forge*changelog.txt
+
+# VS code project settings files
+.vscode/
