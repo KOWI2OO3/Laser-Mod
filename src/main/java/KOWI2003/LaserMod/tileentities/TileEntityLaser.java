@@ -144,7 +144,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		nbt.putFloat("Green", green);
 		nbt.putFloat("Blue", blue);
 		nbt.putDouble("Distance", distance);
-		nbt.putString("Mode", mode.getName());
+		nbt.putString("Mode", mode.name());
 		nbt.putBoolean("isRemoteControlled", isRemoteControlled);
 		nbt = properties.save(nbt);
 //		return super.save(nbt);
@@ -368,11 +368,11 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 	}
 	
 public static enum MODE {
-	NORMAL("NORMAL", 0),
-	POWER("POWER", 1),
-	INVISIBLE("INVISIBLE", 2),
-	BEAM("BEAM", 3),
-	NEW_POWER("NEW_POWER", 4);
+	NORMAL("Normal", 0),
+	POWER("Power", 1),
+	INVISIBLE("Invisible", 2),
+	BEAM("Beam", 3),
+	NEW_POWER("Focused", 4);
 	
 	private int id;
 	private String name;

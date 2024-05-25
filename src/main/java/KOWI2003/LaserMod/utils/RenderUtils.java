@@ -1,18 +1,7 @@
 package KOWI2003.LaserMod.utils;
 
-import static org.lwjgl.opengl.GL11.GL_LINEAR;
-import static org.lwjgl.opengl.GL11.GL_RGB;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
-import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
-import static org.lwjgl.opengl.GL11.glBindTexture;
-import static org.lwjgl.opengl.GL11.glGenTextures;
-import static org.lwjgl.opengl.GL11.glTexImage2D;
-import static org.lwjgl.opengl.GL11.glTexParameteri;
-import static org.lwjgl.opengl.GL30.GL_COLOR_ATTACHMENT0;
-import static org.lwjgl.opengl.GL30.GL_FRAMEBUFFER;
-import static org.lwjgl.opengl.GL30.glFramebufferTexture2D;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL30.*;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -44,7 +33,7 @@ import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.blocks.BlockRotatable;
-import KOWI2003.LaserMod.tileentities.render.LaserRender.LaserRenderType;
+import KOWI2003.LaserMod.utils.client.rendertypes.LegacyLaserRenderType;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -1229,9 +1218,7 @@ public class RenderUtils {
 			RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 			
 			matrix.translate(0, 0.5, 0.7);
-			VertexConsumer buffer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(LaserRenderType.LASER_PROJECTOR_RENDER);
-//			VertexConsumer buffer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.entityTranslucent(getEmptyTexture()));
-//			VertexConsumer buffer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(LaserRenderType.getDebugRenderType2());
+			VertexConsumer buffer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(LegacyLaserRenderType.LASER_PROJECTOR_RENDER);
 			Matrix4f matrix2 = matrix.last().pose();
 			
 			buffer.vertex(matrix2, 0 - (peel-0.3f), height, peel).color(RGB[0], RGB[1], RGB[2], 0f).endVertex();

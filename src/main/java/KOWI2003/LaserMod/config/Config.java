@@ -12,6 +12,8 @@ public class Config {
 		public int defaultLaserDamage;
 
 		public boolean useMultiToolRecoil;
+
+		public LaserSettings laserSettings;
 		
 		@Expose(serialize = false, deserialize = false)
 		public int defaultLaserDistance;
@@ -23,6 +25,7 @@ public class Config {
 		defaultLaserDamage = 3;
 		useMultiToolRecoil = true;
 		defaultLaserDistance = 10;
+		laserSettings = new LaserSettings();
 		updateChecker = new UpdateCheckerConfig();
 	}
 
@@ -40,5 +43,10 @@ public class Config {
 			useUpdateChecker = true;
 			updateCheckerType = "recommended";
 		}
+	}
+
+	public class LaserSettings {
+		public boolean hitmarkerFocusedLaser = true;
+		public boolean hitmarkerPowerLaser = true;
 	}
 }

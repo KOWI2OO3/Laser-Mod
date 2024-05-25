@@ -8,10 +8,10 @@ import com.mojang.math.Vector3f;
 import com.mojang.math.Vector4f;
 
 import KOWI2003.LaserMod.init.ModItems;
-import KOWI2003.LaserMod.tileentities.render.LaserRender.LaserRenderType;
 import KOWI2003.LaserMod.utils.LaserItemUtils;
 import KOWI2003.LaserMod.utils.MathUtils;
 import KOWI2003.LaserMod.utils.RenderUtils;
+import KOWI2003.LaserMod.utils.client.rendertypes.LegacyLaserRenderType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -40,8 +40,8 @@ public class RenderMultiTool extends BlockEntityWithoutLevelRenderer {
 		this.dispatcher = p_172550_;
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
+	@SuppressWarnings({ "deprecation", "null", "resource" })
 	public void renderByItem(ItemStack stack, TransformType transformType, PoseStack matrix,
 			MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 		
@@ -103,10 +103,10 @@ public class RenderMultiTool extends BlockEntityWithoutLevelRenderer {
 		
 		matrix.mulPose(rotation);
 		
-		RenderUtils.renderQuad(buffer.getBuffer(LaserRenderType.LASER_RENDER), matrix, new float[] {pos[0], pos[1] - size/2f, pos[2]}, 
+		RenderUtils.renderQuad(buffer.getBuffer(LegacyLaserRenderType.LASER_RENDER), matrix, new float[] {pos[0], pos[1] - size/2f, pos[2]}, 
 				new float[] {l, size, size}, new float[] {0, 0, 1, 1}, new float[] {color[0], color[1], color[2], 0.5f}, combinedLight, combinedOverlay);
 		matrix.mulPose(Vector3f.XP.rotationDegrees(90));
-		RenderUtils.renderQuad(buffer.getBuffer(LaserRenderType.LASER_RENDER), matrix, new float[] {pos[0], pos[1] - size/2f, pos[2]}, 
+		RenderUtils.renderQuad(buffer.getBuffer(LegacyLaserRenderType.LASER_RENDER), matrix, new float[] {pos[0], pos[1] - size/2f, pos[2]}, 
 				new float[] {l, size, size}, new float[] {0, 0, 1, 1}, new float[] {color[0], color[1], color[2], 0.5f}, combinedLight, combinedOverlay);
 		
 		matrix.popPose();

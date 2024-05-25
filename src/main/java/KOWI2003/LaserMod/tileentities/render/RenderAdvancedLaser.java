@@ -1,20 +1,21 @@
 package KOWI2003.LaserMod.tileentities.render;
 
-import com.mojang.blaze3d.systems.RenderSystem;
+import java.util.function.Consumer;
+
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
+import com.mojang.math.Vector4f;
 
 import KOWI2003.LaserMod.blocks.BlockLaser;
 import KOWI2003.LaserMod.blocks.BlockRotatable;
 import KOWI2003.LaserMod.init.ModItems;
 import KOWI2003.LaserMod.tileentities.TileEntityAdvancedLaser;
 import KOWI2003.LaserMod.tileentities.TileEntityLaser;
-import KOWI2003.LaserMod.tileentities.TileEntityLaser.MODE;
-import KOWI2003.LaserMod.tileentities.render.LaserRender.LaserRenderType;
 import KOWI2003.LaserMod.tileentities.render.models.AdvancedLaserTop;
 import KOWI2003.LaserMod.utils.MathUtils;
+import KOWI2003.LaserMod.utils.client.render.LaserRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -22,38 +23,41 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
 public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvancedLaser> {
-	private final BlockEntityRendererProvider.Context context;
-	
-	private float uMin, vMin = 0;
-	
-	public RenderAdvancedLaser(BlockEntityRendererProvider.Context context) {
-		this.context = context;
-	}	
+
+	public RenderAdvancedLaser(BlockEntityRendererProvider.Context context) {}	
 	
 	@Override
-	public boolean shouldRenderOffScreen(TileEntityAdvancedLaser te) {
+	public boolean shouldRenderOffScreen(@Nonnull TileEntityAdvancedLaser te) {
 		return te.active;
 	}
 
 	@Override
-	public void render(TileEntityAdvancedLaser te, float partialTicks, PoseStack matrix, MultiBufferSource bufferIn,
+	public void render(@Nonnull TileEntityAdvancedLaser tile, float partialTicks, @Nonnull PoseStack matrix, @Nonnull MultiBufferSource bufferIn,
 			int combinedLightIn, int combinedOverlayIn) {
 		
-		matrix.pushPose();
-//		GL11.glPushMatrix();
-		Vec2 rotation = te.getRotation();
-		Vector3f translation = new Vector3f(0, te.height, 0);
+		var color = new Vector4f(tile.red, tile.green, tile.blue, 0.4f);
+		var facing = tile.getBlockState().getValue(BlockLaser.FACING);
+
+		var rotation = tile.getRotation();
+		var translation = new Vector3f(0, tile.height, 0);
+		var origin = new Vector3f(.5f + translation.x()/16f, 0.3f + translation.y()/16f, 0 + translation.z()/16f);
+
+		var dir = MathUtils.rotateVector(new Vector3f(0, 1, 0), origin, new Vector3f(rotation.x, rotation.y, 0));
+		var distance = tile.distance - 0.5f *(dir.x() * tile.height/16f + dir.y() * tile.height/16f) - 0.05f;
+
 		{
+			float r = tile.red;
+			float g = tile.green;
+			float b = tile.blue;
+
 			matrix.pushPose();
-			
 			matrix.translate(.5f, .5f, .5f);
 			
-			matrix.mulPose(Vector3f.XP.rotationDegrees(te.getBlockState().getValue(BlockLaser.FACING).step().y() * 90f - 90f));
-			matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(te.getBlockState().getValue(BlockLaser.FACING).step().y())-1) * (te.getBlockState().getValue(BlockLaser.FACING).toYRot() + 180f)));
+			matrix.mulPose(Vector3f.XP.rotationDegrees(tile.getBlockState().getValue(BlockLaser.FACING).step().y() * 90f - 90f));
+			matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(tile.getBlockState().getValue(BlockLaser.FACING).step().y())-1) * (tile.getBlockState().getValue(BlockLaser.FACING).toYRot() + 180f)));
 			
 			matrix.translate(-.5, -.5, 0);
 			matrix.translate(1, -1.15, .5);
@@ -61,223 +65,43 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 			AdvancedLaserTop<?> model = new AdvancedLaserTop<Entity>();
 			model.setTranslationForPlatform(translation.x(), translation.y(), translation.z());
 			model.setRotationPlatform(rotation.x, rotation.y);
-			float r = te.red;
-			float g = te.green;
-			float b = te.blue;
 			
-			model.renderToBuffer(matrix, null/*bufferIn.getBuffer(RenderType.entityCutout(new Resourece))*/, combinedLightIn, combinedOverlayIn, r, g, b, 1.0f);
+			model.renderToBuffer(matrix, null, combinedLightIn, combinedOverlayIn, r, g, b, 1.0f);
 			matrix.popPose();
 		}
-		
-		if(te.active) {
-			RenderSystem.enableDepthTest();
-			RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-				double distance = te.distance;
-				float r = te.red;
-				float g = te.green;
-				float b = te.blue;
-				float a = 0.4f;
-				
-				float thickness = 0.05f;
-				
-				float ll = 0.5f - thickness/2f;
-		        float lr = 0.5f + thickness/2f;
-		        
-		        Direction facing = te.getBlockState().getValue(BlockLaser.FACING);
 
-		        Vector3f origin = new Vector3f(.5f + translation.x()/16f, 0.3f + translation.y()/16f, 0 + translation.z()/16f);
-		        
-				Vector3f dir = MathUtils.rotateVector(new Vector3f(0, 1, 0), origin, new Vector3f(rotation.x, rotation.y, 0));
-				
-				distance = distance - 0.5f *(dir.x() * te.height/16f + dir.y() * te.height/16f);
-
-				distance -= 0.05f;
-				
-		        if(te.mode == MODE.NORMAL || (te.mode == MODE.INVISIBLE && canBeSeen())) {
-			        matrix.pushPose();
-			        
-					VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER);
-					Matrix4f matrix2 = matrix.last().pose();
-					
-						matrix.translate(.5f, .5f, .5f);
-					
-						matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-						matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
-						
-						matrix.translate(-.5, -.5, 0);
-						
-						matrix.translate(origin.x(), origin.y(), origin.z());
-						matrix.mulPose(Vector3f.ZP.rotation(rotation.y));
-						matrix.mulPose(Vector3f.XP.rotation(rotation.x));
-						matrix.translate(-.5f, 0.05f, 0);
-						
-						buffer.vertex(matrix2, ll, 0F, 0F).color(r, g, b, a).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, ll, (float) distance, 0F).color(r, g, b, a).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, lr, (float) distance, 0F).color(r, g, b, a).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, lr, 0, 0F).color(r, g, b, a).uv(0, 0).endVertex();
-		    			
-				        buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER);
-		    			
-				        matrix.translate(.5, 0, -0.5f);
-				        
-		    			buffer.vertex(matrix2, 0F, 0F, ll).color(r, g, b, a).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, 0f, (float) distance, ll).color(r, g, b, a).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, 0f, (float) distance, lr).color(r, g, b, a).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, 0f, 0F, lr).color(r, g, b, a).uv(0, 0).endVertex();
-		    			
-			        matrix.popPose();
-		        }else if(te.mode == MODE.POWER) {
-		        	matrix.pushPose();
-		        	 
-						VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_POWER_NEW);
-						Matrix4f matrix2 = matrix.last().pose();
-		
-							matrix.translate(.5f, .5f, .5f);
-						
-							matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-							matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
+		Consumer<PoseStack> transformation = pose -> {
+			switch (tile.mode) {
+				case NORMAL, INVISIBLE:
+						pose.translate(-.5, -.5, 0);
+						pose.translate(origin.x(), origin.y(), origin.z());
+						pose.mulPose(Vector3f.ZP.rotation(rotation.y));
+						pose.mulPose(Vector3f.XP.rotation(rotation.x));
+						pose.translate(-.5f, 0.05f, 0);
+					break;
+				case POWER, BEAM, NEW_POWER:
+					pose.translate(-.5, -.5, 0);
 							
-							matrix.translate(-.5f, -.5f, -.5f);
-							
-							matrix.translate(origin.x(), origin.y(), origin.z());
-							matrix.mulPose(Vector3f.ZP.rotation(rotation.y));
-							matrix.mulPose(Vector3f.XP.rotation(rotation.x));
-							matrix.translate(-.5f, 0.05f, 0);
-							
-							distance += .5d;
-							
-							buffer.vertex(matrix2, 0, 0.1F, 0.5F).color(r, g, b, a).uv(0, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0, (float)distance, 0.5F).color(r, g, b, a).uv(1, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 1F, (float)distance, 0.5F).color(r, g, b, a).uv(1, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 1F, 0.1F, 0.5F).color(r, g, b, a).uv(0, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-			    			
-					        buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_POWER_NEW);
-			    			
-					        matrix.translate(0, 0, 0f);
+					pose.translate(origin.x(), origin.y(), origin.z());
+					pose.mulPose(Vector3f.ZP.rotation(rotation.y));
+					pose.mulPose(Vector3f.XP.rotation(rotation.x));
+					pose.translate(-.5f, 0.05f, 0);
+					pose.translate(.5f, .5f, 0);
+					rotationLogic(pose, tile);
+					pose.translate(-.5, -.5, 0);
+					break;
+				default:
+					break;
+			}
 
-							buffer.vertex(matrix2, 0.5F, 0.1F, 0).color(r,g, b, a).uv(0, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, (float)distance, 0).color(r,g, b, a).uv(1, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, (float)distance, 0 + 1F).color(r,g, b, a).uv(1, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, 0.1F, 0 + 1F).color(r,g, b, a).uv(0, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-			    			
-							buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_BEAM);
+		};
 
-							float r2, g2, b2;
-							r2 = g2 = b2 = 1.0f;
-							float a2 = 1.0f;
-							float s = 0.126f;
-							buffer.vertex(matrix2, 0.5f - s/2f, 0.1F, 0.5F).color(r2, g2, b2, a2).uv(0, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5f - s/2f, (float) distance, 0.5F).color(r2, g2, b2, a2).uv(1, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5f + s/2f, (float) distance, 0.5F).color(r2, g2, b2, a2).uv(1, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5f + s/2f, 0.1F, 0.5F).color(r2, g2, b2, a2).uv(0, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							
-
-							buffer.vertex(matrix2, 0.5F, 0.1F, 0.5f - s/2f).uv(0, 0).color(r2, g2, b2, a2).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, (float) distance, 0.5f - s/2f).uv(1, 0).color(r2, g2, b2, a2).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, (float) distance, 0.5f + s/2f).uv(1, 1).color(r2, g2, b2, a2).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, 0.1F, 0.5f + s/2f).uv(0, 1).color(r2, g2, b2, a2).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							
-				        matrix.popPose();
-		        	
-		        }
-		        else if(te.mode == MODE.BEAM) {
-		        	 matrix.pushPose();
-				        
-		        	 ll = 0.3f;
-		        	 lr = 0.7f;
-		        	 
-						VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_POWER_NEW);
-						Matrix4f matrix2 = matrix.last().pose();
-						
-						matrix.translate(.5f, .5f, .5f);
-						
-						matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-						matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
-						
-						matrix.translate(-.5, -.5, 0);
-						
-						matrix.translate(origin.x(), origin.y(), origin.z());
-						matrix.mulPose(Vector3f.ZP.rotation(rotation.y));
-						matrix.mulPose(Vector3f.XP.rotation(rotation.x));
-						matrix.translate(-.5f, 0.05f, 0);
-						matrix.translate(.5f, .5f, 0);
-						rotationLogic(matrix, te);
-						matrix.translate(-.5, -.5, 0);
-						
-						uMin -= 0.01f;
-						if((uMin + 0.01f) == 1) {
-							uMin = 0;
-						}
-						
-						a += 0.25;
-						
-						buffer.vertex(matrix2, ll, 0f, 0f).color(r, g, b, a).uv(uMin, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-						buffer.vertex(matrix2, ll, (float) distance, 0f).color(r, g, b, a).uv(uMin + 10f, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-						buffer.vertex(matrix2, lr, (float) distance, 0f).color(r, g, b, a).uv(uMin + 10f, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-						buffer.vertex(matrix2, lr, 0f, 0f).color(r, g, b, a).uv(uMin, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-						
-					matrix.popPose();
-		        }else if(te.mode == MODE.NEW_POWER) { 
-		        	 matrix.pushPose();
-		        	 
-						VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER);
-						Matrix4f matrix2 = matrix.last().pose();
-							
-						thickness *= 2f;
-						
-						ll = 0.5f - thickness/2f;
-				        lr = 0.5f + thickness/2f;
-						
-						float centerThickness = (thickness/2f)/5f;
-					
-						matrix.translate(.5f, .5f, .5f);
-					
-						matrix.mulPose(Vector3f.XP.rotationDegrees(facing.step().y() * 90f - 90f));
-						matrix.mulPose(Vector3f.ZP.rotationDegrees((Math.abs(facing.step().y())-1) * (facing.toYRot() + 180f)));
-						
-						matrix.translate(-.5, -.5, 0);
-						
-						matrix.translate(origin.x(), origin.y(), origin.z());
-						matrix.mulPose(Vector3f.ZP.rotation(rotation.y));
-						matrix.mulPose(Vector3f.XP.rotation(rotation.x));
-						matrix.translate(-.5f, 0.05f, 0);
-						matrix.translate(.5f, .5f, 0);
-						rotationLogic(matrix, te);
-						matrix.translate(-.5, -.5, 0);
-						
-						buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, 0F, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.48f).endVertex();
-		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.48f).endVertex();
-		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.52f).endVertex();
-						
-						buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, 0F, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.48f).endVertex();
-		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.48f).endVertex();
-		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, 0, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.52f).endVertex();
-		    			
-		    			buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER);
-
-						buffer.vertex(matrix2, ll, 0F, 0F).color(r,g, b, 0f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, ll, (float) distance, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
-
-						buffer.vertex(matrix2, ll, 0F, 0F).color(r,g, b, 0f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, 0, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
-		    			
-		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, 0F, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, lr, (float) distance, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
-
-		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, 0F, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, lr, (float) distance, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, lr, 0, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
-		    			
-			        matrix.popPose();
-		        }
-		        RenderSystem.enableDepthTest();
-		}
-		matrix.popPose();
+		if(tile.active)
+			LaserRenderHelper.renderLaser(tile, matrix, bufferIn, tile.mode, facing, (float)distance, color, 0, transformation, combinedOverlayIn, combinedLightIn);
 	}
 	
+	// Minecraft should not be used with a try for resource at it closed the game hence the suppressing of warnings
+	@SuppressWarnings({ "resource", "null" })
 	public boolean canBeSeen() {
 		boolean condition = false;
 		for(ItemStack stack : Minecraft.getInstance().player.getArmorSlots()) {
@@ -289,6 +113,8 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 		return condition && Minecraft.getInstance().options.getCameraType().isFirstPerson();
 	}
 	
+	// Minecraft should not be used with a try for resource at it closed the game hence the suppressing of warnings
+	@SuppressWarnings({ "resource", "null" })
 	public void rotationLogic(PoseStack matrix, TileEntityLaser te) {
 		Direction facing = te.getBlockState().getValue(BlockRotatable.FACING);
 		Vec3 playerPos = Minecraft.getInstance().player.position()

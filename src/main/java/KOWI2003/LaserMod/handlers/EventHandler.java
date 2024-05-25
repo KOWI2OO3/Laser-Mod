@@ -7,6 +7,7 @@ import KOWI2003.LaserMod.events.LaserBlockBreakEvent;
 import KOWI2003.LaserMod.events.LaserMultiToolEvents;
 import KOWI2003.LaserMod.events.LaserToolEvents;
 import KOWI2003.LaserMod.events.WorldJoinEvent;
+import KOWI2003.LaserMod.utils.client.rendertypes.LaserRenderType.LaserRenderTypeEvent;
 import net.minecraftforge.common.MinecraftForge;
 
 public class EventHandler {
@@ -22,6 +23,8 @@ public class EventHandler {
 	
 	public static void registerClientEvents() {
 		MinecraftForge.EVENT_BUS.register(new LaserMultiToolEvents());
+		
+		MinecraftForge.EVENT_BUS.register(new LaserRenderTypeEvent());
 	}
 	
 }

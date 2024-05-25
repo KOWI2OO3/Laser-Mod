@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.tileentities.TileEntityInfuser;
 import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.core.BlockPos;
@@ -52,7 +54,6 @@ public class BlockInfuser extends BlockHorizontal {
 			BlockEntity te = world.getBlockEntity(pos);
 			if(te instanceof TileEntityInfuser) {
 				NetworkHooks.openScreen((ServerPlayer)player, (TileEntityInfuser) te, pos);
-//				NetworkHooks.openGui((ServerPlayer)player, (TileEntityInfuser) te, pos);
 				return InteractionResult.SUCCESS;
 			}
 		}
@@ -60,7 +61,7 @@ public class BlockInfuser extends BlockHorizontal {
 	}
 	
 	@Override
-	public RenderShape getRenderShape(BlockState p_49232_) {
+	public RenderShape getRenderShape(@Nonnull BlockState state) {
 		return RenderShape.MODEL;
 	}
 	
@@ -112,8 +113,9 @@ public class BlockInfuser extends BlockHorizontal {
 	}
 	
 	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
-			BlockEntityType<T> type) {
+	@SuppressWarnings("unchecked")
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level level, @Nonnull BlockState state,
+	@Nonnull BlockEntityType<T> type) {
 		return level.isClientSide ? null : (level0, pos, state0, blockEntity) -> ((BlockEntityTicker<BlockEntity>)blockEntity).tick(level, pos, state, blockEntity);
 	}
 }
