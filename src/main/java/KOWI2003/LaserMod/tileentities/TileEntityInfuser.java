@@ -9,7 +9,7 @@ import KOWI2003.LaserMod.container.ContainerInfuser;
 import KOWI2003.LaserMod.init.ModTileTypes;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.recipes.infuser.IInfuserRecipe;
-import KOWI2003.LaserMod.recipes.infuser.InfuserRecipeHandler;
+import KOWI2003.LaserMod.recipes.infuser.InfuserRecipeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -23,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 public class TileEntityInfuser extends SyncableBlockEntity implements BlockEntityTicker<TileEntityInfuser>, MenuProvider {
 
@@ -45,8 +46,8 @@ public class TileEntityInfuser extends SyncableBlockEntity implements BlockEntit
 	@Override
 	public void tick(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state,
 			@Nonnull TileEntityInfuser te) {
-		if(currentRecipe == null || !currentRecipe.isRecipeValid(this)) {
-			IInfuserRecipe recipe = InfuserRecipeHandler.getRecipe(this);
+		if(currentRecipe == null || !currentRecipe.isRecipeValid(new RecipeWrapper(handler))) {
+			IInfuserRecipe recipe = InfuserRecipeHelper.getRecipe(this);
 			if(recipe != currentRecipe) {
 				tick = maxTick;
 				currentRecipe = recipe;
@@ -57,7 +58,7 @@ public class TileEntityInfuser extends SyncableBlockEntity implements BlockEntit
 			tick -= currentRecipe.getRecipeSpeed() * properties.getProperty(Properties.SPEED) * Config.GetInstance().machineSettings.infuserSpeed;
 			
 			if(tick <= 0) {
-				InfuserRecipeHandler.handleRecipeEnd(currentRecipe, this);
+				currentRecipe.assemble(new RecipeWrapper(handler));
 				tick = maxTick;
 				currentRecipe = null;
 			}

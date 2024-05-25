@@ -9,6 +9,7 @@ import KOWI2003.LaserMod.init.ModBlocks;
 import KOWI2003.LaserMod.init.ModContainerTypes;
 import KOWI2003.LaserMod.init.ModEntities;
 import KOWI2003.LaserMod.init.ModItems;
+import KOWI2003.LaserMod.init.ModRecipeTypes;
 import KOWI2003.LaserMod.init.ModSounds;
 import KOWI2003.LaserMod.init.ModUpgrades;
 import KOWI2003.LaserMod.proxy.ClientProxy;
@@ -68,13 +69,14 @@ public class MainMod {
 
 		MinecraftForge.EVENT_BUS.register(new ModClientEvents());
 		bus.register(new ModClientEvents());
-//        new ModConfig();
+
     	ConfigSerializer.GetInstance();
 
         ModBlocks.register(bus);
         ModItems.register(bus);
         ModSounds.register(bus);
         ModEntities.register(bus);
+		ModRecipeTypes.register(bus);
         ModContainerTypes.CONTAINER_TYPES.register(bus);
 	}
     

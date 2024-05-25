@@ -60,10 +60,8 @@ public class InfuserRecipeCategory extends AbstractInfuserRecipeCategory<IInfuse
 
 	@Override
 	public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull IInfuserRecipe recipe, @Nonnull IFocusGroup focuses) {
-		builder.addSlot(RecipeIngredientRole.INPUT, 9, 1).addIngredients(recipe.getInputs().length > 0 ? recipe.getInputs()[0] : Ingredient.EMPTY);
-		builder.addSlot(RecipeIngredientRole.INPUT, 37, 45).addIngredients(recipe.getInputs().length > 1 ? recipe.getInputs()[1] : Ingredient.EMPTY);
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 112, 45).addItemStack(recipe.getOutput());
-		
+		builder.addSlot(RecipeIngredientRole.INPUT, 9, 1).addIngredients(recipe.getInputs(null).length > 0 ? recipe.getInputs(null)[0].getA() : Ingredient.EMPTY);
+		builder.addSlot(RecipeIngredientRole.INPUT, 37, 45).addIngredients(recipe.getInputs(null).length > 1 ? recipe.getInputs(null)[1].getA() : Ingredient.EMPTY);
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 112, 45).addItemStack(recipe.getOutput());	
 	}
-
 }
