@@ -2,6 +2,8 @@ package KOWI2003.LaserMod.gui.widgets.properties;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.lang3.EnumUtils;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -21,6 +23,7 @@ public class EnumProperty extends DataProperty<Enum<?>> {
 	
 	final List<Enum<?>> enumList;
 	
+	@SuppressWarnings("unchecked")
 	public EnumProperty(int x, int y, int width, int height, String displayName, Enum<?> value) {
 		super(x, y, width, height, displayName, value);
 		
@@ -42,8 +45,9 @@ public class EnumProperty extends DataProperty<Enum<?>> {
 		});
 	}
 	
+	@SuppressWarnings("resource")
 	@Override
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
         ScreenUtils.blitWithBorder(matrix, WIDGETS_LOCATION, this.x + 44, this.y, 0, 46, 37, 20, 200, 20, 2, 3, 2, 2, this.getBlitOffset());
         
 		Next.render(matrix, mouseX, mouseY, partialTicks);
@@ -51,7 +55,6 @@ public class EnumProperty extends DataProperty<Enum<?>> {
 		
 		Font font = Minecraft.getInstance().font;
 		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", x + 2, y, 35f, 10, 0xffffff);
-//		drawString(matrix, font, getDisplayName()  + ": ", x + 2, y + font.lineHeight/2, 0xffffff);
 		
 		matrix.pushPose();
 		matrix.translate(x + 45, y + font.lineHeight/2 + 2, 0);

@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.gui.widgets;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.Reference;
@@ -67,7 +69,7 @@ public class PartSelector extends AbstractWidget {
 	}
 
 	@Override
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		float tint = 0.4f;
 		RenderUtils.setupStencil();
 		RenderUtils.Gui.drawQuadColor(matrix, x, y, width, height, tint, tint, tint);
@@ -104,6 +106,6 @@ public class PartSelector extends AbstractWidget {
 	}
 	
 	@Override
-	public void updateNarration(NarrationElementOutput p_169152_) {}
+	public void updateNarration(@Nonnull NarrationElementOutput p_169152_) {}
 	
 }

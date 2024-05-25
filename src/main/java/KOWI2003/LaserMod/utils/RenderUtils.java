@@ -180,10 +180,12 @@ public class RenderUtils {
 			RenderSystem.enableTexture();
 		}
 		
+		@SuppressWarnings("resource")
 		public static void drawFontString(PoseStack matrix, String msg, float x, float y, float red, float green, float blue) {
 			Minecraft.getInstance().font.draw(matrix, msg, x, y, Utils.getHexIntFromRGB(red, green, blue));
 		}
 		
+		@SuppressWarnings("resource")
 		public static void drawFontString(PoseStack matrix, String msg, float x, float y, float red, float green, float blue, float scale) {
 			matrix.pushPose();
 			matrix.translate(x, y, 0);
@@ -209,7 +211,7 @@ public class RenderUtils {
 			renderItem(new PoseStack(), stack, x, y, 0, scale, ItemTransforms.TransformType.GUI);
 		}
 
-		@SuppressWarnings("deprecation")
+		@SuppressWarnings({ "deprecation", "resource" })
 		public static void renderItem(PoseStack matrix, ItemStack stack, float x, float y, float z, float scale, TransformType transform) {
 			RenderSystem.enableDepthTest();
 			BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(stack, (Level)null, (LivingEntity)null, 0);
@@ -242,6 +244,7 @@ public class RenderUtils {
 	 	    RenderSystem.applyModelViewMatrix();
 		}
 		
+		@SuppressWarnings("resource")
 		public static void drawCenteredStringWithinLine(PoseStack pose, String msg, float x, float y, float lineWith, int color) {
 			Font font = Minecraft.getInstance().font;
 			int textWidth = font.width(msg);
@@ -251,6 +254,7 @@ public class RenderUtils {
 			font.draw(pose, msg, x, y, color);
 		}
 		
+		@SuppressWarnings("resource")
 		public static void drawCenteredStringWithinBox(PoseStack pose, String msg, float x, float y, float boxWith, float boxHeight, int color) {
 			Font font = Minecraft.getInstance().font;
 			int textWidth = font.width(msg);
@@ -260,6 +264,7 @@ public class RenderUtils {
 			font.draw(pose, msg, x, y, color);
 		}
 		
+		@SuppressWarnings("resource")
 		public static void drawStringWithinLine(PoseStack pose, String msg, float x, float y, float lineWith, int color) {
 			pose.pushPose();
 			float factor = Math.min(1, lineWith/ Minecraft.getInstance().font.width(msg));
@@ -269,6 +274,7 @@ public class RenderUtils {
 			pose.popPose();
 		}
 		
+		@SuppressWarnings("resource")
 		public static void drawStringWithinBox(PoseStack pose, String msg, float x, float y, float boxWith, float boxHeight, int color) {
 			pose.pushPose();
 			Font font = Minecraft.getInstance().font;
@@ -965,10 +971,12 @@ public class RenderUtils {
 		matrix.translate(-0.5f, -0.5f, -0.5f);
 	}
 	
+	@SuppressWarnings("resource")
 	public static void rotationLogic(PoseStack matrix, BlockEntity te) {
 		Direction facing = Direction.NORTH;
 		if(te.getBlockState().hasProperty(BlockRotatable.FACING))
 			facing = te.getBlockState().getValue(BlockRotatable.FACING);
+		@SuppressWarnings("null")
 		Vec3 playerPos = Minecraft.getInstance().player.position()
 				.add(new Vec3(0, Minecraft.getInstance().player.getEyeHeight(), 0));
 		
@@ -1015,6 +1023,7 @@ public class RenderUtils {
 		matrix.mulPose(Vector3f.YP.rotationDegrees(angle));
 	}
 	
+	@SuppressWarnings("resource")
 	public static void renderString(PoseStack matrix, String msg, float x, float y, float z, float scale, 
 			float[] RGBA, float shadowTint) {
 		matrix.pushPose();
@@ -1025,6 +1034,7 @@ public class RenderUtils {
 		matrix.popPose();
 	}
 	
+	@SuppressWarnings("resource")
 	public static void renderString(PoseStack matrix, String msg, float x, float y, float z, float scale, 
 			float[] RGBA, boolean drawShadow) {
 		matrix.pushPose();
@@ -1034,7 +1044,6 @@ public class RenderUtils {
 		Minecraft.getInstance().font.draw(matrix, msg, 0, 0, Utils.getHexIntFromRGBA(RGBA));
 		if(drawShadow)
 			Minecraft.getInstance().font.drawShadow(matrix, msg, 0, 0, Utils.getHexIntFromRGB(0.3f, 0.3f, 0.3f));
-//		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		matrix.popPose();
 	}
 	
@@ -1078,9 +1087,11 @@ public class RenderUtils {
         Minecraft.getInstance().getTextureManager().bindForSetup(resourcelocation);
 	}
 	
+	@SuppressWarnings("resource")
 	public static Context getEntityRenderContext() {
 		return new EntityRendererProvider.Context(Minecraft.getInstance().getEntityRenderDispatcher(), Minecraft.getInstance().getItemRenderer(), 
-				Minecraft.getInstance().getBlockRenderer(), Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer(), Minecraft.getInstance().getResourceManager(), Minecraft.getInstance().getEntityModels(), Minecraft.getInstance().font);
+				Minecraft.getInstance().getBlockRenderer(), Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer(), Minecraft.getInstance().getResourceManager(), 
+				Minecraft.getInstance().getEntityModels(), Minecraft.getInstance().font);
 	}
 	
 	public static void renderPlayerGameProfile(PoseStack matrix, String username, float x, float y, float z, float scale, 
@@ -1170,6 +1181,7 @@ public class RenderUtils {
 		renderString(matrix, msg, x, y, z, RGBA, false);
 	}
 	
+	@SuppressWarnings("resource")
 	public static void renderCenteredStringWithinLine(PoseStack pose, String msg, float x, float y, float z, float lineWith, int color) {
 		Font font = Minecraft.getInstance().font;
 		int textWidth = font.width(msg);
@@ -1180,6 +1192,7 @@ public class RenderUtils {
 		font.draw(pose, msg, 0, 0, color);
 	}
 	
+	@SuppressWarnings("resource")
 	public static void renderCenteredStringWithinBox(PoseStack pose, String msg, float x, float y, float z, float boxWith, float boxHeight, int color) {
 		Font font = Minecraft.getInstance().font;
 		int textWidth = font.width(msg);
@@ -1190,6 +1203,7 @@ public class RenderUtils {
 		font.draw(pose, msg, 0, 0, color);
 	}
 	
+	@SuppressWarnings("resource")
 	public static void renderStringWithinLine(PoseStack pose, String msg, float x, float y, float z, float lineWith, int color) {
 		pose.pushPose();
 		float factor = Math.min(1, lineWith/ Minecraft.getInstance().font.width(msg));
@@ -1347,10 +1361,11 @@ public class RenderUtils {
  * 	===========================================================================================
  */
 	
+ 	@SuppressWarnings({ "resource", "null" })
 	public static float[] screenCoordToUV(float u, float v) {
 		Window window = Minecraft.getInstance().getWindow();
-		Screen scr = Minecraft.getInstance().screen;
-		float f = (float)window.getWidth()/(float)scr.width;
+		Screen sc = Minecraft.getInstance().screen;
+		float f = (float)window.getWidth()/(float)sc.width;
 		return new float[] {(float)u*f/(float)window.getWidth(), (float)v*f/(float)window.getHeight()};
 	}
 	
@@ -1622,7 +1637,8 @@ public class RenderUtils {
 	/**
 	 * Stencil Info: https://learnopengl.com/Advanced-OpenGL/Stencil-testing
 	 */
-	private static void EnableStencils(boolean clearStencil) {
+	@SuppressWarnings("unused")
+	private static void enableStencils(boolean clearStencil) {
 		GL20.glEnable(GL20.GL_STENCIL_TEST);
 		if(!Minecraft.getInstance().getMainRenderTarget().isStencilEnabled()) {
 			Minecraft.getInstance().getMainRenderTarget().enableStencil();

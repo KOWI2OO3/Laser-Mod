@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.config.ConfigSerializer;
 import KOWI2003.LaserMod.events.ModClientEvents;
 import KOWI2003.LaserMod.handlers.EventHandler;
@@ -35,7 +37,7 @@ public class MainMod {
 		}
 		
 		@Override
-		public void fillItemList(NonNullList<ItemStack> list) {
+		public void fillItemList(@Nonnull NonNullList<ItemStack> list) {
 			list.add(new ItemStack(ModItems.Manual.get()));
 			ModBlocks.tabBlocks.forEach(block -> list.add(new ItemStack(block.get())));
 			ModItems.tabStacks.forEach(item -> list.add(item.get().getDefaultInstance()));
@@ -50,7 +52,7 @@ public class MainMod {
 		}
 		
 		@Override
-		public void fillItemList(NonNullList<ItemStack> list) {
+		public void fillItemList(@Nonnull NonNullList<ItemStack> list) {
 			ModUpgrades.tabStacks.forEach(item -> list.add(new ItemStack(item.get())));
 		}
     };

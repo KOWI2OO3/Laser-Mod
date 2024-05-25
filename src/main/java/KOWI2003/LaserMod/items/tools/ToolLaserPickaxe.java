@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.items.tools;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.items.ItemLaserToolBase;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
@@ -55,11 +57,9 @@ public class ToolLaserPickaxe extends ItemLaserToolBase {
 					return 0;
 				}
 			}, state) : false;
-//	      Material material = state.getMaterial();
-//	      return material == Material.STONE || material == Material.METAL || material == Material.HEAVY_METAL;
 	}
 	
-	public float getDestroySpeed(ItemStack stack, BlockState state) {
+	public float getDestroySpeed(@Nonnull ItemStack stack, @Nonnull BlockState state) {
 		if(isExtended(stack))
 			return state.is(BlockTags.MINEABLE_WITH_PICKAXE) ? getProperties(stack).getProperty(LaserProperties.Properties.SPEED) : super.getDestroySpeed(stack, state);
 		return state.requiresCorrectToolForDrops() ? 0f : 1f;

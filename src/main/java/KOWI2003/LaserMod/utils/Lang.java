@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 
 public class Lang
 {
-	private static final String REGEX = "\\|";
 	public static final char CHAR = '|';
 	private final String prefix;
   
@@ -76,7 +75,6 @@ public class Lang
 	}
   
 	public boolean canLocalizeExact(String unloc) {
-//		return I18n.canTranslate(unloc);
 		return false;
 	}
 }

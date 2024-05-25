@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.tileentities.TileEntityMirror;
 import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.core.BlockPos;
@@ -32,22 +34,23 @@ public class BlockMirror extends BlockHorizontal{
 	}
 
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
 		return new TileEntityMirror(pos, state);
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
+	@SuppressWarnings("null")
+	public BlockState getStateForPlacement(@Nonnull BlockPlaceContext context) {
 		return context.getPlayer().isShiftKeyDown() ? this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite().getClockWise()) : super.getStateForPlacement(context);
 	}
 	
 	@Override
-	public RenderShape getRenderShape(BlockState p_49232_) {
+	public RenderShape getRenderShape(@Nonnull BlockState p_49232_) {
 		return RenderShape.MODEL;
 	}
 	
 	@Override
-	public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+	public void playerWillDestroy(@Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if(tileentity instanceof TileEntityMirror) {
 			TileEntityMirror te = ((TileEntityMirror)tileentity);
@@ -120,22 +123,23 @@ public class BlockMirror extends BlockHorizontal{
 	}
 	
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		VoxelShape temp = V_SHAPE;
 		temp = Utils.rotateVoxelShape(temp, state.getValue(FACING).getCounterClockWise());
 	    return temp;
 	}
 	
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		VoxelShape temp = C_SHAPE;
 		temp = Utils.rotateVoxelShape(temp, state.getValue(FACING).getCounterClockWise());
 	    return temp;
 	}
 	
 	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
-			BlockEntityType<T> type) {
+	@SuppressWarnings("unchecked")
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level level, @Nonnull BlockState state,
+		@Nonnull BlockEntityType<T> type) {
 		return level.isClientSide ? null : (level0, pos, state0, blockEntity) -> ((BlockEntityTicker<BlockEntity>)blockEntity).tick(level, pos, state, blockEntity);
 	}
 	

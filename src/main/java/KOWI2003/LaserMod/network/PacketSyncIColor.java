@@ -46,10 +46,10 @@ public class PacketSyncIColor {
 		buf.writeInt(index);
 	}
 	
+	@SuppressWarnings({ "resource", "null" })
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 	    ctx.get().enqueueWork(() -> {
 	        // Work that needs to be thread-safe (most work)
-	    	
 	        if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
 	        {
 	        	Level level = Minecraft.getInstance().player.getLevel();
@@ -70,6 +70,5 @@ public class PacketSyncIColor {
 	        
 	    });
 	    ctx.get().setPacketHandled(true);
-	    //return true;
 	}
 }

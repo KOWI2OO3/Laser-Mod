@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.lwjgl.glfw.GLFW;
 
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -182,7 +184,7 @@ public class GuiLaserProjector extends Screen {
 	}
 	
 	@Override
-	protected <T extends GuiEventListener & Widget & NarratableEntry> T addRenderableWidget(T widget) {
+	protected <T extends GuiEventListener & Widget & NarratableEntry> T addRenderableWidget(@Nonnull T widget) {
 		if(widget instanceof AbstractWidget) buttons.add((AbstractWidget)widget);
 		return super.addRenderableWidget(widget);
 	}
@@ -251,7 +253,7 @@ public class GuiLaserProjector extends Screen {
 		}
 	}
 	
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		ChangeSizeButtonLocationUpdate();
 		this.renderBackground(matrix);
 		renderBg(matrix, partialTicks, mouseX, mouseY);
@@ -323,6 +325,7 @@ public class GuiLaserProjector extends Screen {
 		RenderUtils.Gui.drawOutline(matrix, centreX-size/2f, centreY-size/2f, size, size, 0, 0, 1);
 	}
 	
+	@SuppressWarnings("null")
 	protected void renderInside(PoseStack matrix, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
 		RenderUtils.setupStencil();
 		{
@@ -468,8 +471,8 @@ public class GuiLaserProjector extends Screen {
 		matrix.popPose();
 	}
 	
-	@SuppressWarnings("deprecation")
-	void renderSurroudings(PoseStack matrix, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
+	@SuppressWarnings({ "deprecation", "null", "resource" })
+	void renderSurroudings(@Nonnull PoseStack matrix, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
 		matrix.pushPose();
 		float rot = te.getBlockState().getValue(BlockHorizontal.FACING).toYRot();
 		matrix.mulPose(Vector3f.YP.rotationDegrees(rot));
@@ -502,9 +505,8 @@ public class GuiLaserProjector extends Screen {
 					ModelData modelData = model.getModelData(minecraft.level, pos, state, null);
 					float[] color = Utils.getFloatRGBAFromHexInt(Minecraft.getInstance().getBlockColors().getColor(state, level, pos, 0));
 					
-//					renderer.renderBatched(state, pos, level, matrix, buffer.getBuffer(RenderType.translucent()), true, new Random(), modelData); //--> has shadows on the blocks that have an block next tot them in the world
 					modelRenderer.renderModel(matrix.last(), buffer.getBuffer(ItemBlockRenderTypes.getRenderType(state, false)), state, model, color[0], color[1], color[2], 15728880, OverlayTexture.NO_OVERLAY, modelData, RenderType.translucent());
-//					renderer.renderSingleBlock(state, matrix, buffer, 15728880, OverlayTexture.NO_OVERLAY, modelData); //--> Crashes when an block with tintindex is visible like the laser
+
 					if(tile != null)
 						tileRenderer.render(tile, partialTicks, matrix, buffer);
 					matrix.popPose();

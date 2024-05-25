@@ -45,6 +45,7 @@ public class LaserMultiToolEvents {
 	
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
+	@SuppressWarnings({ "resource", "null" })
 	public void onClickInput(InputEvent.InteractionKeyMappingTriggered event) 
 	{
 		Player player = Minecraft.getInstance().player;
@@ -96,6 +97,7 @@ public class LaserMultiToolEvents {
 
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
+	@SuppressWarnings("resource")
 	public void onTick(ClientTickEvent event) {
 		if(isAttacking && !Minecraft.getInstance().options.keyAttack.isDown())
 			isAttacking = false;
@@ -143,6 +145,9 @@ public class LaserMultiToolEvents {
 								int slot = player.getInventory().findSlotMatchingItem(stack);
 								
 								CompoundTag tag = stack.getTag();
+								if(tag == null)
+									tag = new CompoundTag();
+								
 								tag.putFloat("distance", 10);
 								stack.setTag(tag);
 								player.setItemInHand(hand, stack);
@@ -158,8 +163,11 @@ public class LaserMultiToolEvents {
 	
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
+	@SuppressWarnings("resource")
 	public void lastRender(RenderLevelStageEvent event) {
 		Player player = Minecraft.getInstance().player;
+		if(player == null)
+			return;
 		
 		if(ModConfig.GetConfig().useMultiToolRecoil) {
 			if(totalOffset != 0) {
@@ -171,6 +179,7 @@ public class LaserMultiToolEvents {
 		}
 	}
 	
+	@SuppressWarnings({ "resource", "null" })
 	private void handleBreakBlock(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		Level level = player.getLevel();

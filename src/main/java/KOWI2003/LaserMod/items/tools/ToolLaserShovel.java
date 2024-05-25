@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.items.tools;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.items.ItemLaserToolBase;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
@@ -26,7 +28,7 @@ public class ToolLaserShovel extends ItemLaserToolBase {
 	}
 	
 	@Override
-	public float getDestroySpeed(ItemStack stack, BlockState state) {
+	public float getDestroySpeed(@Nonnull ItemStack stack, @Nonnull BlockState state) {
 		if(!isExtended(stack))
 			return state.requiresCorrectToolForDrops() ? 0f : 1f;
 		return state.is(BlockTags.MINEABLE_WITH_SHOVEL) ? getProperties(stack).getProperty(LaserProperties.Properties.SPEED) : super.getDestroySpeed(stack, state);
@@ -38,7 +40,7 @@ public class ToolLaserShovel extends ItemLaserToolBase {
 	}
 
 	@Override
-	public InteractionResult useOn(UseOnContext context) {
+	public InteractionResult useOn(@Nonnull UseOnContext context) {
 		if(!isExtended(context.getItemInHand()))
 			return InteractionResult.PASS;
 		Level world = context.getLevel();

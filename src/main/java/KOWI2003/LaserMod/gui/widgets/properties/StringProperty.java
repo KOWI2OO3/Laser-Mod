@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui.widgets.properties;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.utils.RenderUtils;
@@ -12,10 +14,10 @@ public class StringProperty extends DataProperty<String> {
 
 	EditBox text;
 	
+	@SuppressWarnings("resource")
 	public StringProperty(int x, int y, int width, int height, String name, String value) {
 		super(x, y, width, 40, name, value);
 		text = new EditBox(Minecraft.getInstance().font, 
-//				x + Minecraft.getInstance().font.width(name + ": ") + 3
 				x + 5
 				, y - 1
 				+18
@@ -25,10 +27,9 @@ public class StringProperty extends DataProperty<String> {
 	}
 
 	@Override
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		text.render(matrix, mouseX, mouseY, partialTicks);
 		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", x + 2, y, 80f, 10, 0xffffff);
-//		drawString(matrix, Minecraft.getInstance().font, getDisplayName() + ": ", x + 2, y + Minecraft.getInstance().font.lineHeight/2, 0xffffff);
 	}
 	
 	@Override
@@ -73,7 +74,4 @@ public class StringProperty extends DataProperty<String> {
 	public boolean isMouseOver(double mouseX, double mouseY) {
 		return super.isMouseOver(mouseX, mouseY);
 	}
-
-	
-	
 }

@@ -1,5 +1,8 @@
 package KOWI2003.LaserMod.gui.manual.widgets;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.gui.manual.data.WidgetBase;
@@ -30,7 +33,7 @@ public class ManualComponent<T extends WidgetBase> extends AbstractWidget {
 	}
 
 	@Override
-	public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nullable PoseStack stack, int mouseX, int mouseY, float partialTicks) {
 		if(data.backgroundColor != null) {
 			float[] finalColor = Utils.parseColor(data.backgroundColor);
 			RenderUtils.Gui.drawQuadColor(stack, getX(), getY(), width, height, finalColor[0], finalColor[1], finalColor[2]);
@@ -40,7 +43,6 @@ public class ManualComponent<T extends WidgetBase> extends AbstractWidget {
 		setFocused(false);
 		
 		renderComponent(stack, mouseX, mouseY);
-		//renderToolTip(stack, mouseX, mouseY);
 	}
 	
 	public void renderComponent(PoseStack stack, int mouseX, int mouseY) {
@@ -88,7 +90,6 @@ public class ManualComponent<T extends WidgetBase> extends AbstractWidget {
 	
 	@Override
 	public boolean isMouseOver(double mouseX, double mouseY) {
-//		return super.isMouseOver(mouseX, mouseY);
 		return this.active && this.visible && mouseX >= (double)getX() && mouseY >= (double)getY() && mouseX < (double)(getX() + getWidth()) && mouseY < (double)(getY() + getHeight());
 	}
 	
@@ -100,10 +101,9 @@ public class ManualComponent<T extends WidgetBase> extends AbstractWidget {
 		return super.y + data.Y;
 	}
 	
-//	public void updateComponent() {}
 	public void updateOnSizeChanged() {}
 
 	@Override
-	public void updateNarration(NarrationElementOutput p_169152_) {}
+	public void updateNarration(@Nonnull NarrationElementOutput narrationElement) {}
 
 }

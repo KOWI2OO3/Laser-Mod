@@ -31,7 +31,7 @@ public class ModUpgrades {
 	public static final RegistryObject<Item> Fire = registerItem("fire", () -> new UpgradeFire("fire"));
 	public static final RegistryObject<Item> Color = registerItem("color", () -> new ItemUpgradeBase(new LaserTools[] {LaserTools.ALL, LaserTools.OMNI}, new boolean[] {true, true, true, true},"color", new String[] {"Colorable"}, new float[] {0.5f,  0.0f, 0.5f}) {
 		public boolean isUsefullForLaser() {return true;};
-		public boolean isUsefullForLaserTool() { return true; };
+		@SuppressWarnings("unused") public boolean isUsefullForLaserTool() { return true; };
 	});
 	public static final RegistryObject<Item> Mode = registerItem("mode", () -> new ItemUpgradeBase("mode") {
 		public boolean isUsefullForLaser() {return true;};
@@ -97,13 +97,6 @@ public class ModUpgrades {
 		}
 		return null;
 	}
-	
-	private static RegistryObject<Item> registerItemHidden(String name, Supplier<? extends ItemUpgradeBase> item)
-    {
-		RegistryObject<Item> i = registerItem(name, item);
-        ModItems.hidenItems.add(i);
-    	return i;
-    }
     
     public static RegistryObject<Item> registerItem(String name, Supplier<? extends ItemUpgradeBase> item)
     {

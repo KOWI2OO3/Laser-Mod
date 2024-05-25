@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.tileentities;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.container.ContainerModStation;
 import KOWI2003.LaserMod.init.ModTileTypes;
@@ -29,13 +31,13 @@ public class TileEntityModStation extends SyncableBlockEntity implements MenuPro
 	}
 	
 	@Override
-	public void load(CompoundTag nbt) {
+	public void load(@Nonnull CompoundTag nbt) {
 		handler.deserializeNBT(nbt.getCompound("inv"));
 		super.load(nbt);
 	}
 	
 	@Override
-	protected void saveAdditional(CompoundTag nbt) {
+	protected void saveAdditional(@Nonnull CompoundTag nbt) {
 		nbt.put("inv", handler.serializeNBT());
 		super.saveAdditional(nbt);
 	}
@@ -101,7 +103,7 @@ public class TileEntityModStation extends SyncableBlockEntity implements MenuPro
 	}
 
 	@Override
-	public AbstractContainerMenu createMenu(int windowId, Inventory playerInv, Player player) {
+	public AbstractContainerMenu createMenu(int windowId, @Nonnull Inventory playerInv, @Nonnull Player player) {
 		return new ContainerModStation(windowId, playerInv, this);
 	}
 

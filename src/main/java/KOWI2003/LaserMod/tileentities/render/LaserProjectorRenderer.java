@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.tileentities.render;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -17,33 +19,24 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 
 public class LaserProjectorRenderer implements BlockEntityRenderer<TileEntityLaserProjector> {
-	private final BlockEntityRendererProvider.Context context;
-	
-	public LaserProjectorRenderer(BlockEntityRendererProvider.Context context) {
-		this.context = context;
-	}
+	public LaserProjectorRenderer(BlockEntityRendererProvider.Context context) {}
 	
 	@Override
-	public void render(TileEntityLaserProjector te, float partialTicks, PoseStack matrix, MultiBufferSource bufferIn,
+	public void render(@Nonnull TileEntityLaserProjector te, float partialTicks, @Nonnull  PoseStack matrix, @Nonnull  MultiBufferSource bufferIn,
 			int combinedLightIn, int combinedOverlayIn) {
 		if(te.isActive) {
-			
 			RenderContext<TileEntityLaserProjector> context = new RenderContext<TileEntityLaserProjector>(te, partialTicks, matrix, bufferIn, combinedLightIn, combinedOverlayIn);
 			
 			RenderUtils.renderLighting(matrix, new float[] {1.0f, 0.0f, 0.0f}, 0.3f, 0.4f, 0.3f);
 			
 			matrix.pushPose();
-
 			renderCustom(context);
-			
 			matrix.popPose();
 		}
 	}
 	
 	public void handleRotation(PoseStack matrix, TileEntityLaserProjector te) {
 		RenderUtils.rotateMatrixForBlock(matrix, te.getBlockState().getValue(BlockHorizontal.FACING));
-//		RenderUtils.rotateMatrixForBlock(matrix, te.properties.getProperty(PROJECTOR_PROPERTY.ROTATION)*360 + (te.doesRotate ? te.rotation : 0));
-		
 	}
 	
 	public void renderCustom(RenderContext<TileEntityLaserProjector> context) {
@@ -52,9 +45,7 @@ public class LaserProjectorRenderer implements BlockEntityRenderer<TileEntityLas
 		context.getMatrix().translate(0.5f, 1.1f + 0.11f*2.2f, 0.5f);
 		context.getMatrix().scale(scale, scale, scale);
 		
-//		RenderSystem.disableCull();
 		new ProjectorCustomGui(context.getTileentity()).render(context);
-//		new ProjectorTestGui(context.getTileentity()).render(context);
 		RenderSystem.enableCull();
 	}
 	

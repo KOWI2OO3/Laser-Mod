@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -36,8 +38,7 @@ public class ItemStackPropertyGui extends BetterAbstractContainerScreen<Containe
 	}
 	
 	@Override
-	protected void renderLabels(PoseStack matrix, int mouseX, int mouseY) {
-//		super.renderLabels(matrix, mouseX, mouseY);
+	protected void renderLabels(@Nonnull PoseStack matrix, int mouseX, int mouseY) {
 		int posx = width / 2;
 		int posy = height / 2;
 		
@@ -45,7 +46,7 @@ public class ItemStackPropertyGui extends BetterAbstractContainerScreen<Containe
 	}
 	
 	@Override
-	protected void renderBg(PoseStack matrix, float partialTicks, int mouseX, int mouseY) {
+	protected void renderBg(@Nonnull PoseStack matrix, float partialTicks, int mouseX, int mouseY) {
 		renderBackground(matrix);
 	    RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0F);

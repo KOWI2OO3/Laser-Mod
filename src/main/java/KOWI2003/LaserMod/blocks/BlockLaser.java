@@ -2,6 +2,8 @@ package KOWI2003.LaserMod.blocks;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.tileentities.TileEntityLaser;
 import KOWI2003.LaserMod.utils.Utils;
@@ -50,8 +52,8 @@ public class BlockLaser extends BlockRotatable {
 	}
 	
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-			BlockHitResult raytraceResult) {
+	public InteractionResult use(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand,
+			@Nonnull BlockHitResult raytraceResult) {
 		if(!world.isClientSide) {
 			BlockEntity te = world.getBlockEntity(pos);
 			if(te instanceof TileEntityLaser) {
@@ -63,17 +65,17 @@ public class BlockLaser extends BlockRotatable {
 	}
 	
 	@Override
-	public RenderShape getRenderShape(BlockState state) {
+	public RenderShape getRenderShape(@Nonnull BlockState state) {
 		return RenderShape.MODEL;
 	}
 	
 	@Override
-	public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getVisualShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		return getShape(state, world, pos, context);
 	}
 	
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		switch((Direction)state.getValue(FACING)) {
 			case NORTH:
 				return Utils.getShapeFromAABB(NORTH_AABB);
@@ -93,7 +95,7 @@ public class BlockLaser extends BlockRotatable {
 	}
 	
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		switch((Direction)state.getValue(FACING)) {
 			case NORTH:
 				return Utils.getShapeFromAABB(NORTH_AABB);
@@ -113,7 +115,7 @@ public class BlockLaser extends BlockRotatable {
 	}
 
 	@Override
-	public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+	public void playerWillDestroy(@Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if(tileentity instanceof TileEntityLaser) {
 			TileEntityLaser te = ((TileEntityLaser)tileentity);
@@ -129,13 +131,14 @@ public class BlockLaser extends BlockRotatable {
 	}
 	
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
 		return new TileEntityLaser(pos, state);
 	}
 	
 	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
-			BlockEntityType<T> type) {
+	@SuppressWarnings("unchecked")
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level level, @Nonnull BlockState state,
+			@Nonnull BlockEntityType<T> type) {
 		return level.isClientSide ? null : (level0, pos, state0, blockEntity) -> ((BlockEntityTicker<BlockEntity>)blockEntity).tick(level, pos, state, blockEntity);
 	}
 

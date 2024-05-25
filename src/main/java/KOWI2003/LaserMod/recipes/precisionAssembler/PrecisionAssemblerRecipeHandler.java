@@ -94,6 +94,7 @@ public class PrecisionAssemblerRecipeHandler {
 		return null;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static void handleRecipeEnd(IPrecisionAssemblerRecipe recipe, TileEntityPrecisionAssembler te) {
 		if(!recipe.isRecipeValid(te.getHandler()))
 			return;

@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.utils.compat.jei.slotmovers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.gui.GuiModStation;
 import KOWI2003.LaserMod.utils.compat.jei.SlotMover;
 import net.minecraft.client.renderer.Rect2i;
@@ -14,7 +16,7 @@ public class ModStationGuiSlotMover extends SlotMover<GuiModStation> {
 	}
 	
 	@Override
-	public List<Rect2i> getGuiExtraAreas(GuiModStation gui) {
+	public List<Rect2i> getGuiExtraAreas(@Nonnull GuiModStation gui) {
 		List<Rect2i> tabBoxes = new ArrayList<>();
 		
 		if(!gui.te.handler.getStackInSlot(0).isEmpty()) 

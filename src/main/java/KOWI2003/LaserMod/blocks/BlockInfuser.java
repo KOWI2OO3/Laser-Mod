@@ -43,13 +43,13 @@ public class BlockInfuser extends BlockHorizontal {
 	}
 	
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
 		return new TileEntityInfuser(pos, state);
 	}
 	
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player,
-			InteractionHand hand, BlockHitResult raytraceResult) {
+	public InteractionResult use(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull Player player,
+			@Nonnull InteractionHand hand, @Nonnull BlockHitResult raytraceResult) {
 		if(!world.isClientSide) {
 			BlockEntity te = world.getBlockEntity(pos);
 			if(te instanceof TileEntityInfuser) {
@@ -66,7 +66,7 @@ public class BlockInfuser extends BlockHorizontal {
 	}
 	
 	@Override
-	public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+	public void playerWillDestroy(@Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if(tileentity instanceof TileEntityInfuser) {
 			TileEntityInfuser te = ((TileEntityInfuser)tileentity);
@@ -95,20 +95,20 @@ public class BlockInfuser extends BlockHorizontal {
 	}
 
 	@Override
-	public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos,
-			CollisionContext context) {
+	public VoxelShape getVisualShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos,
+			@Nonnull CollisionContext context) {
 		return getShape(state, world, pos, context);
 	}
 	
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos,
-			CollisionContext context) {
+	public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter getter, @Nonnull BlockPos pos,
+			@Nonnull CollisionContext context) {
 		return Utils.rotateVoxelShape(SHAPE, state.getValue(FACING).getCounterClockWise());
 	}
 	
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter reader, BlockPos pos,
-			CollisionContext context) {
+	public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull BlockGetter reader, @Nonnull BlockPos pos,
+			@Nonnull CollisionContext context) {
 		return getShape(state, reader, pos, context);
 	}
 	

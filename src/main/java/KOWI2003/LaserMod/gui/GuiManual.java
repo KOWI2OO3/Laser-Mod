@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.Reference;
@@ -29,8 +31,6 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.resources.ResourceLocation;
 
 public class GuiManual extends Screen {
@@ -64,7 +64,7 @@ public class GuiManual extends Screen {
 	}
 	
 	@Override
-	protected <T extends GuiEventListener & Widget & NarratableEntry> T addRenderableWidget(T widget) {
+	protected <T extends GuiEventListener & Widget & NarratableEntry> T addRenderableWidget(@Nonnull T widget) {
 		if(widget instanceof AbstractWidget) buttons.add((AbstractWidget)widget);
 		return super.addRenderableWidget(widget);
 	}
@@ -127,12 +127,11 @@ public class GuiManual extends Screen {
 		}
 	}
 	
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 //		init(); //Debugging command
 		this.renderBackground(matrix);
 		renderBg(matrix, partialTicks, mouseX, mouseY);
 		super.render(matrix, mouseX, mouseY, partialTicks);
-//		this.renderTooltip(matrix, mouseX, mouseY);
 		renderFG(mouseX, mouseY);
 	}
 	

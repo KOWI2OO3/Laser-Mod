@@ -548,9 +548,12 @@ public class Utils {
 		return nbt;
 	}
 	
+	@SuppressWarnings("null")
 	public static Object[] getObjectArray(CompoundTag nbt) {
 		List<Object> objs = new ArrayList<Object>();
 		for (String key : nbt.getAllKeys()){
+			if(!nbt.contains(key)) continue;
+
 			String type = nbt.get(key).getType().getName();
 			if(type.equals("STRING")) {
 				objs.add(nbt.getString(key));
@@ -622,16 +625,14 @@ public class Utils {
 		return file.getPath().replace(RelativeFolder.getAbsolutePath() + "\\", "").replace("\\", "/");
 	}
 	
+	@SuppressWarnings("resource")
 	public static String[] splitToFitWidth(String s, int width) {
 		List<String> list = new LinkedList<>();
 		try {
 			int textWidth = Minecraft.getInstance().font.width(s);
 			int splitStep = (s.length()-1) / (int) Math.ceil((double)textWidth / (double)(width));
-//			int estLineCount = (int)Math.floor((double)textWidth / (double)width);
-//			int splitStep = (s.length() / estLineCount)-1;
 			boolean isDone = false;
 			int offset = 0;
-//			int line = 0;
 			s += " ";
 			while(!isDone) {
 				int end = 0;
@@ -645,7 +646,6 @@ public class Utils {
 				String str = (String) s.substring(offset, end);
 				list.add(str);
 				offset += str.length()+1;
-//				line++;
 				if(isDone)
 					break;
 			}

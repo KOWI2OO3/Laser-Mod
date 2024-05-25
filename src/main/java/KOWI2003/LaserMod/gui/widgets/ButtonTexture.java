@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui.widgets;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -33,7 +35,7 @@ public class ButtonTexture extends Button{
 	}
 	
 	@Override
-	public void renderButton(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void renderButton(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		renderButtonRaw(matrix, mouseX, mouseY, partialTicks);
 		if (this.isHoveredOrFocused()) {
 			this.renderToolTip(matrix, mouseX, mouseY);

@@ -2,6 +2,9 @@ package KOWI2003.LaserMod.tileentities;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.DamageSourceLaser;
@@ -87,7 +90,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 	}
 	
 	@Override
-	public void tick(Level level, BlockPos pos, BlockState state, TileEntityLaser te) {
+	public void tick(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull TileEntityLaser te) {
 		if(!isRemoteControlled)
 			if(active != Utils.isBlockPowered(pos, level)) {
 				setActive(Utils.isBlockPowered(pos, level));
@@ -111,6 +114,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		}
 	}
 	
+	@SuppressWarnings("null")
 	public void setActive(boolean value) {
 		active = value;
 		if(!active) {
@@ -138,7 +142,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 	}
 	
 	@Override
-	protected void saveAdditional(CompoundTag nbt) {
+	protected void saveAdditional(@Nonnull CompoundTag nbt) {
 		nbt.putBoolean("Powered", active);
 		nbt.putFloat("Red", red);
 		nbt.putFloat("Green", green);
@@ -147,12 +151,11 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		nbt.putString("Mode", mode.name());
 		nbt.putBoolean("isRemoteControlled", isRemoteControlled);
 		nbt = properties.save(nbt);
-//		return super.save(nbt);
 		super.saveAdditional(nbt);
 	}
 	
 	@Override
-	public void load(CompoundTag nbt) {
+	public void load(@Nonnull CompoundTag nbt) {
 		active = nbt.getBoolean("Powered");
 		red = nbt.getFloat("Red");
 		green = nbt.getFloat("Green");
@@ -165,6 +168,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		super.load(nbt);
 	}
 	
+	@SuppressWarnings("null")
 	public void setColor(float red, float green, float blue) {
 		setColor(0, new float[] {red, green, blue});
 		
@@ -198,6 +202,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		return getEntitiesInLaser(LivingEntity.class); 
 	}
 	
+	@SuppressWarnings("null")
 	public <T extends Entity> List<T> getEntitiesInLaser(Class<T> entityType) {
 		AABB aabb = new AABB(getBlockPos());
 		Vector3f dir = getDir();
@@ -232,6 +237,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		return Utils.offset(getBlockPos(), getBlockState().getValue(BlockLaser.FACING), (float) stuckDistance);
 	}
 	
+	@SuppressWarnings("null")
 	public void updateLaser() {
 		if(stuckDistance > properties.getProperty(Properties.MAX_DISTANCE))
 			stuckDistance = properties.getProperty(Properties.MAX_DISTANCE);
@@ -253,6 +259,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		}
 	}
 	
+	@SuppressWarnings("null")
 	private void updateLaserInteractables(int distance, BlockPos newPos) {
 		if(distance < stuckDistance)
 			handleTurnOffForInteractable();
@@ -263,6 +270,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 				((ILaserInteractable)te).interactWithLaser(this);
 	}
 	
+	@SuppressWarnings("null")
 	public void handleTurnOffForInteractable() {
 		BlockPos pos = Utils.offset(getBlockPos(), getBlockState().getValue(BlockLaser.FACING), (float) stuckDistance);
 		BlockEntity te = getLevel().getBlockEntity(pos);
@@ -271,6 +279,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 				((ILaserInteractable)te).onLaserInteractStop(this);
 	}
 	
+	@SuppressWarnings("null")
 	public boolean canPassThrough(BlockPos pos, BlockState newState) {
 		Direction facing = getBlockState().getValue(BlockLaser.FACING);
 		
@@ -296,6 +305,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		return true;
 	}
 	
+	@SuppressWarnings("null")
 	public double getRenderDistance(BlockPos pos, BlockState newState, double distance) {
 		Direction facing = getBlockState().getValue(BlockLaser.FACING);
 		
@@ -358,7 +368,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 	}
 	
 	@Override
-	public AbstractContainerMenu createMenu(int windowId, Inventory playerInv, Player player) {
+	public AbstractContainerMenu createMenu(int windowId, @Nonnull Inventory playerInv, @Nullable Player player) {
 		return new ContainerLaser(windowId, playerInv, this);
 	}
 	

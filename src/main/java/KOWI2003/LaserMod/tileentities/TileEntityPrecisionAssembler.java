@@ -1,7 +1,10 @@
 package KOWI2003.LaserMod.tileentities;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.LaserProperties.Properties;
+import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.container.ContainerPrecisionAssembler;
 import KOWI2003.LaserMod.init.ModTileTypes;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
@@ -39,7 +42,7 @@ public class TileEntityPrecisionAssembler extends SyncableBlockEntity implements
 	}
 	
 	@Override
-	protected void saveAdditional(CompoundTag nbt) {
+	protected void saveAdditional(@Nonnull CompoundTag nbt) {
 		nbt.put("inv", handler.serializeNBT());
 		nbt.putFloat("tick", tick);
 		properties.save(nbt);
@@ -47,7 +50,7 @@ public class TileEntityPrecisionAssembler extends SyncableBlockEntity implements
 	}
 	
 	@Override
-	public void load(CompoundTag nbt) {
+	public void load(@Nonnull CompoundTag nbt) {
 		if(nbt.contains("inv"))
 			handler.deserializeNBT(nbt.getCompound("inv"));
 		if(nbt.contains("tick"))
@@ -57,8 +60,8 @@ public class TileEntityPrecisionAssembler extends SyncableBlockEntity implements
 	}
 
 	@Override
-	public void tick(Level level, BlockPos pos, BlockState state,
-			TileEntityPrecisionAssembler tile) {
+	public void tick(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state,
+			@Nonnull TileEntityPrecisionAssembler tile) {
 		if(currentRecipe == null || !currentRecipe.isRecipeValid(this.getHandler())) {
 			IPrecisionAssemblerRecipe recipe = PrecisionAssemblerRecipeHandler.getRecipe(this);
 			if(recipe != currentRecipe) {
@@ -68,7 +71,7 @@ public class TileEntityPrecisionAssembler extends SyncableBlockEntity implements
 		}
 		
 		if(currentRecipe != null) {
-			tick -= currentRecipe.getRecipeSpeed() * properties.getProperty(Properties.SPEED);
+			tick -= currentRecipe.getRecipeSpeed() * properties.getProperty(Properties.SPEED) * Config.GetInstance().machineSettings.precisionAssemblerSpeed;
 			
 			if(tick <= 0) {
 				PrecisionAssemblerRecipeHandler.handleRecipeEnd(currentRecipe, this);
@@ -88,7 +91,7 @@ public class TileEntityPrecisionAssembler extends SyncableBlockEntity implements
 	}
 	
 	@Override
-	public AbstractContainerMenu createMenu(int windowId, Inventory playerInv, Player player) {
+	public AbstractContainerMenu createMenu(int windowId, @Nonnull Inventory playerInv, @Nonnull Player player) {
 		return new ContainerPrecisionAssembler(windowId, playerInv, this);
 	}
 

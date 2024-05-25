@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.tileentities.TileEntityLaser;
 import KOWI2003.LaserMod.tileentities.TileEntityLaserController;
 import KOWI2003.LaserMod.tileentities.TileEntityLaserProjector;
@@ -44,10 +46,12 @@ public class BlockRemote extends BlockHorizontal {
 	}
 	
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-			BlockHitResult hit) {
+	public InteractionResult use(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand,
+			@Nonnull BlockHitResult hit) {
 		Vec3 loc = hit.getLocation().subtract(new Vec3(pos.getX(), pos.getY(), pos.getZ()));
 		TileEntityLaserController te = (TileEntityLaserController) world.getBlockEntity(pos);
+		if(te == null)
+			return super.use(state, world, pos, player, hand, hit);
 		
 		if(!te.isConnected())
 			return super.use(state, world, pos, player, hand, hit);
@@ -142,13 +146,13 @@ public class BlockRemote extends BlockHorizontal {
 	}
 	
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
 		ModChecker.check();
 		return ModChecker.isComputercraftLoaded ? new TileEntityRemoteCC(pos, state) : new TileEntityLaserController(pos, state);
 	}
 	
 	@Override
-	public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+	public void playerWillDestroy(@Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if(tileentity instanceof TileEntityRemoteCC) {
 			TileEntityRemoteCC te = ((TileEntityRemoteCC)tileentity);
@@ -159,7 +163,7 @@ public class BlockRemote extends BlockHorizontal {
 	}
 	
 	@Override
-	public void destroy(LevelAccessor world, BlockPos pos, BlockState state) {
+	public void destroy(@Nonnull LevelAccessor world, @Nonnull BlockPos pos, @Nonnull BlockState state) {
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if(tileentity instanceof TileEntityRemoteCC) {
 			TileEntityRemoteCC te = ((TileEntityRemoteCC)tileentity);
@@ -170,7 +174,7 @@ public class BlockRemote extends BlockHorizontal {
 	}
 	
 	@Override
-	public RenderShape getRenderShape(BlockState p_49232_) {
+	public RenderShape getRenderShape(@Nonnull BlockState p_49232_) {
 		return RenderShape.MODEL;
 	}
 	
@@ -208,12 +212,12 @@ public class BlockRemote extends BlockHorizontal {
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 	    return SHAPE;
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		return SHAPE;
 	}
 

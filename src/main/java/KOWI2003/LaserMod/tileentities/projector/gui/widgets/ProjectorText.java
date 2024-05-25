@@ -15,11 +15,11 @@ public class ProjectorText extends ProjectorWidget {
 	String text;
 	boolean isCentered = true;
 	
+	@SuppressWarnings("resource")
 	public ProjectorText(ProjectorTextData data) {
 		super(data);
 		text = TileEntityUtils.StringCommands(Minecraft.getInstance().player, data.text);
 		isCentered = data.Centered;
-//		isCentered = data.
 		setScalingType(ScalingType.Rectangular);
 	}
 	
@@ -38,6 +38,7 @@ public class ProjectorText extends ProjectorWidget {
 	}
 	
 	@Override
+	@SuppressWarnings("resource")
 	public PoseStack getRenderMatrix(PoseStack matrix) {
 		matrix = super.getRenderMatrix(matrix);
 		matrix.translate(x, y, z);
@@ -50,13 +51,10 @@ public class ProjectorText extends ProjectorWidget {
 	
 	@Override
 	public void renderWidget(RenderContext<?> context) {
-//		renderOutline(context);
 		context.getMatrix().pushPose();
 		
 		RenderSystem.disableCull();
-		
 		RenderUtils.renderString(getRenderMatrix(context.getMatrix()), text, 0, 0, 0, getScale(), new float[] {1.0f, 1.0f, 1.0f, getAlpha(context.getTileentity())}, false);
-
 		RenderSystem.enableCull();
 		
 		context.getMatrix().popPose();
@@ -83,11 +81,13 @@ public class ProjectorText extends ProjectorWidget {
 	}
 	
 	@Override
+	@SuppressWarnings("resource")
 	public float getWidth() {
 		return Minecraft.getInstance().font.width(text) * getScale();
 	}
 	
 	@Override
+	@SuppressWarnings("resource")
 	public float getHeight() {
 		return Minecraft.getInstance().font.lineHeight * getScale();
 	}

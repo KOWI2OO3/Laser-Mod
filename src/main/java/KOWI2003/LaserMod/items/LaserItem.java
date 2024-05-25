@@ -3,6 +3,9 @@ package KOWI2003.LaserMod.items;
 import java.util.List;
 import java.util.function.Consumer;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.items.interfaces.IChargable;
 import KOWI2003.LaserMod.items.interfaces.IExtendable;
@@ -43,17 +46,17 @@ public class LaserItem extends ItemDefault implements ILaserUpgradable, IChargab
 	}
 	
 	@Override
-	public int getBarWidth(ItemStack stack) {
+	public int getBarWidth(@Nonnull ItemStack stack) {
 		return (int) Math.round((1d - LaserItemUtils.getDurabilityForDisplay(stack))*13);
 	}
 	
 	@Override
-	public boolean isBarVisible(ItemStack stack) {
+	public boolean isBarVisible(@Nonnull ItemStack stack) {
 		return getCharge(stack) < getMaxCharge(stack);
 	}
 	
 	@Override
-	public int getBarColor(ItemStack stack) {
+	public int getBarColor(@Nonnull ItemStack stack) {
 		return Mth.hsvToRgb(Math.max(0.0F, (float) (1.0F - LaserItemUtils.getDurabilityForDisplay(stack))) / 3.0F, 1.0F, 1.0F);
 	}
 	
@@ -68,7 +71,7 @@ public class LaserItem extends ItemDefault implements ILaserUpgradable, IChargab
 	}
 	
 	@Override
-	public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
+	public void appendHoverText(@Nonnull ItemStack stack, @Nullable Level world, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flags) {
 		MutableComponent charge = MutableComponent.create(new LiteralContents("Charge: " + getCharge(stack) + "/" + getMaxCharge(stack)));
 		charge.setStyle(charge.getStyle().withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(0.35f, 0.35f, 0.35f))));
 		tooltip.add(charge);

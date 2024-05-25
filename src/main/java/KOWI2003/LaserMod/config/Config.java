@@ -14,6 +14,8 @@ public class Config {
 		public boolean useMultiToolRecoil;
 
 		public LaserSettings laserSettings;
+
+		public MachineSettings machineSettings;
 		
 		@Expose(serialize = false, deserialize = false)
 		public int defaultLaserDistance;
@@ -27,6 +29,7 @@ public class Config {
 		defaultLaserDistance = 10;
 		laserSettings = new LaserSettings();
 		updateChecker = new UpdateCheckerConfig();
+		machineSettings = new MachineSettings();
 	}
 
 	public static Config GetInstance() {
@@ -48,5 +51,12 @@ public class Config {
 	public class LaserSettings {
 		public boolean hitmarkerFocusedLaser = true;
 		public boolean hitmarkerPowerLaser = true;
+	}
+
+	public static class MachineSettings {
+		public float infuserSpeed = 1.0f;
+		public float precisionAssemblerSpeed = 1.0f;
+		
+		public float infuserToolChargingSpeed = 1.0f;
 	}
 }

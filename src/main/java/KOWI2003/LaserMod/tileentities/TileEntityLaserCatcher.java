@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.tileentities;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.blocks.BlockRotatable;
 import KOWI2003.LaserMod.init.ModTileTypes;
 import KOWI2003.LaserMod.utils.TileEntityUtils;
@@ -18,7 +20,7 @@ public class TileEntityLaserCatcher extends SyncableBlockEntity implements ILase
 	}
 
 	@Override
-	protected void saveAdditional(CompoundTag nbt) {
+	protected void saveAdditional(@Nonnull CompoundTag nbt) {
 		nbt.putBoolean("isHit", isHit);
 		if(te != null) {
 			BlockPos pos = te.getPos();
@@ -28,7 +30,8 @@ public class TileEntityLaserCatcher extends SyncableBlockEntity implements ILase
 	}
 	
 	@Override
-	public void load(CompoundTag nbt) {
+	@SuppressWarnings("null")
+	public void load(@Nonnull CompoundTag nbt) {
 		isHit = nbt.getBoolean("isHit");
 		if(nbt.contains("laserPos")) {
 			int[] pos = nbt.getIntArray("laserPos");
@@ -40,6 +43,7 @@ public class TileEntityLaserCatcher extends SyncableBlockEntity implements ILase
 	}
 	
 	@Override
+	@SuppressWarnings("null")
 	public void interactWithLaser(ILaserAccess te) {
 		if(getBlockState().getValue(BlockRotatable.FACING) == te.getDirection()) {
 			isHit = true;
@@ -51,6 +55,7 @@ public class TileEntityLaserCatcher extends SyncableBlockEntity implements ILase
 	}
 
 	@Override
+	@SuppressWarnings("null")
 	public void onLaserInteractStop(ILaserAccess te) {
 		isHit = false;
 		this.te = null;

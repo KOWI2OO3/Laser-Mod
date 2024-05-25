@@ -54,13 +54,13 @@ public class ModTileTypes {
     	INFUSER = buildType("infuser", BlockEntityType.Builder.of(TileEntityInfuser::new, ModBlocks.Infuser.get()));
     	MOD_STATION = buildType("mod_station", BlockEntityType.Builder.of(TileEntityModStation::new, ModBlocks.ModStation.get()));
     	LASER_PROJECTOR = buildType("laser_projector", BlockEntityType.Builder.of(TileEntityLaserProjector::new, ModBlocks.LaserProjector.get()));
-//    	LASER_CONTROLLER = buildType("laser_controller", BlockEntityType.Builder.of(TileEntityLaserController::new, ModBlocks.LaserController.get()));
     	MIRROR = buildType("mirror", BlockEntityType.Builder.of(TileEntityMirror::new, ModBlocks.Mirror.get()));
     	ADVANCED_LASER = buildType("advanced_laser", BlockEntityType.Builder.of(TileEntityAdvancedLaser::new, ModBlocks.AdvancedLaser.get()));
     	PRECISION_ASSEMBLER = buildType("precision_assembler", BlockEntityType.Builder.of(TileEntityPrecisionAssembler::new, ModBlocks.PrecisionAssembler.get()));
     	optionalRegistry();
     }
     
+	@SuppressWarnings("null")
 	private static <T extends BlockEntity> BlockEntityType<T> buildType(String id, BlockEntityType.Builder<T> builder) {
 		BlockEntityType<T> type = builder.build(null);
 		TILE_ENTITY_TYPES.add(new RegistryObject(id, type));
@@ -68,7 +68,6 @@ public class ModTileTypes {
 	}
 	
 	@SubscribeEvent
-//	public static void registerType(final RegistryEvent.Register<BlockEntityType<?>> event) {
 	public static void registerType(final RegisterEvent event) {
 		if(event.getForgeRegistry() != null)
 		if(event.getForgeRegistry().getRegistryName().equals(ForgeRegistries.BLOCK_ENTITY_TYPES.getRegistryName())) {

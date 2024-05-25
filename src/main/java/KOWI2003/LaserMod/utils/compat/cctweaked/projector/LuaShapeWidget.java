@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorShapeData;
+import KOWI2003.LaserMod.tileentities.projector.data.ProjectorShapeData.ShapeType;
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorWidgetData;
 import KOWI2003.LaserMod.utils.Utils;
-import KOWI2003.LaserMod.tileentities.projector.data.ProjectorShapeData.ShapeType;
 import dan200.computercraft.api.lua.IArguments;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
@@ -19,6 +21,7 @@ public class LuaShapeWidget extends LuaProjectorWidget {
         super(dataSupplier, sync);
     }
 
+    @Nonnull
     @Override
     public String[] getMethodNames() {
         List<String> methods = new ArrayList<>(List.of(super.getMethodNames()));

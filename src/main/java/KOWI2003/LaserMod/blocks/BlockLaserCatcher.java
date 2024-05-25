@@ -42,7 +42,7 @@ public class BlockLaserCatcher extends BlockRotatable {
 	}
 	
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
 		return new TileEntityLaserCatcher(pos, state);
 	}
 	

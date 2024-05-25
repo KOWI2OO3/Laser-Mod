@@ -48,6 +48,7 @@ public class InfuserRecipeChargingTool implements IInfuserRecipe {
 	}
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public Pair<Ingredient, Integer>[] getInputs(TileEntityInfuser te) {
 		int stackSize = getRequiredRedstone(te);
 		ItemStack toolStack = new ItemStack(Blocks.VOID_AIR);
@@ -62,23 +63,19 @@ public class InfuserRecipeChargingTool implements IInfuserRecipe {
 				(te.handler.getStackInSlot(1).getItem() instanceof IChargable && LaserItemUtils.getDurabilityForDisplay(te.handler.getStackInSlot(1)) > 0.0f);
 	}
 
-	//Charge Speed (Change in Config?)
 	@Override
 	public float getRecipeSpeed() {
-		return 2;
+		return ModConfig.GetConfig().machineSettings.infuserToolChargingSpeed;
 	}
 
 	@Override
 	public ItemStack getOutput() {
-//		return new ItemStack(ModItems.LaserSword);
 		return new ItemStack(Blocks.AIR);
 	}
 	
 	@Override
 	public Ingredient[] getInputs() {
-		return new Ingredient[] {Ingredient.of(new ItemStack(Items.REDSTONE)), 
-//				new ItemStack(ModItems.LaserSword)};
-				Ingredient.of(new ItemStack(Blocks.AIR))};
+		return new Ingredient[] {Ingredient.of(new ItemStack(Items.REDSTONE)), Ingredient.of(new ItemStack(Blocks.AIR))};
 	}
 
 }

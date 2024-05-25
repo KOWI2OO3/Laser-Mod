@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.gui.widgets;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.gui.components.Button;
@@ -44,10 +46,10 @@ public class Dropdown extends Button {
 	}
 	
 	@Override
-	public boolean mouseClicked(double p_231044_1_, double p_231044_3_, int p_231044_5_) {
+	public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
 		if(extended)
 			for (Button button : buttons) {
-				if(button.mouseClicked(p_231044_1_, p_231044_3_, p_231044_5_)) {
+				if(button.mouseClicked(mouseX, mouseY, mouseButton)) {
 					extended = false;
 					return true;
 				}
@@ -56,19 +58,19 @@ public class Dropdown extends Button {
 			extended = false;
 			return false;
 		}
-		return super.mouseClicked(p_231044_1_, p_231044_3_, p_231044_5_);
+		return super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 	
 	@Override
-	public boolean isMouseOver(double p_231047_1_, double p_231047_3_) {
+	public boolean isMouseOver(double mouseX, double mouseY) {
 		for (Button button : buttons) {
-			button.changeFocus(button.isMouseOver(p_231047_1_, p_231047_3_));
+			button.changeFocus(button.isMouseOver(mouseX, mouseY));
 		}
-		return super.isMouseOver(p_231047_1_, p_231047_3_);
+		return super.isMouseOver(mouseX, mouseY);
 	}
 	
 	@Override
-	public void renderButton(PoseStack matrix, int x, int y, float partialTicks) {
+	public void renderButton(@Nonnull PoseStack matrix, int x, int y, float partialTicks) {
 		super.renderButton(matrix, x, y, partialTicks);
 		if(extended)
 			for (Button button : buttons) {

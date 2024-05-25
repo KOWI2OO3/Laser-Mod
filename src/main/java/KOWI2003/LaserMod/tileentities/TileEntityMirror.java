@@ -2,6 +2,8 @@ package KOWI2003.LaserMod.tileentities;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.DamageSourceLaser;
@@ -44,7 +46,7 @@ public class TileEntityMirror extends SyncableBlockEntity implements ILaserInter
 	}
 
 	@Override
-	protected void saveAdditional(CompoundTag nbt) {
+	protected void saveAdditional(@Nonnull CompoundTag nbt) {
 		nbt.putLong("Laser", laser == null ? -1 : laser.getBlockPos().asLong());
 		nbt.putDouble("Distance", distance);
 		nbt.putInt("Direction", redirectDirection.ordinal());
@@ -52,7 +54,7 @@ public class TileEntityMirror extends SyncableBlockEntity implements ILaserInter
 	}
 	
 	@Override
-	public void load(CompoundTag nbt) {
+	public void load(@Nonnull CompoundTag nbt) {
 		if(nbt.contains("Distance"))
 			distance = nbt.getDouble("Distance");
 		if(nbt.contains("Direction"))
@@ -83,7 +85,7 @@ public class TileEntityMirror extends SyncableBlockEntity implements ILaserInter
 	}
 	
 	@Override
-	public void tick(Level level, BlockPos pos, BlockState state, TileEntityMirror tile) {
+	public void tick(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull TileEntityMirror tile) {
 		sync();
 		if(isActive()) {
 			updateLaserAbilities();
@@ -134,6 +136,7 @@ public class TileEntityMirror extends SyncableBlockEntity implements ILaserInter
 		return getEntitiesInLaser(LivingEntity.class, direction); 
 	}
 	
+	@SuppressWarnings("null")
 	public <T extends Entity> List<T> getEntitiesInLaser(Class<T> entityType, Direction direction) {
 		AABB aabb = new AABB(getBlockPos());
 		Vector3f dir = MathUtils.mulVector(MathUtils.getVectorFromDir(direction),(float) distance-1);
@@ -141,6 +144,7 @@ public class TileEntityMirror extends SyncableBlockEntity implements ILaserInter
 		return getLevel().getEntitiesOfClass(entityType, aabb);
 	}
 	
+	@SuppressWarnings("null")
 	public void updateLaser(Direction direction) {
 		for(int i = 1; i <= Math.round(distance); i++) {
 			Direction facing = direction;
@@ -158,6 +162,7 @@ public class TileEntityMirror extends SyncableBlockEntity implements ILaserInter
 		}
 	}
 	
+	@SuppressWarnings("null")
 	private void updateLaserInteractables(int distance, BlockPos newPos) {
 		if(distance < stuckDistance)
 			handleTurnOffForInteractable();
@@ -168,6 +173,7 @@ public class TileEntityMirror extends SyncableBlockEntity implements ILaserInter
 				((ILaserInteractable)te).interactWithLaser(this);
 	}
 	
+	@SuppressWarnings("null")
 	public void handleTurnOffForInteractable() {
 		BlockPos pos = Utils.offset(getBlockPos(), redirectDirection, (float) stuckDistance);
 		BlockEntity te = getLevel().getBlockEntity(pos);
@@ -176,6 +182,7 @@ public class TileEntityMirror extends SyncableBlockEntity implements ILaserInter
 				((ILaserInteractable)te).onLaserInteractStop(this);
 	}
 	
+	@SuppressWarnings("null")
 	public boolean canPassThrough(BlockPos pos, BlockState newState, Direction direction) {
 		Direction facing = direction;
 		
@@ -201,6 +208,7 @@ public class TileEntityMirror extends SyncableBlockEntity implements ILaserInter
 		return true;
 	}
 	
+	@SuppressWarnings("null")
 	public double getRenderDistance(BlockPos pos, BlockState newState, double distance, Direction direction) {
 		Direction facing = direction;
 		
@@ -233,6 +241,7 @@ public class TileEntityMirror extends SyncableBlockEntity implements ILaserInter
 		return Math.abs(value - (Math.floor(value))) + distance;
 	}
 	
+	@SuppressWarnings("null")
 	public void updateLaserAbilities() {
 		AABB aabb = new AABB(getBlockPos());
 		Vector3f dir = MathUtils.getVectorFromDir(redirectDirection);

@@ -2,6 +2,8 @@ package KOWI2003.LaserMod.container;
 
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.init.ModContainerTypes;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.tileentities.TileEntityPrecisionAssembler;
@@ -46,11 +48,7 @@ public class ContainerPrecisionAssembler extends AbstractContainerMenu {
 			}
 			
 			@Override
-			public void onTake(Player player, ItemStack stack) {
-				if(stack.getItem() instanceof ItemUpgradeBase) {
-//					boolean removed =  te.remove((ItemUpgradeBase)stack.getItem(), false);
-//					return removed ? stack : ItemStack.EMPTY;
-				}
+			public void onTake(@Nonnull Player player, @Nonnull ItemStack stack) {
 				super.onTake(player, stack);
 			}
 			
@@ -79,7 +77,7 @@ public class ContainerPrecisionAssembler extends AbstractContainerMenu {
 	}
 	
 	@Override
-	public ItemStack quickMoveStack(Player player, int index) {
+	public ItemStack quickMoveStack(@Nonnull Player player, int index) {
 	      return ItemStack.EMPTY;
 	}
 	
@@ -96,7 +94,7 @@ public class ContainerPrecisionAssembler extends AbstractContainerMenu {
 		return te;
 	}
 	
-	public boolean stillValid(Player player) {
+	public boolean stillValid(@Nonnull Player player) {
 		return true;
 	}
 }

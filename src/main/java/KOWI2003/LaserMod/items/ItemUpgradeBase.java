@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.Reference;
@@ -32,7 +33,6 @@ public class ItemUpgradeBase extends ItemDefault /*implements SubItems*/ {
 
 	private String UpgradeName;
 	protected boolean stackable = false;
-	private String resLoc = StringUtils.EMPTY;
 	
 	protected String[] AbilityNames = new String[] {};
 	protected float[] abilityNameColor = new float[] {0.35f, 0.35f, 0.35f};
@@ -194,14 +194,6 @@ public class ItemUpgradeBase extends ItemDefault /*implements SubItems*/ {
 		return USEFULL_MACHINES.contains(Machine);
 	}
 	
-	protected void setResourceLocation(String id) {
-		this.resLoc = id;
-	}
-	
-	protected void clearResourceLocation() {
-		this.resLoc = StringUtils.EMPTY;
-	}
-	
 	public String getUpgradeName() {
 		return UpgradeName;
 	}
@@ -220,7 +212,7 @@ public class ItemUpgradeBase extends ItemDefault /*implements SubItems*/ {
 	}
 	
 	@Override
-	public Component getName(ItemStack stack) {
+	public Component getName(@Nonnull ItemStack stack) {
 		if(hasTier())
 				return MutableComponent.create(new TranslatableContents("item." + Reference.MODID + ".upgrade_" + getUpgradeBaseName()));
 		return super.getName(stack);
@@ -258,7 +250,7 @@ public class ItemUpgradeBase extends ItemDefault /*implements SubItems*/ {
 	public void runOnArmorTick(ItemStack stack, Level level, Player player, EquipmentSlot slot) {}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+	public void appendHoverText(@Nonnull ItemStack stack, @Nullable Level worldIn, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flagIn) {
 		Component text = MutableComponent.create(new TranslatableContents("r"));
 		Style st = text.getStyle().applyFormat(ChatFormatting.GRAY);
 		

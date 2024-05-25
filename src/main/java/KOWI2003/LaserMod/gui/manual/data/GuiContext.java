@@ -6,9 +6,9 @@ import java.util.List;
 import KOWI2003.LaserMod.gui.manual.ManualHandler;
 import KOWI2003.LaserMod.gui.manual.data.widget.FlipPageComponent;
 import KOWI2003.LaserMod.gui.manual.data.widget.FlipPageComponent.ButtonIconType;
-import KOWI2003.LaserMod.utils.Utils;
 import KOWI2003.LaserMod.gui.manual.data.widget.PageSelector;
 import KOWI2003.LaserMod.gui.manual.data.widget.TextBoxComponent;
+import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -147,6 +147,7 @@ public class GuiContext {
 		return Component.translatable(txt).getString();
 	}
 
+	@SuppressWarnings("resource")
 	protected int width(String txt) {
 		return Minecraft.getInstance().font.width(Component.translatable(txt));
 	}

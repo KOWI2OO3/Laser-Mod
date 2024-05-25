@@ -2,6 +2,8 @@ package KOWI2003.LaserMod.container;
 
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.init.ModContainerTypes;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.tileentities.TileEntityLaser;
@@ -38,7 +40,7 @@ public class ContainerLaser extends AbstractContainerMenu {
 	    		this.addSlot(new SlotItemHandler(inventory, j + i * 3, 62 + j * 18, 17 + i * 18) {
 	    			
 	    			@Override
-	    			public void onTake(Player player, ItemStack stack) {
+	    			public void onTake(@Nonnull Player player, @Nonnull ItemStack stack) {
 	    				if(stack.getItem() instanceof ItemUpgradeBase) {
 	    					if(!te.remove((ItemUpgradeBase)stack.getItem(), false))
 	    						return;
@@ -81,7 +83,7 @@ public class ContainerLaser extends AbstractContainerMenu {
 	}
 	
 	@Override
-	public ItemStack quickMoveStack(Player player, int index) {
+	public ItemStack quickMoveStack(@Nonnull Player player, int index) {
 	      return ItemStack.EMPTY;
 	}
 	
@@ -98,7 +100,7 @@ public class ContainerLaser extends AbstractContainerMenu {
 		return te;
 	}
 
-	public boolean stillValid(Player p_38874_) {
+	public boolean stillValid(@Nonnull Player player) {
 		return true;
 	}
 	

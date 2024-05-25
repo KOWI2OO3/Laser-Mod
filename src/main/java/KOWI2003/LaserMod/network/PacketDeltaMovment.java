@@ -27,12 +27,10 @@ public class PacketDeltaMovment {
 		buf.writeDouble(movement.z);
 	}
 	
+	@SuppressWarnings({ "resource", "null" })
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 	    ctx.get().enqueueWork(() -> {
 	        // Work that needs to be thread-safe (most work)
-	    	
-	        //ServerPlayer sender = ctx.get().getSender(); // the client that sent this packet
-	    	
 	        if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
 	        	Minecraft.getInstance().player.setDeltaMovement(movement);
 	        }else {
@@ -42,7 +40,6 @@ public class PacketDeltaMovment {
 	        }
 	    });
 	    ctx.get().setPacketHandled(true);
-	    //return true;
 	}
 	
 }

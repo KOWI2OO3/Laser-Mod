@@ -3,6 +3,7 @@ package KOWI2003.LaserMod.tileentities;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.mojang.math.Vector3f;
@@ -49,7 +50,7 @@ public class TileEntityDeviceHub extends SyncableBlockEntity implements BlockEnt
 	}
 
 	@Override
-	public void tick(Level level, BlockPos pos, BlockState state, TileEntityDeviceHub tile) {
+	public void tick(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull TileEntityDeviceHub tile) {
 		validateDevices();
 	}
 	
@@ -65,7 +66,7 @@ public class TileEntityDeviceHub extends SyncableBlockEntity implements BlockEnt
 	}
 	
 	@Override
-	protected void saveAdditional(CompoundTag nbt) {
+	protected void saveAdditional(@Nonnull CompoundTag nbt) {
 		List<Integer> coords = new LinkedList<>();
 		for (Device d: devices) {
 			coords.add(d.getPos().getX());
@@ -77,7 +78,7 @@ public class TileEntityDeviceHub extends SyncableBlockEntity implements BlockEnt
 	}
 	
 	@Override
-	public void load(CompoundTag nbt) {
+	public void load(@Nonnull CompoundTag nbt) {
 		List<BlockPos> positions = new LinkedList<>();
 		int[] coords = nbt.getIntArray("Data");
 		for(int i = 0; i < coords.length; i += 3)
@@ -250,12 +251,12 @@ public class PeripheralInterface implements IDynamicPeripheral {
 	}
 
 	@Override
-	public String getType() {
+	public @Nonnull String getType() {
 		return "Device_Hub";
 	}
 
 	@Override
-	public MethodResult callMethod(IComputerAccess computer, ILuaContext content, int methodIndex, IArguments args)
+	public @Nonnull MethodResult callMethod(@Nonnull IComputerAccess computer, @Nonnull ILuaContext content, int methodIndex, @Nonnull IArguments args)
 			throws LuaException {
 		try {
 		switch( methodIndex )
@@ -444,6 +445,7 @@ public class PeripheralInterface implements IDynamicPeripheral {
 		}
 	}
 
+	@Nonnull 
 	@Override
 	public String[] getMethodNames() {
 		return new String[] {
@@ -481,7 +483,7 @@ public class PeripheralInterface implements IDynamicPeripheral {
 	}
 	
 	@Override
-	public boolean equals(IPeripheral arg0) {
+	public boolean equals(@Nullable IPeripheral peripheral) {
 		return false;
 	}
 }
@@ -496,8 +498,9 @@ public class DeviceObject implements IDynamicLuaObject {
 		this.index = index;
 	}
 	
+	@Nonnull 
 	@Override
-	public MethodResult callMethod(ILuaContext context, int methodIndex, IArguments args) throws LuaException {
+	public MethodResult callMethod(@Nonnull ILuaContext context, int methodIndex, @Nonnull IArguments args) throws LuaException {
 		try {
 			switch( methodIndex )
 	        {
@@ -533,6 +536,7 @@ public class DeviceObject implements IDynamicLuaObject {
 			}
 	}
 
+	@Nonnull 
 	@Override
 	public String[] getMethodNames() {
 		return new String[] {

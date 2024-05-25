@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 
 public class ManualPageSelector extends ManualComponent<PageSelector> {
 
+	@SuppressWarnings("resource")
 	public ManualPageSelector(PageSelector data) {
 		super(data);
 		int w = (data.item != null ? 20 : 0) + Minecraft.getInstance().font.width(data.Text) + 5;
@@ -21,6 +22,7 @@ public class ManualPageSelector extends ManualComponent<PageSelector> {
 	}
 	
 	@Override
+	@SuppressWarnings("resource")
 	public void renderComponent(PoseStack stack, int mouseX, int mouseY) {
 		float[] color = Utils.parseColor(data.TextColor);
 		if(data.TextHoverColor != null && isMouseOver(mouseX, mouseY))

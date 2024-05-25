@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui.widgets;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -90,12 +92,12 @@ public class Slider2D extends Button {
 	}
 	
 	@Override
-	public void render(PoseStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
+	public void render(@Nonnull PoseStack pose, int x, int y, float partialTicks) {
 		if (this.visible) {
-	         this.isHovered = p_230430_2_ >= this.x && p_230430_3_ >= this.y && p_230430_2_ < this.x + this.width && p_230430_3_ < this.y + this.height;
+	         this.isHovered = x >= this.x && y >= this.y && x < this.x + this.width && y < this.y + this.height;
 
 	         if (this.visible) {
-	            this.onRender(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
+	            this.onRender(pose, x, y, partialTicks);
 	         }
 	         
 	         this.wasHovered = this.isHovered;
@@ -114,30 +116,27 @@ public class Slider2D extends Button {
 	}
 	
 	@Override
-	public void renderButton(PoseStack p_230431_1_, int p_230431_2_, int p_230431_3_, float p_230431_4_) {
-		 Minecraft minecraft = Minecraft.getInstance();
-		 RenderSystem.setShader(GameRenderer::getPositionTexShader);
-		 RenderSystem.setShaderTexture(0, WIDGETS_LOCATION);
-		 //RenderSystem.color4f(1.0F, 1.0F, 1.0F, this.alpha);
-		 RenderSystem.enableBlend();
-		 RenderSystem.defaultBlendFunc();
-		 RenderSystem.enableDepthTest();
-		 
-		 int uvX = 41;
-		 int uvY = 106; //46 + i * 20
-		 
-		 this.blit(p_230431_1_, this.x, this.y, uvX, uvY, this.width / 2, this.height/2); //matrix, guiX, guiY, uvX, uvY, width, height
-		 this.blit(p_230431_1_, this.x + this.width / 2, this.y, (256 - this.width / 2), uvY, this.width / 2, this.height/2);
-		 
-		 this.blit(p_230431_1_, this.x, this.y + this.height / 2, uvX, (206 - this.height / 2), this.width / 2, this.height/2); //matrix, guiX, guiY, uvX, uvY, width, height
-		 this.blit(p_230431_1_, this.x + this.width / 2, this.y + this.height / 2, (256 - this.width / 2), (206 - this.height / 2), this.width / 2, this.height/2);
-		 
-		 this.renderBg(p_230431_1_, minecraft, p_230431_2_, p_230431_3_);
-		 //int j = this.getFGColor();
-		 //drawCenteredString(p_230431_1_, fontrenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, j | MathHelper.ceil(this.alpha * 255.0F) << 24);
-		if (this.isHovered) {
-			this.renderToolTip(p_230431_1_, p_230431_2_, p_230431_3_);
-		}
+	public void renderButton(@Nonnull PoseStack pose, int mouseX, int mouseY, float partialTicks) {
+		Minecraft minecraft = Minecraft.getInstance();
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderTexture(0, WIDGETS_LOCATION);
+		RenderSystem.enableBlend();
+		RenderSystem.defaultBlendFunc();
+		RenderSystem.enableDepthTest();
+		
+		int uvX = 41;
+		int uvY = 106; //46 + i * 20
+		
+		this.blit(pose, this.x, this.y, uvX, uvY, this.width / 2, this.height/2); //matrix, guiX, guiY, uvX, uvY, width, height
+		this.blit(pose, this.x + this.width / 2, this.y, (256 - this.width / 2), uvY, this.width / 2, this.height/2);
+		
+		this.blit(pose, this.x, this.y + this.height / 2, uvX, (206 - this.height / 2), this.width / 2, this.height/2); //matrix, guiX, guiY, uvX, uvY, width, height
+		this.blit(pose, this.x + this.width / 2, this.y + this.height / 2, (256 - this.width / 2), (206 - this.height / 2), this.width / 2, this.height/2);
+		
+		this.renderBg(pose, minecraft, mouseX, mouseY);
+	
+		if (this.isHovered)
+			this.renderToolTip(pose, mouseX, mouseY);
 	}
 	
 	@Override
@@ -166,7 +165,6 @@ public class Slider2D extends Button {
 	
 	@Override
 	public void mouseMoved(double deltaX, double deltaY) {
-		// TODO Auto-generated method stub
 		super.mouseMoved(deltaX, deltaY);
 	}
 	

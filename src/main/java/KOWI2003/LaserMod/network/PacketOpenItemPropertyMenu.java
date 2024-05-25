@@ -2,6 +2,8 @@ package KOWI2003.LaserMod.network;
 
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.container.ContainerItemStackProperty;
 import KOWI2003.LaserMod.gui.widgets.properties.ItemProperty;
 import net.minecraft.core.BlockPos;
@@ -43,9 +45,6 @@ public class PacketOpenItemPropertyMenu {
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 	    ctx.get().enqueueWork(() -> {
 	        // Work that needs to be thread-safe (most work)
-	    	
-	        //ServerPlayer sender = ctx.get().getSender(); // the client that sent this packet
-	    	
 	        if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
 	        	
 	        }else {
@@ -53,8 +52,8 @@ public class PacketOpenItemPropertyMenu {
 				NetworkHooks.openScreen(sender, (new MenuProvider() {
 	    			
 	    			@Override
-	    			public AbstractContainerMenu createMenu(int p_39954_, Inventory p_39955_, Player p_39956_) {
-	    				return new ContainerItemStackProperty(p_39954_, p_39956_.getInventory(), handler);
+	    			public AbstractContainerMenu createMenu(int menuId, @Nonnull Inventory inventory, @Nonnull Player player) {
+	    				return new ContainerItemStackProperty(menuId, player.getInventory(), handler);
 	    			}
 	    			
 	    			@Override
@@ -65,7 +64,6 @@ public class PacketOpenItemPropertyMenu {
 	        }
 	    });
 	    ctx.get().setPacketHandled(true);
-	    //return true;
 	}
 	
 }

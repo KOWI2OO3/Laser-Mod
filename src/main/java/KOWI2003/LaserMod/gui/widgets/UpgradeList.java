@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.gui.widgets;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -118,13 +120,10 @@ public class UpgradeList extends Button {
 	    RenderSystem.enableBlend();
 	    RenderSystem.defaultBlendFunc();
 	    RenderSystem.enableDepthTest();
-	    //button.blit(matrix, button.x, button.y, 0, 46 + i * 20, button.getWidth() / 2, button.getHeight());
-	    //button.blit(matrix, button.x + button.getWidth() / 2, button.y, 200 - button.getWidth() / 2, 46 + i * 20, button.getWidth() / 2, button.getHeight());
 	    ScreenUtils.blitWithBorder(matrix, TEXTURE, button.x, button.y, 0, (i*20) + 46, 
 	    		button.getWidth(), button.getHeight(), 200, 20, 2, 3, 2, 2, this.getBlitOffset());
 		
 	    minecraft.getTextureManager().bindForSetup(WIDGETS_LOCATION);
-//	    button.renderBg(matrix, minecraft, x, y);
 	    int j = getFGColor();
 	    drawCenteredString(matrix, fontrenderer, button.getMessage(), button.x + button.getWidth() / 2, button.y + (button.getHeight() - 8) / 2, j | (int)Math.ceil(this.alpha * 255.0F) << 24);
 	    if (button.isHoveredOrFocused()) {
@@ -133,7 +132,7 @@ public class UpgradeList extends Button {
 	}
 	
 	@Override
-	public void renderButton(PoseStack matrix, int x, int y, float partialticks) {
+	public void renderButton(@Nonnull PoseStack matrix, int x, int y, float partialticks) {
 		for (Button button : buttons) {
 			button.render(matrix, x, y, partialticks);
 			renderButton(button, matrix, x, y, partialticks, TEXTURE);
@@ -141,9 +140,9 @@ public class UpgradeList extends Button {
 	}
 	
 	@Override
-	public boolean mouseClicked(double p_231044_1_, double p_231044_3_, int p_231044_5_) {
+	public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
 		for (Button button : buttons) {
-			if(button.mouseClicked(p_231044_1_, p_231044_3_, p_231044_5_)) {
+			if(button.mouseClicked(mouseX, mouseY, mouseButton)) {
 				return true;
 			}
 		}
@@ -151,25 +150,25 @@ public class UpgradeList extends Button {
 	}
 	
 	@Override
-	public boolean isMouseOver(double p_231047_1_, double p_231047_3_) {
+	public boolean isMouseOver(double mouseX, double mouseY) {
 		for (Button button : buttons) {
-			boolean cond = button.isMouseOver(p_231047_1_, p_231047_3_);
+			boolean cond = button.isMouseOver(mouseX, mouseY);
 			if(cond != button.isFocused())
 				button.changeFocus(cond);
 			if(cond)
 				return true;
 		}
-		return super.isMouseOver(p_231047_1_, p_231047_3_);
+		return super.isMouseOver(mouseX, mouseY);
 	}
 	
 	@Override
-	public boolean mouseReleased(double p_231048_1_, double p_231048_3_, int p_231048_5_) {
+	public boolean mouseReleased(double mouseX, double mouseY, int mouseButton) {
 		for (Button button : buttons) {
-			if(button.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_)) {
+			if(button.mouseReleased(mouseX, mouseY, mouseButton)) {
 				return true;
 			}
 		}
-		return super.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_);
+		return super.mouseReleased(mouseX, mouseY, mouseButton);
 	}
 
 }

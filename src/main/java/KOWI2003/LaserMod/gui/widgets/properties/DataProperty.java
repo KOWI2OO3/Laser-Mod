@@ -2,6 +2,8 @@ package KOWI2003.LaserMod.gui.widgets.properties;
 
 import java.lang.reflect.Field;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorWidgetData;
@@ -26,6 +28,7 @@ public class DataProperty<T> extends AbstractWidget {
 		this.name = displayName;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setValue(Object value) {
 		if(this.value.getClass() == value.getClass()) {
 			this.value = (T)value;
@@ -67,7 +70,7 @@ public class DataProperty<T> extends AbstractWidget {
 	}
 	
 	@Override
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", x + 2, y, 35f, 10, 0xffffff);
 	}
 	
@@ -81,5 +84,5 @@ public class DataProperty<T> extends AbstractWidget {
 	}
 	
 	@Override
-	public void updateNarration(NarrationElementOutput p_259858_) {}
+	public void updateNarration(@Nonnull NarrationElementOutput p_259858_) {}
 }

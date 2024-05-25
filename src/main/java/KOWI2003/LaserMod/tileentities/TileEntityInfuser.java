@@ -1,7 +1,10 @@
 package KOWI2003.LaserMod.tileentities;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.LaserProperties.Properties;
+import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.container.ContainerInfuser;
 import KOWI2003.LaserMod.init.ModTileTypes;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
@@ -40,8 +43,8 @@ public class TileEntityInfuser extends SyncableBlockEntity implements BlockEntit
 	
 	
 	@Override
-	public void tick(Level level, BlockPos pos, BlockState state,
-			TileEntityInfuser te) {
+	public void tick(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state,
+			@Nonnull TileEntityInfuser te) {
 		if(currentRecipe == null || !currentRecipe.isRecipeValid(this)) {
 			IInfuserRecipe recipe = InfuserRecipeHandler.getRecipe(this);
 			if(recipe != currentRecipe) {
@@ -51,7 +54,7 @@ public class TileEntityInfuser extends SyncableBlockEntity implements BlockEntit
 		}
 		
 		if(currentRecipe != null) {
-			tick -= currentRecipe.getRecipeSpeed() * properties.getProperty(Properties.SPEED);
+			tick -= currentRecipe.getRecipeSpeed() * properties.getProperty(Properties.SPEED) * Config.GetInstance().machineSettings.infuserSpeed;
 			
 			if(tick <= 0) {
 				InfuserRecipeHandler.handleRecipeEnd(currentRecipe, this);
@@ -63,7 +66,7 @@ public class TileEntityInfuser extends SyncableBlockEntity implements BlockEntit
 	}
 	
 	@Override
-	protected void saveAdditional(CompoundTag nbt) {
+	protected void saveAdditional(@Nonnull CompoundTag nbt) {
 		nbt.put("inv", handler.serializeNBT());
 		nbt.putFloat("tick", tick);
 		properties.save(nbt);
@@ -71,7 +74,7 @@ public class TileEntityInfuser extends SyncableBlockEntity implements BlockEntit
 	}
 	
 	@Override
-	public void load(CompoundTag nbt) {
+	public void load(@Nonnull CompoundTag nbt) {
 		handler.deserializeNBT(nbt.getCompound("inv"));
 		tick = nbt.getFloat("tick");
 		properties.load(nbt);
@@ -83,7 +86,7 @@ public class TileEntityInfuser extends SyncableBlockEntity implements BlockEntit
 	}
 	
 	@Override
-	public AbstractContainerMenu createMenu(int windowId, Inventory playerInv, Player player) {
+	public AbstractContainerMenu createMenu(int windowId, @Nonnull Inventory playerInv, @Nonnull Player player) {
 		return new ContainerInfuser(windowId, playerInv, this);
 	}
 

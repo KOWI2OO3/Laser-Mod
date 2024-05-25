@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.utils.compat.jei.slotmovers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.gui.GuiLaser;
 import KOWI2003.LaserMod.utils.compat.jei.SlotMover;
 import net.minecraft.client.renderer.Rect2i;
@@ -14,7 +16,7 @@ public class LaserGuiSlotMover extends SlotMover<GuiLaser> {
 	}
 	
 	@Override
-	public List<Rect2i> getGuiExtraAreas(GuiLaser gui) {
+	public List<Rect2i> getGuiExtraAreas(@Nonnull GuiLaser gui) {
 		List<Rect2i> tabBoxes = new ArrayList<>();
 		
 		if(gui.menuOpen) 

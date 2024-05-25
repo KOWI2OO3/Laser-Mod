@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.tileentities.render.models;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
@@ -325,7 +327,7 @@ public class AdvancedLaserTop<T extends Entity> extends EntityModel<T> {
 		return MathUtils.getLenght(MathUtils.getVec2f(dir, interperter));
 	}
 	
-	public void renderToBuffer(PoseStack matrix, VertexConsumer bufferr, int combinedLight, int combinedLightOverlay,
+	public void renderToBuffer(@Nonnull PoseStack matrix, @Nonnull VertexConsumer bufferr, int combinedLight, int combinedLightOverlay,
 			float red, float green, float blue, float alpha) {
 
 		ResourceLocation GRAY = new ResourceLocation("minecraft", "textures/block/gray_concrete.png");
@@ -355,7 +357,7 @@ public class AdvancedLaserTop<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_,
+	public void setupAnim(@Nonnull T p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_,
 			float p_102623_) {
 	}
  

@@ -64,10 +64,10 @@ public class PacketLaser {
 	    	}
 	    });
 	    ctx.get().setPacketHandled(true);
-	    //return true;
 	}
 	
 	@OnlyIn(Dist.CLIENT)
+	@SuppressWarnings({ "resource", "null" })
 	private void handleClient() {
 		Player player = Minecraft.getInstance().player;
 		BlockEntity tileentity = player.getLevel().getBlockEntity(pos);

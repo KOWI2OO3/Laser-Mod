@@ -86,6 +86,7 @@ public class TileEntityRemoteCC extends TileEntityLaserController {
 		return getConnectedType(controlPos);
 	}
 	
+	@SuppressWarnings("null")
 	public int getConnectedType(BlockPos pos) {
 		Block block = getLevel().getBlockState(pos).getBlock();
 		if(block == ModBlocks.Laser.get())
@@ -113,7 +114,7 @@ public class TileEntityRemoteCC extends TileEntityLaserController {
 
 	@Nonnull
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side )
+    public <T> LazyOptional<T> getCapability(@Nullable Capability<T> cap, @Nullable Direction side )
     {
 		//sync();
         if( cap == Capabilities.CAPABILITY_PERIPHERAL) {
@@ -269,13 +270,15 @@ public class TileEntityRemoteCC extends TileEntityLaserController {
 		this.te = te;
 	}
 	
+	@Nonnull 
 	@Override
 	public String getType() {
 		return "Laser_Controller";
 	}
 
+	@Nonnull 
 	@Override
-	public MethodResult callMethod(IComputerAccess computer, ILuaContext context, int methodIndex, IArguments args) throws LuaException {
+	public MethodResult callMethod(@Nonnull IComputerAccess computer, @Nonnull ILuaContext context, int methodIndex, @Nonnull IArguments args) throws LuaException {
 		int type = te.getConnectedType();
 		switch(type) {
 			case 1:	// Laser
@@ -283,12 +286,12 @@ public class TileEntityRemoteCC extends TileEntityLaserController {
 				return callLaserMethod(computer, context, methodIndex, args);
 			case 2:
 				return callProjectorMethod(computer, context, methodIndex, args);
-				// return callProjectorMethod(computer, context, methodIndex, args);
 			default:
 				return callDefaultMethod(computer, context, methodIndex, args);
 		}
 	}
 
+	@Nonnull 
 	@Override
 	public String[] getMethodNames() {
 		int type = te.getConnectedType();
@@ -334,10 +337,11 @@ public class TileEntityRemoteCC extends TileEntityLaserController {
 	}
 	
 	@Override
-	public boolean equals(IPeripheral other) {
+	public boolean equals(@Nullable IPeripheral other) {
 		return false;
 	}
 
+	@SuppressWarnings("null")
 	public Object[] getTile() {
 		if(te.controlPos == null)
 			return null;
@@ -355,6 +359,7 @@ public class TileEntityRemoteCC extends TileEntityLaserController {
 	}
 
 	@OnlyIn(Dist.CLIENT)
+	@SuppressWarnings({ "resource", "null" })
 	private BlockEntity getTileClient() {
 		return Minecraft.getInstance().level.getBlockEntity(te.controlPos);
 	}
@@ -501,6 +506,7 @@ public class TileEntityRemoteCC extends TileEntityLaserController {
 		return new LuaProjectorWidget(data, sync);
 	}
 
+	@SuppressWarnings("null")
 	public MethodResult callDefaultMethod(IComputerAccess compuer, ILuaContext content, int methodIndex, IArguments args) throws LuaException {
 		switch(methodIndex) {
 			// connect
@@ -577,6 +583,7 @@ public class TileEntityRemoteCC extends TileEntityLaserController {
 		}
 	}
 
+	@SuppressWarnings("null")
 	public MethodResult callLaserMethod(IComputerAccess compuer, ILuaContext content, int methodIndex, IArguments args) throws LuaException {
 		try {
 			switch( methodIndex )

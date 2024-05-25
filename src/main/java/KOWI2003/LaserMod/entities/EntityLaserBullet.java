@@ -2,6 +2,8 @@ package KOWI2003.LaserMod.entities;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.items.LaserItem;
 import KOWI2003.LaserMod.utils.LaserItemUtils;
@@ -93,24 +95,16 @@ public class EntityLaserBullet extends AbstractArrow {
 	}
 	
 	@Override
-	protected void onHit(HitResult hit) {
+	protected void onHit(@Nonnull HitResult hit) {
 		HitResult.Type hitresult$type = hit.getType();
 		if (hitresult$type == HitResult.Type.ENTITY) {
 			this.onHitEntity((EntityHitResult)hit);
-		} else if (hitresult$type == HitResult.Type.BLOCK) {
-//			this.onHitBlock((BlockHitResult)hit);
 		}
-
-//		if (hitresult$type != HitResult.Type.MISS) {
-//			this.gameEvent(GameEvent.PROJECTILE_LAND, this.getOwner());
-//		}
 		kill();
 	}
 	
 	@Override
-	protected void onHitEntity(EntityHitResult hit) {
-//		float damage = 6;
-//		float knockback = .5f;
+	protected void onHitEntity(@Nonnull EntityHitResult hit) {
 		float knockback = entityData.get(KNOCKBACK);
 		
 		Entity entity = hit.getEntity();

@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.items;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.gui.GuiManual;
 import KOWI2003.LaserMod.gui.manual.ManualHandler;
 import KOWI2003.LaserMod.gui.manual.data.GuiContext;
@@ -20,7 +22,7 @@ public class ItemManual extends ItemDefault {
 	}
 	
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResultHolder<ItemStack> use(@Nonnull Level level, @Nonnull Player player, @Nonnull InteractionHand hand) {
 		if(level.isClientSide) {
 			handleClient();
 		}
@@ -31,7 +33,7 @@ public class ItemManual extends ItemDefault {
 	void handleClient() {
 		if(!ManualHandler.isInitialized())
 			ManualHandler.initContext();
-//		Minecraft.getInstance().setScreen(new GuiManual(ManualHandler.MAIN));
+			
 		GuiContext data = GuiManual.openMenu == null ? new MainPage("main") : GuiManual.openMenu; // from Gui.OpenMenu
 		data.init();
 		ManualHandler.initContext();

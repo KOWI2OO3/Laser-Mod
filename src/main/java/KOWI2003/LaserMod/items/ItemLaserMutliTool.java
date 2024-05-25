@@ -2,6 +2,8 @@ package KOWI2003.LaserMod.items;
 
 import java.util.function.Consumer;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.items.ItemUpgradeBase.LaserTools;
 import KOWI2003.LaserMod.items.render.RenderMultiTool;
@@ -34,7 +36,7 @@ public class ItemLaserMutliTool extends LaserItem {
 	}
 	
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+	public void initializeClient(@Nonnull Consumer<IClientItemExtensions> consumer) {
 		consumer.accept(new IClientItemExtensions() {
 			
 			@Override

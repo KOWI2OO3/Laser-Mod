@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 
@@ -53,7 +55,7 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 	}
 	
 	@Override
-	public void tick(Level level, BlockPos pos, BlockState state, TileEntityLaser te) {
+	public void tick(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull TileEntityLaser te) {
 		super.tick(level, pos, state, te);
 	}
 	
@@ -63,6 +65,7 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 	}
 	
 	@Override
+	@SuppressWarnings("null")
 	public void updateLaser() {
 		if(rotation.x == 0 && rotation.y == 0) {
 			super.updateLaser();
@@ -98,13 +101,11 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 				if(!canPassThrough(x, y, z, state)) {
 					updateLaserInteractables(i, pos);
 					distance = getRenderDistance(x, y, z, state, i);
-//					distance = i;
 					stuckDistance = i;
 					break;
 				}
-				if(i >= stuckDistance-0.5f && canPassThrough(x, y, z, state)) {
+				if(i >= stuckDistance-0.5f && canPassThrough(x, y, z, state))
 					distance = properties.getProperty(Properties.MAX_DISTANCE);
-				}
 			}
 		}
 	}
@@ -129,10 +130,6 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 		Vector3f dir = direction.copy();
 		dir.sub(getLaserPosVector());
 		dir.normalize();
-//		Vector3f rotation = MathUtils.forwardToEuler(dir, MathUtils.normalVectorFrom(dir));
-
-//		rotation = MathUtils.mulVector(rotation, 10);
-//		setRotationEular(new Vec2((float)rotation.x(), -(float)rotation.y()));
 	}
 	
 	public void setDirectionDirect(Vector3f direction) {
@@ -163,6 +160,7 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 		return super.getRenderDistance(pos, newState, distance) - 0.35f;
 	}
 	
+	@SuppressWarnings("null")
 	public boolean canPassThrough(double x, double y, double z, BlockState state) {
 		Vector3f dir = getForward();
 		
@@ -195,9 +193,9 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 		return true;
 	}
 	
+	@SuppressWarnings("null")
 	public double getRenderDistance(double x, double y, double z, BlockState state, double distance) {
 		Vector3f dir = getForward();
-//		float stepSize = 0.1f;
 		BlockPos pos = new BlockPos(Math.round(x), Math.round(y), Math.round(z));
 		
 		VoxelShape shape = state.getCollisionShape(getLevel(), pos);
@@ -227,6 +225,7 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 		return distance;
 	}
 	
+	@SuppressWarnings("null")
 	private void updateLaserInteractables(float distance, BlockPos newPos) {
 		if(distance < stuckDistance)
 			handleTurnOffForInteractable();
@@ -238,7 +237,7 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 	}
 	
 	@Override
-	protected void saveAdditional(CompoundTag nbt) {
+	protected void saveAdditional(@Nonnull CompoundTag nbt) {
 		CompoundTag rotNBT = new CompoundTag();
 		rotNBT.putFloat("X", rotation.x);
 		rotNBT.putFloat("Y", rotation.y);
@@ -249,7 +248,7 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 	}
 	
 	@Override
-	public void load(CompoundTag nbt) {
+	public void load(@Nonnull CompoundTag nbt) {
 		if(nbt.contains("Rotation")) {
 			CompoundTag rotNBT = nbt.getCompound("Rotation");
 			if(rotNBT.contains("X") && rotNBT.contains("Y"))
@@ -287,6 +286,7 @@ public class TileEntityAdvancedLaser extends TileEntityLaser {
 	}
 	
 	@Override
+	@SuppressWarnings("null")
 	public <T extends Entity> List<T> getEntitiesInLaser(Class<T> entityType) {
 		Set<T> entities = new HashSet<>();
 		Vector3f dir = getForward();

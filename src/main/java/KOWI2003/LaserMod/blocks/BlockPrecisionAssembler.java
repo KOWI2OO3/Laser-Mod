@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.tileentities.TileEntityPrecisionAssembler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,8 +36,8 @@ public class BlockPrecisionAssembler extends BlockHorizontal {
 	}
 	
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-			BlockHitResult raytraceResult) {
+	public InteractionResult use(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand,
+			@Nonnull BlockHitResult raytraceResult) {
 		if(!world.isClientSide) {
 			BlockEntity te = world.getBlockEntity(pos);
 			if(te instanceof TileEntityPrecisionAssembler) {
@@ -47,12 +49,12 @@ public class BlockPrecisionAssembler extends BlockHorizontal {
 	}
 	
 	@Override
-	public RenderShape getRenderShape(BlockState p_49232_) {
+	public RenderShape getRenderShape(@Nonnull BlockState p_49232_) {
 		return RenderShape.MODEL;
 	}
 	
 	@Override
-	public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+	public void playerWillDestroy(@Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if(tileentity instanceof TileEntityPrecisionAssembler) {
 			TileEntityPrecisionAssembler te = ((TileEntityPrecisionAssembler)tileentity);
@@ -66,7 +68,7 @@ public class BlockPrecisionAssembler extends BlockHorizontal {
 	}
 	
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
 		return new TileEntityPrecisionAssembler(pos, state);
 	}
 	
@@ -85,24 +87,24 @@ public class BlockPrecisionAssembler extends BlockHorizontal {
 	}
 	
 	@Override
-	public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getVisualShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		return getShape(state, world, pos, context);
 	}
 	
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-//		return Utils.rotateVoxelShape(SHAPE, state.getValue(FACING).getCounterClockWise());
+	public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		return SHAPE;
 	}
 	
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		return getShape(state, world, pos, context);
 	}
 	
 	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
-			BlockEntityType<T> type) {
+	@SuppressWarnings("unchecked")
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level level, @Nonnull BlockState state,
+			@Nonnull BlockEntityType<T> type) {
 		return level.isClientSide ? null : (level0, pos, state0, blockEntity) -> ((BlockEntityTicker<BlockEntity>)blockEntity).tick(level, pos, state, blockEntity);
 	}
 

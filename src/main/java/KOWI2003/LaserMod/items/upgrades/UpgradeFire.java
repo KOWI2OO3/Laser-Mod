@@ -23,6 +23,7 @@ public class UpgradeFire extends ItemUpgradeBase {
 	}
 	
 	@Override
+	@SuppressWarnings("null")
 	public void runLaserBlock(ILaserAccess te, BlockPos pos) {
 		BlockState state = te.getTileEntity().getLevel().getBlockState(pos);
 		if(state.isFlammable(te.getTileEntity().getLevel(), pos, te.getDirection().getOpposite())) {

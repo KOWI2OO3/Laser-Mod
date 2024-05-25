@@ -9,7 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.network.chat.contents.TranslatableContents;
 
 public class ManualTextBox extends ManualComponent<TextBoxComponent> {
@@ -19,6 +18,7 @@ public class ManualTextBox extends ManualComponent<TextBoxComponent> {
 	
 	int offset = 6;
 	
+	@SuppressWarnings("resource")
 	public ManualTextBox(TextBoxComponent data) {
 		super(data);
 		this.msg = data.Text;
@@ -29,6 +29,7 @@ public class ManualTextBox extends ManualComponent<TextBoxComponent> {
 	}
 	
 	@Override
+	@SuppressWarnings("resource")
 	public void renderComponent(PoseStack stack, int mouseX, int mouseY) {
 		if(data.Text != null && !data.Text.isEmpty()) {
 			float[] color = Utils.parseColor(data.TextColor);
@@ -48,6 +49,7 @@ public class ManualTextBox extends ManualComponent<TextBoxComponent> {
 	
 	
 	@Override
+	@SuppressWarnings("resource")
 	public void updateOnSizeChanged() {
 		int height = (Minecraft.getInstance().font.split(getComponent(), width).size() + 1) * Minecraft.getInstance().font.lineHeight;
 		if(this.height < height)

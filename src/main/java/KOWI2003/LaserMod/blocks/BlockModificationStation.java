@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.tileentities.TileEntityModStation;
 import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.core.BlockPos;
@@ -29,8 +31,8 @@ public class BlockModificationStation extends BlockHorizontal {
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player,
-			InteractionHand hand, BlockHitResult raytraceResult) {
+	public InteractionResult use(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull Player player,
+			@Nonnull InteractionHand hand, @Nonnull BlockHitResult raytraceResult) {
 		if(!world.isClientSide) {
 			BlockEntity te = world.getBlockEntity(pos);
 			if(te instanceof TileEntityModStation) {
@@ -42,27 +44,27 @@ public class BlockModificationStation extends BlockHorizontal {
 	}
 	
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
 		return new TileEntityModStation(pos, state);
 	}
 	
 	@Override
-	public RenderShape getRenderShape(BlockState state) {
+	public RenderShape getRenderShape(@Nonnull BlockState state) {
 		return RenderShape.MODEL;
 	}
 	
 	@Override
-	public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getVisualShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		return getShape(state, world, pos, context);
 	}
 	
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		return getShape(state, world, pos, context);
 	}
 	
 	@Override
-	public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+	public void playerWillDestroy(@Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if(tileentity instanceof TileEntityModStation) {
 			TileEntityModStation te = ((TileEntityModStation)tileentity);
@@ -76,7 +78,7 @@ public class BlockModificationStation extends BlockHorizontal {
 	}
 	
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		List<AABB> aabbs = new ArrayList<AABB>();
 		aabbs.add(new AABB(0.25, 0, 0, 0.938, 0.125, 1));
 		aabbs.add(new AABB(0, 0, 0.062, 1, 0.125, 0.938));

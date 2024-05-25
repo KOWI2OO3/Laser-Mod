@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.utils.compat.jei.precisionAssembler;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.init.ModBlocks;
@@ -30,7 +32,7 @@ public class PrecisionRecipeCategory extends AbstractPrecisionRecipeCategory<IPr
 	}
 	
 	@Override
-	public void draw(IPrecisionAssemblerRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX,
+	public void draw(@Nonnull IPrecisionAssemblerRecipe recipe, @Nonnull IRecipeSlotsView recipeSlotsView, @Nonnull PoseStack stack, double mouseX,
 			double mouseY) {
 		animatedPorgress.draw(stack, 72, 24 + 2);
 		super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
@@ -51,48 +53,13 @@ public class PrecisionRecipeCategory extends AbstractPrecisionRecipeCategory<IPr
 		return icon;
 	}
 
-//	@Override
-//	public void setIngredients(IPrecisionAssemblerRecipe recipe, IIngredients ingredients) {
-//		List<Ingredient> stacks = new ArrayList<>();
-//		stacks.add(recipe.getInputBaseIngredient());
-//		for(Object obj: recipe.getInputsIngredient()) {
-//			if(obj instanceof Ingredient)
-//				stacks.add((Ingredient)obj);
-//			else if(obj instanceof ItemStack)
-//				stacks.add(Ingredient.of((ItemStack)obj));
-//			else if(obj instanceof TagKey<?>)
-//				stacks.add(Ingredient.of((TagKey<Item>)obj));
-//			else 
-//				stacks.add(Ingredient.EMPTY);
-//		}
-//		if(recipe.getInputs().length < 3) {
-//			for (int i = 0; i < recipe.getInputs().length - 3; i++) {
-//				stacks.add(null);
-//			}
-//		}
-//		
-//		ingredients.setInputIngredients(stacks);
-//		ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
-//	}
-
-//	@Override
-//	public void setRecipe(IRecipeLayout recipeLayout, IPrecisionAssemblerRecipe recipe, IIngredients ingredients) {
-//		IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-//		stacks.init(inputBase, true, 45, 31-12 + 2);
-//		stacks.init(input1, true, 9, -2 + 2);
-//		stacks.init(input2, true, 9, 31-12 + 2);
-//		stacks.init(input3, true, 9, 52-12 + 2);
-//		stacks.init(output, false, 127, 31-12 + 2);
-//		stacks.set(ingredients);
-//	}
-
 	@Override
 	public RecipeType<IPrecisionAssemblerRecipe> getRecipeType() {
 		return RecipeCategories.PRECISION_ASSEMBLER;
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayoutBuilder builder, IPrecisionAssemblerRecipe recipe, IFocusGroup focuses) {
+	public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull IPrecisionAssemblerRecipe recipe, @Nonnull IFocusGroup focuses) {
 		builder.addSlot(RecipeIngredientRole.INPUT, 46, 32-12 + 2).addIngredients(recipe.getInputBase());
 		builder.addSlot(RecipeIngredientRole.INPUT, 10, -1 + 2).addIngredients(recipe.getInputs().length > 0 ? recipe.getInputs()[0] : Ingredient.EMPTY);
 		builder.addSlot(RecipeIngredientRole.INPUT, 10, 32-12 + 2).addIngredients(recipe.getInputs().length > 1 ? recipe.getInputs()[1] : Ingredient.EMPTY);

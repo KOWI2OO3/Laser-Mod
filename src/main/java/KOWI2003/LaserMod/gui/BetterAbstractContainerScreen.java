@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.gui;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -27,7 +29,7 @@ public abstract class BetterAbstractContainerScreen<T extends AbstractContainerM
 		super.clearWidgets();
 	}
 	
-	protected <K extends GuiEventListener & Widget & NarratableEntry> K addRenderableWidget(K widget) {
+	protected <K extends GuiEventListener & Widget & NarratableEntry> K addRenderableWidget(@Nonnull K widget) {
 		if(widget instanceof AbstractWidget) buttons.add((AbstractWidget)widget);
 		return super.addRenderableWidget(widget);
 	}

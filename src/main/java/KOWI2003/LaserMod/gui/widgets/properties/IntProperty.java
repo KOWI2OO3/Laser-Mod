@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui.widgets.properties;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.utils.RenderUtils;
@@ -25,9 +27,9 @@ public class IntProperty extends DataProperty<Integer> {
 		hasRange = min < max;
 		
 		rangeSlider = new ForgeSlider(x + 33, y, 55, height, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), min, max, value, 1f, 0, false);
-//		rangeSlider = new Slider(x, y, MutableComponent.create(new LiteralContents(""), min, max, value, (button) -> {}, (button) -> {});
 	}
 	
+	@SuppressWarnings("resource")
 	public IntProperty(int x, int y, int width, int height, String name, int value) {
 		super(x, y, width, 21, name, value);
 		int localX = 20;
@@ -49,7 +51,7 @@ public class IntProperty extends DataProperty<Integer> {
 	}
 	
 	@Override
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		if(hasRange) {
 			rangeSlider.render(matrix, mouseX, mouseY, partialTicks);
 			if(rangeSlider.getValue() != value) {
@@ -62,7 +64,6 @@ public class IntProperty extends DataProperty<Integer> {
 			Lower.render(matrix, mouseX, mouseY, partialTicks);
 		}
 		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", x + 2, y, 35f, 10, 0xffffff);
-//		drawString(matrix, Minecraft.getInstance().font, getDisplayName() + ": ", x + 2, y + Minecraft.getInstance().font.lineHeight/2, 0xffffff);
 	}
 	
 	@Override

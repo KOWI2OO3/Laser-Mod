@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 import java.util.UUID;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.gui.widgets.DataProperties.RangeProperty;
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorWidgetData;
 import dan200.computercraft.api.lua.IArguments;
@@ -26,6 +28,7 @@ public class LuaProjectorWidget implements IDynamicLuaObject {
         return dataSupplier != null & dataSupplier.get() != null;
     }
 
+    @Nonnull
     @Override
     public String[] getMethodNames() {
         return new String[] {
@@ -52,8 +55,9 @@ public class LuaProjectorWidget implements IDynamicLuaObject {
         };
     }
 
+    @Nonnull
     @Override
-    public final MethodResult callMethod(ILuaContext context, int method, IArguments arguments) throws LuaException {
+    public final MethodResult callMethod(@Nonnull ILuaContext context, int method, @Nonnull IArguments arguments) throws LuaException {
         if(!isValid())
             throw new LuaException("Internal Object Error!");
 

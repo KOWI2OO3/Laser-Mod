@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.jetbrains.annotations.NotNull;
@@ -59,7 +60,7 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 
 	private static final UUID[] ARMOR_MODIFIER_UUID_PER_SLOT = new UUID[]{UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"), UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"), UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"), UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")};
 	public static final DispenseItemBehavior DISPENSE_ITEM_BEHAVIOR = new DefaultDispenseItemBehavior() {
-		protected ItemStack execute(BlockSource p_40408_, ItemStack p_40409_) {
+		protected ItemStack execute(@Nonnull BlockSource p_40408_, @Nonnull ItemStack p_40409_) {
 			return ArmorItem.dispenseArmor(p_40408_, p_40409_) ? p_40409_ : super.execute(p_40408_, p_40409_);
 		}
 	};
@@ -156,7 +157,7 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 	}
 	
 	@Override
-	public boolean isValidRepairItem(ItemStack stack, ItemStack repairItem) {
+	public boolean isValidRepairItem(@Nonnull ItemStack stack, @Nonnull ItemStack repairItem) {
 		return false;
 	}
 
@@ -179,7 +180,7 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 	}
 	
 	@Override
-	public boolean isEnchantable(ItemStack stack) {
+	public boolean isEnchantable(@Nonnull ItemStack stack) {
 		return false;
 	}
 	
@@ -193,25 +194,25 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 		return stack;
 	}
 
-	public InteractionResultHolder<ItemStack> use(Level p_40395_, Player p_40396_, InteractionHand p_40397_) {
-		ItemStack itemstack = p_40396_.getItemInHand(p_40397_);
+	public InteractionResultHolder<ItemStack> use(@Nonnull Level level, @Nonnull Player player, @Nonnull InteractionHand hand) {
+		ItemStack itemstack = player.getItemInHand(hand);
 		EquipmentSlot equipmentslot = Mob.getEquipmentSlotForItem(itemstack);
-		ItemStack itemstack1 = p_40396_.getItemBySlot(equipmentslot);
+		ItemStack itemstack1 = player.getItemBySlot(equipmentslot);
 		if (itemstack1.isEmpty()) {
-			p_40396_.setItemSlot(equipmentslot, itemstack.copy());
-			if (!p_40395_.isClientSide()) {
-				p_40396_.awardStat(Stats.ITEM_USED.get(this));
+			player.setItemSlot(equipmentslot, itemstack.copy());
+			if (!level.isClientSide()) {
+				player.awardStat(Stats.ITEM_USED.get(this));
 			}
 
 			itemstack.setCount(0);
-			return InteractionResultHolder.sidedSuccess(itemstack, p_40395_.isClientSide());
+			return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
 		} else {
 			return InteractionResultHolder.fail(itemstack);
 		}
 	}
 	
 	@Override
-	public int getBarWidth(ItemStack stack) {
+	public int getBarWidth(@Nonnull ItemStack stack) {
 		return (int) Math.round((1d - getDurabilityForDisplay(stack))*13);
 	}
 	
@@ -220,12 +221,12 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 	}
 
 	@Override
-	public boolean isBarVisible(ItemStack stack) {
+	public boolean isBarVisible(@Nonnull ItemStack stack) {
 		return getCharge(stack) < getMaxCharge(stack);
 	}
 	
 	@Override
-	public int getBarColor(ItemStack stack) {
+	public int getBarColor(@Nonnull ItemStack stack) {
 		return Mth.hsvToRgb(Math.max(0.0F, (float) (1.0F - getDurabilityForDisplay(stack))) / 3.0F, 1.0F, 1.0F);
 	}
 	
@@ -240,7 +241,7 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 	}
 	
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+	public void initializeClient(@Nonnull Consumer<IClientItemExtensions> consumer) {
 		consumer.accept(new IClientItemExtensions() {
 			
 			@Override
@@ -251,25 +252,13 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 		});
 	}
 	
-//	@Override
-//	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//		consumer.accept(new IItemRenderProperties() {
-//			
-//			@Override
-//			public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-//					EquipmentSlot armorSlot, HumanoidModel<?> _default) {
-//				return LaserArmorModelHandler.getModel(itemStack, _default);
-//			}
-//		});
-//	}
-	
 	@Override
 	public String[] getAbilityNames(ItemUpgradeBase upgrade) {
 		return upgrade.getArmorAbilityNames();
 	}
 	
 	@Override
-	public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
+	public void appendHoverText(@Nonnull ItemStack stack, @Nullable Level world, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flags) {
 		MutableComponent charge = MutableComponent.create(new LiteralContents("Charge: " + getCharge(stack) + "/" + getMaxCharge(stack)));
 		charge.setStyle(charge.getStyle().withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(0.35f, 0.35f, 0.35f))));
 		tooltip.add(MutableComponent.create(new LiteralContents("Press " + ModKeybindings.ArmorToggle.getKey().getDisplayName().getString().toUpperCase() + " to " + 
@@ -370,9 +359,9 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 		}
 		
 		@Override
-		public int getDurabilityForSlot(EquipmentSlot slot) { return HEALTH_PER_SLOT[slot.getIndex()] * durability; }
+		public int getDurabilityForSlot(@Nonnull EquipmentSlot slot) { return HEALTH_PER_SLOT[slot.getIndex()] * durability; }
 		@Override
-		public int getDefenseForSlot(EquipmentSlot slot) { return defense[slot.getIndex()]; }
+		public int getDefenseForSlot(@Nonnull EquipmentSlot slot) { return defense[slot.getIndex()]; }
 		@Override
 		public int getEnchantmentValue() { return 0; }
 		@Override

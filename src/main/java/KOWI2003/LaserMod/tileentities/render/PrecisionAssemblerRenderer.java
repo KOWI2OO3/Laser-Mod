@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.tileentities.render;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -14,14 +16,10 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.item.Items;
 
 public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntityPrecisionAssembler> {
-	private final BlockEntityRendererProvider.Context context;
-	
-	public PrecisionAssemblerRenderer(BlockEntityRendererProvider.Context context) {
-		this.context = context;
-	}
+	public PrecisionAssemblerRenderer(BlockEntityRendererProvider.Context context) {}
 
 	@Override
-	public void render(TileEntityPrecisionAssembler te, float partialTicks, PoseStack matrix, MultiBufferSource bufferIn,
+	public void render(@Nonnull TileEntityPrecisionAssembler te, float partialTicks, @Nonnull PoseStack matrix, @Nonnull MultiBufferSource bufferIn,
 			int combinedLightIn, int combinedOverlayIn) {
 		matrix.pushPose();
 		matrix.translate(0.5f, 0f, 0.5);

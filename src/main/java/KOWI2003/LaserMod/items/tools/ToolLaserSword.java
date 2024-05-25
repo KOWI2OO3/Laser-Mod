@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.items.tools;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.items.ItemLaserToolBase;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.items.ItemUpgradeBase.LaserTools;
@@ -19,14 +21,13 @@ public class ToolLaserSword extends ItemLaserToolBase {
 	}
 	
 	@Override
-	public boolean canAttackBlock(BlockState state, Level level,
-			BlockPos blockpos, Player player) {
-		// TODO Auto-generated method stub
+	public boolean canAttackBlock(@Nonnull BlockState state, @Nonnull Level level,
+			@Nonnull BlockPos blockpos, @Nonnull Player player) {
 		return !player.isCreative();
 	}
 
 	@Override
-	public float getDestroySpeed(ItemStack stack, BlockState state) {
+	public float getDestroySpeed(@Nonnull ItemStack stack, @Nonnull BlockState state) {
 		if(isExtended(stack)) {
 	      if (state.is(Blocks.COBWEB)) {
 	         return 15.0F;
@@ -39,7 +40,7 @@ public class ToolLaserSword extends ItemLaserToolBase {
 		return state.requiresCorrectToolForDrops() ? 0f : 1f;
     }
 	
-	public boolean isCorrectToolForDrops(BlockState state) {
+	public boolean isCorrectToolForDrops(@Nonnull BlockState state) {
 	      return state.is(Blocks.COBWEB);
 	}
 	

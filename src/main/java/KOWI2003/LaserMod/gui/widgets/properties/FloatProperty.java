@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui.widgets.properties;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.utils.RenderUtils;
@@ -24,10 +26,11 @@ public class FloatProperty extends DataProperty<Float> {
 		this(x, y, width, height, name, value);
 		hasRange = min < max;
 		
-		rangeSlider = new ForgeSlider(x + 35, y, width - 37, height, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), min, max, value, .001f, 0, false);
-//		rangeSlider = new Slider(x, y, MutableComponent.create(new LiteralContents(""), min, max, value, (button) -> {}, (button) -> {});
+		rangeSlider = new ForgeSlider(x + 35, y, width - 37, height, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 
+			min, max, value, .001f, 0, false);
 	}
 	
+	@SuppressWarnings("resource")
 	public FloatProperty(int x, int y, int width, int height, String name, float value) {
 		super(x, y, width, 21, name, value);
 		int localX = (name.length() <= 3 ? 0 : Minecraft.getInstance().font.width(getDisplayName())/2);
@@ -49,7 +52,7 @@ public class FloatProperty extends DataProperty<Float> {
 	}
 	
 	@Override
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		if(hasRange) {
 			rangeSlider.render(matrix, mouseX, mouseY, partialTicks);
 			if(rangeSlider.getValue() != value) {
@@ -62,13 +65,6 @@ public class FloatProperty extends DataProperty<Float> {
 			Lower.render(matrix, mouseX, mouseY, partialTicks);
 		}
 		RenderUtils.Gui.drawStringWithinLine(matrix, getDisplayName() + ": ", x + 2, y + 10, 35f, 0xffffff);
-//		matrix.pushPose();
-//		String msg = getDisplayName() + ": ";
-//		float factor = Math.min(1, 35f/ Minecraft.getInstance().font.width(msg));
-//		matrix.translate(x + 2, y + Minecraft.getInstance().font.lineHeight/2, 0);
-//		matrix.scale(factor, factor, factor);
-//		drawString(matrix, Minecraft.getInstance().font, msg, 0, +Minecraft.getInstance().font.lineHeight/2, 0xffffff);
-//		matrix.popPose();
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.blocks;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.tileentities.TileEntityDeviceHub;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -12,7 +14,7 @@ public class BlockDeviceHub extends BlockHorizontal {
 	}
 	
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
 		return new TileEntityDeviceHub(pos, state);
 	}
 

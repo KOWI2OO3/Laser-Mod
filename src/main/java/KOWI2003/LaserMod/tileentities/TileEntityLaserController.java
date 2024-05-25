@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.tileentities;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.init.ModTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -26,7 +28,7 @@ public class TileEntityLaserController extends SyncableBlockEntity implements Bl
 	}
 	
 	@Override
-	protected void saveAdditional(CompoundTag nbt) {
+	protected void saveAdditional(@Nonnull CompoundTag nbt) {
 		CompoundTag controlPosNBT = new CompoundTag();
 		if(controlPos != null) {
 			controlPosNBT.putInt("x", controlPos.getX());
@@ -38,7 +40,7 @@ public class TileEntityLaserController extends SyncableBlockEntity implements Bl
 	}
 	
 	@Override
-	public void load(CompoundTag nbt) {
+	public void load(@Nonnull CompoundTag nbt) {
 		if(nbt.contains("controlPosition")) {
 			CompoundTag controlPosNBT = nbt.getCompound("controlPosition");
 			if(controlPosNBT.contains("x") && controlPosNBT.contains("y") && controlPosNBT.contains("z")) {
@@ -50,13 +52,14 @@ public class TileEntityLaserController extends SyncableBlockEntity implements Bl
 	}
 	
 	@Override
-	public void tick(Level level, BlockPos pos, BlockState state, TileEntityLaserController te) {
+	public void tick(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull TileEntityLaserController te) {
 		sync();
 		if(!(getControlTileEntity() instanceof TileEntityLaser || getControlTileEntity() instanceof TileEntityLaserProjector)) {
 			controlPos = null;
 		}
 	}
 	
+	@SuppressWarnings("null")
 	public BlockEntity getControlTileEntity() {
 		if(controlPos == null)
 			return null;

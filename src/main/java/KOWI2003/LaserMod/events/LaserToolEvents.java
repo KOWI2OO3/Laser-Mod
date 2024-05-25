@@ -24,9 +24,13 @@ public class LaserToolEvents {
 
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
+	@SuppressWarnings("resource")
 	public void onClickInput(InputEvent.InteractionKeyMappingTriggered event) 
 	{
 		Player player = Minecraft.getInstance().player;
+		if(player == null)
+			return;
+		
 		if(player.getItemInHand(event.getHand()).getItem() instanceof ItemLaserToolBase && 
 				((ItemLaserToolBase)player.getItemInHand(event.getHand()).getItem()).getProperties(player.getItemInHand(event.getHand())).hasUpgarde("mining") && !player.isShiftKeyDown()) {
 			if(event.isAttack())
@@ -53,11 +57,8 @@ public class LaserToolEvents {
 			List<Direction> dirs = new ArrayList<>();
 			
 			for (Direction dir : Direction.values()) {
-				if(dir != side && dir != side.getOpposite()) {
+				if(dir != side && dir != side.getOpposite())
 					dirs.add(dir);
-//					player.level.destroyBlock(Utils.offset(currentPosition, dir, 1), false);
-//					PacketHandler.sendToServer(new PacketMultiToolLaserBreakBlock(Utils.offset(currentPosition, dir, 1), InteractionHand.MAIN_HAND));
-				}
 			}
 			
 			BlockPos topLeft = Utils.offset(Utils.offset(new BlockPos(0, 0, 0), dirs.get(0), 1), dirs.get(2), 1);

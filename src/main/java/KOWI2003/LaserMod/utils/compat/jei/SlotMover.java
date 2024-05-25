@@ -3,6 +3,8 @@ package KOWI2003.LaserMod.utils.compat.jei;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.Rect2i;
@@ -32,7 +34,7 @@ public class SlotMover<T extends AbstractContainerScreen<?>> implements IGuiCont
 	}
 	
 	@Override
-	public List<Rect2i> getGuiExtraAreas(T containerScreen) {
+	public List<Rect2i> getGuiExtraAreas(@Nonnull T containerScreen) {
 		List<Rect2i> tabBoxes = new ArrayList<>();
 		
 		for(Rect2i rect : list) {
@@ -44,7 +46,7 @@ public class SlotMover<T extends AbstractContainerScreen<?>> implements IGuiCont
 	}
 	
 	@Override
-	public Object getIngredientUnderMouse(T containerScreen, double mouseX, double mouseY) {
+	public Object getIngredientUnderMouse(@Nonnull T containerScreen, double mouseX, double mouseY) {
 		return null;
 	}
 	

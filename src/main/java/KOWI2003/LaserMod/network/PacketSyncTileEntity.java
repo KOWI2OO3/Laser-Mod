@@ -34,6 +34,7 @@ public class PacketSyncTileEntity {
 		buf.writeNbt(tag);
 	}
 	
+	@SuppressWarnings("null")
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 	    ctx.get().enqueueWork(() -> {
 	        // Work that needs to be thread-safe (most work)
@@ -41,7 +42,9 @@ public class PacketSyncTileEntity {
 	        
 	        if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER) {
                 BlockEntity tile = sender.getLevel().getBlockEntity(pos);
-                tile.load(tag);
+				if(tile != null)
+                	tile.load(tag);
+				
 				for(ServerPlayer player : sender.getServer().getPlayerList().getPlayers())
 					PacketHandler.sendToClient(this, player);
 	        }else if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
@@ -49,16 +52,17 @@ public class PacketSyncTileEntity {
 	    	}
 	    });
 	    ctx.get().setPacketHandled(true);
-	    //return true;
 	}
 	
 	@OnlyIn(Dist.CLIENT)
+	@SuppressWarnings("resource")
 	private void handleClient() {
 		Level level = Minecraft.getInstance().level;
 		if(level == null) return;
 
 		BlockEntity tile = level.getBlockEntity(pos);
-		tile.load(tag);
+		if(tile != null)
+			tile.load(tag);
 	}
 
 }

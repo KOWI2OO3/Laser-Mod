@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui.widgets.properties;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.utils.RenderUtils;
@@ -24,10 +26,11 @@ public class DoubleProperty extends DataProperty<Double> {
 		this(x, y, width, height, name, value);
 		hasRange = min < max;
 		
-		rangeSlider = new ForgeSlider(x + 33, y, 55, height, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), min, max, value, .00001d, 0, false);
-//		rangeSlider = new Slider(x, y, new TextComponent(""), min, max, value, (button) -> {}, (button) -> {});
+		rangeSlider = new ForgeSlider(x + 33, y, 55, height, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 
+			min, max, value, .00001d, 0, false);
 	}
 	
+	@SuppressWarnings("resource")
 	public DoubleProperty(int x, int y, int width, int height, String name, double value) {
 		super(x, y, width, 21, name, value);
 		int localX = (name.length() <= 3 ? 0 : Minecraft.getInstance().font.width(getDisplayName())/2);
@@ -48,7 +51,7 @@ public class DoubleProperty extends DataProperty<Double> {
 	}
 	
 	@Override
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		if(hasRange) {
 			rangeSlider.render(matrix, mouseX, mouseY, partialTicks);
 			if(rangeSlider.getValue() != value) {
@@ -61,7 +64,6 @@ public class DoubleProperty extends DataProperty<Double> {
 			Lower.render(matrix, mouseX, mouseY, partialTicks);
 		}
 		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", x + 2, y, 35f, 10, 0xffffff);
-//		drawString(matrix, Minecraft.getInstance().font, getDisplayName() + ": ", x + 2, y + Minecraft.getInstance().font.lineHeight/2, 0xffffff);
 	}
 	
 	@Override

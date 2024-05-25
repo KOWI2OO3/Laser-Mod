@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.tileentities.render;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -22,14 +24,10 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.item.ItemStack;
 
 public class ModStationRenderer implements BlockEntityRenderer<TileEntityModStation> {
-	private final BlockEntityRendererProvider.Context context;
-	
-	public ModStationRenderer(BlockEntityRendererProvider.Context context) {
-		this.context = context;
-	}
+	public ModStationRenderer(BlockEntityRendererProvider.Context context) {}
 
 	@Override
-	public void render(TileEntityModStation te, float partialTicks, PoseStack matrix, MultiBufferSource bufferIn,
+	public void render(@Nonnull TileEntityModStation te, float partialTicks, @Nonnull PoseStack matrix, @Nonnull MultiBufferSource bufferIn,
 			int combinedLightIn, int combinedOverlayIn) {
 		RenderSystem.enableDepthTest();
 		matrix.pushPose();

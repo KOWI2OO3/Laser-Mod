@@ -22,8 +22,6 @@ public class ProjectorPlayer extends ProjectorWidget {
 	public String username;
 	public GenericConsumer<GameProfile> profile;
 	
-	private boolean isProfileChecked = false;
-	
 	public ProjectorPlayer(ProjectorPlayerData data) {
 		super(data);
 		liveModel = data.liveModel;
@@ -43,7 +41,6 @@ public class ProjectorPlayer extends ProjectorWidget {
 		this.isChild = isChild;
 		this.username = username;
 		this.profile = profile;
-//		updateProfile();
 		setScalingType(ScalingType.Rectangular);
 		
 	}
@@ -54,7 +51,6 @@ public class ProjectorPlayer extends ProjectorWidget {
 		this.isChild = isChild;
 		this.username = username;
 		this.profile = profile;
-//		updateProfile();
 		setScalingType(ScalingType.Rectangular);
 	}
 	
@@ -62,21 +58,12 @@ public class ProjectorPlayer extends ProjectorWidget {
 	public PoseStack getRenderMatrix(PoseStack matrix) {
 		matrix = super.getRenderMatrix(matrix);
 		matrix.translate(x, y, z);
-//		float scale = 100f * getScale();
-//		scale *= 0.7f;
-//		if(liveModel) {
-//			scale *= 1.05f;
-//			matrix.scale(scale, scale, scale);
-//		}
 		return matrix;
 	}
 	
 	@Override
+	@SuppressWarnings({ "resource", "null" })
 	public void renderWidget(RenderContext<?> context) {
-//		context.getMatrix().pushPose();
-//		renderOutline(context);
-//		context.getMatrix().popPose();
-		
 		PoseStack matrix = context.getMatrix();
 		BlockEntity te = context.getTileentity();
 		matrix.pushPose();
@@ -116,8 +103,7 @@ public class ProjectorPlayer extends ProjectorWidget {
 			else
 				if(profile != null && profile.getStored() != null)
 					RenderUtils.renderPlayerGameProfile(matrix, profile.getStored(), 0, scale*1.5f, 0, scale, new float[] {1.0f, 1.0f, 1.0f, getAlpha(te)}, context.getBuffer(), context.getCombinedLight(), context.getCombinedOverlay(), isChild);
-		
-//		System.out.println(profile);
+					
 		matrix.popPose();
 	}
 	

@@ -8,6 +8,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.checkerframework.framework.qual.DefaultQualifierInHierarchy;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -124,7 +126,7 @@ public class DataProperties extends AbstractWidget {
 	}
 	
 	@Override
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		float tint = 0.4f;
 		RenderUtils.setupStencil();
 		RenderUtils.Gui.drawQuadColor(matrix, x, y, width, height, tint, tint, tint);
@@ -140,8 +142,6 @@ public class DataProperties extends AbstractWidget {
 		matrix.popPose();
 		
 		RenderUtils.disableStencil();
-		
-//		super.render(matrix, mouseX, mouseY, partialTicks);
 	}
 	
 	public boolean hasAnyChanged() {
@@ -231,7 +231,6 @@ public class DataProperties extends AbstractWidget {
 			for (DataProperty<?> property : properties) {
 				if(!property.isMouseOver(mouseX - x, mouseY - y - offset))
 					property.changeFocus(false);
-//				if(property.isMouseOver(mouseX - x, mouseY - y - offset))
 				check = property.mouseClicked(mouseX - x, mouseY - y - offset, button) || check;
 			}
 		}else
@@ -242,29 +241,28 @@ public class DataProperties extends AbstractWidget {
 	@Override
 	public boolean keyPressed(int p_94745_, int p_94746_, int p_94747_) {
 		boolean check = false;
-		for (DataProperty<?> property : properties) {
+		for (DataProperty<?> property : properties) 
 			check = property.keyPressed(p_94745_, p_94746_, p_94747_)  || check;
-		}
+
 		return check;
 	}
 	
 	@Override
 	public boolean keyReleased(int p_94750_, int p_94751_, int p_94752_) {
 		boolean check = false;
-		for (DataProperty<?> property : properties) {
+		for (DataProperty<?> property : properties) 
 			check = property.keyReleased(p_94750_, p_94751_, p_94752_) || check;
-		}
+
 		return check;
 	}
 	
 	@Override
 	public boolean mouseReleased(double mouseX, double mouseY, int button) {
 		boolean check = false;
-		for (DataProperty<?> property : properties) {
+		for (DataProperty<?> property : properties) 
 			check = property.mouseReleased(mouseX - x, mouseY - y - offset, button) || check;
-		}
+		
 		return check;
-//		return super.mouseReleased(mouseX, mouseY, button);
 	}
 	
 	@Override
@@ -276,7 +274,6 @@ public class DataProperties extends AbstractWidget {
 	public boolean mouseScrolled(double mouseX, double mouseY, double deltaScroll) {
 		if(super.isMouseOver(mouseX, mouseY) && totalHeight > height) {
 			offset += deltaScroll * 5;
-			
 			offset = Math.min(0, Math.max(-(totalHeight - height), offset));
 		}
 		return super.isMouseOver(mouseX, mouseY);
@@ -285,15 +282,14 @@ public class DataProperties extends AbstractWidget {
 	@Override
 	public boolean charTyped(char p_94732_, int p_94733_) {
 		boolean check = false;
-		for (DataProperty<?> property : properties) {
+		for (DataProperty<?> property : properties)
 			check = property.charTyped(p_94732_, p_94733_) || check;
-		}
+
 		return check;
 	}
 
-	public void updateNarration(NarrationElementOutput p_169152_) {}
+	public void updateNarration(@Nonnull NarrationElementOutput p_169152_) {}
 
-	
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target({ElementType.FIELD})
 	@DefaultQualifierInHierarchy

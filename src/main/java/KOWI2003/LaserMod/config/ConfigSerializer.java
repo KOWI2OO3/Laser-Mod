@@ -15,9 +15,6 @@ public class ConfigSerializer {
 	static ConfigSerializer instance;
 	
 	ConfigSerializer() {
-//		if(Utils.isClient)
-//			configFile = new File(Minecraft.getInstance().gameDirectory + "/config/" + configFileName);
-//		else
 		configFile = new File("./config/" + configFileName);
 		
 		if(configFile.exists())

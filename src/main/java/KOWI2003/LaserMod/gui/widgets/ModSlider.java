@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui.widgets;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -24,16 +26,11 @@ public class ModSlider extends AbstractWidget {
 	}
 	
 	@Override
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTick) {
-//		RenderUtils.Gui.drawQuadColor(matrix, x, y, width, height, 1, 1, 1);
-		
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTick) {
 		RenderSystem._setShaderTexture(0, GuiLaserProjector.WIDGETS);
 		blit(matrix, x, y + 6, 1, 209, this.width / 2, 6);
 		blit(matrix, x + this.width / 2, y+6, 1 + 105 - this.width / 2, 209, this.width / 2, 6);
-//		blit(matrix, x, y+height/3, 1, 209, width, height/3);
 		blit(matrix, (int) (sliderX + x), y, 249, 172, 7, 20);
-//		RenderUtils.Gui.drawQuadColor(matrix, sliderX+x, y, sliderWidth, height, 1, 0, 0);
-//		super.render(matrix, mouseX, mouseY, partialTick);
 	}
 	
 	public float getValue() {
@@ -84,6 +81,6 @@ public class ModSlider extends AbstractWidget {
 	
 	
 	@Override
-	public void updateNarration(NarrationElementOutput p_169152_) {}
+	public void updateNarration(@Nonnull NarrationElementOutput p_169152_) {}
 
 }

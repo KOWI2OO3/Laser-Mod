@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.tileentities;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.init.ModTileTypes;
 import KOWI2003.LaserMod.tileentities.projector.ProjectorGuiContext;
 import KOWI2003.LaserMod.tileentities.projector.ProjectorTemplates;
@@ -33,7 +35,7 @@ public class TileEntityLaserProjector extends SyncableBlockEntity implements Blo
 	
 	
 	@Override
-	public void tick(Level level, BlockPos pos, BlockState state, TileEntityLaserProjector tile) {
+	public void tick(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull TileEntityLaserProjector tile) {
 		if(isActive) {
 			sync();
 		}
@@ -53,7 +55,7 @@ public class TileEntityLaserProjector extends SyncableBlockEntity implements Blo
 	}
 	
 	@Override
-	protected void saveAdditional(CompoundTag nbt) {
+	protected void saveAdditional(@Nonnull CompoundTag nbt) {
 		nbt.put("inv", handler.serializeNBT());
 		nbt.putBoolean("isRemoteControlled", isRemoteControlled);
 		nbt.putBoolean("isActive", isActive);
@@ -63,7 +65,7 @@ public class TileEntityLaserProjector extends SyncableBlockEntity implements Blo
 	}
 	
 	@Override
-	public void load(CompoundTag nbt) {
+	public void load(@Nonnull CompoundTag nbt) {
 		if(nbt.contains("inv"))
 			handler.deserializeNBT(nbt.getCompound("inv"));
 		if(nbt.contains("isRemoteControlled"))

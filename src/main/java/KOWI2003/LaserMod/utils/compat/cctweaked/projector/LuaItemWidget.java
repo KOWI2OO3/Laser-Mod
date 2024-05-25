@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorItemData;
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorWidgetData;
 import dan200.computercraft.api.lua.IArguments;
@@ -20,6 +22,7 @@ public class LuaItemWidget extends LuaProjectorWidget {
         super(dataSupplier, sync);
     }
 
+    @Nonnull
     @Override
     public String[] getMethodNames() {
         List<String> methods = new ArrayList<>(List.of(super.getMethodNames()));
@@ -33,6 +36,7 @@ public class LuaItemWidget extends LuaProjectorWidget {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public MethodResult callSubMethod(ILuaContext context, int method, IArguments arguments) throws LuaException {
         if(dataSupplier.get() instanceof ProjectorItemData data) {
             switch(method) {

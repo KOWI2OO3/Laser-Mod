@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.items;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
@@ -43,7 +45,7 @@ public class ItemLaserToolBase extends LaserItem {
 	}
 	
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
+	public InteractionResultHolder<ItemStack> use(@Nonnull Level world, @Nonnull Player entity, @Nonnull InteractionHand hand) {
 		ItemStack stack = entity.getItemInHand(hand);
 		if(getCharge(stack) > 0)
 			stack = setExtended(stack, !isExtended(stack));
@@ -81,8 +83,8 @@ public class ItemLaserToolBase extends LaserItem {
 	}
 	
 	@Override
-	public boolean mineBlock(ItemStack stack, Level world, BlockState state, BlockPos pos,
-			LivingEntity entity) {
+	public boolean mineBlock(@Nonnull ItemStack stack, @Nonnull Level world, @Nonnull BlockState state, @Nonnull BlockPos pos,
+			@Nonnull LivingEntity entity) {
 		if(isExtended(stack)) {
 			if (!world.isClientSide && state.getDestroySpeed(world, pos) != 0.0F) {
 				LaserProperties properties = getProperties(stack);
@@ -98,7 +100,7 @@ public class ItemLaserToolBase extends LaserItem {
 	}
 	
 	@Override
-	public boolean hurtEnemy(ItemStack stack, LivingEntity enemy, LivingEntity player) {
+	public boolean hurtEnemy(@Nonnull ItemStack stack, @Nonnull LivingEntity enemy, @Nonnull LivingEntity player) {
 		if(isExtended(stack)) {
 			LaserProperties properties = getProperties(stack);
 			properties.getUpgrades().forEach((upgrade) -> {
@@ -112,7 +114,7 @@ public class ItemLaserToolBase extends LaserItem {
 		return false;
 	}
 
-	public float getDestroySpeed(ItemStack stack, BlockState state) {
+	public float getDestroySpeed(@Nonnull ItemStack stack, @Nonnull BlockState state) {
 	  if(isExtended(stack)) {
 	      return state.is(this.blocks) ? getProperties(stack).getProperty(LaserProperties.Properties.SPEED) * 4 : 1.0F;
 	  }

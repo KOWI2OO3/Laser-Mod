@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui.widgets;
 
+import javax.annotation.Nonnull;
+
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -22,7 +24,7 @@ public class RecipeButton extends Button {
 	
 	public RecipeButton(int x, int y, int width, int height,
 			Component title, IRecipePressable action) {
-		super(x, y, width, height, title, null);
+		super(x, y, width, height, title, btn -> {});
 		this.onPress = action;
 	}
 	
@@ -38,7 +40,7 @@ public class RecipeButton extends Button {
 	}
 	
 	@Override
-	public void renderButton(PoseStack matrix, int x, int y, float partialTicks) {
+	public void renderButton(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		Minecraft minecraft = Minecraft.getInstance();
 		Font fontrenderer = minecraft.font;
 		minecraft.getTextureManager().bindForSetup(new ResourceLocation(Reference.MODID,
@@ -63,7 +65,7 @@ public class RecipeButton extends Button {
 		matrix.translate(this.width*scales, 0, 0);
 		this.blit(matrix, 0, 0, 200 - this.width / 2, 46 + i * 20, this.width / 2, 20);
 		matrix.popPose();
-		this.renderBg(matrix, minecraft, x, y);
+		this.renderBg(matrix, minecraft, mouseX, mouseY);
 		int j = this.getFGColor();
 		setWidth(tempWidth);
 		if(recipeID == null)
@@ -85,7 +87,7 @@ public class RecipeButton extends Button {
 		matrix.popPose();
 		
 		if (this.isHovered) {
-			this.renderToolTip(matrix, x, y);
+			this.renderToolTip(matrix, mouseX, mouseY);
 		}
 	}
 	

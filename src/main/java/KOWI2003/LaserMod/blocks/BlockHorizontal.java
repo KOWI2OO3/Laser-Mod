@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.blocks;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +28,7 @@ public abstract class BlockHorizontal extends ContainerBlockDefault {
 	}
 	
 	@Override
-	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(@Nonnull Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
 	
@@ -35,7 +37,7 @@ public abstract class BlockHorizontal extends ContainerBlockDefault {
 	}
 	
 	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
+	public BlockState getStateForPlacement(@Nonnull BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 	

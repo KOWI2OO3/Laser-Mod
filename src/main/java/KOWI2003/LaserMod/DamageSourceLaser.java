@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.LiteralContents;
@@ -22,7 +24,7 @@ public class DamageSourceLaser extends DamageSource {
 	}
 	
 	@Override
-	public Component getLocalizedDeathMessage(LivingEntity entityLivingBaseIn) {
+	public Component getLocalizedDeathMessage(@Nonnull LivingEntity entityLivingBaseIn) {
 		return MutableComponent.create(new TranslatableContents("death.block.laser", entityLivingBaseIn.getDisplayName()));
 	}
 	
@@ -49,7 +51,7 @@ public class DamageSourceLaser extends DamageSource {
 		
 		
 		@Override
-		public Component getLocalizedDeathMessage(LivingEntity entityLivingBaseIn) {
+		public Component getLocalizedDeathMessage(@Nonnull LivingEntity entityLivingBaseIn) {
 			return MutableComponent.create(new TranslatableContents("death.armor.laser", entityLivingBaseIn.getDisplayName(), getEntityName()));
 		}
 		

@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -142,13 +144,14 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 		}
 	}
 
-	public void render(PoseStack matrix, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
+	public void render(@Nonnull PoseStack matrix, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
 		this.renderBackground(matrix);
 		super.render(matrix, p_230430_2_, p_230430_3_, p_230430_4_);
 		this.renderTooltip(matrix, p_230430_2_, p_230430_3_);
 	}
 	
-	protected void renderBg(PoseStack matrix, float partialTicks, int mouseX, int mouseY) {
+	@SuppressWarnings("null")
+	protected void renderBg(@Nonnull PoseStack matrix, float partialTicks, int mouseX, int mouseY) {
 		if(te != null) {
 		    RenderSystem.setShader(GameRenderer::getPositionTexShader);
 			RenderSystem.setShaderColor(te.red, te.green, te.blue, 1.0f);
@@ -160,7 +163,6 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 		}else
 			RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0F);
 		RenderSystem.setShaderTexture(0, TEXTURE);
-//		this.minecraft.getTextureManager().bindForSetup(TEXTURE);
 		int i = (this.width - this.imageWidth) / 2;
 		int j = (this.height - this.imageHeight) / 2;
 		this.blit(matrix, i, j, 0, 0, this.imageWidth, this.imageHeight);
@@ -195,9 +197,6 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 	}
 	
 	protected void renderFG(int mouseX, int mouseY) {
-//		int actualMouseX = mouseX - ((this.width - this.imageWidth) / 2);
-//		int actualMouseY = mouseY - ((this.height - this.imageHeight) / 2);
-		
 		if(te instanceof TileEntityAdvancedLaser) {
 			Vec2 rotation = gimbalSlider.getValue();
 			rotation = new Vec2(-(rotation.y - 0.5f) * 2f, (rotation.x - 0.5f) * 2f);

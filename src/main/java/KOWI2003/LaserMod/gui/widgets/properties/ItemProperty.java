@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui.widgets.properties;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.gui.GuiLaserProjector;
@@ -45,10 +47,9 @@ public class ItemProperty extends DataProperty<ItemStack> {
 	}
 	
 	@Override
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		openMenu.render(matrix, mouseX, mouseY, partialTicks);
 		RenderUtils.Gui.drawStringWithinBox(matrix, getDisplayName() + ": ", x + 2, y, 35f, 10, 0xffffff);
-//		drawString(matrix, Minecraft.getInstance().font, getDisplayName() + ": ", x + 2, y + Minecraft.getInstance().font.lineHeight/2, 0xffffff);
 	}
 	
 	@Override

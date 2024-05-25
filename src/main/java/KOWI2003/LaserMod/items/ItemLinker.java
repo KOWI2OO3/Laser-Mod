@@ -2,6 +2,8 @@ package KOWI2003.LaserMod.items;
 
 import java.util.function.Consumer;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.init.ModBlocks;
 import KOWI2003.LaserMod.items.render.RenderLinker;
 import KOWI2003.LaserMod.tileentities.TileEntityDeviceHub;
@@ -21,12 +23,11 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 public class ItemLinker extends ItemDefault {
 	
 	public ItemLinker() {
-//		super(new Item.Properties().tab(MainMod.blocks).setISTER(() -> RenderLinker::new));
 		super(new Item.Properties());
 	}
 	
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+	public void initializeClient(@Nonnull Consumer<IClientItemExtensions> consumer) {
 	  consumer.accept(new IClientItemExtensions() {
 
 		  @Override
@@ -37,11 +38,14 @@ public class ItemLinker extends ItemDefault {
 	}
 	
 	@Override
-	public InteractionResult useOn(UseOnContext context) {
+	public InteractionResult useOn(@Nonnull UseOnContext context) {
 		Player player = context.getPlayer();
 		ItemStack stack = context.getItemInHand();
 		BlockPos pos = context.getClickedPos();
 		Block block = context.getLevel().getBlockState(pos).getBlock();
+		if(player == null)
+			return InteractionResult.FAIL;
+			
 		if(block == ModBlocks.Laser.get() || block == ModBlocks.LaserProjector.get() || block == ModBlocks.AdvancedLaser.get()) {
 			stack = setPos(stack, pos);
 			player.setItemInHand(context.getHand(), stack);

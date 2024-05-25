@@ -23,6 +23,7 @@ public class SyncableBlockEntity extends BlockEntity {
 	}
 	
 	@Override
+	@SuppressWarnings("null")
 		public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
 		this.load(pkt.getTag());
 	}

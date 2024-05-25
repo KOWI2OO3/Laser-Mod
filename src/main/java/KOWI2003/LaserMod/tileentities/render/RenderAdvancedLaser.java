@@ -35,6 +35,7 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 	}
 
 	@Override
+	@SuppressWarnings("null")
 	public void render(@Nonnull TileEntityAdvancedLaser tile, float partialTicks, @Nonnull PoseStack matrix, @Nonnull MultiBufferSource bufferIn,
 			int combinedLightIn, int combinedOverlayIn) {
 		

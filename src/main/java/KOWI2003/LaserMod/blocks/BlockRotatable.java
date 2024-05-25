@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.blocks;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +31,7 @@ public abstract class BlockRotatable extends ContainerBlockDefault {
 	}
 	
 	@Override
-	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(@Nonnull Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
 	
@@ -37,13 +39,9 @@ public abstract class BlockRotatable extends ContainerBlockDefault {
 		builder.add(FACING);
 	}
 	
-//	@Override
-//	public boolean isToolEffective(BlockState state, ToolType tool) {
-//		return tool == ToolType.PICKAXE;
-//	}
-	
 	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
+	@SuppressWarnings("null")
+	public BlockState getStateForPlacement(@Nonnull BlockPlaceContext context) {
 		if(!this.ModelPlacement) {
 			float rot = context.getPlayer().getRotationVector().x;
 			if(rot > 90 - 45.5f)

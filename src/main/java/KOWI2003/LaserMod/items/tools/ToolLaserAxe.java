@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.items.tools;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.items.ItemLaserToolBase;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
@@ -23,7 +25,7 @@ public class ToolLaserAxe extends ItemLaserToolBase {
 		super(properties, BlockTags.MINEABLE_WITH_AXE, speed, damageBaseline, maxCharge);
 	}
 	
-	public float getDestroySpeed(ItemStack stack, BlockState state) {
+	public float getDestroySpeed(@Nonnull ItemStack stack, @Nonnull BlockState state) {
 		if(!isExtended(stack))
 			return state.requiresCorrectToolForDrops() ? 0f : 1f;
 		return state.is(BlockTags.MINEABLE_WITH_AXE) ? getProperties(stack).getProperty(LaserProperties.Properties.SPEED) : super.getDestroySpeed(stack, state);
@@ -37,7 +39,7 @@ public class ToolLaserAxe extends ItemLaserToolBase {
 	static final SoundEvent[] SOUNDS = new SoundEvent[] {SoundEvents.AXE_STRIP, SoundEvents.AXE_WAX_OFF, SoundEvents.AXE_SCRAPE};
 	
 	@Override
-	public InteractionResult useOn(UseOnContext context) {
+	public InteractionResult useOn(@Nonnull UseOnContext context) {
 		if(!isExtended(context.getItemInHand()))
 			return InteractionResult.PASS;
 		Level world = context.getLevel();

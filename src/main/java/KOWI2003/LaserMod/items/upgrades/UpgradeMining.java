@@ -21,6 +21,7 @@ public class UpgradeMining extends ItemUpgradeBase {
 	}
 	
 	@Override
+	@SuppressWarnings("null")
 	public void runLaserBlock(ILaserAccess te, BlockPos pos) {
 		BlockState state = te.getTileEntity().getLevel().getBlockState(pos);
 		BlockEntity tile = te.getTileEntity().getLevel().getBlockEntity(pos);

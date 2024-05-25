@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.utils.compat.jei;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.gui.GuiInfuser;
 import KOWI2003.LaserMod.gui.GuiLaser;
@@ -33,7 +35,7 @@ public class JEICompat implements IModPlugin {
 	}
 	
 	@Override
-	public void registerCategories(IRecipeCategoryRegistration registry) {
+	public void registerCategories(@Nonnull IRecipeCategoryRegistration registry) {
 		final IJeiHelpers helpers = registry.getJeiHelpers();
 		final IGuiHelper gui = helpers.getGuiHelper();
 		
@@ -43,7 +45,7 @@ public class JEICompat implements IModPlugin {
 	}
 	
 	@Override
-	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+	public void registerRecipeCatalysts(@Nonnull IRecipeCatalystRegistration registration) {
 		registration.addRecipeCatalyst(new ItemStack(ModBlocks.PrecisionAssembler.get()), RecipeCategories.PRECISION_ASSEMBLER);
 		registration.addRecipeCatalyst(new ItemStack(ModBlocks.Infuser.get()), RecipeCategories.INFUSER);
 		
@@ -51,7 +53,7 @@ public class JEICompat implements IModPlugin {
 	}
 	
 	@Override
-	public void registerRecipes(IRecipeRegistration registry) {
+	public void registerRecipes(@Nonnull IRecipeRegistration registry) {
 		final IJeiHelpers helpers = registry.getJeiHelpers();
 
 		registry.addRecipes(RecipeCategories.PRECISION_ASSEMBLER, PrecisionAssemblerRecipeHandler.getAllRecipes());
@@ -61,7 +63,7 @@ public class JEICompat implements IModPlugin {
 	}
 	
 	@Override
-	public void registerGuiHandlers(IGuiHandlerRegistration registry) {
+	public void registerGuiHandlers(@Nonnull IGuiHandlerRegistration registry) {
 		
 		registry.addGuiContainerHandler(GuiLaser.class, new LaserGuiSlotMover());
 		registry.addGuiContainerHandler(GuiModStation.class, new ModStationGuiSlotMover());
@@ -73,7 +75,7 @@ public class JEICompat implements IModPlugin {
 	}
 	
 	@Override
-	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+	public void registerRecipeTransferHandlers(@Nonnull IRecipeTransferRegistration registration) {
 		
 		IModPlugin.super.registerRecipeTransferHandlers(registration);
 	}

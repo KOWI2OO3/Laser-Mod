@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorPlayerData;
 import KOWI2003.LaserMod.tileentities.projector.data.ProjectorWidgetData;
 import dan200.computercraft.api.lua.IArguments;
@@ -17,6 +19,7 @@ public class LuaPlayerWidget extends LuaProjectorWidget {
         super(dataSupplier, sync);
     }
 
+    @Nonnull
     @Override
     public String[] getMethodNames() {
         List<String> methods = new ArrayList<>(List.of(super.getMethodNames()));

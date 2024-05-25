@@ -8,6 +8,8 @@ import oshi.util.tuples.Pair;
 public interface IInfuserRecipe {
 
 	public default ItemStack getOutput(TileEntityInfuser te) { return getOutput(); }
+
+	@SuppressWarnings("unchecked")
 	public default Pair<Ingredient, Integer>[] getInputs(TileEntityInfuser te) { 
 		Ingredient[] in = getInputs();
 		Pair<Ingredient, Integer>[] list = new Pair[in.length];
@@ -15,8 +17,11 @@ public interface IInfuserRecipe {
 			list[i] = new Pair<Ingredient, Integer>(in[i], 1);
 		return list;
 	}
+	
 	public ItemStack getOutput();
+
 	public Ingredient[] getInputs();
+	
 	public default boolean isRecipeValid(TileEntityInfuser te) {
 		if(getInputs(te).length >= 2) {
 			if(getInputs(te)[0] != null && getInputs(te)[1] != null && getOutput(te) != null) {

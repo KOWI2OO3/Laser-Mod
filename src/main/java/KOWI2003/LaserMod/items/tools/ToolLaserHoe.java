@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.items.tools;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.Nullable;
 
 import KOWI2003.LaserMod.items.ItemLaserToolBase;
@@ -25,7 +27,7 @@ public class ToolLaserHoe extends ItemLaserToolBase {
 	}
 	
 	@Override
-	public InteractionResult useOn(UseOnContext context) {
+	public InteractionResult useOn(@Nonnull UseOnContext context) {
 		if(isExtended((context.getItemInHand())))
 		{
 			Level world = context.getLevel();

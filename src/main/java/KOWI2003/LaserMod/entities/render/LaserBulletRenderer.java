@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.entities.render;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 
@@ -21,14 +23,14 @@ public class LaserBulletRenderer extends EntityRenderer<EntityLaserBullet> {
 	}
 	
 	@Override
-	public boolean shouldRender(EntityLaserBullet p_114491_, Frustum p_114492_, double p_114493_, double p_114494_,
+	public boolean shouldRender(@Nonnull EntityLaserBullet p_114491_, @Nonnull Frustum p_114492_, double p_114493_, double p_114494_,
 			double p_114495_) {
 		return true;
 	}
 
 	@Override
-	public void render(EntityLaserBullet entity, float p_114486_, float p_114487_, PoseStack pose,
-			MultiBufferSource buffer, int combinedLight) {
+	public void render(@Nonnull EntityLaserBullet entity, float p_114486_, float p_114487_, @Nonnull PoseStack pose,
+			@Nonnull MultiBufferSource buffer, int combinedLight) {
 		
 		pose.pushPose();
 		
@@ -53,7 +55,7 @@ public class LaserBulletRenderer extends EntityRenderer<EntityLaserBullet> {
 	}
 	
 	@Override
-	public ResourceLocation getTextureLocation(EntityLaserBullet entity) {
+	public ResourceLocation getTextureLocation(@Nonnull EntityLaserBullet entity) {
 		return new ResourceLocation("textures/entity/boat/oak.png");
 	}
 }

@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.utils.compat.cctweaked;
 
+import javax.annotation.Nonnull;
+
 import dan200.computercraft.api.lua.IArguments;
 import dan200.computercraft.api.lua.IDynamicLuaObject;
 import dan200.computercraft.api.lua.ILuaContext;
@@ -15,8 +17,9 @@ public class LuaBlockPos implements IDynamicLuaObject {
 		this.pos = pos;
 	}	
 	
+	@Nonnull
 	@Override
-	public MethodResult callMethod(ILuaContext context, int methodIndex, IArguments args) throws LuaException {
+	public MethodResult callMethod(@Nonnull ILuaContext context, int methodIndex, @Nonnull IArguments args) throws LuaException {
 		try {
 			switch( methodIndex )
 	        {
@@ -63,6 +66,7 @@ public class LuaBlockPos implements IDynamicLuaObject {
 		}
 	}
 
+	@Nonnull
 	@Override
 	public String[] getMethodNames() {
 		return new String[] {

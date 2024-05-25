@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.gui.widgets.properties;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.utils.Utils;
@@ -23,7 +25,8 @@ public class ColorProperty extends DataProperty<float[]> {
 	}
 	
 	@Override
-	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
+	@SuppressWarnings("resource")
+	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		drawString(matrix, Minecraft.getInstance().font, getDisplayName() + ": ", x + 2, y + Minecraft.getInstance().font.lineHeight/2, 0xffffff);
 		red.render(matrix, mouseX, mouseY, partialTicks);
 		green.render(matrix, mouseX, mouseY, partialTicks);
@@ -56,7 +59,6 @@ public class ColorProperty extends DataProperty<float[]> {
 		red.mouseMoved(p_94758_, p_94759_);
 		green.mouseMoved(p_94758_, p_94759_);
 		blue.mouseMoved(p_94758_, p_94759_);
-//		super.mouseMoved(p_94758_, p_94759_);
 	}
 	
 	@Override

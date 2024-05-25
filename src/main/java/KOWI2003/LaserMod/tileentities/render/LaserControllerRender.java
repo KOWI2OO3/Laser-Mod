@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.tileentities.render;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -22,19 +24,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class LaserControllerRender implements BlockEntityRenderer<TileEntityLaserController> {
-	private final BlockEntityRendererProvider.Context context;
-	
-	public LaserControllerRender(BlockEntityRendererProvider.Context context) {
-		this.context = context;
-	}
+	public LaserControllerRender(BlockEntityRendererProvider.Context context) {}
+
 	@Override
-	public void render(TileEntityLaserController te, float partialTicks, PoseStack matrix, MultiBufferSource bufferIn,
+	public void render(@Nonnull TileEntityLaserController te, float partialTicks, @Nonnull PoseStack matrix, @Nonnull MultiBufferSource bufferIn,
 			int combinedLightIn, int combinedOverlayIn) {
 		ResourceLocation TEXTURE = new ResourceLocation(Reference.MODID, "textures/render/levers_and_switches.png");
 		
-		LaserControllerLevers<?> levers = new LaserControllerLevers<Entity>(LaserControllerLevers.createBodyLayer().bakeRoot()
-//				RenderUtils.getEntityRenderContext().bakeLayer(ModelLayers.CHEST)
-				);
+		LaserControllerLevers<?> levers = new LaserControllerLevers<Entity>(LaserControllerLevers.createBodyLayer().bakeRoot());
 		Minecraft.getInstance().getTextureManager().bindForSetup(TEXTURE);
 		RenderUtils.rotateMatrixForBlock(matrix, te.getBlockState().getValue(BlockHorizontal.FACING));
 		float rot = 1.6f;
@@ -46,16 +43,16 @@ public class LaserControllerRender implements BlockEntityRenderer<TileEntityLase
 				TileEntityLaser laser = ((TileEntityLaser)tile);
 				levers.setValues(laser.red, laser.green, laser.blue, laser.mode.ordinal(), MODE.values().length-1);
 			}
-			if(tile instanceof TileEntityLaserProjector) {
+			if(tile instanceof TileEntityLaserProjector)
 				isActive = ((TileEntityLaserProjector)tile).isActive;
-//				TileEntityLaserProjector laser = ((TileEntityLaserProjector)tile);
-			}
+
 			rot = isActive ? 0 : rot;
 		}else levers.setValues(0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
 		levers.setRotationAngle(levers.MainLever, rot, 0, 0);
 		levers.renderToBuffer(matrix, bufferIn.getBuffer(RenderType.entityTranslucent(TEXTURE)), combinedLightIn, combinedOverlayIn, 1.0f, 1.0f, 1.0f, 1.0f);	
-//		
+
 		RenderSystem.enableDepthTest();
+		
 		//Screens
 		matrix.pushPose();
 		{	
@@ -66,12 +63,8 @@ public class LaserControllerRender implements BlockEntityRenderer<TileEntityLase
 
 			if(te.isConnected()) {
 				BlockEntity tile = te.getControlTileEntity();
-				if(tile instanceof TileEntityLaser) {
+				if(tile instanceof TileEntityLaser) 
 					mode = ((TileEntityLaser)tile).mode.getFormalName();
-				}
-				if(tile instanceof TileEntityLaserProjector) {
-					
-				}
 			}
 			
 			RenderUtils.renderString(matrix, "MODE: " + mode, 0, 0, 0, 0.0033f);

@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.items;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.math.Vector3f;
 
 import KOWI2003.LaserMod.init.ModBlocks;
@@ -15,12 +17,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class ItemLaserDirector extends ItemDefault {
 
-//	public ItemLaserDirector() {
-//		super(new Item.Properties().tab(MainMod.blocks).setISTER(() -> RenderLinker::new));
-//	}
-
 	@Override
-	public InteractionResult useOn(UseOnContext context) {
+	public InteractionResult useOn(@Nonnull UseOnContext context) {
 		Player player = context.getPlayer();
 		ItemStack stack = context.getItemInHand();
 		BlockPos pos = context.getClickedPos();
@@ -33,6 +31,9 @@ public class ItemLaserDirector extends ItemDefault {
 			}
 		}
 		
+		if(player == null)
+			return InteractionResult.FAIL;
+
 		if(hasPos(stack) && player.isShiftKeyDown()) {
 			stack = setPos(stack, pos);
 			player.setItemInHand(context.getHand(), stack);
@@ -42,8 +43,6 @@ public class ItemLaserDirector extends ItemDefault {
 		stack = setPos(stack, pos);
 		player.setItemInHand(context.getHand(), stack);
 		return InteractionResult.SUCCESS;
-		
-		//return super.useOn(context);
 	}
 	
 	public static ItemStack setPos(ItemStack stack, BlockPos pos) {
@@ -70,9 +69,8 @@ public class ItemLaserDirector extends ItemDefault {
 		CompoundTag nbt = stack.getOrCreateTag();
 		if(nbt.contains("pos")) {
 			CompoundTag posNbt = nbt.getCompound("pos");
-			if(posNbt.contains("x") && posNbt.contains("y") && posNbt.contains("z")) {
-				return new Vector3f((float)posNbt.getDouble("x"), (float)posNbt.getDouble("y"), (float)posNbt.getDouble("z"));
-			}
+			if(posNbt.contains("x") && posNbt.contains("y") && posNbt.contains("z")) 
+				return new Vector3f((float)posNbt.getDouble("x"), (float)posNbt.getDouble("y"), (float)posNbt.getDouble("z"));	
 		}
 		return null;
 	}

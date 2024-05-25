@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.container.slots;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -62,7 +64,7 @@ public class MemorySlot extends SlotItemHandler {
 	}
 	
 	@Override
-	public boolean isSameInventory(Slot p_isSameInventory_1_) {
+	public boolean isSameInventory(@Nonnull Slot slot) {
 		return false;
 	}
 	

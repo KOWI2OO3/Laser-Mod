@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.items.render;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 
@@ -34,8 +36,9 @@ public class RenderLinker extends BlockEntityWithoutLevelRenderer {
 	}
 
 	@Override
-	public void renderByItem(ItemStack stack, TransformType transformType, PoseStack matrix,
-			MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+	@SuppressWarnings({ "resource", "null" })
+	public void renderByItem(@Nonnull ItemStack stack, @Nonnull TransformType transformType, @Nonnull PoseStack matrix,
+		@Nonnull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 		
 		matrix.pushPose();
 		

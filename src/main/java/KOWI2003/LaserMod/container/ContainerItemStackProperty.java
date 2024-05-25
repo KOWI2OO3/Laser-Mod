@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.container;
 
+import javax.annotation.Nonnull;
+
 import KOWI2003.LaserMod.init.ModContainerTypes;
 import KOWI2003.LaserMod.network.PacketHandler;
 import KOWI2003.LaserMod.network.PacketSyncItemProperty;
@@ -41,7 +43,7 @@ public class ContainerItemStackProperty extends AbstractContainerMenu {
 				}
 				
 				@Override
-				public void onTake(Player player, ItemStack stack) {
+				public void onTake(@Nonnull Player player, @Nonnull ItemStack stack) {
 					if(player instanceof ServerPlayer)
 						PacketHandler.sendToClient(new PacketSyncItemProperty(ItemStack.EMPTY), (ServerPlayer) player);
 					super.onTake(player, stack);
@@ -88,11 +90,11 @@ public class ContainerItemStackProperty extends AbstractContainerMenu {
 	}
 	
 	@Override
-	public ItemStack quickMoveStack(Player player, int index) {
+	public ItemStack quickMoveStack(@Nonnull Player player, int index) {
 	      return ItemStack.EMPTY;
 	}
 
-	public boolean stillValid(Player p_38874_) {
+	public boolean stillValid(@Nonnull Player p_38874_) {
 		return true;
 	}
 	

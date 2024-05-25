@@ -1,5 +1,7 @@
 package KOWI2003.LaserMod.utils.compat.jei.infuser;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.init.ModBlocks;
@@ -30,7 +32,7 @@ public class InfuserRecipeCategory extends AbstractInfuserRecipeCategory<IInfuse
 	}
 	
 	@Override
-	public void draw(IInfuserRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX,
+	public void draw(@Nonnull IInfuserRecipe recipe, @Nonnull IRecipeSlotsView recipeSlotsView, @Nonnull PoseStack stack, double mouseX,
 			double mouseY) {
 		animatedPorgress.draw(stack, 60, 49);
 		super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
@@ -57,7 +59,7 @@ public class InfuserRecipeCategory extends AbstractInfuserRecipeCategory<IInfuse
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayoutBuilder builder, IInfuserRecipe recipe, IFocusGroup focuses) {
+	public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull IInfuserRecipe recipe, @Nonnull IFocusGroup focuses) {
 		builder.addSlot(RecipeIngredientRole.INPUT, 9, 1).addIngredients(recipe.getInputs().length > 0 ? recipe.getInputs()[0] : Ingredient.EMPTY);
 		builder.addSlot(RecipeIngredientRole.INPUT, 37, 45).addIngredients(recipe.getInputs().length > 1 ? recipe.getInputs()[1] : Ingredient.EMPTY);
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 112, 45).addItemStack(recipe.getOutput());

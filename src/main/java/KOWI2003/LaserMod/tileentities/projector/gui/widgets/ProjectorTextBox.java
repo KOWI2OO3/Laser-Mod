@@ -20,6 +20,7 @@ public class ProjectorTextBox extends ProjectorWidget {
 	
 	int offset = 6;
 	
+	@SuppressWarnings("resource")
 	public ProjectorTextBox(ProjectorTextBoxData data) {
 		super(data);
 		this.text = data.text;
@@ -32,6 +33,7 @@ public class ProjectorTextBox extends ProjectorWidget {
 		this.textColor = data.textColor;
 	}
 	
+	@SuppressWarnings("resource")
 	public ProjectorTextBox(float x, float y, float width, String text, float[] textColor, boolean isCentered) {
 		super(x, y, width, 1);
 		this.text = text;
@@ -46,6 +48,7 @@ public class ProjectorTextBox extends ProjectorWidget {
 	
 	
 
+	@SuppressWarnings("resource")
 	public ProjectorTextBox(float x, float y, float z, float width, String text,
 			float[] textColor, boolean isCentered) {
 		super(x, y, z, width, 1, 1);
@@ -60,6 +63,7 @@ public class ProjectorTextBox extends ProjectorWidget {
 	}
 
 	@Override
+	@SuppressWarnings("resource")
 	public void renderWidget(RenderContext<?> context) {
 		if(text != null && !text.isEmpty()) {
 			float[] color = Utils.parseColor(textColor);
@@ -84,6 +88,7 @@ public class ProjectorTextBox extends ProjectorWidget {
 		return isCentered ? (super.getX() - super.getWidth()/2) : super.getX();
 	}
 	
+	@SuppressWarnings("resource")
 	public void updateLines() {
 		if(text != null && !text.isEmpty())
 			if(Minecraft.getInstance().font.width(text) > width-offset*2) {
