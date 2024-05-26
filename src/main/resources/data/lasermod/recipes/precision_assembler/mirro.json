@@ -1,0 +1,21 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "minecraft:glass"
+    },
+    "inputs": [
+        {
+            "tag": "forge:ingots/iron"
+        },
+        {
+            "tag": "forge:ingots/iron"
+        },
+        {
+            "tag": "forge:ingots/iron"
+        }
+    ],
+    "output": {
+        "item": "lasermod:mirror"
+    },
+    "speed": 1
+}

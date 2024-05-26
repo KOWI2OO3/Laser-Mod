@@ -1,10 +1,7 @@
 package KOWI2003.LaserMod.recipes.infuser;
 
-import java.util.Random;
-
 import javax.annotation.Nullable;
 
-import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.init.ModRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -28,16 +25,6 @@ public class InfuserRecipeBase implements IInfuserRecipe {
 		this.output = output;
 		this.speed = speed;
 		this.id = id;
-	}
-	
-	@Deprecated
-	public InfuserRecipeBase(Ingredient input1, Ingredient input2, ItemStack output, float speed) {
-		this(new Pair<>(input1, 1), new Pair<>(input2, 1), output, speed, new ResourceLocation(Reference.MODID, "infuser/custom" + new Random().nextInt()));
-	}
-
-	@Deprecated
-	public InfuserRecipeBase(Ingredient input1, Ingredient input2, ItemStack output) {
-		this(input1, input2, output, 1);
 	}
 	
 	public ItemStack getOutput() { return output; }

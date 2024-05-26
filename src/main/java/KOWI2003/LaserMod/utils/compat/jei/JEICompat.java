@@ -23,6 +23,7 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -53,10 +54,11 @@ public class JEICompat implements IModPlugin {
 	}
 	
 	@Override
+	@SuppressWarnings("resource")
 	public void registerRecipes(@Nonnull IRecipeRegistration registry) {
 		final IJeiHelpers helpers = registry.getJeiHelpers();
 
-		registry.addRecipes(RecipeCategories.PRECISION_ASSEMBLER, PrecisionAssemblerRecipeHandler.getAllRecipes());
+		registry.addRecipes(RecipeCategories.PRECISION_ASSEMBLER, PrecisionAssemblerRecipeHandler.getAllRecipes(Minecraft.getInstance().level));
 		registry.addRecipes(RecipeCategories.INFUSER, InfuserRecipeMaker.getRecipes(helpers));
 		
 		IModPlugin.super.registerRecipes(registry);

@@ -1,0 +1,13 @@
+{
+    "type": "lasermod:precision_assembler_shapeless",
+    "base_input": {
+        "item": "lasermod:printed_circuit_board"
+    },
+    "inputs": [
+        {
+            "item": "minecraft:wooden_sword"
+        }
+    ],
+    "output": "lasermod:upgrade_damage_1",
+    "speed": 1
+}

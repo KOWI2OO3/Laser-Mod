@@ -7,13 +7,14 @@ import KOWI2003.LaserMod.init.ModTileTypes;
 import KOWI2003.LaserMod.utils.TileEntityUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TileEntityLaserCatcher extends SyncableBlockEntity implements ILaserInteractable, IColorable {
 
 	public boolean isHit = false;
 	ILaserAccess te;
+
+	BlockPos laserPosition;
 	
 	public TileEntityLaserCatcher(BlockPos pos, BlockState state) {
 		super(ModTileTypes.LASER_CATCHER, pos, state);
@@ -22,10 +23,10 @@ public class TileEntityLaserCatcher extends SyncableBlockEntity implements ILase
 	@Override
 	protected void saveAdditional(@Nonnull CompoundTag nbt) {
 		nbt.putBoolean("isHit", isHit);
-		if(te != null) {
-			BlockPos pos = te.getPos();
+		var pos = te != null ? te.getPos() : laserPosition;
+		if(pos != null)
 			nbt.putIntArray("laserPos", new int[] {pos.getX(), pos.getY(), pos.getZ()});
-		}
+			
 		super.saveAdditional(nbt);
 	}
 	
@@ -35,9 +36,13 @@ public class TileEntityLaserCatcher extends SyncableBlockEntity implements ILase
 		isHit = nbt.getBoolean("isHit");
 		if(nbt.contains("laserPos")) {
 			int[] pos = nbt.getIntArray("laserPos");
-			BlockEntity tile = getLevel().getBlockEntity(new BlockPos(pos[0], pos[1], pos[2]));
-			if(tile instanceof ILaserAccess)
-				te = (ILaserAccess)tile;
+			laserPosition = new BlockPos(pos[0], pos[1], pos[2]);
+
+			if(getLevel() != null) {
+				var tile = getLevel().getBlockEntity(laserPosition);
+				if(tile instanceof ILaserAccess)
+					te = (ILaserAccess)tile;
+			}
 		}
 		super.load(nbt);
 	}

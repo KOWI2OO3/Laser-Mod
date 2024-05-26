@@ -1,0 +1,13 @@
+{
+    "type": "lasermod:precision_assembler_shapeless",
+    "base_input": {
+        "item": "lasermod:printed_circuit_board"
+    },
+    "inputs": [
+        {
+            "item": "minecraft:iron_pickaxe"
+        }
+    ],
+    "output": "lasermod:upgrade_mining",
+    "speed": 1
+}

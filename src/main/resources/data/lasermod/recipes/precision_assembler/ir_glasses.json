@@ -1,0 +1,21 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "tag": "forge:ingots/iron"
+    },
+    "inputs": [
+        {
+            "tag": "forge:glass/black"
+        },
+        {
+            "tag": "forge:ingots/iron"
+        },
+        {
+            "tag": "forge:glass/black"
+        }
+    ],
+    "output": {
+        "item": "lasermod:ir_glasses"
+    },
+    "speed": 1
+}

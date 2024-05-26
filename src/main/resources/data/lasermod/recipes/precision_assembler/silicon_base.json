@@ -1,0 +1,13 @@
+{
+    "type": "lasermod:precision_assembler_shapeless",
+    "base_input": {},
+    "inputs": [
+        {
+            "item": "lasermod:silicon"
+        }
+    ],
+    "output": {
+        "item": "lasermod:silicon_plate"
+    },
+    "speed": 1
+}

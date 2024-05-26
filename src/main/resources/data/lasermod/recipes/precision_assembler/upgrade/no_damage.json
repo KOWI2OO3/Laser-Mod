@@ -1,0 +1,13 @@
+{
+    "type": "lasermod:precision_assembler_shapeless",
+    "base_input": {
+        "item": "lasermod:printed_circuit_board"
+    },
+    "inputs": [
+        {
+            "tag": "minecraft:wool"
+        }
+    ],
+    "output": "lasermod:upgrade_no_damage",
+    "speed": 1
+}

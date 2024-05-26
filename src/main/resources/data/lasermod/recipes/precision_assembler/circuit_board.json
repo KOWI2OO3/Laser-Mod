@@ -1,0 +1,17 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "lasermod:silicon_plate"
+    },
+    "inputs": [
+        {
+            "tag": "forge:ingots/iron"
+        },
+        {},
+        {
+            "item": "minecraft:redstone"
+        }
+    ],
+    "output": "lasermod:printed_circuit_board",
+    "speed": 1
+}

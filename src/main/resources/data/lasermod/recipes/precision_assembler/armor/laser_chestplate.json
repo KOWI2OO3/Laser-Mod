@@ -1,0 +1,21 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "minecraft:iron_chestplate"
+    },
+    "inputs": [
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        }
+    ],
+    "output": {
+        "item": "lasermod:laser_chestplate"
+    },
+    "speed": 1
+}

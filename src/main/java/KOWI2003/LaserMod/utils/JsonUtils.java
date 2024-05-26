@@ -142,7 +142,7 @@ public class JsonUtils {
 			if(item == null)
 				return Optional.empty();
 			
-			return Optional.of(new ItemStack(item));
+			return Optional.of(item.getDefaultInstance());
 		}
 		if(!element.isJsonObject())
 			return Optional.empty();
@@ -156,7 +156,8 @@ public class JsonUtils {
 		if(item == null || count <= 0)
 			return Optional.empty();
 
-		ItemStack stack = new ItemStack(item, count);
+		ItemStack stack = item.getDefaultInstance();
+		stack.setCount(count);
 		
 		if(GsonHelper.isValidNode(json, "nbt")) {
 			try {

@@ -23,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 public class TileEntityPrecisionAssembler extends SyncableBlockEntity implements BlockEntityTicker<TileEntityPrecisionAssembler>, MenuProvider {
 
@@ -60,9 +61,10 @@ public class TileEntityPrecisionAssembler extends SyncableBlockEntity implements
 	}
 
 	@Override
+	@SuppressWarnings("null")
 	public void tick(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state,
 			@Nonnull TileEntityPrecisionAssembler tile) {
-		if(currentRecipe == null || !currentRecipe.isRecipeValid(this.getHandler())) {
+		if(currentRecipe == null || !currentRecipe.matches(new RecipeWrapper(this.getHandler()), getLevel())) {
 			IPrecisionAssemblerRecipe recipe = PrecisionAssemblerRecipeHandler.getRecipe(this);
 			if(recipe != currentRecipe) {
 				tick = maxTick;

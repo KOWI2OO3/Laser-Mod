@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 
 import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.recipes.infuser.InfuserRecipeSerializer;
+import KOWI2003.LaserMod.recipes.precisionAssembler.PrecisionAssemblerRecipeShapedSerializer;
+import KOWI2003.LaserMod.recipes.precisionAssembler.PrecisionAssemblerRecipeShapelessSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
@@ -20,7 +22,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public enum ModRecipeTypes {
-    INFUSER(InfuserRecipeSerializer::new);
+    INFUSER(InfuserRecipeSerializer::new),
+    PRECISION_ASSEMBLER_SHAPED(PrecisionAssemblerRecipeShapedSerializer::new),
+    PRECISION_ASSEMBLER_SHAPELESS(PrecisionAssemblerRecipeShapelessSerializer::new);
     
     private final ResourceLocation id;
     private final RegistryObject<RecipeSerializer<?>> serializerObject;

@@ -1,0 +1,21 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "lasermod:laser_sword"
+    },
+    "inputs": [
+        {
+            "item": "lasermod:laser_pickaxe"
+        },
+        {
+            "item": "lasermod:laser_axe"
+        },
+        {
+            "item": "lasermod:laser_shovel"
+        }
+    ],
+    "output": {
+        "item": "lasermod:laser_multitool"
+    },
+    "speed": 1
+}

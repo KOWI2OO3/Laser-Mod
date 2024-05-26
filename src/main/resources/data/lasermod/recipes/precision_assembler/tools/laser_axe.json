@@ -1,0 +1,21 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "lasermod:laser_tool_base"
+    },
+    "inputs": [
+        {
+            "item": "minecraft:iron_axe"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        }
+    ],
+    "output": {
+        "item": "lasermod:laser_axe"
+    },
+    "speed": 1
+}

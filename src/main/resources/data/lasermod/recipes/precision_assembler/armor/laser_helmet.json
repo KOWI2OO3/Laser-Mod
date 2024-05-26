@@ -1,0 +1,21 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "minecraft:iron_helmet"
+    },
+    "inputs": [
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        }
+    ],
+    "output": {
+        "item": "lasermod:laser_helmet"
+    },
+    "speed": 1
+}
