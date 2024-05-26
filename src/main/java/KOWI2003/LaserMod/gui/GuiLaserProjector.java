@@ -412,9 +412,6 @@ public class GuiLaserProjector extends Screen {
 		}
 		
 		{
-//			float cubeSize = 10;
-//			RenderUtils.renderCube(matrix, -cubeSize/2f, -cubeSize/2f, -cubeSize/2f, cubeSize, cubeSize, cubeSize, 1, 0, 0);
-			
 			float[] lineColor = new float[] {1, 0, 0, 1};
 			RenderUtils.renderLine(matrix, new float[] {0, 0, 0}, new Vector3f(0, gridSize, 0), lineColor);
 			RenderUtils.renderLine(matrix, new float[] {0, 0, 0}, new Vector3f(gridSize, 0, 0), lineColor);
@@ -547,7 +544,6 @@ public class GuiLaserProjector extends Screen {
 	float[] hitbox = new float[4];
 	
 	public ProjectorWidgetData getHoveredProjectorWidget(PoseStack matrix, int mouseX, int mouseY) {
-		//TODO make more Efficient...
 		float[] ClipMousePos = getMouseInClipSpace(mouseX, mouseY);
 		
 		float ClipMouseX = ClipMousePos[0];
@@ -607,14 +603,9 @@ public class GuiLaserProjector extends Screen {
 		return new RenderContext<TileEntityLaserProjector>(te, partialTicks, matrix, Minecraft.getInstance().renderBuffers().bufferSource(), 15728880, OverlayTexture.NO_OVERLAY);
 	}	
 	
-	protected void renderToolTip(PoseStack matrix, int mouseX, int mouseY, int guiLeft, int guiTop) {
-		
-	}
+	protected void renderToolTip(PoseStack matrix, int mouseX, int mouseY, int guiLeft, int guiTop) {}
 	
-	protected void renderFG(int mouseX, int mouseY) {
-//		int actualMouseX = mouseX - ((this.width - WINDOW_WIDTH) / 2);
-//		int actualMouseY = mouseY - ((this.height - WINDOW_HEIGHT) / 2);
-	}
+	protected void renderFG(int mouseX, int mouseY) {}
 	
 	boolean isMovingView = false;
 	boolean isRotatingView = false;
@@ -754,7 +745,6 @@ public class GuiLaserProjector extends Screen {
 	
 	@Override
 	public boolean mouseScrolled(double mouseX, double mouseY, double deltaScroll) {
-		
 		boolean click = super.mouseScrolled(mouseX, mouseY, deltaScroll);
 		for (AbstractWidget widget : buttons)
 			click = click || widget.mouseScrolled(mouseX, mouseY, deltaScroll);
