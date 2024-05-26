@@ -41,8 +41,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 
@@ -810,7 +808,6 @@ public class Utils {
 	 * @param index the index of the slot that the item is being moved from
 	 * @return the item that was moved
 	 */
-	@OnlyIn(Dist.CLIENT)
 	public static ItemStack handleQuickMove(AbstractContainerMenu menu, Player player, int index) {
 		int slotCount = menu.slots.size() - 36;
 		
@@ -933,7 +930,6 @@ public class Utils {
 	 * @param index the index of the slot that the item is being moved from
 	 * @return the item that was moved
 	 */
-	@OnlyIn(Dist.CLIENT)
 	public static ItemStack quickMoveStackNormal(Player player, int index) {
 		return index > 0 && index < 46 ? player.inventoryMenu.quickMoveStack(player, index) : ItemStack.EMPTY;
 	}
