@@ -73,7 +73,7 @@ public class TileEntityPrecisionAssembler extends SyncableBlockEntity implements
 		}
 		
 		if(currentRecipe != null) {
-			tick -= currentRecipe.getRecipeSpeed() * properties.getProperty(Properties.SPEED) * Config.GetInstance().machineSettings.precisionAssemblerSpeed;
+			tick -= currentRecipe.getRecipeSpeed() * properties.getProperty(Properties.SPEED) * Config.getInstance().machineSettings.precisionAssemblerSpeed;
 			
 			if(tick <= 0) {
 				PrecisionAssemblerRecipeHandler.handleRecipeEnd(currentRecipe, this);

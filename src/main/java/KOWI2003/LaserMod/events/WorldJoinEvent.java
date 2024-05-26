@@ -3,7 +3,7 @@ package KOWI2003.LaserMod.events;
 import com.google.gson.JsonObject;
 
 import KOWI2003.LaserMod.Reference;
-import KOWI2003.LaserMod.config.ModConfig;
+import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.utils.JsonUtils;
 import KOWI2003.LaserMod.utils.MultiVersionUtils;
 import KOWI2003.LaserMod.utils.Utils;
@@ -29,11 +29,11 @@ public class WorldJoinEvent {
 	@OnlyIn(Dist.CLIENT)
 	public void onEvent(PlayerLoggedInEvent event) {
 		try {
-			if(ModConfig.GetConfig().updateChecker.useUpdateChecker) {
+			if(Config.getInstance().updateChecker.useUpdateChecker) {
 				Player player = (Player) event.getEntity();
 				
 				String version = "";
-				version = ModConfig.GetConfig().updateChecker.updateCheckerType.equals("latest") ? Utils.getLatestVersion() : Utils.getRecommendedVersion();
+				version = Config.getInstance().updateChecker.updateCheckerType.equals("latest") ? Utils.getLatestVersion() : Utils.getRecommendedVersion();
 
 				System.out.println(Utils.getLatestVersion() + " -> " + Reference.VESRION);
 				

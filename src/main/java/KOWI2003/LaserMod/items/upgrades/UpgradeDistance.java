@@ -1,5 +1,6 @@
 package KOWI2003.LaserMod.items.upgrades;
 
+import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 
 public class UpgradeDistance extends ItemUpgradeBase {
@@ -20,7 +21,7 @@ public class UpgradeDistance extends ItemUpgradeBase {
 	@Override
 	public float getMultiplier(KOWI2003.LaserMod.LaserProperties.Properties property) {
 		if(property == KOWI2003.LaserMod.LaserProperties.Properties.MAX_DISTANCE)
-			return 1 + getTierOr(1);
+			return 1 + getTierOr(1) * Config.getInstance().upgradeSettings.distanceUpgradeMultiplier;
 		return super.getMultiplier(property);
 	}
 	

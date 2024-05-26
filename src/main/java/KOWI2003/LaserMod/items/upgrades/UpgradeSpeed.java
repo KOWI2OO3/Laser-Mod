@@ -1,6 +1,7 @@
 package KOWI2003.LaserMod.items.upgrades;
 
 import KOWI2003.LaserMod.LaserProperties;
+import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.init.ModBlocks;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import net.minecraft.world.level.block.Block;
@@ -26,7 +27,7 @@ public class UpgradeSpeed extends ItemUpgradeBase {
 	@Override
 	public float getMultiplier(LaserProperties.Properties property) {
 		if(property == LaserProperties.Properties.SPEED)
-			return 2f;
+			return Config.getInstance().upgradeSettings.speedUpgradeMultiplier;
 		return super.getMultiplier(property);
 	}
 	

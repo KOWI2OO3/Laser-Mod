@@ -1,6 +1,7 @@
 package KOWI2003.LaserMod.items.upgrades;
 
 import KOWI2003.LaserMod.LaserProperties;
+import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 
 public class UpgradeCapacity extends ItemUpgradeBase {
@@ -15,7 +16,7 @@ public class UpgradeCapacity extends ItemUpgradeBase {
 	@Override
 	public float getMultiplier(LaserProperties.Properties property) {
 		if(property == LaserProperties.Properties.DURABILITY)
-			return getTier() + 1;
+			return getTier() * Config.getInstance().upgradeSettings.capacityUpgradeMultiplier + 1;
 		return super.getMultiplier(property);
 	}
 	

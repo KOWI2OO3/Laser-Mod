@@ -2,7 +2,7 @@ package KOWI2003.LaserMod.events;
 
 import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.LaserProperties.Properties;
-import KOWI2003.LaserMod.config.ModConfig;
+import KOWI2003.LaserMod.config.ClientConfig;
 import KOWI2003.LaserMod.init.ModItems;
 import KOWI2003.LaserMod.items.ItemLaserMutliTool;
 import KOWI2003.LaserMod.network.PacketFireLaserBullet;
@@ -80,7 +80,7 @@ public class LaserMultiToolEvents {
 		
 		isAttacking = true;
 		
-		if(ModConfig.GetConfig().useMultiToolRecoil)
+		if(ClientConfig.getInstance().useMultiToolRecoil)
 			totalOffset -= 2;
 	}
 	
@@ -169,7 +169,7 @@ public class LaserMultiToolEvents {
 		if(player == null)
 			return;
 		
-		if(ModConfig.GetConfig().useMultiToolRecoil) {
+		if(ClientConfig.getInstance().useMultiToolRecoil) {
 			if(totalOffset != 0) {
 				totalOffset += 0.025f * event.getPartialTick();
 				player.setXRot(player.getXRot() + (totalOffset+1f)/50f);

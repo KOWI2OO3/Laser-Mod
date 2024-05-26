@@ -27,7 +27,6 @@ public class UpgradeMining extends ItemUpgradeBase {
 		BlockEntity tile = te.getTileEntity().getLevel().getBlockEntity(pos);
 		if(state.getDestroySpeed(te.getTileEntity().getLevel(), pos) >= 0)
 			if(state.getMaterial() == Material.STONE) {
-				System.out.println(state.getMaterial());
 				if(state.getBlock() == ModBlocks.LaserCatcher.get() || state.getBlock() == Blocks.BEDROCK || state.getBlock() == ModBlocks.Laser.get() || tile instanceof ILaserAccess)
 					return;
 				te.getTileEntity().getLevel().removeBlock(pos, true);

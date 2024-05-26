@@ -2,6 +2,7 @@ package KOWI2003.LaserMod.items.upgrades;
 
 import java.util.List;
 
+import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.tileentities.ILaserAccess;
 import KOWI2003.LaserMod.utils.Utils;
@@ -32,7 +33,7 @@ public class UpgradeFire extends ItemUpgradeBase {
 		List<LivingEntity> entities = te.getEntitiesInLaser(LivingEntity.class);
 		
 		for (LivingEntity entity : entities) {
-			entity.setSecondsOnFire(5);
+			entity.setSecondsOnFire(Config.getInstance().upgradeSettings.fireUpgradeBurnTime);
 		}
 	}
 	

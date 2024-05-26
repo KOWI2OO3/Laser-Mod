@@ -21,11 +21,9 @@ public class WebUtils {
             String line = null;
             while ((line = reader.readLine()) != null)
                 file=file+line+"\n";
-//            System.out.println(file);
             	return file;
 
         } catch (IOException e) {
-//            System.out.println("Wrong username and password");
             return null;
         }
 	}

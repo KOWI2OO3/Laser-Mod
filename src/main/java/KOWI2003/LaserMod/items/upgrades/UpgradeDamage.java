@@ -2,6 +2,7 @@ package KOWI2003.LaserMod.items.upgrades;
 
 import KOWI2003.LaserMod.DamageSourceLaser.DamageSourceLaserArmor;
 import KOWI2003.LaserMod.LaserProperties;
+import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.utils.LaserItemUtils;
 import net.minecraft.world.damagesource.DamageSource;
@@ -49,7 +50,7 @@ public class UpgradeDamage extends ItemUpgradeBase {
 	public void runOnEntityHitArmor(ItemStack item, LivingEntity attacker, LivingEntity player, float damageAmount) {
 		DamageSource source = new DamageSourceLaserArmor("laser", LaserItemUtils.getProperties(item).hasUpgarde("fire"), player);
 		int tier = getTierOr(1);
-		attacker.hurt(source, 2 * tier/5);
+		attacker.hurt(source, Config.getInstance().upgradeSettings.damageUpgradeMultiplier * tier);
 		super.runOnEntityHitArmor(item, attacker, player, damageAmount);
 	}
 	

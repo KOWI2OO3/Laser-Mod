@@ -2,7 +2,7 @@ package KOWI2003.LaserMod;
 
 import javax.annotation.Nonnull;
 
-import KOWI2003.LaserMod.config.ConfigSerializer;
+import KOWI2003.LaserMod.config.ConfigHandler;
 import KOWI2003.LaserMod.events.ModClientEvents;
 import KOWI2003.LaserMod.handlers.EventHandler;
 import KOWI2003.LaserMod.init.ModBlocks;
@@ -70,7 +70,7 @@ public class MainMod {
 		MinecraftForge.EVENT_BUS.register(new ModClientEvents());
 		bus.register(new ModClientEvents());
 
-    	ConfigSerializer.GetInstance();
+    	ConfigHandler.register();
 
         ModBlocks.register(bus);
         ModItems.register(bus);

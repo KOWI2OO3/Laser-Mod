@@ -72,12 +72,6 @@ public class PacketHandler {
 		.consumerMainThread(PacketSyncIColor::handle)
 		.add();
 		
-		INSTANCE.messageBuilder(PacketSyncConfig.class, nextID())
-		.encoder(PacketSyncConfig::toBytes)
-		.decoder(PacketSyncConfig::new)
-		.consumerMainThread(PacketSyncConfig::handle)
-		.add();
-		
 		INSTANCE.messageBuilder(PacketSyncArmor.class, nextID())
 		.encoder(PacketSyncArmor::toBytes)
 		.decoder(PacketSyncArmor::new)

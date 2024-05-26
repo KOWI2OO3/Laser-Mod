@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mojang.math.Vector3f;
 
+import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.network.PacketDeltaMovment;
 import KOWI2003.LaserMod.network.PacketHandler;
@@ -42,7 +43,7 @@ public class UpgradeMove extends ItemUpgradeBase {
 	
 	@Override
 	public void runLaserToolHitEnemy(ItemStack item, LivingEntity enemy, LivingEntity player) {
-		float strenght = 0.8f;
+		float strenght = Config.getInstance().upgradeSettings.pushPullUpgradeKnockback;
 		if(!isPush)
 			enemy.knockback(strenght, player.getDirection().getStepX(), player.getDirection().getStepZ());
 		else
@@ -56,18 +57,15 @@ public class UpgradeMove extends ItemUpgradeBase {
 		List<Entity> entities = te.getEntitiesInLaser(Entity.class);
 		
 		for (Entity entity : entities) {
-			float speed = 0.05f;
+			float speed = Config.getInstance().upgradeSettings.pushPullUpgradeMultiplier;
 			
 			if(!isPush)
 				speed *= -1;
 			if(hasTier())
 				speed *= getTier();
 			
-			//entityPos = entityPos.add(new Vec3(dire.getStepX() * speed, dire.getStepY() * speed, dire.getStepZ() * speed));
-			
-			if(dire == Direction.UP || dire == Direction.DOWN || te.getLaser() instanceof TileEntityAdvancedLaser) {
+			if(dire == Direction.UP || dire == Direction.DOWN || te.getLaser() instanceof TileEntityAdvancedLaser)
 				entity.setDeltaMovement(entity.getDeltaMovement().x, entity.getDeltaMovement().y + 0.05f, entity.getDeltaMovement().z);
-			}
 			
 			Vector3f dir = te.getForward();
 			dir.normalize();

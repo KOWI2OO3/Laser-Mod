@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import KOWI2003.LaserMod.Reference;
-import KOWI2003.LaserMod.config.ModConfig;
+import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.init.ModItems;
 import KOWI2003.LaserMod.init.ModRecipeTypes;
 import KOWI2003.LaserMod.items.interfaces.IChargable;
@@ -28,7 +28,7 @@ public class InfuserRecipeChargingTool implements IInfuserRecipe {
 	public InfuserRecipeChargingTool() {}
 	
 	public static float getRedstoneToChargeRatio() {
-		return ModConfig.GetConfig().redstoneChargeValue;
+		return Config.getInstance().generalSettings.redstoneChargeValue;
 	}
 	
 	@Override
@@ -96,7 +96,7 @@ public class InfuserRecipeChargingTool implements IInfuserRecipe {
 
 	@Override
 	public float getRecipeSpeed() {
-		return ModConfig.GetConfig().machineSettings.infuserToolChargingSpeed;
+		return Config.getInstance().machineSettings.infuserToolChargingSpeed;
 	}
 
 	@Override

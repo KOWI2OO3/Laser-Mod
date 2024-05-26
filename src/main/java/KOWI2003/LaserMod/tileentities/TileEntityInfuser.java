@@ -55,7 +55,7 @@ public class TileEntityInfuser extends SyncableBlockEntity implements BlockEntit
 		}
 		
 		if(currentRecipe != null) {
-			tick -= currentRecipe.getRecipeSpeed() * properties.getProperty(Properties.SPEED) * Config.GetInstance().machineSettings.infuserSpeed;
+			tick -= currentRecipe.getRecipeSpeed() * properties.getProperty(Properties.SPEED) * Config.getInstance().machineSettings.infuserSpeed;
 			
 			if(tick <= 0) {
 				currentRecipe.assemble(new RecipeWrapper(handler));

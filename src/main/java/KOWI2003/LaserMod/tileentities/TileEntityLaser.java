@@ -12,7 +12,8 @@ import KOWI2003.LaserMod.LaserProperties;
 import KOWI2003.LaserMod.LaserProperties.Properties;
 import KOWI2003.LaserMod.blocks.BlockLaser;
 import KOWI2003.LaserMod.blocks.BlockRotatable;
-import KOWI2003.LaserMod.config.ModConfig;
+import KOWI2003.LaserMod.config.ClientConfig;
+import KOWI2003.LaserMod.config.Config;
 import KOWI2003.LaserMod.container.ContainerLaser;
 import KOWI2003.LaserMod.init.ModSounds;
 import KOWI2003.LaserMod.init.ModTileTypes;
@@ -60,7 +61,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 	public boolean active = false;
 	public float red = 1.0f;
 	public float green, blue = 0.0f;
-	public double distance = ModConfig.GetConfig().defaultLaserDistance;
+	public double distance = Config.getInstance().generalSettings.defaultLaserDistance;
 	public int soundCooldown = 0;
 	public MODE mode = MODE.NORMAL;
 	
@@ -76,8 +77,8 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		green = 0.0f;
 		blue = 0.0f;
 		properties = new LaserProperties();
-		properties.setProperty(Properties.DAMAGE,ModConfig.GetConfig().defaultLaserDamage);
-		properties.setProperty(Properties.MAX_DISTANCE, ModConfig.GetConfig().defaultLaserDistance);
+		properties.setProperty(Properties.DAMAGE, Config.getInstance().generalSettings.defaultLaserDamage);
+		properties.setProperty(Properties.MAX_DISTANCE,  Config.getInstance().generalSettings.defaultLaserDistance);
 	}
 	public TileEntityLaser(BlockPos pos, BlockState state) {
 		super(ModTileTypes.LASER, pos, state);
@@ -85,8 +86,8 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		green = 0.0f;
 		blue = 0.0f;
 		properties = new LaserProperties();
-		properties.setProperty(Properties.DAMAGE,ModConfig.GetConfig().defaultLaserDamage);
-		properties.setProperty(Properties.MAX_DISTANCE, ModConfig.GetConfig().defaultLaserDistance);
+		properties.setProperty(Properties.DAMAGE, Config.getInstance().generalSettings.defaultLaserDamage);
+		properties.setProperty(Properties.MAX_DISTANCE, Config.getInstance().generalSettings.defaultLaserDistance);
 	}
 	
 	@Override
@@ -97,7 +98,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 			}
 			
 		if(active) {
-			if(ModConfig.useSounds) {
+			if(ClientConfig.getInstance().useSounds) {
 				soundCooldown--;
 				if(soundCooldown <= 0) {
 					soundCooldown = 29;
@@ -119,10 +120,10 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 		active = value;
 		if(!active) {
 			handleTurnOffForInteractable();
-			if(ModConfig.useSounds && !properties.hasUpgarde((ItemUpgradeBase)ModUpgrades.Silence.get()))
+			if(ClientConfig.getInstance().useSounds && !properties.hasUpgarde((ItemUpgradeBase)ModUpgrades.Silence.get()))
 				level.playSound(null, getBlockPos(), ModSounds.LASER_DEACTIVATE.get(), SoundSource.BLOCKS, 1.0f, 0.68f);
 		}else
-			if(ModConfig.useSounds && !properties.hasUpgarde((ItemUpgradeBase)ModUpgrades.Silence.get()))
+			if(ClientConfig.getInstance().useSounds && !properties.hasUpgarde((ItemUpgradeBase)ModUpgrades.Silence.get()))
 				level.playSound(null, getBlockPos(), ModSounds.LASER_ACTIVATE.get(), SoundSource.BLOCKS, 1.0f, 0.68f);
 		soundCooldown = 29;
 		sync();

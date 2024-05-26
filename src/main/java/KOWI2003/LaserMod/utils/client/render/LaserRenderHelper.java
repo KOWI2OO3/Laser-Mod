@@ -189,7 +189,7 @@ public class LaserRenderHelper {
         float g = color.y();
         float b = color.z();
         
-        var useHitMarker = isPower ? Config.GetInstance().laserSettings.hitmarkerPowerLaser : Config.GetInstance().laserSettings.hitmarkerFocusedLaser;
+        var useHitMarker = isPower ? Config.getInstance().laserSettings.hitmarkerPowerLaser : Config.getInstance().laserSettings.hitmarkerFocusedLaser;
         var endPosition = tile.getBlockPos().relative(facing, (int)distance);
         if(useHitMarker && !tile.getLevel().getBlockState(endPosition).isAir() && !(tile.getLevel().getBlockEntity(endPosition) instanceof TileEntityMirror) && !hasTransformation) {
             var size = (thickness/2.0f); 

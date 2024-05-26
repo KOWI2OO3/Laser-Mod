@@ -216,27 +216,6 @@ public class Utils {
 	public static int getHexFromInt(int value) {
 		return Integer.parseInt(Integer.toHexString(Math.round(value*255) & 0xff), 16);
 	}
-//	public static EnumDyeColor getColourFromDye(ItemStack stack) {
-//		for(int id : OreDictionary.getOreIDs(stack)) {
-//			if(id == OreDictionary.getOreID("dyeBlack")) return EnumDyeColor.BLACK;
-//			if(id == OreDictionary.getOreID("dyeRed")) return EnumDyeColor.RED;
-//			if(id == OreDictionary.getOreID("dyeGreen")) return EnumDyeColor.GREEN;
-//			if(id == OreDictionary.getOreID("dyeBrown")) return EnumDyeColor.BROWN;
-//			if(id == OreDictionary.getOreID("dyeBlue")) return EnumDyeColor.BLUE;
-//			if(id == OreDictionary.getOreID("dyePurple")) return EnumDyeColor.PURPLE;
-//			if(id == OreDictionary.getOreID("dyeCyan")) return EnumDyeColor.CYAN;
-//			if(id == OreDictionary.getOreID("dyeLightGray")) return EnumDyeColor.SILVER;
-//			if(id == OreDictionary.getOreID("dyeGray")) return EnumDyeColor.GRAY;
-//			if(id == OreDictionary.getOreID("dyePink")) return EnumDyeColor.PINK;
-//			if(id == OreDictionary.getOreID("dyeLime")) return EnumDyeColor.LIME;
-//			if(id == OreDictionary.getOreID("dyeYellow")) return EnumDyeColor.YELLOW;
-//			if(id == OreDictionary.getOreID("dyeLightBlue")) return EnumDyeColor.LIGHT_BLUE;
-//			if(id == OreDictionary.getOreID("dyeMagenta")) return EnumDyeColor.MAGENTA;
-//			if(id == OreDictionary.getOreID("dyeOrange")) return EnumDyeColor.ORANGE;
-//			if(id == OreDictionary.getOreID("dyeWhite")) return EnumDyeColor.WHITE;
-//		}
-//		return EnumDyeColor.WHITE;
-//	}
 	
 	/**
 	 * gets the latest Version of the mod from the github update json
@@ -800,6 +779,23 @@ public class Utils {
 		return GLFW.glfwGetKey(Minecraft.getInstance().getWindow().getWindow(), key) == GLFW.GLFW_TRUE;
 	}
 	
+	/**
+	 * checks whether the given value is the class of an primitive data type <br>ex. <i>int, float, boolean</i> etc.
+	 * but also the Object class type for example. <i>Integer, Float, Boolean</i> etc.
+	 * @param value
+	 * @return whether the given value is the class of an primitive data type
+	 */
+	public static boolean isPrimitiveType(Class<?> value) {
+		return value == int.class || value == boolean.class || value == String.class || value == double.class|| value == float.class || value == byte.class || value == char.class
+				|| value == short.class || value == long.class || value == Integer.class || value == Boolean.class || value == Double.class|| value == Float.class || 
+				value == Character.class || value == Short.class || value == Long.class || value == Byte.class;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T extends Enum<T>> Object getEnum(Class<?> enumClass, String name) {
+		return Enum.valueOf((Class<T>) enumClass, name);
+	}
+
 	public static class GenericConsumer<T> implements Consumer<T> {
 		T stored;
 		
