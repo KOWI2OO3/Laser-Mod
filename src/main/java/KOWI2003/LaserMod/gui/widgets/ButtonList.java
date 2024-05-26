@@ -103,7 +103,6 @@ public class ButtonList extends AbstractWidget {
 	
 	@Override
 	@SuppressWarnings({ "resource", "null" })
-//	TODO use stencils of some kind of window, to make the scroll possible if the list is to long, and possibly a scrollbar
 	public void render(@Nonnull PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
 		mouseY -= offset;
 

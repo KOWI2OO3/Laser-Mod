@@ -20,8 +20,6 @@ public class LaserControllerSubPage extends GuiContext {
 	public void init() {
 		super.init();
 		
-		//TODO requires second page to display and explain the levers!
-		
 		addComponent(new TextBoxComponent("info", 0, -35, 200, 0, new float[] {.4f, .4f, .4f}, "manual.blocks.controller.sub.info.basic", null));
 
 		addComponent(new TextBoxComponent("info", 0, 0, 200, 0, new float[] {.4f, .4f, .4f}, "manual.blocks.controller.sub.info.extra", null));

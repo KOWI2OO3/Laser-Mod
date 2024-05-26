@@ -27,9 +27,6 @@ public class LaserProjectorSubPage extends GuiContext {
 		addComponent(new TextBoxComponent("info", 15, 0, 170, 0, new float[] {.4f, .4f, .4f}, "manual.blocks.projector.sub.info.extra", null));
 
 		addComponent(new ImageComponent("explain", -110, -45, 260, 170, new ResourceLocation(Reference.MODID, "textures/gui/manual/projector_explain.png")));
-		
-//		addPageSelector(-100 + 35, 30, 0, ManualHandler.UpgradesHeader, "Upgrades");
-//		addComponent(new TextBoxComponent("info", -100, 30, 100, 0, null, "Also Check: ", null));
 	}
 	
 }

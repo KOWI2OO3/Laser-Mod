@@ -1290,7 +1290,6 @@ public class RenderUtils {
 
 		float width = size.length > 0 ? size[0] : 1f;
 		float height = size.length > 1 ? size[1] : 1f;
-//		float depth = size.length > 2 ? size[2] : 1f;
 
 		float red = color.length > 0 ? color[0] : 1f;
 		float green = color.length > 1 ? color[1] : 1f;
@@ -1560,31 +1559,30 @@ public class RenderUtils {
 	}
 	
 	// https://www.curseforge.com/minecraft/mc-mods/stencil-shenanigans/files/2931876
-		public static void setupStencil(boolean clearStencil) {	
-			if(clearStencil)
-				RenderSystem.clearStencil(0xFF);
-			
-			EnableStencils();
-			setStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
-			clearStencilBuffer();
-			setStencilFunc(GL11.GL_ALWAYS, 1, 0xFF); // all fragments should pass the stencil test
-			setStencilMask(0xFF);
-			//Draw the Things that need to be replaced!
-		}
+	public static void setupStencil(boolean clearStencil) {	
+		if(clearStencil)
+			RenderSystem.clearStencil(0xFF);
+		
+		EnableStencils();
+		setStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
+		clearStencilBuffer();
+		setStencilFunc(GL11.GL_ALWAYS, 1, 0xFF); // all fragments should pass the stencil test
+		setStencilMask(0xFF);
+		//Draw the Things that need to be replaced!
+	}
 	
 	// https://www.curseforge.com/minecraft/mc-mods/stencil-shenanigans/files/2931876
-		public static void setupStencilInverse() {		
-			RenderSystem.clearStencil(0xFF);
-			
-			EnableStencils();
-			setStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
-			clearStencilBuffer();
-			setStencilFunc(GL11.GL_ALWAYS, 0, 0xFF); // all fragments should pass the stencil test
-			setStencilMask(0xFF);
-			//Draw the Things that need to be replaced!
-		}
+	public static void setupStencilInverse() {		
+		RenderSystem.clearStencil(0xFF);
+		
+		EnableStencils();
+		setStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
+		clearStencilBuffer();
+		setStencilFunc(GL11.GL_ALWAYS, 0, 0xFF); // all fragments should pass the stencil test
+		setStencilMask(0xFF);
+		//Draw the Things that need to be replaced!
+	}
 	
-	//TODO render outside (with stencilFunc GL_NOTEQUAL)
 	public static void setupRenderInside() {
 		setStencilFunc(GL11.GL_EQUAL, 1, 0xFF);
 		setStencilMask(0x00); // disable writing to the stencil buffer (because we only want to read the stencil buffer from this point, not write to it anymore)
@@ -1610,7 +1608,6 @@ public class RenderUtils {
 		disableStencils();
 		RenderSystem.enableDepthTest();
 		RenderSystem.depthMask(true);
-//		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 	
 	public static void disableStencil(boolean clearStencil) {
@@ -1620,7 +1617,6 @@ public class RenderUtils {
 		disableStencils(clearStencil);
 		RenderSystem.enableDepthTest();
 		RenderSystem.depthMask(true);
-//		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 	
 	/**
@@ -1650,7 +1646,6 @@ public class RenderUtils {
 	
 	public static void clearStencilBuffer() {
 		RenderSystem.clear(GL11.GL_STENCIL_BUFFER_BIT, false);
-//		GL20.glClear(GL20.GL_STENCIL_BUFFER_BIT);
 	}
 	
 	private static void disableStencils() {
@@ -1681,7 +1676,6 @@ public class RenderUtils {
 	 */
 	public static void setStencilFunc(int func, int ref, int mask) {
 		RenderSystem.stencilFunc(func, ref, mask);
-//		GL20.glStencilFunc(func, ref, mask);
 	}
 	
 	/**
@@ -1707,7 +1701,6 @@ public class RenderUtils {
 	 */
 	public static void setStencilOp(int sfail, int dpfail, int dppass) {
 		RenderSystem.stencilOp(sfail, dpfail, dppass);
-//		GL20.glStencilOp(sfail, dpfail, dppass);
 	}
 	
 	public static void resetStencilFunctions() {

@@ -318,7 +318,6 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 	}
 	
 	private Multimap<Attribute, AttributeModifier> getAttributeModifiers(LaserProperties properties) {
-		//TODO add chaching for the modifiers;
 		UUID uuid = ARMOR_MODIFIER_UUID_PER_SLOT[getSlot().getIndex()];
 		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor modifier", this.getDefense(), AttributeModifier.Operation.ADDITION));
