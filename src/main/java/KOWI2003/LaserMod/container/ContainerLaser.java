@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import KOWI2003.LaserMod.init.ModContainerTypes;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.tileentities.TileEntityLaser;
+import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -44,7 +45,6 @@ public class ContainerLaser extends AbstractContainerMenu {
 	    				if(stack.getItem() instanceof ItemUpgradeBase) {
 	    					if(!te.remove((ItemUpgradeBase)stack.getItem(), false))
 	    						return;
-//	    					return removed ? stack : ItemStack.EMPTY;
 	    				}
 	    				super.onTake(player, stack);
 	    			}
@@ -84,7 +84,7 @@ public class ContainerLaser extends AbstractContainerMenu {
 	
 	@Override
 	public ItemStack quickMoveStack(@Nonnull Player player, int index) {
-	      return ItemStack.EMPTY;
+		return Utils.handleQuickMove(this, player, index);
 	}
 	
 	private static TileEntityLaser getTileEntity(final Inventory playerInv, final FriendlyByteBuf data) {

@@ -8,6 +8,7 @@ import KOWI2003.LaserMod.init.ModContainerTypes;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.items.interfaces.ILaserUpgradable;
 import KOWI2003.LaserMod.tileentities.TileEntityModStation;
+import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -64,7 +65,7 @@ public class ContainerModStation extends AbstractContainerMenu {
 	
 	@Override
 	public ItemStack quickMoveStack(@Nonnull Player player, int index) {
-	      return ItemStack.EMPTY;
+		return Utils.handleQuickMove(this, player, index);
 	}
 	
 	private static TileEntityModStation getTileEntity(final Inventory playerInv, final FriendlyByteBuf data) {

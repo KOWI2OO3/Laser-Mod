@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import KOWI2003.LaserMod.init.ModContainerTypes;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.tileentities.TileEntityPrecisionAssembler;
+import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -28,17 +29,7 @@ public class ContainerPrecisionAssembler extends AbstractContainerMenu {
 		super(ModContainerTypes.PRECISION_ASSEMBLER_TYPE.get(), windowId);
 		this.te = te;
 		
-		//(Block) Inventory Slots
-		this.addSlot(new SlotItemHandler(te.handler, 0, 14, 10));
-		this.addSlot(new SlotItemHandler(te.handler, 1, 14, 31));
-		this.addSlot(new SlotItemHandler(te.handler, 2, 14, 52));
-		this.addSlot(new SlotItemHandler(te.handler, 3, 50, 31));
-		this.addSlot(new SlotItemHandler(te.handler, 4, 132, 31) {
-			@Override
-			public boolean mayPlace(ItemStack stack) {
-				return false;
-			}
-		});
+		// Upgrade Slot
 		this.addSlot(new SlotItemHandler(te.getUpgradeInv(), 0, 153, 7) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
@@ -49,6 +40,9 @@ public class ContainerPrecisionAssembler extends AbstractContainerMenu {
 			
 			@Override
 			public void onTake(@Nonnull Player player, @Nonnull ItemStack stack) {
+				if(stack.getItem() instanceof ItemUpgradeBase upgrade && !te.remove(upgrade, false))
+					return;
+				
 				super.onTake(player, stack);
 			}
 			
@@ -60,6 +54,18 @@ public class ContainerPrecisionAssembler extends AbstractContainerMenu {
 			@Override
 			public int getMaxStackSize(ItemStack stack) {
 				return 1;
+			}
+		});
+
+		//(Block) Inventory Slots
+		this.addSlot(new SlotItemHandler(te.handler, 0, 14, 10));
+		this.addSlot(new SlotItemHandler(te.handler, 1, 14, 31));
+		this.addSlot(new SlotItemHandler(te.handler, 2, 14, 52));
+		this.addSlot(new SlotItemHandler(te.handler, 3, 50, 31));
+		this.addSlot(new SlotItemHandler(te.handler, 4, 132, 31) {
+			@Override
+			public boolean mayPlace(ItemStack stack) {
+				return false;
 			}
 		});
 	    
@@ -78,7 +84,7 @@ public class ContainerPrecisionAssembler extends AbstractContainerMenu {
 	
 	@Override
 	public ItemStack quickMoveStack(@Nonnull Player player, int index) {
-	      return ItemStack.EMPTY;
+		return Utils.handleQuickMove(this, player, index);
 	}
 	
 	private static TileEntityPrecisionAssembler getTileEntity(final Inventory playerInv, final FriendlyByteBuf data) {

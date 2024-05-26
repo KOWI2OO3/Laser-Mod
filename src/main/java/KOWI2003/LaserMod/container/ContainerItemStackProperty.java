@@ -5,6 +5,7 @@ import javax.annotation.Nonnull;
 import KOWI2003.LaserMod.init.ModContainerTypes;
 import KOWI2003.LaserMod.network.PacketHandler;
 import KOWI2003.LaserMod.network.PacketSyncItemProperty;
+import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
@@ -91,7 +92,7 @@ public class ContainerItemStackProperty extends AbstractContainerMenu {
 	
 	@Override
 	public ItemStack quickMoveStack(@Nonnull Player player, int index) {
-	      return ItemStack.EMPTY;
+		return Utils.handleQuickMove(this, player, index);
 	}
 
 	public boolean stillValid(@Nonnull Player p_38874_) {

@@ -30,7 +30,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -38,6 +41,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 
@@ -794,6 +799,143 @@ public class Utils {
 	@SuppressWarnings("unchecked")
 	public static <T extends Enum<T>> Object getEnum(Class<?> enumClass, String name) {
 		return Enum.valueOf((Class<T>) enumClass, name);
+	}
+
+	/**
+	 * This method is used to move an item from a slot to the player inventory or vice versa
+ 	 * *Adapted version from the KOWI-Core library*
+	 *
+	 * @param menu the container menu that the slot is in
+	 * @param player the player that is moving the item
+	 * @param index the index of the slot that the item is being moved from
+	 * @return the item that was moved
+	 */
+	@OnlyIn(Dist.CLIENT)
+	public static ItemStack handleQuickMove(AbstractContainerMenu menu, Player player, int index) {
+		int slotCount = menu.slots.size() - 36;
+		
+		if(index < slotCount) {	//From Gui To Inv
+			Slot slot = menu.getSlot(index);
+			ItemStack stack = slot.getItem().copy();
+			
+			int toBePlaced = stack.getCount();
+			
+			if(toBePlaced <= 0 || stack.isEmpty())
+				return ItemStack.EMPTY;
+			
+			Inventory inv = player.getInventory();
+			for (int i = 0; i < 36; i++) {
+				ItemStack checkStack = player.getInventory().getItem(i);
+				if(checkStack.getItem() == stack.getItem() && checkStack.getCount() < checkStack.getMaxStackSize()) {
+					if(i == -1)
+						break;
+					
+					int rest = checkStack.isEmpty() ? Math.min(checkStack.getMaxStackSize(), toBePlaced) : 
+						Math.min(checkStack.getMaxStackSize() - checkStack.getCount(), toBePlaced);
+					
+					if(checkStack.getItem() == stack.getItem()) {
+						if(checkStack.isEmpty()) {
+							checkStack = stack.copy();
+							checkStack.setCount(rest);
+						}else
+							checkStack.setCount(checkStack.getCount() + rest);
+						toBePlaced -= rest;
+
+						inv.setItem(i, checkStack);
+					}
+					
+					if(toBePlaced <= 0)
+						break;
+
+				}
+			}
+			
+			for (int i = 0; i < 36; i++) {
+				int checkIndex = i;
+				ItemStack checkStack = inv.getItem(checkIndex);
+				
+				boolean canPlace = checkStack.isEmpty() || (checkStack.getItem() == stack.getItem() && checkStack.getCount() < checkStack.getMaxStackSize());
+				int rest = checkStack.isEmpty() ? Math.min(checkStack.getMaxStackSize(), toBePlaced) : 
+					Math.min(checkStack.getMaxStackSize() - checkStack.getCount(), toBePlaced);
+				if(canPlace) {
+					if(checkStack.isEmpty()) {
+						checkStack = stack.copy();
+						checkStack.setCount(rest);
+					}else
+						checkStack.setCount(checkStack.getCount() + rest);
+					toBePlaced -= rest;
+
+					inv.setItem(checkIndex, checkStack);
+				}
+				
+				if(toBePlaced <= 0)
+					break;
+			}
+			if(toBePlaced != stack.getCount()) {
+				slot.onTake(player, stack);
+				stack.setCount(toBePlaced);
+				slot.set(stack);
+			}
+		}else {	//From Inv To Gui
+			Slot slot = menu.getSlot(index);
+			ItemStack stack = slot.getItem().copy();
+			
+			int toBePlaced = stack.getCount();
+			
+			if(toBePlaced <= 0 || stack.isEmpty())
+				return ItemStack.EMPTY;
+			
+			for (int i = 0; i < slotCount; i++) {
+				Slot checkSlot = menu.getSlot(i);
+				ItemStack checkStack = checkSlot.getItem();
+				
+				boolean canPlace = (checkStack.isEmpty() || checkStack.getItem() == stack.getItem()) && checkSlot.mayPlace(stack);
+				int rest = checkStack.isEmpty() ? Math.min(Math.min(checkStack.getMaxStackSize(), checkSlot.getMaxStackSize()), toBePlaced) : 
+					Math.min(Math.min(checkStack.getMaxStackSize(), checkSlot.getMaxStackSize()) - checkStack.getCount(), toBePlaced);
+				if(canPlace) {
+					if(checkStack.isEmpty()) {
+						checkStack = stack.copy();
+						checkStack.setCount(rest);
+					}else
+						checkStack.setCount(checkStack.getCount() + rest);
+					toBePlaced -= rest;
+					checkSlot.set(checkStack);
+				}
+				
+				if(toBePlaced <= 0) 
+					break;
+			}
+			
+			if(toBePlaced != stack.getCount()) {
+				stack.setCount(toBePlaced);
+				slot.set(stack);
+			}
+		}
+		
+		if(index > slotCount-1) {
+			if(index > 27) {
+				index = 36 - index;
+				index = 8 - index;
+			}else {
+				index = 36 - index;
+				index -= 8;
+				index = 27 - index;
+				index += 9;
+			}
+			return quickMoveStackNormal(player, index - (menu.slots.size()-37));
+		}
+		return ItemStack.EMPTY;
+	}
+
+	/**
+	 * This method is used to move an item through the player inventory 
+	 * @param player the player that is moving the item
+	 * @param index the index of the slot that the item is being moved from
+	 * @return the item that was moved
+	 */
+	@OnlyIn(Dist.CLIENT)
+	public static ItemStack quickMoveStackNormal(Player player, int index) {
+		return index > 0 && index < 46 ? player.inventoryMenu.quickMoveStack(player, index) : ItemStack.EMPTY;
 	}
 
 	public static class GenericConsumer<T> implements Consumer<T> {
