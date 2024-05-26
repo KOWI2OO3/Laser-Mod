@@ -12,9 +12,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -30,7 +29,7 @@ public class WorldJoinEvent {
 	public void onEvent(PlayerLoggedInEvent event) {
 		try {
 			if(ModConfig.GetConfig().updateChecker.useUpdateChecker) {
-				Player player = (Player) event.getEntity();
+				Player player = (Player) event.getEntityLiving();
 				
 				String version = "";
 				version = ModConfig.GetConfig().updateChecker.updateCheckerType.equals("latest") ? Utils.getLatestVersion() : Utils.getRecommendedVersion();
@@ -61,32 +60,30 @@ public class WorldJoinEvent {
 					if(useLink)
 						message = message.replace("#link", "");
 					
-					
-					
-					Component mod = MutableComponent.create(new LiteralContents(ChatFormatting.DARK_AQUA  + "---Laser Mod---"));
-					Component s = MutableComponent.create(new LiteralContents(PREFIX + message));
-					player.sendSystemMessage(mod);
-					player.sendSystemMessage(s);
+					Component mod = new TextComponent(ChatFormatting.DARK_AQUA  + "---Laser Mod---");
+					Component s = new TextComponent(PREFIX + message);
+					player.sendMessage(mod, player.getUUID());
+					player.sendMessage(s, player.getUUID());
 					if(useLink) {
-						MutableComponent link = MutableComponent.create(new LiteralContents(PREFIX + ChatFormatting.BLUE + ChatFormatting.UNDERLINE + "Click Here"));
+						TextComponent link = new TextComponent(PREFIX + ChatFormatting.BLUE + ChatFormatting.UNDERLINE + "Click Here");
 						Style style = link.getStyle();
 						style = link.getStyle().withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, JsonUtils.getValue(WebUtils.getJsonObj(Reference.UPDATE_URL), "homepage")));
-						style = style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, MutableComponent.create(new LiteralContents("go to the mod page"))));
+						style = style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponent("go to the mod page")));
 						link.setStyle(style);
-						player.sendSystemMessage(link);
+						player.sendMessage(link, player.getUUID());
 					}
 				}else {
 					if(!Reference.VESRION.equals(version)) {
-						MutableComponent mod = MutableComponent.create(new LiteralContents(ChatFormatting.DARK_AQUA  + "---Laser Mod---"));
-						MutableComponent s = MutableComponent.create(new LiteralContents(PREFIX + "version " + version + " is out, your client is out-dated, to update "));
-						MutableComponent link = MutableComponent.create(new LiteralContents(PREFIX + ChatFormatting.BLUE + ChatFormatting.UNDERLINE + "Click Here"));
+						TextComponent mod = new TextComponent(ChatFormatting.DARK_AQUA  + "---Laser Mod---");
+						TextComponent s = new TextComponent(PREFIX + "version " + version + " is out, your client is out-dated, to update ");
+						TextComponent link = new TextComponent(PREFIX + ChatFormatting.BLUE + ChatFormatting.UNDERLINE + "Click Here");
 						Style style = link.getStyle();
 						style = link.getStyle().withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, JsonUtils.getValue(WebUtils.getJsonObj(Reference.UPDATE_URL), "homepage")));
-						style = style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, MutableComponent.create(new LiteralContents("go to the mod page"))));
+						style = style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponent("go to the mod page")));
 						link.setStyle(style);
-						player.sendSystemMessage(mod);
-						player.sendSystemMessage(s);
-						player.sendSystemMessage(link);
+						player.sendMessage(mod, player.getUUID());
+						player.sendMessage(s, player.getUUID());
+						player.sendMessage(link, player.getUUID());
 					}
 				}
 			}

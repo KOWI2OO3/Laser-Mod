@@ -21,7 +21,7 @@ public class Config {
 	private Config() {
 		redstoneChargeValue = 15f;
 		defaultLaserDamage = 3;
-		useMultiToolRecoil = true;
+		useMultiToolRecoil = false;
 		defaultLaserDistance = 10;
 		updateChecker = new UpdateCheckerConfig();
 	}

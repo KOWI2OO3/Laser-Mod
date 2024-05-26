@@ -55,7 +55,7 @@ public class RenderMultiTool extends BlockEntityWithoutLevelRenderer {
 		float[] color = LaserItemUtils.getColor(stack);
 		
 		matrix.pushPose();
-		
+
 		float l = 10;
 		
 		CompoundTag tag = stack.getTag();
@@ -102,7 +102,6 @@ public class RenderMultiTool extends BlockEntityWithoutLevelRenderer {
 		rotation.normalize();
 		
 		matrix.mulPose(rotation);
-		
 		RenderUtils.renderQuad(buffer.getBuffer(LaserRenderType.LASER_RENDER), matrix, new float[] {pos[0], pos[1] - size/2f, pos[2]}, 
 				new float[] {l, size, size}, new float[] {0, 0, 1, 1}, new float[] {color[0], color[1], color[2], 0.5f}, combinedLight, combinedOverlay);
 		matrix.mulPose(Vector3f.XP.rotationDegrees(90));

@@ -16,7 +16,7 @@ public class LaserArmorEvents {
 	@SubscribeEvent
 	public void onGettingAttacked(LivingDamageEvent event) 
 	{
-		LivingEntity wearer = event.getEntity();	//Wears Armor
+		LivingEntity wearer = event.getEntityLiving();	//Wears Armor
 		for(ItemStack stack : wearer.getArmorSlots()) {
 			if(stack.getItem() instanceof ItemLaserArmorBase)
 			{

@@ -23,23 +23,23 @@ public class PrecisionAssemblerRecipeHandler {
 	
 	public static void registerRecipes() {
 		registerRecipe(1, new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(ModItems.SiliconBase.get()), new ItemStack(Items.IRON_INGOT), ItemStack.EMPTY, new ItemStack(Items.REDSTONE));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Speed.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Items.FEATHER)), Ingredient.of(new ItemStack(Items.REDSTONE)), Ingredient.of(new ItemStack(Items.GLOWSTONE_DUST)));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Mining.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Items.IRON_PICKAXE)));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Fire.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Items.FLINT_AND_STEEL)));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Color.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Items.RED_DYE)), Ingredient.of(new ItemStack(Items.LAPIS_LAZULI)), Ingredient.of(new ItemStack(Items.GREEN_DYE)));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage1.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Items.WOODEN_SWORD)));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage2.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Items.STONE_SWORD)));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage3.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Items.IRON_SWORD)));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage4.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Items.DIAMOND_SWORD)));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage5.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Items.NETHERITE_SWORD)));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.NoDamage.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(ItemTags.WOOL));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Speed.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Items.FEATHER), new ItemStack(Items.REDSTONE), new ItemStack(Items.GLOWSTONE_DUST));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Mining.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Items.IRON_PICKAXE));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Fire.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Items.FLINT_AND_STEEL));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Color.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Items.RED_DYE), new ItemStack(Items.LAPIS_LAZULI), new ItemStack(Items.GREEN_DYE));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage1.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Items.WOODEN_SWORD));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage2.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Items.STONE_SWORD));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage3.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Items.IRON_SWORD));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage4.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Items.DIAMOND_SWORD));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Damage5.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Items.NETHERITE_SWORD));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.NoDamage.get()), new ItemStack(ModItems.CircuitBoard.get()), ItemTags.WOOL);
 		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Silence.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(ItemTags.WOOL), Ingredient.of(ItemTags.WOOL), Ingredient.of(ItemTags.WOOL));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Push.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Blocks.PISTON)));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Pull.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Blocks.STICKY_PISTON)));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Push.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Blocks.PISTON));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Pull.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Blocks.STICKY_PISTON));
 		registerRecipe(1, new ItemStack(ModUpgrades.Distance.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Blocks.GLASS), ItemStack.EMPTY, new ItemStack(Blocks.GLASS));
 		registerRecipe(1, new ItemStack(ModUpgrades.Distance2.get()), new ItemStack(ModUpgrades.Distance.get()), new ItemStack(Blocks.GLASS), ItemStack.EMPTY, new ItemStack(Blocks.GLASS));
 		registerRecipe(1, new ItemStack(ModUpgrades.Distance3.get()), new ItemStack(ModUpgrades.Distance2.get()), new ItemStack(Blocks.GLASS), ItemStack.EMPTY, new ItemStack(Blocks.GLASS));
-		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Mode.get()), Ingredient.of(new ItemStack(ModItems.CircuitBoard.get())), Ingredient.of(new ItemStack(Blocks.GLASS)), Ingredient.of(new ItemStack(Items.PAPER)));
+		registerRecipeShapeless(1, new ItemStack(ModUpgrades.Mode.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Blocks.GLASS), new ItemStack(Items.PAPER));
 		registerRecipe(1, new ItemStack(ModUpgrades.Capacity.get()), new ItemStack(ModItems.CircuitBoard.get()), new ItemStack(Blocks.GLASS), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(Items.IRON_INGOT));
 		registerRecipe(1, new ItemStack(ModUpgrades.Capacity2.get()), new ItemStack(ModUpgrades.Capacity.get()), new ItemStack(Blocks.GLASS), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(Items.IRON_INGOT));
 		registerRecipe(1, new ItemStack(ModUpgrades.Capacity3.get()), new ItemStack(ModUpgrades.Capacity2.get()), new ItemStack(Blocks.GLASS), new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(Items.IRON_INGOT));
@@ -71,18 +71,11 @@ public class PrecisionAssemblerRecipeHandler {
 		recipes.add(recipe);
 	}
 	
-	public static void registerRecipe(float speed, ItemStack output, ItemStack inputBase, ItemStack... inputs) {
-		Ingredient[] in = new Ingredient[inputs.length];
-		for(int i = 0; i < in.length; i++)
-			in[i] = Ingredient.of(inputs[i]);
-		registerRecipe(speed, output, Ingredient.of(inputBase), in);
-	}
-	
-	public static void registerRecipe(float speed, ItemStack output, Ingredient inputBase, Ingredient... inputs) {
+	public static void registerRecipe(float speed, ItemStack output, Object inputBase, Object... inputs) {
 		recipes.add(new PrecisionAssemblerRecipeBase(output, speed, inputBase, inputs));
 	}
 	
-	public static void registerRecipeShapeless(float speed, ItemStack output, Ingredient inputBase, Ingredient... inputs) {
+	public static void registerRecipeShapeless(float speed, ItemStack output, Object inputBase, Object... inputs) {
 		recipes.add(new PrecisionAssemblerRecipeShapeless(output, speed, inputBase, inputs));
 	}
 	
@@ -98,23 +91,84 @@ public class PrecisionAssemblerRecipeHandler {
 		if(!recipe.isRecipeValid(te.getHandler()))
 			return;
 		ItemStackHandler handler = te.getHandler();
-		Ingredient[] inputs = recipe.getInputs();
+		Object[] inputs = recipe.getInputs();
 		if (recipe instanceof PrecisionAssemblerRecipeShapeless) {
 			for(int i = 0; i < inputs.length; i++) {
-				Ingredient in = inputs[i];
-				for(int j = 0; j < handler.getSlots(); j++) {
-					if(in.test(handler.getStackInSlot(j))) {
-						handler.extractItem(j, 1, false);
-						break;
+				Object obj = inputs[i];
+				if(obj instanceof ItemStack) {
+					ItemStack input = ((ItemStack)obj).copy();
+					for (int j = 0; j < handler.getSlots() - 2; j++) {
+						ItemStack slot = handler.getStackInSlot(j).copy();
+						if(slot.getItem() == input.getItem()) {
+							int newCount = slot.getCount() - input.getCount();
+							if(newCount <= 0)
+								slot = ItemStack.EMPTY;
+							else
+								slot.setCount(slot.getCount() - input.getCount());
+							handler.setStackInSlot(j, slot);
+						}
+					}
+				}else if(obj instanceof ITag<?>) {
+					for (int j = 0; j < handler.getSlots() - 2; j++) {
+						ItemStack slot = handler.getStackInSlot(j).copy();
+						if(((ITag<Item>)obj).contains(slot.getItem())) {
+							int newCount = slot.getCount() - 1;
+							if(newCount <= 0)
+								slot = ItemStack.EMPTY;
+							else
+								slot.setCount(slot.getCount() - 1);
+							handler.setStackInSlot(j, slot);
+						}
+					}
+				}else if(obj instanceof TagKey<?>) {
+					for (int j = 0; j < handler.getSlots() - 2; j++) {
+						ItemStack slot = handler.getStackInSlot(j).copy();
+						if(slot.is((TagKey<Item>)obj)) {
+							int newCount = slot.getCount() - 1;
+							if(newCount <= 0)
+								slot = ItemStack.EMPTY;
+							else
+								slot.setCount(slot.getCount() - 1);
+							handler.setStackInSlot(j, slot);
+						}
 					}
 				}
 			}
-		}else
-			for(int i = 0; i < inputs.length; i++)
-				handler.extractItem(i, 1, false);
-
-		handler.extractItem(3, 1, false);
-		
+		}else {
+			for (int i = 0; i < Math.min(inputs.length, handler.getSlots() - 2); i++) {
+				Object obj = inputs[i];
+				if(obj instanceof ItemStack) {
+					ItemStack input = ((ItemStack)obj).copy();
+					ItemStack slot = handler.getStackInSlot(i).copy();
+					int newCount = slot.getCount() - input.getCount();
+					if(newCount <= 0)
+						slot = ItemStack.EMPTY;
+					else
+						slot.setCount(slot.getCount() - input.getCount());
+					handler.setStackInSlot(i, slot);
+				}else if(obj instanceof ITag<?>) {
+					ItemStack slot = handler.getStackInSlot(i).copy();
+					if(((ITag<Item>)obj).contains(slot.getItem())) {
+						int newCount = slot.getCount() - 1;
+						if(newCount <= 0)
+							slot = ItemStack.EMPTY;
+						else
+							slot.setCount(slot.getCount() - 1);
+						handler.setStackInSlot(i, slot);
+					}
+				}else if(obj instanceof TagKey<?>) {
+					ItemStack slot = handler.getStackInSlot(i).copy();
+					if(slot.is((TagKey<Item>)obj)) {
+						int newCount = slot.getCount() - 1;
+						if(newCount <= 0)
+							slot = ItemStack.EMPTY;
+						else
+							slot.setCount(slot.getCount() - 1);
+						handler.setStackInSlot(i, slot);
+					}
+				}
+			}
+		}
 		Object obj = recipe.getInputBase();
 		ItemStack slot = handler.getStackInSlot(3).copy();
 		if(obj instanceof ItemStack) {

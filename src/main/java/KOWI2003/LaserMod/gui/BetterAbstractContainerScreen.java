@@ -27,6 +27,7 @@ public abstract class BetterAbstractContainerScreen<T extends AbstractContainerM
 		super.clearWidgets();
 	}
 	
+	@Override
 	protected <K extends GuiEventListener & Widget & NarratableEntry> K addRenderableWidget(K widget) {
 		if(widget instanceof AbstractWidget) buttons.add((AbstractWidget)widget);
 		return super.addRenderableWidget(widget);
@@ -36,8 +37,7 @@ public abstract class BetterAbstractContainerScreen<T extends AbstractContainerM
 	public boolean mouseClicked(double p_97748_, double p_97749_, int p_97750_) {
 		boolean click = super.mouseClicked(p_97748_, p_97749_, p_97750_);
 		for (AbstractWidget widget : buttons)
-			if(widget.isMouseOver(p_97748_, p_97749_))
-				click = click || widget.mouseClicked(p_97748_, p_97749_, p_97750_);
+			click = click || widget.mouseClicked(p_97748_, p_97749_, p_97750_);
 		return click;
 	}
 	
@@ -76,8 +76,7 @@ public abstract class BetterAbstractContainerScreen<T extends AbstractContainerM
 	public boolean mouseReleased(double p_97812_, double p_97813_, int p_97814_) {
 		boolean click = super.mouseReleased(p_97812_, p_97813_, p_97814_);
 		for (AbstractWidget widget : buttons)
-			if(widget.isMouseOver(p_97812_, p_97813_))
-				click = click || widget.mouseReleased(p_97812_, p_97813_, p_97814_);
+			click = click || widget.mouseReleased(p_97812_, p_97813_, p_97814_);
 		return click;
 	}
 	

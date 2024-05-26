@@ -39,7 +39,7 @@ public class BlockPrecisionAssembler extends BlockHorizontal {
 		if(!world.isClientSide) {
 			BlockEntity te = world.getBlockEntity(pos);
 			if(te instanceof TileEntityPrecisionAssembler) {
-				NetworkHooks.openScreen((ServerPlayer)player, (TileEntityPrecisionAssembler)te, pos);
+				NetworkHooks.openGui((ServerPlayer)player, (TileEntityPrecisionAssembler)te, pos);
 				return InteractionResult.SUCCESS;
 			}
 		}

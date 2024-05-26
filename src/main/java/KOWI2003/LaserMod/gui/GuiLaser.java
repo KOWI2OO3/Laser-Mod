@@ -17,15 +17,14 @@ import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec2;
-import net.minecraftforge.client.gui.ScreenUtils;
-import net.minecraftforge.client.gui.widget.ForgeSlider;
+import net.minecraftforge.client.gui.GuiUtils;
+import net.minecraftforge.client.gui.widget.Slider;
 
 public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 
@@ -39,9 +38,9 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 	public Button options;
 	public boolean menuOpen = false;
 	
-	public ForgeSlider Red;
-	public ForgeSlider Green;
-	public ForgeSlider Blue;
+	public Slider Red;
+	public Slider Green;
+	public Slider Blue;
 	
 	public Button modeNext;
 	public Button modePrev;
@@ -54,22 +53,31 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 		this.playerInv = playerInv;
 		this.player = playerInv.player;
 
-		options = new Button(width + getGuiLeft() + 260 - 30, getGuiTop() + 100, 50, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.button.options")), (button) -> 
+		options = new Button(width + getGuiLeft() + 260 - 30, getGuiTop() + 100, 50, 20, new TranslatableComponent("container.lasermod.laser.button.options"), (button) -> 
 			toggleMenu());
 		
-		Red = new ForgeSlider(0, 0, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")), MutableComponent.create(new LiteralContents("")), 0f, 1f, te.red, .01f, 0, true);
-		Green = new ForgeSlider(0, 40, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")), MutableComponent.create(new LiteralContents("")), 0f, 1f, te.green, .01f, 0, true);
-		Blue = new ForgeSlider(0, 80, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")), MutableComponent.create(new LiteralContents("")), 0f, 1f, te.blue, .01f, 0, true);
+		Red = new Slider(0, 0, new TranslatableComponent("container.lasermod.laser.red"), 0f, 1f, te.red, (button) -> {}, (button) -> {
+			PacketHandler.sendToServer(new PacketLaser(te.getBlockPos(), (float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue()));
+			Red.setMessage(new TranslatableComponent("container.lasermod.laser.red"));
+		});
+		Green = new Slider(0, 40, new TranslatableComponent("container.lasermod.laser.green"), 0f, 1f, te.green, (button) -> {}, (button) -> {
+			PacketHandler.sendToServer(new PacketLaser(te.getBlockPos(), (float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue()));
+			Green.setMessage(new TranslatableComponent("container.lasermod.laser.green"));
+		});
+		Blue = new Slider(0, 80, new TranslatableComponent("container.lasermod.laser.blue"), 0f, 1f, te.blue, (button) -> {}, (button) -> {
+			PacketHandler.sendToServer(new PacketLaser(te.getBlockPos(), (float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue()));
+			Blue.setMessage(new TranslatableComponent("container.lasermod.laser.blue"));
+		});
 		
-		Red.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")));
-		Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
-		Blue.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")));
+		Red.setMessage(new TranslatableComponent("container.lasermod.laser.red"));
+		Green.setMessage(new TranslatableComponent("container.lasermod.laser.green"));
+		Blue.setMessage(new TranslatableComponent("container.lasermod.laser.blue"));
 		
-		modePrev = new Button(0, 0, 20, 20, MutableComponent.create(new TranslatableContents("<")), (button) -> {
+		modePrev = new Button(0, 0, 20, 20, new TranslatableComponent("<"), (button) -> {
 			PacketHandler.sendToServer(new PacketLaserMode(te.getBlockPos(), false));
 		});
 		
-		modeNext = new Button(modePrev.x + modePrev.getWidth() + 60, modePrev.y, modePrev.getWidth(), modePrev.getHeight(), MutableComponent.create(new TranslatableContents(">")), (button) -> {
+		modeNext = new Button(modePrev.x + modePrev.getWidth() + 60, modePrev.y, modePrev.getWidth(), modePrev.getHeight(), new TranslatableComponent(">"), (button) -> {
 			PacketHandler.sendToServer(new PacketLaserMode(te.getBlockPos(), true));
 		});
 		
@@ -111,32 +119,32 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 		int posx = width / 2;
 		int posy = height / 2;
 		
-		this.options.x = (posx + 30);
-		this.options.y = (posy - 25);
+		this.options.x = posx + 30;
+		this.options.y = posy - 25;
 		
-		this.modePrev.x = (posx + 91);
-		this.modePrev.y = (posy - 40);
+		this.modePrev.x = posx + 91;
+		this.modePrev.y = posy - 40;
 		
-		this.modeNext.x = (modePrev.x + modePrev.getWidth() + 30);
-		this.modeNext.y = (modePrev.y);
+		this.modeNext.x = modePrev.x + modePrev.getWidth() + 30;
+		this.modeNext.y = modePrev.y;
 		
 		int x = 89;
 		int y = 10;
 		
-		this.Red.x = (posx + x);
-		this.Red.y = (posy + 1 - y);
-		this.Green.x = (posx + x);
-		this.Green.y = (posy + 21 - y);
-		this.Blue.x = (posx + x);
-		this.Blue.y = (posy + 41 - y);
+		this.Red.x = posx + x;
+		this.Red.y = posy + 1 - y;
+		this.Green.x = posx + x;
+		this.Green.y = posy + 21 - y;
+		this.Blue.x = posx + x;
+		this.Blue.y = posy + 41 - y;
 
 		Red.setWidth(75);
 		Green.setWidth(75);
 		Blue.setWidth(75);
 		
 		if(te instanceof TileEntityAdvancedLaser) {
-			gimbalSlider.x = (posx-81);
-			gimbalSlider.y = (posy-65);
+			gimbalSlider.x = posx-81;
+			gimbalSlider.y = posy-65;
 			gimbalSlider.setWidth(50);
 			gimbalSlider.setHeight(50);
 		}
@@ -180,13 +188,13 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 			this.blit(matrix, i + 175, j, 175, 0, 81, imageHeight);
 			
 			if(te.getProperties().hasUpgarde("mode")) {
-				ScreenUtils.blitWithBorder(matrix, Button.WIDGETS_LOCATION, modePrev.x, modePrev.y - modePrev.getHeight(), 0, 46, 
+				GuiUtils.drawContinuousTexturedBox(matrix, Button.WIDGETS_LOCATION, modePrev.x, modePrev.y - modePrev.getHeight(), 0, 46, 
 						modeNext.x + modeNext.getWidth() - modePrev.x,modePrev.getHeight(), 200, 20, 2, 3, 2, 2, this.getBlitOffset());
 				
-				Component modeText = MutableComponent.create(new LiteralContents(te.mode.getFormalName())).copy().setStyle(title.getStyle());
+				Component modeText = new TextComponent(te.mode.getFormalName()).copy().setStyle(title.getStyle());
 				drawCenteredString(matrix, font, modeText, modePrev.x + 
 						(modeNext.x + modeNext.getWidth() - modePrev.x)/2, modePrev.y - modePrev.getHeight()/2 - font.lineHeight/2, Utils.getHexIntFromRGB(1f, 1f, 1f));
-				Component text = MutableComponent.create(new LiteralContents("Laser Mode:")).copy().setStyle(title.getStyle());
+				Component text = new TextComponent("Laser Mode:").copy().setStyle(title.getStyle());
 				font.draw(matrix, text, getGuiLeft() + 185, getGuiTop() + 10, Utils.getHexIntFromRGB(0.3f, 0.3f, 0.3f));
 			}
 		}
@@ -241,25 +249,15 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 //		for (AbstractWidget widget : buttons) {
 			//widget.mouseClicked(p_231044_1_, p_231044_3_, p_231044_5_);
 //		}
-		boolean i = super.mouseClicked(p_231044_1_, p_231044_3_, p_231044_5_);
-		Red.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")));
-		Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
-		Blue.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")));
-		return i;
+		return super.mouseClicked(p_231044_1_, p_231044_3_, p_231044_5_);
 	}
 	
 	@Override
 	public boolean mouseDragged(double mouseX, double mouseY, int p_231045_5_, double p_231045_6_,
 			double p_231045_8_) {
-		if((Red.isMouseOver(mouseX, mouseY) && Red.mouseDragged(mouseX, mouseY, p_231045_5_, p_231045_6_, p_231045_8_)) ||
-				(Green.isMouseOver(mouseX, mouseY) && Green.mouseDragged(mouseX, mouseY, p_231045_5_, p_231045_6_, p_231045_8_)) ||
-				(Blue.isMouseOver(mouseX, mouseY) && Blue.mouseDragged(mouseX, mouseY, p_231045_5_, p_231045_6_, p_231045_8_))) {
-			PacketHandler.sendToServer(new PacketLaser(te.getBlockPos(), (float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue()));
-
-			Red.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")));
-			Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
-			Blue.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")));
-		}
+		Red.mouseDragged(mouseX, mouseY, p_231045_5_, p_231045_6_, p_231045_8_);
+		Green.mouseDragged(mouseX, mouseY, p_231045_5_, p_231045_6_, p_231045_8_);
+		Blue.mouseDragged(mouseX, mouseY, p_231045_5_, p_231045_6_, p_231045_8_);
 		if(te instanceof TileEntityAdvancedLaser)
 			gimbalSlider.mouseDragged(mouseX, mouseY, p_231045_5_, p_231045_6_, p_231045_8_);
 		return super.mouseDragged(mouseX, mouseY, p_231045_5_, p_231045_6_, p_231045_8_);
@@ -277,12 +275,9 @@ public class GuiLaser extends BetterAbstractContainerScreen<ContainerLaser> {
 	
 	@Override
 	public boolean mouseReleased(double p_231048_1_, double p_231048_3_, int p_231048_5_) {
-		if(Red.isMouseOver(p_231048_1_, p_231048_3_) && Red.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_))
-			Red.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")));
-		if(Green.isMouseOver(p_231048_1_, p_231048_3_) &&Green.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_))
-			Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
-		if(Blue.isMouseOver(p_231048_1_, p_231048_3_) &&Blue.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_))
-			Blue.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")));
+		Red.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_);
+		Green.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_);
+		Blue.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_);
 		PacketHandler.sendToServer(new PacketLaser(te.getBlockPos(), (float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue()));
 		if(te instanceof TileEntityAdvancedLaser)
 			gimbalSlider.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_);

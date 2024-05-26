@@ -9,8 +9,7 @@ import KOWI2003.LaserMod.utils.RenderUtils;
 import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 
 public class DataProperty<T> extends AbstractWidget {
 
@@ -21,7 +20,7 @@ public class DataProperty<T> extends AbstractWidget {
 	boolean isHoveredOver = false;
 	
 	public DataProperty(int x, int y, int width, int height, String displayName, T value) {
-		super(x, y, width, height, MutableComponent.create(new LiteralContents(Utils.SpaceOnUpperCase(displayName))));
+		super(x, y, width, height, new TextComponent(Utils.SpaceOnUpperCase(displayName)));
 		this.value = value;
 		this.name = displayName;
 	}
@@ -81,5 +80,6 @@ public class DataProperty<T> extends AbstractWidget {
 	}
 	
 	@Override
-	public void updateNarration(NarrationElementOutput p_259858_) {}
+	public void updateNarration(NarrationElementOutput p_169152_) {}
+
 }

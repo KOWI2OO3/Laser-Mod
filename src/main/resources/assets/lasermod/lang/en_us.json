@@ -75,7 +75,7 @@
 	"subtitle.lasermod.laser_activate": "Laser Activate",
 	"subtitle.lasermod.laser_active": "Laser Active Loop",
 	"subtitle.lasermod.laser_deactivate": "Laser Deactivate",
-	
+
 
 	"manual.misc.see": "Also Check: ",
 
@@ -262,5 +262,4 @@
 	
 	"manual.integration.cc.widget.setAlpha.name": "setAlpha§d(§balpha §f: §3number§d)§r",
 	"manual.integration.cc.widget.setAlpha.desc": "sets the alpha of the widget, which describes how translucent the widget is. Note this is from 0-1 where 1 is fully solid and 0 is invisible"
-	
 }

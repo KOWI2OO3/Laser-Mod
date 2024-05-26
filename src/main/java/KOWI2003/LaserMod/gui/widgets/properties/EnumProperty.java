@@ -10,9 +10,8 @@ import KOWI2003.LaserMod.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
-import net.minecraftforge.client.gui.ScreenUtils;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraftforge.client.gui.GuiUtils;
 
 public class EnumProperty extends DataProperty<Enum<?>> {
 
@@ -26,14 +25,14 @@ public class EnumProperty extends DataProperty<Enum<?>> {
 		
 		enumList = EnumUtils.getEnumList(value.getClass());
 		
-		Prev = new Button(x + 35, y, 10, height, MutableComponent.create(new LiteralContents("<")), (button) -> {
+
+		Prev = new Button(x + 35, y, 10, height, new TextComponent("<"), (button) -> {
 			int nextIndex = this.value.ordinal() - 1;
 			if(nextIndex < 0)
 				nextIndex = enumList.size() - 1;
 			setValue(enumList.get(nextIndex));
 			setHasChanged();});
-		
-		Next = new Button(Prev.x + 45, y, 10, height, MutableComponent.create(new LiteralContents(">")), (button) -> {
+		Next = new Button(Prev.x + 45, y, 10, height, new TextComponent(">"), (button) -> {
 			int nextIndex = this.value.ordinal() + 1;
 			if(nextIndex >= enumList.size())
 				nextIndex = 0;
@@ -44,7 +43,7 @@ public class EnumProperty extends DataProperty<Enum<?>> {
 	
 	@Override
 	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
-        ScreenUtils.blitWithBorder(matrix, WIDGETS_LOCATION, this.x + 44, this.y, 0, 46, 37, 20, 200, 20, 2, 3, 2, 2, this.getBlitOffset());
+        GuiUtils.drawContinuousTexturedBox(matrix, WIDGETS_LOCATION, this.x + 44, this.y, 0, 46, 37, 20, 200, 20, 2, 3, 2, 2, this.getBlitOffset());
         
 		Next.render(matrix, mouseX, mouseY, partialTicks);
 		Prev.render(matrix, mouseX, mouseY, partialTicks);

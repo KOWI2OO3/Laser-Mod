@@ -15,7 +15,6 @@ import KOWI2003.LaserMod.blocks.BlockRotatable;
 import KOWI2003.LaserMod.init.ModItems;
 import KOWI2003.LaserMod.tileentities.TileEntityLaser;
 import KOWI2003.LaserMod.tileentities.TileEntityLaser.MODE;
-import KOWI2003.LaserMod.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -93,7 +92,7 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 		        }else if(te.mode == MODE.POWER) {
 		        	matrix.pushPose();
 		        	 
-		        		VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_POWER);
+		        		VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.getDebugRenderType());
 						Matrix4f matrix2 = matrix.last().pose();
 		
 							matrix.translate(.5f, .5f, .5f);
@@ -142,7 +141,6 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 		        else if(te.mode == MODE.BEAM) {
 		        	 matrix.pushPose();
 				        
-		        	 RenderSystem.setShaderColor(1, 1, 1, 1);
 		        	 ll = 0.3f;
 		        	 lr = 0.7f;
 		        	 
@@ -174,7 +172,7 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 		        }else if(te.mode == MODE.NEW_POWER) { 
 		        	 matrix.pushPose();
 		        	 
-		        	 	VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER);
+		        	 	VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.getDebugRenderType());
 						Matrix4f matrix2 = matrix.last().pose();
 							
 						thickness *= 2f;
@@ -196,18 +194,27 @@ public class LaserRender implements BlockEntityRenderer<TileEntityLaser> {
 		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, 0F, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.48f).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.48f).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.52f).endVertex();
+		    			
+		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, 0F, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.48f).endVertex();
+		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.48f).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, 0, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.52f).endVertex();
 		    			
-		    			buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER);
+		    			buffer = bufferIn.getBuffer(LaserRenderType.getDebugRenderType());
 
 						buffer.vertex(matrix2, ll, 0F, 0F).color(r,g, b, 0f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, ll, (float) distance, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
+		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
+						
+						buffer.vertex(matrix2, ll, 0F, 0F).color(r,g, b, 0f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, 0, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, 0F, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, lr, (float) distance, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
+
+		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, 0F, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
+		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, lr, 0, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
 
 			        matrix.popPose();
@@ -285,7 +292,7 @@ public static class LaserRenderType extends RenderType {
 	}
 
 	public static final RenderType LASER_RENDER = create("laser_render",
-			DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256, 
+			DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.TRIANGLES, 256, 
 			true, false,
 			RenderType.CompositeState.builder()
 			.setShaderState(RENDERTYPE_LEASH_SHADER)
@@ -337,19 +344,22 @@ public static class LaserRenderType extends RenderType {
 	}
 	
 	public static RenderType getDebugRenderType() {
-//		RenderType.entityTranslucent(null)r
-		return create("debug",
-			DefaultVertexFormat.POSITION_COLOR_TEX, VertexFormat.Mode.QUADS, 256, 
-			 false, true,
-			 RenderType.CompositeState.builder()
-			.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
-			.setWriteMaskState(COLOR_WRITE)
-			.setTextureState(TexStatePOWER)
+		return create("debug", 
+			DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.TRIANGLES, 256, 
+			true, false,
+			RenderType.CompositeState.builder()
+			.setShaderState(RENDERTYPE_LEASH_SHADER)
+			.setShaderState(RENDERTYPE_LIGHTNING_SHADER)
+			.setShaderState(POSITION_COLOR_SHADER)
+			.setWriteMaskState(COLOR_DEPTH_WRITE)
+			.setTextureState(NO_TEXTURE)
 			.setCullState(NO_CULL)
 			.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-			.setLightmapState(NO_LIGHTMAP)
+			.setLayeringState(VIEW_OFFSET_Z_LAYERING)
 			.setOutputState(TRANSLUCENT_TARGET)
-			.createCompositeState(false));
+			.setLightmapState(NO_LIGHTMAP)
+			.setDepthTestState(LEQUAL_DEPTH_TEST)
+			.createCompositeState(true));
 	}
 	
 	private static final TextureStateShard TexStatePOWER = new TextureStateShard(new ResourceLocation(Reference.MODID, "textures/render/laser_power_old_double.png"), false, false);
@@ -362,8 +372,8 @@ public static class LaserRenderType extends RenderType {
 				RenderType.CompositeState.builder()
 //				.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
 				.setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
-				.setWriteMaskState(COLOR_WRITE)
-				.setTextureState(TexStatePOWER)
+				.setWriteMaskState(COLOR_DEPTH_WRITE)
+				.setTextureState(TexStatePOWER_NEW)
 				.setCullState(NO_CULL)
 				.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
 				.setLightmapState(NO_LIGHTMAP)
@@ -374,11 +384,12 @@ public static class LaserRenderType extends RenderType {
 			DefaultVertexFormat.POSITION_COLOR_TEX, VertexFormat.Mode.QUADS, 256, 
 			 false, true,
 			 RenderType.CompositeState.builder()
-			 .setShaderState(RENDERTYPE_LIGHTNING_SHADER)
+			 .setShaderState(RENDERTYPE_ENERGY_SWIRL_SHADER)
 			 .setWriteMaskState(COLOR_WRITE)
 			 .setTextureState(TexStatePOWER)
 			 .setCullState(NO_CULL)
 			 .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+			 .setShaderState(RENDERTYPE_SOLID_SHADER)
 			 .createCompositeState(false));
 	
 	public static final RenderType LASER_RENDER_BEAM = create("laser_beam",

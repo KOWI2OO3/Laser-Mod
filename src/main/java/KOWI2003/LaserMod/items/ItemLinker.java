@@ -2,6 +2,7 @@ package KOWI2003.LaserMod.items;
 
 import java.util.function.Consumer;
 
+import KOWI2003.LaserMod.MainMod;
 import KOWI2003.LaserMod.init.ModBlocks;
 import KOWI2003.LaserMod.items.render.RenderLinker;
 import KOWI2003.LaserMod.tileentities.TileEntityDeviceHub;
@@ -16,23 +17,23 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.client.IItemRenderProperties;
 
 public class ItemLinker extends ItemDefault {
 	
 	public ItemLinker() {
 //		super(new Item.Properties().tab(MainMod.blocks).setISTER(() -> RenderLinker::new));
-		super(new Item.Properties());
+		super(new Item.Properties().tab(MainMod.blocks));
 	}
 	
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-	  consumer.accept(new IClientItemExtensions() {
+	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+	  consumer.accept(new IItemRenderProperties() {
 
-		  @Override
-		  public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-			  return RenderLinker.get();
-		  }
+	    @Override
+	    public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+	      return RenderLinker.get();
+	    }
 	  });
 	}
 	

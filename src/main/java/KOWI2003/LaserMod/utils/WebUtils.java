@@ -30,7 +30,6 @@ public class WebUtils {
         }
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static JsonObject getJsonObj(String url) {
 		URL url1;String file = "";
         try {

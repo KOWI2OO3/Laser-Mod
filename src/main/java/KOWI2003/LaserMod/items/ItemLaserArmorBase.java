@@ -6,8 +6,6 @@ import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
@@ -28,10 +26,9 @@ import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
@@ -53,7 +50,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.client.IItemRenderProperties;
 
 public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, IChargable, IExtendable {
 
@@ -132,7 +129,7 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 	}
 	
 	@Override
-	public int getMaxStackSize(ItemStack stack) {
+	public int getItemStackLimit(ItemStack stack) {
 		return 1;
 	}
 
@@ -240,28 +237,16 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 	}
 	
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		consumer.accept(new IClientItemExtensions() {
+	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+		consumer.accept(new IItemRenderProperties() {
 			
 			@Override
-			public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack,
-					EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-				return LaserArmorModelHandler.getModel(itemStack, original);
+			public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
+					EquipmentSlot armorSlot, HumanoidModel<?> _default) {
+				return LaserArmorModelHandler.getModel(itemStack, _default);
 			}
 		});
 	}
-	
-//	@Override
-//	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-//		consumer.accept(new IItemRenderProperties() {
-//			
-//			@Override
-//			public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-//					EquipmentSlot armorSlot, HumanoidModel<?> _default) {
-//				return LaserArmorModelHandler.getModel(itemStack, _default);
-//			}
-//		});
-//	}
 	
 	@Override
 	public String[] getAbilityNames(ItemUpgradeBase upgrade) {
@@ -270,29 +255,29 @@ public class ItemLaserArmorBase extends ArmorItem implements ILaserUpgradable, I
 	
 	@Override
 	public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
-		MutableComponent charge = MutableComponent.create(new LiteralContents("Charge: " + getCharge(stack) + "/" + getMaxCharge(stack)));
+		TextComponent charge = new TextComponent("Charge: " + getCharge(stack) + "/" + getMaxCharge(stack));
 		charge.setStyle(charge.getStyle().withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(0.35f, 0.35f, 0.35f))));
-		tooltip.add(MutableComponent.create(new LiteralContents("Press " + ModKeybindings.ArmorToggle.getKey().getDisplayName().getString().toUpperCase() + " to " + 
-		(LaserItemUtils.isExtended(stack) ? "deactivate" : "activate"))).withStyle(charge.getStyle().withColor(Utils.getHexIntFromRGB(.6f, .6f, .6f))));
+		tooltip.add(new TextComponent("Press " + ModKeybindings.ArmorToggle.getKey().getDisplayName().getString().toUpperCase() + " to " + 
+		(LaserItemUtils.isExtended(stack) ? "deactivate" : "activate")).withStyle(charge.getStyle().withColor(Utils.getHexIntFromRGB(.6f, .6f, .6f))));
 		tooltip.add(charge);
 
 		boolean debug = false;
 		if(debug) {
-			tooltip.add(MutableComponent.create(new LiteralContents(isExtended(stack)+"")));
+			tooltip.add(new TextComponent(isExtended(stack)+""));
 			float[] color = getColor(stack);
-			tooltip.add(MutableComponent.create(new LiteralContents(color[0]+", " + color[1] + ", " + color[2])));
+			tooltip.add(new TextComponent(color[0]+", " + color[1] + ", " + color[2]));
 		}
 		
 		LaserProperties properties = getProperties(stack);
 		
 		if(properties.hasUpgradeWithAbilityName()) {
-			tooltip.add(MutableComponent.create(new LiteralContents("")));
-			tooltip.add(MutableComponent.create(new LiteralContents("Abilities: ")).setStyle(MutableComponent.create(new LiteralContents("")).getStyle().withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(0.7f, 0.7f, 0.7f)))));
+			tooltip.add(new TextComponent(""));
+			tooltip.add(new TextComponent("Abilities: ").setStyle(new TextComponent("").getStyle().withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(0.7f, 0.7f, 0.7f)))));
 			for (ItemUpgradeBase upgrade : properties.getUpgrades()) {
 				if(getAbilityNames(upgrade).length > 0) {
 					float[] color = upgrade.getAbilityNameColor();
 					for(String abilityName : getAbilityNames(upgrade)) {
-						MutableComponent comp = MutableComponent.create(new LiteralContents(abilityName));
+						TextComponent comp = new TextComponent(abilityName);
 						Style style = comp.getStyle();
 						style = style.withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(
 								color.length > 0 ? color[0] : 0.35f,

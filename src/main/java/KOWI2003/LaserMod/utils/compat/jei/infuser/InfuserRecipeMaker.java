@@ -12,7 +12,6 @@ import mezz.jei.api.helpers.IJeiHelpers;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 
 public class InfuserRecipeMaker {
 
@@ -47,17 +46,17 @@ public class InfuserRecipeMaker {
 public static class EmptyInfuserRecipe implements IInfuserRecipe {
 
 	public ItemStack output;
-	public Ingredient[] input;
+	public ItemStack[] input;
 	
 	public EmptyInfuserRecipe(ItemStack output, ItemStack input1, ItemStack input2) {
 		this.output = output;
-		this.input = new Ingredient[] {Ingredient.of(input1), Ingredient.of(input2)};
+		this.input = new ItemStack[] {input1, input2};
 	}
 	
 	@Override
 	public ItemStack getOutput() { return output; }
 	@Override
-	public Ingredient[] getInputs() { return input; }
+	public ItemStack[] getInputs() { return input; }
 	@Override
 	public float getRecipeSpeed() {return 1; }
 }

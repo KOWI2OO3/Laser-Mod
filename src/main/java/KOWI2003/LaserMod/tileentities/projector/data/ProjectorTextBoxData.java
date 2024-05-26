@@ -11,7 +11,8 @@ public class ProjectorTextBoxData extends ProjectorWidgetData {
 	public boolean isCentered = false;
 
 	public ProjectorTextBoxData() {
-		super(ProjectorWidgetTypes.TextBox);
+		this(0, 0, 0, 1, "Unknown", new float[] {1, 1, 1, 1}, true);
+		// super(ProjectorWidgetTypes.TextBox);
 	}
 
 	public ProjectorTextBoxData(float x, float y, float z, float size,

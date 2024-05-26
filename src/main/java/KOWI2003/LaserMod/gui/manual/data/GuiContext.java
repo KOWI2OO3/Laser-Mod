@@ -10,7 +10,7 @@ import KOWI2003.LaserMod.utils.Utils;
 import KOWI2003.LaserMod.gui.manual.data.widget.PageSelector;
 import KOWI2003.LaserMod.gui.manual.data.widget.TextBoxComponent;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
@@ -144,11 +144,11 @@ public class GuiContext {
 	}
 
 	protected String getTranslation(String txt) {
-		return Component.translatable(txt).getString();
+		return new TranslatableComponent(txt).getString();
 	}
 
 	protected int width(String txt) {
-		return Minecraft.getInstance().font.width(Component.translatable(txt));
+		return Minecraft.getInstance().font.width(new TranslatableComponent(txt));
 	}
 
 	public GuiContext getParent() {

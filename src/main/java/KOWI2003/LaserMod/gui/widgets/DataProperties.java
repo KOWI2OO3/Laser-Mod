@@ -30,8 +30,7 @@ import KOWI2003.LaserMod.tileentities.projector.gui.ProjectorGui;
 import KOWI2003.LaserMod.utils.RenderUtils;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
 
 public class DataProperties extends AbstractWidget {
@@ -46,13 +45,13 @@ public class DataProperties extends AbstractWidget {
 	GuiLaserProjector guiInstance;
 	
 	public DataProperties(int x, int y, int width, int height, String name, ProjectorWidgetData data) {
-		super(x, y, width, height, MutableComponent.create(new LiteralContents(name)));
+		super(x, y, width, height, new TextComponent(name));
 		properties = new ArrayList<>();
 		setData(data);
 	}
 	
 	public DataProperties(int x, int y, int width, int height, String name, ProjectorWidgetData data, GuiLaserProjector gui) {
-		super(x, y, width, height, MutableComponent.create(new LiteralContents(name)));
+		super(x, y, width, height, new TextComponent(name));
 		properties = new ArrayList<>();
 		this.guiInstance = gui;
 		setData(data);
@@ -211,17 +210,6 @@ public class DataProperties extends AbstractWidget {
 			property.changeFocus(value);
 		}
 		return super.changeFocus(value);
-	}
-	
-	@Override
-	public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
-		boolean check = false;
-		for (DataProperty<?> property : properties) {
-			if(!property.isMouseOver(mouseX - x, mouseY - y - offset))
-				property.changeFocus(false);
-			check = property.mouseClicked(mouseX - x, mouseY - y - offset, button) || check;
-		}
-		return check || super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
 	}
 	
 	@Override

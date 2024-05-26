@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -40,15 +40,15 @@ public class ModBlocks {
 	
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MODID);
 	
-	public static RegistryObject<Block> Laser = register("laser", () -> new BlockLaser(Properties.of(Material.METAL).strength(1.5F, 1.5F)));
-	public static RegistryObject<Block> LaserCatcher = register("laser_catcher", () -> new BlockLaserCatcher(Properties.of(Material.STONE).strength(1.5F, 1.5F)));
-	public static RegistryObject<Block> Infuser = register("infuser", () -> new BlockInfuser(Properties.of(Material.METAL).strength(1.5F, 1.5F)));
-	public static RegistryObject<Block> ModStation = register("mod_station", () -> new BlockModificationStation(Properties.of(Material.METAL).strength(1.5F, 1.5F)));
-	public static RegistryObject<Block> LaserProjector = register("laser_projector", () -> new BlockLaserProjector(Properties.of(Material.METAL).strength(1.5F, 1.5F)));
-	public static RegistryObject<Block> LaserController = register("laser_controller", () -> new BlockRemote(Properties.of(Material.METAL).strength(1.5F, 1.5F)));
-	public static RegistryObject<Block> Mirror = register("mirror", () -> new BlockMirror(Properties.of(Material.METAL).strength(1.5F, 1.5F)));
-	public static RegistryObject<Block> PrecisionAssembler = register("precision_assembler", () -> new BlockPrecisionAssembler(Properties.of(Material.METAL).strength(1.5F, 1.5F)));
-	public static RegistryObject<Block> AdvancedLaser = register("advanced_laser", () -> new AdvancedLaserBlock(Properties.of(Material.METAL).strength(1.5F, 1.5F)));
+	public static RegistryObject<Block> Laser = register("laser", () -> new BlockLaser(Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5F, 1.5F)));
+	public static RegistryObject<Block> LaserCatcher = register("laser_catcher", () -> new BlockLaserCatcher(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5F, 5.0F)));
+	public static RegistryObject<Block> Infuser = register("infuser", () -> new BlockInfuser(Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5F, 3.5F)));
+	public static RegistryObject<Block> ModStation = register("mod_station", () -> new BlockModificationStation(Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5F, 3.5F)));
+	public static RegistryObject<Block> LaserProjector = register("laser_projector", () -> new BlockLaserProjector(Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5F, 4F)));
+	public static RegistryObject<Block> LaserController = register("laser_controller", () -> new BlockRemote(Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5F, 4F)));
+	public static RegistryObject<Block> Mirror = register("mirror", () -> new BlockMirror(Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5F, 4.0F)));
+	public static RegistryObject<Block> PrecisionAssembler = register("precision_assembler", () -> new BlockPrecisionAssembler(Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5F, 3.5F)));
+	public static RegistryObject<Block> AdvancedLaser = register("advanced_laser", () -> new AdvancedLaserBlock(Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5F, 1.5F)));
 	public static RegistryObject<Block> DeviceHub;
 	
 	static {
@@ -77,7 +77,7 @@ public class ModBlocks {
 	}
 	
 	private static RegistryObject<Item> registerBlockItem(String name, RegistryObject<Block> block, CreativeModeTab tab) {
-		return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+		return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
 	}
 	
 	public static void register(IEventBus bus) {
@@ -86,8 +86,7 @@ public class ModBlocks {
 
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
-	@SuppressWarnings("deprecation")
-	public static void registerBlockColors(final RegisterColorHandlersEvent.Block event){
+	public static void registerBlockColors(final ColorHandlerEvent.Block event){
 		event.getBlockColors().register(new ColorHandler.Block(), ModBlocks.LaserCatcher.get(), ModBlocks.Laser.get(), ModBlocks.AdvancedLaser.get());
 	}
 }

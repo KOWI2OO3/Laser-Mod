@@ -7,9 +7,8 @@ import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
-import net.minecraftforge.client.gui.widget.ForgeSlider;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraftforge.client.gui.widget.Slider;
 
 public class IntProperty extends DataProperty<Integer> {
 
@@ -18,34 +17,32 @@ public class IntProperty extends DataProperty<Integer> {
 	Button Lower;
 	
 	boolean hasRange = false;
-	ForgeSlider rangeSlider;
+	Slider rangeSlider;
 	
 	public IntProperty(int x, int y, int width, int height, String name, int value, float min, float max) {
 		this(x, y, width, height, name, value);
 		hasRange = min < max;
 		
-		rangeSlider = new ForgeSlider(x + 33, y, 55, height, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), min, max, value, 1f, 0, false);
-//		rangeSlider = new Slider(x, y, MutableComponent.create(new LiteralContents(""), min, max, value, (button) -> {}, (button) -> {});
+		rangeSlider = new Slider(x + 33, y, 55, height, new TextComponent(""), new TextComponent(""), min, max, value, false, false, (button) -> {});
+//		rangeSlider = new Slider(x, y, new TextComponent(""), min, max, value, (button) -> {}, (button) -> {});
 	}
 	
 	public IntProperty(int x, int y, int width, int height, String name, int value) {
 		super(x, y, width, 21, name, value);
 		int localX = 20;
-		intText = new EditBox(Minecraft.getInstance().font, x+10 + localX, y + 2, 50, 16, MutableComponent.create(new LiteralContents("intText")));
+		intText = new EditBox(Minecraft.getInstance().font, x+10 + localX, y + 2, 50, 16, new TextComponent("intText"));
 		intText.setValue(String.format("%.02f", value));
 		
-		Raise = new Button(x + localX + 60, y, 10, 20, MutableComponent.create(new LiteralContents(">")), (button) -> {
+		Raise = new Button(x + localX + 60, y, 10, 20, new TextComponent(">"), (button) -> {
 			this.value += (Utils.isCtrlDown() ? 1 : (Utils.isShiftDown() ? 10 : 100));
 			intText.setValue(String.format("%.02f", this.value));
 			setHasChanged();
 		});
-		
-		Lower = new Button(x + localX, y, 10, 20, MutableComponent.create(new LiteralContents("<")), (button) -> {
+		Lower = new Button(x + localX, y, 10, 20, new TextComponent("<"), (button) -> {
 			this.value -= (Utils.isCtrlDown() ? 1 : (Utils.isShiftDown() ? 10 : 100));
 			intText.setValue(String.format("%.02f", this.value));
 			setHasChanged();
 		});
-		
 	}
 	
 	@Override

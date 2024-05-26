@@ -219,8 +219,7 @@ public class RenderUtils {
 		public static void renderItem(ItemStack stack, float x, float y, float scale) {
 			renderItem(new PoseStack(), stack, x, y, 0, scale, ItemTransforms.TransformType.GUI);
 		}
-
-		@SuppressWarnings("deprecation")
+		
 		public static void renderItem(PoseStack matrix, ItemStack stack, float x, float y, float z, float scale, TransformType transform) {
 			RenderSystem.enableDepthTest();
 			BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(stack, (Level)null, (LivingEntity)null, 0);
@@ -1091,7 +1090,7 @@ public class RenderUtils {
 	
 	public static Context getEntityRenderContext() {
 		return new EntityRendererProvider.Context(Minecraft.getInstance().getEntityRenderDispatcher(), Minecraft.getInstance().getItemRenderer(), 
-				Minecraft.getInstance().getBlockRenderer(), Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer(), Minecraft.getInstance().getResourceManager(), Minecraft.getInstance().getEntityModels(), Minecraft.getInstance().font);
+				Minecraft.getInstance().getResourceManager(), Minecraft.getInstance().getEntityModels(), Minecraft.getInstance().font);
 	}
 	
 	public static void renderPlayerGameProfile(PoseStack matrix, String username, float x, float y, float z, float scale, 

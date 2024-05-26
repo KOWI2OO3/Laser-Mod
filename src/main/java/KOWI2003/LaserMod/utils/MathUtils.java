@@ -2,6 +2,7 @@ package KOWI2003.LaserMod.utils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Quaternion;
@@ -13,7 +14,6 @@ import KOWI2003.LaserMod.utils.math.Matrix3;
 import KOWI2003.LaserMod.utils.math.Matrix4;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
@@ -77,7 +77,7 @@ public class MathUtils {
 			mat.multiply(Vector3f.XP.rotation(render.xRot));
 		}
 		
-	    ModelPart.Cube cube = render.getRandomCube(RandomSource.create());
+	    ModelPart.Cube cube = render.getRandomCube(new Random());
 	    
         Vector4f vector4f = new Vector4f((cube.maxX + cube.minX) / 2f,
         		(cube.maxY + cube.minY) / 2f,
@@ -101,7 +101,7 @@ public class MathUtils {
 		mat.setIdentity();
 		mat.translate(origin);
 		mat.multiply(rotation);
-		Vector4f vec4f = new Vector4f(0, 0, 0, 1.0f);
+		Vector4f vec4f = new Vector4f(vec.x(), vec.y(), vec.z(), 1.0f);
 		vec4f.transform(mat);
 		return new Vector3f(vec4f.x(), vec4f.y(), vec4f.z()); 
 	}
@@ -139,7 +139,7 @@ public class MathUtils {
 		}
 		
 		if (rotation.x() != 0.0F) {
-			mat.multiply(Vector3f.XP.rotation(rotation.x()));
+			mat.multiply(Vector3f.YP.rotation(rotation.y()));
 		}
 		Vector4f vec4f = new Vector4f(vec.x(), vec.y(), vec.z(), 1.0f);
 		vec4f.transform(mat);
@@ -249,7 +249,7 @@ public class MathUtils {
 	}
 	
 	public static Vector3f toVector3f(Vec3 vec) {
-		return new Vector3f((float)vec.x, (float)vec.y, (float)vec.z);
+		return new Vector3f(vec);
 	}
 	
 	public static Vector3d toVector3d(Vec3 vec) {
@@ -273,7 +273,7 @@ public class MathUtils {
 		return new Vector3f((float)Math.toRadians(eular.x()), (float)Math.toRadians(eular.y()), (float)Math.toRadians(eular.z()));
 	}
 	
-	public static Quaternion QuaternionromMatrix(Matrix4f m) {
+	public static Quaternion quaternionFromMatrix(Matrix4f m) {
 		return new Matrix4(m).toQuaternion();
 	}
 	
@@ -346,6 +346,6 @@ public class MathUtils {
 		matrix.translate(vec);
 		Vector4f vec4 = new Vector4f(0, 0, 0, 1);
 		vec4.transform(matrix);
-		return new Vector3f(vec4.x(), vec4.y(), vec4.z());
+		return new Vector3f(vec4);
 	}
 }

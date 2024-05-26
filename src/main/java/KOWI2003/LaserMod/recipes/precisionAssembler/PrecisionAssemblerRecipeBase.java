@@ -1,16 +1,15 @@
 package KOWI2003.LaserMod.recipes.precisionAssembler;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 
 public class PrecisionAssemblerRecipeBase implements IPrecisionAssemblerRecipe {
 
-	public Ingredient[] inputs;
-	public Ingredient inputBase;
+	public Object[] inputs;
+	public Object inputBase;
 	public ItemStack output;
 	public float speed;
 	
-	public PrecisionAssemblerRecipeBase(ItemStack output, float speed, Ingredient inputBase, Ingredient... inputs) {
+	public PrecisionAssemblerRecipeBase(ItemStack output, float speed, Object inputBase, Object... inputs) {
 		this.inputs = inputs;
 		this.output = output;
 		this.speed = speed;
@@ -18,12 +17,12 @@ public class PrecisionAssemblerRecipeBase implements IPrecisionAssemblerRecipe {
 	}
 	
 	@Override
-	public Ingredient getInputBase() {
+	public Object getInputBase() {
 		return inputBase;
 	}
 
 	@Override
-	public Ingredient[] getInputs() {
+	public Object[] getInputs() {
 		return inputs;
 	}
 

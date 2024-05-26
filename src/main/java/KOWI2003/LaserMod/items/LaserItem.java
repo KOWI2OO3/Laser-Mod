@@ -10,10 +10,9 @@ import KOWI2003.LaserMod.items.interfaces.ILaserUpgradable;
 import KOWI2003.LaserMod.utils.LaserItemUtils;
 import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -69,20 +68,20 @@ public class LaserItem extends ItemDefault implements ILaserUpgradable, IChargab
 	
 	@Override
 	public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
-		MutableComponent charge = MutableComponent.create(new LiteralContents("Charge: " + getCharge(stack) + "/" + getMaxCharge(stack)));
+		TextComponent charge = new TextComponent("Charge: " + getCharge(stack) + "/" + getMaxCharge(stack));
 		charge.setStyle(charge.getStyle().withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(0.35f, 0.35f, 0.35f))));
 		tooltip.add(charge);
 		
 		LaserProperties properties = getProperties(stack);
 		
 		if(properties.hasUpgradeWithAbilityName()) {
-			tooltip.add(MutableComponent.create(new LiteralContents("")));
-			tooltip.add(MutableComponent.create(new LiteralContents("Abilities: ")).setStyle(MutableComponent.create(new LiteralContents("")).getStyle().withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(0.7f, 0.7f, 0.7f)))));
+			tooltip.add(new TextComponent(""));
+			tooltip.add(new TextComponent("Abilities: ").setStyle(new TextComponent("").getStyle().withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(0.7f, 0.7f, 0.7f)))));
 			for (ItemUpgradeBase upgrade : properties.getUpgrades()) {
 				if(getAbilityNames(upgrade).length > 0) {
 					float[] color = upgrade.getAbilityNameColor();
 					for(String abilityName : getAbilityNames(upgrade)) {
-						MutableComponent comp = MutableComponent.create(new LiteralContents(abilityName));
+						TextComponent comp = new TextComponent(abilityName);
 						Style style = comp.getStyle();
 						style = style.withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(
 								color.length > 0 ? color[0] : 0.35f,

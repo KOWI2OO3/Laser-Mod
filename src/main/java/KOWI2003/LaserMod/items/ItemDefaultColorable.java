@@ -1,5 +1,6 @@
 package KOWI2003.LaserMod.items;
 
+import KOWI2003.LaserMod.MainMod;
 import KOWI2003.LaserMod.items.interfaces.IItemColorable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
@@ -14,7 +15,7 @@ public class ItemDefaultColorable extends ItemDefault implements IItemColorable 
 	}
 	
 	public ItemDefaultColorable() {
-		this(new Item.Properties());
+		this(new Item.Properties().tab(MainMod.blocks));
 	}
 	
 	public ItemDefaultColorable(Properties properties, float defaultRed, float defaultGreen, float defaultBlue) {
@@ -25,7 +26,7 @@ public class ItemDefaultColorable extends ItemDefault implements IItemColorable 
 	}
 	
 	public ItemDefaultColorable(float defaultRed, float defaultGreen, float defaultBlue) {
-		this(new Item.Properties(), defaultRed, defaultGreen, defaultBlue);
+		this(new Item.Properties().tab(MainMod.blocks), defaultRed, defaultGreen, defaultBlue);
 	}
 
 	@Override

@@ -46,9 +46,9 @@ public class PacketLaser {
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 	    ctx.get().enqueueWork(() -> {
 	        // Work that needs to be thread-safe (most work)
-	    	if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER) {
-		        ServerPlayer sender = ctx.get().getSender(); // the client that sent this packets
-		        
+	        ServerPlayer sender = ctx.get().getSender(); // the client that sent this packets
+	        
+	        if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER) {
 		        BlockEntity tileentity = sender.getLevel().getBlockEntity(pos);
 		        if(tileentity instanceof TileEntityLaser) {
 		        	TileEntityLaser te = (TileEntityLaser)tileentity;
@@ -59,8 +59,8 @@ public class PacketLaser {
 		        }else if(tileentity instanceof TileEntityModStation) {
 		        	((TileEntityModStation)tileentity).setColor(red, green, blue);
 		        }
-	    	}else if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
-	    		handleClient();
+	        }else if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
+	        	handleClient();
 	    	}
 	    });
 	    ctx.get().setPacketHandled(true);

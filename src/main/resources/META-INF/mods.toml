@@ -4,7 +4,7 @@ license="All Rights Reserved unless otherwise explicitly stated"
 
 [[mods]]
 modId="lasermod"
-version="1.0.1"
+version="1.1.0"
 displayName="KOWI's Laser Mod"
 logoFile="logo.png"
 authors="KOWI2003"
@@ -19,6 +19,6 @@ description="A Mod that adds working lasers and laser related items to minecraft
 [[dependencies.lasermod]]
     modId="minecraft"
     mandatory=true
-	versionRange="[1.19,1.19.3]"
+	versionRange="[1.18,1.18.2)"
     ordering="NONE"
     side="BOTH"

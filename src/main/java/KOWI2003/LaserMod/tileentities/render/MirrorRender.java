@@ -170,7 +170,7 @@ public class MirrorRender implements BlockEntityRenderer<TileEntityMirror> {
 		        }else if(laser.mode == MODE.NEW_POWER) { 
 		        	 matrix.pushPose();
 		        	 
-						VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER);
+						VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_BEAM);
 						Matrix4f matrix2 = matrix.last().pose();
 							
 						thickness *= 2f;
@@ -192,9 +192,6 @@ public class MirrorRender implements BlockEntityRenderer<TileEntityMirror> {
 		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, start, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.48f).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.48f).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.52f).endVertex();
-		    			
-						buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, start, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.48f).endVertex();
-						buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.48f).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, start, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.52f).endVertex();
 		    			
 		    			buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER);
@@ -202,16 +199,10 @@ public class MirrorRender implements BlockEntityRenderer<TileEntityMirror> {
 						buffer.vertex(matrix2, ll, start, 0F).color(r,g, b, 0f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, ll, (float) distance, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
-		    			
-						buffer.vertex(matrix2, ll, start, 0F).color(r,g, b, 0f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, start, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, start, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, lr, (float) distance, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
-		    			
-		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, start, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, lr, (float) distance, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, lr, start, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
 

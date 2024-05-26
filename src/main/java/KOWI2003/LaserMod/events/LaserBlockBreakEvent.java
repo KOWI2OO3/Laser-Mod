@@ -17,7 +17,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class LaserBlockBreakEvent {
@@ -31,7 +31,7 @@ public class LaserBlockBreakEvent {
 		Player player = event.getPlayer();
 		BlockPos pos = event.getPos();
 		BlockState state = event.getState();
-		LevelAccessor level = event.getLevel();
+		LevelAccessor level = event.getWorld();
 		
 		ItemStack item = player.getInventory().getSelected();
 		

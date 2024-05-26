@@ -85,7 +85,8 @@ public class TileEntityLaserController extends SyncableBlockEntity implements Bl
 		}if(tileentity instanceof TileEntityLaserProjector) {
 			((TileEntityLaserProjector)tileentity).isRemoteControlled = false;
 			((TileEntityLaserProjector)tileentity).sync();
-		}controlPos = null;
+		}
+		controlPos = null;
 		sync();
 	}
 }

@@ -4,8 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.utils.RenderUtils;
 import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 
 public class BoolProperty extends DataProperty<Boolean> {
 
@@ -13,7 +12,7 @@ public class BoolProperty extends DataProperty<Boolean> {
 	
 	public BoolProperty(int x, int y, int width, int height, String name, boolean value) {
 		super(x, y, width, height, name, value);
-		box = new Checkbox(x + 65, y + 3, 10, 10, MutableComponent.create(new LiteralContents("")), value);
+		box = new Checkbox(x + 65, y + 3, 10, 10, new TextComponent(""), value);
 	}
 
 	@Override

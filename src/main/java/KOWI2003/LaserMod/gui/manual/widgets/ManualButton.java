@@ -4,8 +4,7 @@ import KOWI2003.LaserMod.gui.manual.data.widget.ButtonComponent;
 import KOWI2003.LaserMod.gui.manual.data.widget.IButtonAction;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TextComponent;
 
 public class ManualButton extends Button {
 
@@ -24,7 +23,7 @@ public class ManualButton extends Button {
 	}
 	
 	private ManualButton(int x, int y, int width, int heigth, String name, IButtonAction action) {
-		this(x, y, width, heigth, MutableComponent.create(new TranslatableContents(name)), action);
+		this(x, y, width, heigth, new TextComponent(name), action);
 	}
 	
 	public void onClick(double mouseX, double mouseY) {

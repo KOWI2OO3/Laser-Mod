@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModEntities {
 
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES 
-	= DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Reference.MODID);
+	= DeferredRegister.create(ForgeRegistries.ENTITIES, Reference.MODID);
 	
 	public static final RegistryObject<EntityType<EntityLaserBullet>> LASER_BULLET = ENTITY_TYPES.register("laser_bullet", 
 			() ->  EntityType.Builder.<EntityLaserBullet>of(EntityLaserBullet::new, MobCategory.MISC)

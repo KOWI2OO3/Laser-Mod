@@ -24,16 +24,15 @@ import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.gui.ScreenUtils;
-import net.minecraftforge.client.gui.widget.ForgeSlider;
+import net.minecraftforge.client.gui.GuiUtils;
+import net.minecraftforge.client.gui.widget.Slider;
 
 public class GuiModStation extends BetterAbstractContainerScreen<ContainerModStation> {
 
@@ -49,7 +48,7 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 	public Button InsertUpgarde;
 	public UpgradeList upgrades;
 	
-	public ForgeSlider Red,Green,Blue;
+	public Slider Red,Green,Blue;
 	
 	ILaserUpgradable tool;
 	boolean wasColorOpen = false;
@@ -60,7 +59,7 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 		this.playerInv = playerInv;
 		this.player = playerInv.player;
 		
-		InsertUpgarde = new Button(60, 0, 40, 20, MutableComponent.create(new LiteralContents("Insert")), (button) ->  {
+		InsertUpgarde = new Button(60, 0, 40, 20, new TextComponent("Insert"), (button) ->  {
 			PacketHandler.sendToServer(new PacketModStation(te.getBlockPos(), "", true));
 			te.addUpgrade();
 			if(te.handler.getStackInSlot(0).getItem() instanceof ILaserUpgradable)
@@ -77,30 +76,41 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 					"textures/gui/mod_widgets.png")
 		);
 		
-		
 
-		Red = new ForgeSlider(0, 0, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")), MutableComponent.create(new LiteralContents("")), 0, 1, te.getColor()[0], 0.001d, 0, true);
-		Green = new ForgeSlider(0, 40, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")), MutableComponent.create(new LiteralContents("")), 0, 1, te.getColor()[0], 0.001d, 0, true);
-		Blue = new ForgeSlider(0, 80, 20, 20, MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")), MutableComponent.create(new LiteralContents("")), 0, 1, te.getColor()[0], 0.001d, 0, true);
+		Red = new Slider(0, 0, new TranslatableComponent("container.lasermod.laser.red"), 0f, 1f, te.getColor()[0], (button) -> {}, (button) -> {
+			PacketHandler.sendToServer(new PacketLaser(te.getBlockPos(), (float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue()));
+			te.setColor((float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue());
+			Red.setMessage(new TranslatableComponent("container.lasermod.laser.red"));
+		});
+		Green = new Slider(0, 40, new TranslatableComponent("container.lasermod.laser.green"), 0f, 1f, te.getColor()[1], (button) -> {}, (button) -> {
+			PacketHandler.sendToServer(new PacketLaser(te.getBlockPos(), (float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue()));
+			te.setColor((float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue());
+			Green.setMessage(new TranslatableComponent("container.lasermod.laser.green"));
+		});
+		Blue = new Slider(0, 80, new TranslatableComponent("container.lasermod.laser.blue"), 0f, 1f, te.getColor()[2], (button) -> {}, (button) -> {
+			PacketHandler.sendToServer(new PacketLaser(te.getBlockPos(), (float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue()));
+			te.setColor((float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue());
+			Blue.setMessage(new TranslatableComponent("container.lasermod.laser.blue"));
+		});
 		
-		Red.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")));
-		Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
-		Blue.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")));
+		Red.setMessage(new TranslatableComponent("container.lasermod.laser.red"));
+		Green.setMessage(new TranslatableComponent("container.lasermod.laser.green"));
+		Blue.setMessage(new TranslatableComponent("container.lasermod.laser.blue"));
 	}
 	
 	protected void init() {
-		super.init();
-		this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2 + 37;
-		this.inventoryLabelY = this.imageHeight - 91;
+      super.init();
+      this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2 + 37;
+      this.inventoryLabelY = this.imageHeight - 91;
       
-		ChangeSizeButtonLocationUpdate();
+      ChangeSizeButtonLocationUpdate();
       
-		clearWidgets();
-		addRenderableWidget(InsertUpgarde);
-		addRenderableWidget(upgrades);
-		addRenderableWidget(Red);
-		addRenderableWidget(Green);
-		addRenderableWidget(Blue);
+      clearWidgets();
+      addRenderableWidget(InsertUpgarde);
+      addRenderableWidget(upgrades);
+      addRenderableWidget(Red);
+      addRenderableWidget(Green);
+      addRenderableWidget(Blue);
 	}
 
 	public void ChangeSizeButtonLocationUpdate() {
@@ -109,18 +119,18 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 		
 		upgrades.setPos(posx-78, posy - 74);
 		
-		InsertUpgarde.x = (posx);
-		InsertUpgarde.y = (posy - 45);
+		InsertUpgarde.x = posx;
+		InsertUpgarde.y = posy - 45;
 
 		int x = -164;
 		int y = 40;
 		
-		this.Red.x = (posx + x);
-		this.Red.y = (posy + 1 - y);
-		this.Green.x = (posx + x);
-		this.Green.y = (posy + 21 - y);
-		this.Blue.x = (posx + x);
-		this.Blue.y = (posy + 41 - y);
+		this.Red.x = posx + x;
+		this.Red.y = posy + 1 - y;
+		this.Green.x = posx + x;
+		this.Green.y = posy + 21 - y;
+		this.Blue.x = posx + x;
+		this.Blue.y = posy + 41 - y;
 
 		Red.setWidth(75);
 		Green.setWidth(75);
@@ -135,12 +145,6 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 	
 	protected void renderBg(PoseStack matrix, float partialTicks, int mouseX, int mouseY) {
 //		this.minecraft.getTextureManager().bindForSetup(TEXTURE);
-
-		Red.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")));
-		Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
-		Blue.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")));
-		
-		matrix.pushPose();
 		RenderUtils.bindTexture(TEXTURE);
 		int i = (this.width - this.imageWidth) / 2;
 		int j = (this.height - this.imageHeight) / 2;
@@ -177,7 +181,7 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 				wasColorOpen = true;
 				int Sx = width / 2 - 157;
 				int Sy = height/ 2 - 70;
-				ScreenUtils.blitWithBorder(matrix, new ResourceLocation(Reference.MODID,
+				GuiUtils.drawContinuousTexturedBox(matrix, new ResourceLocation(Reference.MODID,
 						"textures/gui/mod_widgets.png"), Sx, Sy, 0, 66, 
 			    		60, 20, 200, 20, 2, 3, 2, 2, this.getBlitOffset());
 
@@ -200,8 +204,6 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 		
 		if(!te.handler.getStackInSlot(0).isEmpty())
 			renderStats(matrix, mouseX, mouseY);
-
-		matrix.popPose();
 	}
 	
 	public String[] getFormalUpgradeName(List<ItemUpgradeBase> bases) {
@@ -286,12 +288,11 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 	}
 	
 	@Override
-	public boolean mouseClicked(double mouseX, double mouseY, int button) {
-		boolean i = super.mouseClicked(mouseX, mouseY, button);
-		Red.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")));
-		Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
-		Blue.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")));
-		return i;
+	public boolean mouseClicked(double p_231044_1_, double p_231044_3_, int p_231044_5_) {
+		for (AbstractWidget widget : buttons) {
+			widget.mouseClicked(p_231044_1_, p_231044_3_, p_231044_5_);
+		}
+		return super.mouseClicked(p_231044_1_, p_231044_3_, p_231044_5_);
 	}
 	
 	@Override
@@ -303,18 +304,12 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 	}
 	
 	@Override
-	public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
-		if((Red.isMouseOver(mouseX, mouseY) && Red.mouseDragged(mouseX, mouseY, button, deltaX, deltaY)) ||
-				(Green.isMouseOver(mouseX, mouseY) && Green.mouseDragged(mouseX, mouseY, button, deltaX, deltaY)) ||
-				(Blue.isMouseOver(mouseX, mouseY) && Blue.mouseDragged(mouseX, mouseY, button, deltaX, deltaY))) {
-			PacketHandler.sendToServer(new PacketLaser(te.getBlockPos(), (float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue()));
-			te.setColor((float)Red.getValue(), (float)Green.getValue(), (float)Blue.getValue());
-			
-			Red.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.red")));
-			Green.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.green")));
-			Blue.setMessage(MutableComponent.create(new TranslatableContents("container.lasermod.laser.blue")));
+	public boolean mouseDragged(double p_231045_1_, double p_231045_3_, int p_231045_5_, double p_231045_6_,
+			double p_231045_8_) {
+		for (AbstractWidget widget : buttons) {
+			widget.mouseDragged(p_231045_1_, p_231045_3_, p_231045_5_, p_231045_6_, p_231045_8_);
 		}
-		return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+		return super.mouseDragged(p_231045_1_, p_231045_3_, p_231045_5_, p_231045_6_, p_231045_8_);
 	}
 	
 	@Override
@@ -327,9 +322,9 @@ public class GuiModStation extends BetterAbstractContainerScreen<ContainerModSta
 	
 	@Override
 	public boolean mouseReleased(double p_231048_1_, double p_231048_3_, int p_231048_5_) {
-//		for (AbstractWidget widget : buttons) {
-//			widget.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_);
-//		}
+		for (AbstractWidget widget : buttons) {
+			widget.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_);
+		}
 		return super.mouseReleased(p_231048_1_, p_231048_3_, p_231048_5_);
 	}
 }

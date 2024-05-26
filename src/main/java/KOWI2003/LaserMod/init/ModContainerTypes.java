@@ -15,7 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModContainerTypes {
 
 	public static final DeferredRegister<MenuType<?>> CONTAINER_TYPES = DeferredRegister
-			.create(ForgeRegistries.MENU_TYPES, Reference.MODID);
+			.create(ForgeRegistries.CONTAINERS, Reference.MODID);
 	
 	public static final RegistryObject<MenuType<ContainerLaser>> LASER_CONTAINER_TYPE = CONTAINER_TYPES
 			.register("laser", () -> IForgeMenuType.create(ContainerLaser::new));

@@ -57,7 +57,7 @@ public class ModUpgrades {
 			return super.getMultiplier(property);
 		};
 	});
-
+	
 	public static final RegistryObject<Item> Silence = registerItem("silence", () -> new ItemUpgradeBase("silence") {
 		public boolean isUsefullForLaser() {return true;};
 	});

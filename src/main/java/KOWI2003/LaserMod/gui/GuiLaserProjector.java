@@ -46,7 +46,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
@@ -54,16 +53,15 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.ModelData;
+import net.minecraftforge.client.model.data.IModelData;
 
 public class GuiLaserProjector extends Screen {
 
@@ -80,7 +78,7 @@ public class GuiLaserProjector extends Screen {
 	public static final int WINDOW_INSIDE_HEIGHT = 145;
 	private static final int WINDOW_TITLE_X = 8;
 	private static final int WINDOW_TITLE_Y = 6;
-	private static final Component TITLE = MutableComponent.create(new TranslatableContents("block.lasermod.laser_projector"));
+	private static final Component TITLE = new TranslatableComponent("block.lasermod.laser_projector");
 	
 	float x = 0, y = 0, z = 0;
 	float rotX = 0, rotY = 0;
@@ -114,13 +112,13 @@ public class GuiLaserProjector extends Screen {
 	public static boolean debug = false;
 	
 	public GuiLaserProjector(TileEntityLaserProjector te) {
-		super(MutableComponent.create(new LiteralContents("Null")));
+		super(new TextComponent("Null"));
 		this.te = te;
 		buttons = new ArrayList<>();
 		this.minecraft = Minecraft.getInstance();
 		centreView();
 		
-		nextTemplate = new Button(0, 0, 20, 20, MutableComponent.create(new LiteralContents(">")), (button) -> {
+		nextTemplate = new Button(0, 0, 20, 20, new TextComponent(">"), (button) -> {
 			int index = te.template.ordinal();
 			index++;
 			if(index >= ProjectorTemplates.values().length)
@@ -130,7 +128,7 @@ public class GuiLaserProjector extends Screen {
 			hoveringWidget = null;
 		});
 		
-		prevTemplate = new Button(0, 0, 20, 20, MutableComponent.create(new LiteralContents("<")), (button) -> {
+		prevTemplate = new Button(0, 0, 20, 20, new TextComponent("<"), (button) -> {
 			int index = te.template.ordinal();
 			index--;
 			if(index < 0)
@@ -142,10 +140,10 @@ public class GuiLaserProjector extends Screen {
 
 		
 		
-		gridToggle = new ButtonTexture(0, 0, 103, 0, 20, 20, MutableComponent.create(new LiteralContents(" ")), (button) -> {
+		gridToggle = new ButtonTexture(0, 0, 103, 0, 20, 20, new TextComponent(" "), (button) -> {
 			useGrid = !useGrid;
 		}, WIDGETS);
-		toggle3D = new ButtonTexture(0, 0, is3D ? 82 : 102, is3D ? 41 : 42, 20, 20, MutableComponent.create(new LiteralContents(" ")), (button) -> {
+		toggle3D = new ButtonTexture(0, 0, is3D ? 82 : 102, is3D ? 41 : 42, 20, 20, new TextComponent(" "), (button) -> {
 			is3D = !is3D;
 			if(!is3D) {
 				rotX = 0;
@@ -154,10 +152,10 @@ public class GuiLaserProjector extends Screen {
 			toggle3D.uvX = is3D ? 82 : 102;
 			toggle3D.uvY = is3D ? 21 : 22;
 		}, WIDGETS);
-		centreView = new ButtonTexture(0, 0, 124, 0, 20, 20, MutableComponent.create(new LiteralContents(" ")), (button) -> {
+		centreView = new ButtonTexture(0, 0, 124, 0, 20, 20, new TextComponent(" "), (button) -> {
 			centreView();
 		}, WIDGETS);
-		toggleSurrounding = new ButtonTexture(0, 0, !showSurroudings ? 102 : 122, 123, 20, 20, MutableComponent.create(new LiteralContents(" ")), (button) -> {
+		toggleSurrounding = new ButtonTexture(0, 0, !showSurroudings ? 102 : 122, 123, 20, 20, new TextComponent(" "), (button) -> {
 			showSurroudings = !showSurroudings;
 			toggleSurrounding.uvX = !showSurroudings ? 102 : 122;
 			toggleSurrounding.uvY = !showSurroudings ? 103 : 103;
@@ -210,29 +208,29 @@ public class GuiLaserProjector extends Screen {
 		int posx = width / 2;
 		int posy = height / 2;
 		
-		nextTemplate.x = (posx+55);
-		nextTemplate.y = (posy-112);
+		nextTemplate.x = posx+55;
+		nextTemplate.y = posy-112;
 		
-		prevTemplate.x = (posx-72);
-		prevTemplate.y = (posy-112);
+		prevTemplate.x = posx-72;
+		prevTemplate.y = posy-112;
 		
-		gridToggle.x = (posx + 38);
-		gridToggle.y = (posy + 91);
+		gridToggle.x = posx + 38;
+		gridToggle.y = posy + 91;
 		
-		toggle3D.x = (gridToggle.x + 30);
-		toggle3D.y = (gridToggle.y);
+		toggle3D.x = gridToggle.x + 30;
+		toggle3D.y = gridToggle.y;
 		
-		toggleSurrounding.x = (toggle3D.x + 30);
-		toggleSurrounding.y = (toggle3D.y);
+		toggleSurrounding.x = toggle3D.x + 30;
+		toggleSurrounding.y = toggle3D.y;
 
-		centreView.x = (gridToggle.x - 30);
-		centreView.y = (gridToggle.y);
+		centreView.x = gridToggle.x - 30;
+		centreView.y = gridToggle.y;
 		
-		properties.x = (posx + 128);
-		properties.y = (posy - 80);
+		properties.x = posx + 128;
+		properties.y = posy - 80;
 		
-		parts.x = (posx - 200);
-		parts.y = (posy - 80);
+		parts.x = posx - 200;
+		parts.y = posy - 80;
 		
 		for (AbstractWidget widget : buttons) {
 			WidgetBase data = null;
@@ -242,8 +240,8 @@ public class GuiLaserProjector extends Screen {
 				data = ((ManualComponent<?>)widget).getData();
 			}
 			if(data != null) {
-				widget.x = (posx + data.X);
-				widget.y = (posy + data.Y);
+				widget.x = posx + data.X;
+				widget.y = posy + data.Y;
 			}
 			
 			if(widget instanceof ManualComponent<?>)
@@ -468,7 +466,6 @@ public class GuiLaserProjector extends Screen {
 		matrix.popPose();
 	}
 	
-	@SuppressWarnings("deprecation")
 	void renderSurroudings(PoseStack matrix, float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop) {
 		matrix.pushPose();
 		float rot = te.getBlockState().getValue(BlockHorizontal.FACING).toYRot();
@@ -499,11 +496,11 @@ public class GuiLaserProjector extends Screen {
 						continue;
 					matrix.translate(i, j, k);
 					BakedModel model = renderer.getBlockModel(state);
-					ModelData modelData = model.getModelData(minecraft.level, pos, state, null);
+					IModelData modelData = model.getModelData(minecraft.level, pos, state, null);
 					float[] color = Utils.getFloatRGBAFromHexInt(Minecraft.getInstance().getBlockColors().getColor(state, level, pos, 0));
 					
 //					renderer.renderBatched(state, pos, level, matrix, buffer.getBuffer(RenderType.translucent()), true, new Random(), modelData); //--> has shadows on the blocks that have an block next tot them in the world
-					modelRenderer.renderModel(matrix.last(), buffer.getBuffer(ItemBlockRenderTypes.getRenderType(state, false)), state, model, color[0], color[1], color[2], 15728880, OverlayTexture.NO_OVERLAY, modelData, RenderType.translucent());
+					modelRenderer.renderModel(matrix.last(), buffer.getBuffer(ItemBlockRenderTypes.getRenderType(state, false)), state, model, color[0], color[1], color[2], 15728880, OverlayTexture.NO_OVERLAY, modelData);
 //					renderer.renderSingleBlock(state, matrix, buffer, 15728880, OverlayTexture.NO_OVERLAY, modelData); //--> Crashes when an block with tintindex is visible like the laser
 					if(tile != null)
 						tileRenderer.render(tile, partialTicks, matrix, buffer);
@@ -660,7 +657,7 @@ public class GuiLaserProjector extends Screen {
 		
 		boolean click = super.mouseDragged(mouseX, mouseY, buttonId, deltaX, deltaY);
 		for (AbstractWidget widget : buttons)
-			click = widget.mouseDragged(mouseX, mouseY, buttonId, deltaX, deltaY) || click;
+			click = click || widget.mouseDragged(mouseX, mouseY, buttonId, deltaX, deltaY);
 		return click;
 	}
 	
@@ -773,8 +770,8 @@ public class GuiLaserProjector extends Screen {
 	public void renderCheckBox(PoseStack matrix, Checkbox checkbox) {
 		int posx = checkbox.x;
 		int posy = checkbox.y;
-		checkbox.x = (0);
-		checkbox.y = (0);
+		checkbox.x = 0;
+		checkbox.y = 0;
 		matrix.pushPose();
 		matrix.translate(posx, posy, 0);
 		float scale = 0.5f;

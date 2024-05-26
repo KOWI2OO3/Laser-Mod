@@ -1,7 +1,5 @@
 package KOWI2003.LaserMod.items.tools;
 
-import org.jetbrains.annotations.Nullable;
-
 import KOWI2003.LaserMod.items.ItemLaserToolBase;
 import KOWI2003.LaserMod.items.ItemUpgradeBase;
 import KOWI2003.LaserMod.items.ItemUpgradeBase.LaserTools;
@@ -24,15 +22,15 @@ public class ToolLaserHoe extends ItemLaserToolBase {
 		super(properties, BlockTags.MINEABLE_WITH_HOE, speed, damageBaseline, maxCharge);
 	}
 	
+	@SuppressWarnings("removal")
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
 		if(isExtended((context.getItemInHand())))
 		{
 			Level world = context.getLevel();
 			BlockPos blockpos = context.getClickedPos();
-			BlockState original = world.getBlockState(blockpos);
-			@Nullable BlockState hook = ForgeEventFactory.onToolUse(original, context, ToolActions.HOE_TILL, false);
-			if(hook != null && hook != original) return InteractionResult.SUCCESS;
+			int hook = ForgeEventFactory.onHoeUse(context);
+			if(hook != 0) return hook > 0 ? InteractionResult.SUCCESS : InteractionResult.FAIL;
 			if(context.getClickedFace() != Direction.DOWN && world.isEmptyBlock(blockpos.above()))
 			{
 				BlockState state = world.getBlockState(blockpos).getToolModifiedState(context, ToolActions.HOE_TILL, true);

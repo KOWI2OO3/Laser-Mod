@@ -34,7 +34,7 @@ public class BlockModificationStation extends BlockHorizontal {
 		if(!world.isClientSide) {
 			BlockEntity te = world.getBlockEntity(pos);
 			if(te instanceof TileEntityModStation) {
-				NetworkHooks.openScreen((ServerPlayer)player, (TileEntityModStation)te, pos);
+				NetworkHooks.openGui((ServerPlayer)player, (TileEntityModStation)te, pos);
 				return InteractionResult.SUCCESS;
 			}
 		}

@@ -5,10 +5,9 @@ import KOWI2003.LaserMod.tileentities.projector.gui.RenderContext;
 import KOWI2003.LaserMod.utils.RenderUtils;
 import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 
 public class ProjectorTextBox extends ProjectorWidget {
 
@@ -63,7 +62,7 @@ public class ProjectorTextBox extends ProjectorWidget {
 	public void renderWidget(RenderContext<?> context) {
 		if(text != null && !text.isEmpty()) {
 			float[] color = Utils.parseColor(textColor);
-			MutableComponent s = MutableComponent.create(new LiteralContents(text));
+			TextComponent s = new TextComponent(text);
 			Style sty = Style.EMPTY;
 			sty.withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(color)));
 			s.setStyle(sty);

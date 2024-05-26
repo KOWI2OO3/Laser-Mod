@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 public class ItemIRGlasses extends ItemDefault {
 
 	@Override
-	public int getMaxStackSize(ItemStack stack) {
+	public int getItemStackLimit(ItemStack stack) {
 		return 1;
 	}
 	

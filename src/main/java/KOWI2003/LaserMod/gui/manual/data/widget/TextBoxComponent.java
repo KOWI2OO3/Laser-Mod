@@ -10,10 +10,10 @@ public class TextBoxComponent extends WidgetBase {
 
 	public String Text;
 	public float[] TextColor;
-	
-	public boolean centred = false;
 
 	public List<Supplier<String>> arguments;
+	
+	public boolean centred = false;
 	
 	public TextBoxComponent(String name, int x, int y, int width, int height, String tooltip, float[] tooltipColor,
 			float[] backgroundColor, String text, float[] textColor) {

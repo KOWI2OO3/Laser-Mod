@@ -1,15 +1,10 @@
 package KOWI2003.LaserMod.utils.compat.jei;
 
 import KOWI2003.LaserMod.Reference;
-import KOWI2003.LaserMod.recipes.infuser.IInfuserRecipe;
-import KOWI2003.LaserMod.recipes.precisionAssembler.IPrecisionAssemblerRecipe;
-import mezz.jei.api.recipe.RecipeType;
+import net.minecraft.resources.ResourceLocation;
 
 public class RecipeCategories {
 
-	public static final RecipeType<IInfuserRecipe> INFUSER =
-			RecipeType.create(Reference.MODID, "infuser", IInfuserRecipe.class);
-
-	public static final RecipeType<IPrecisionAssemblerRecipe> PRECISION_ASSEMBLER =
-			RecipeType.create(Reference.MODID, "precision_assembler", IPrecisionAssemblerRecipe.class);
+	public static final ResourceLocation INFUSER = new ResourceLocation(Reference.MODID, "infuser");
+	public static final ResourceLocation PRECISION_ASSEMBLER = new ResourceLocation(Reference.MODID, "precision_assembler");
 }

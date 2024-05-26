@@ -37,7 +37,7 @@ public class LuaItemWidget extends LuaProjectorWidget {
         if(dataSupplier.get() instanceof ProjectorItemData data) {
             switch(method) {
                 case 0:
-                    return MethodResult.of(data.item.isEmpty() ? null : data.item.getItem().getName(data.item).toString());
+                    return MethodResult.of(data.item.isEmpty() ? null : data.item.getItem().getRegistryName().toString());
                 case 1:
                     return MethodResult.of(data.onSurface);
                 case 2:

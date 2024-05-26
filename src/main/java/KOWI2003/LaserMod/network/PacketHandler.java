@@ -33,109 +33,109 @@ public class PacketHandler {
 		INSTANCE.messageBuilder(PacketLaser.class, nextID())
 			.encoder(PacketLaser::toBytes)
 			.decoder(PacketLaser::new)
-			.consumerMainThread(PacketLaser::handle)
+			.consumer(PacketLaser::handle)
 			.add();
 		
 		INSTANCE.messageBuilder(PacketLaserMode.class, nextID())
 		.encoder(PacketLaserMode::toBytes)
 		.decoder(PacketLaserMode::new)
-		.consumerMainThread(PacketLaserMode::handle)
+		.consumer(PacketLaserMode::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketModStation.class, nextID())
 		.encoder(PacketModStation::toBytes)
 		.decoder(PacketModStation::new)
-		.consumerMainThread(PacketModStation::handle)
+		.consumer(PacketModStation::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketComputerToMainThread.class, nextID())
 		.encoder(PacketComputerToMainThread::toBytes)
 		.decoder(PacketComputerToMainThread::new)
-		.consumerMainThread(PacketComputerToMainThread::handle)
+		.consumer(PacketComputerToMainThread::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketLaserDirection.class, nextID())
 		.encoder(PacketLaserDirection::toBytes)
 		.decoder(PacketLaserDirection::new)
-		.consumerMainThread(PacketLaserDirection::handle)
+		.consumer(PacketLaserDirection::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketDeltaMovment.class, nextID())
 		.encoder(PacketDeltaMovment::toBytes)
 		.decoder(PacketDeltaMovment::new)
-		.consumerMainThread(PacketDeltaMovment::handle)
+		.consumer(PacketDeltaMovment::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketSyncIColor.class, nextID())
 		.encoder(PacketSyncIColor::toBytes)
 		.decoder(PacketSyncIColor::new)
-		.consumerMainThread(PacketSyncIColor::handle)
+		.consumer(PacketSyncIColor::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketSyncConfig.class, nextID())
 		.encoder(PacketSyncConfig::toBytes)
 		.decoder(PacketSyncConfig::new)
-		.consumerMainThread(PacketSyncConfig::handle)
+		.consumer(PacketSyncConfig::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketSyncArmor.class, nextID())
 		.encoder(PacketSyncArmor::toBytes)
 		.decoder(PacketSyncArmor::new)
-		.consumerMainThread(PacketSyncArmor::handle)
+		.consumer(PacketSyncArmor::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketTemplateProjector.class, nextID())
 		.encoder(PacketTemplateProjector::toBytes)
 		.decoder(PacketTemplateProjector::new)
-		.consumerMainThread(PacketTemplateProjector::handle)
+		.consumer(PacketTemplateProjector::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketDataChanged.class, nextID())
 		.encoder(PacketDataChanged::toBytes)
 		.decoder(PacketDataChanged::new)
-		.consumerMainThread(PacketDataChanged::handle)
+		.consumer(PacketDataChanged::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketDataRemoved.class, nextID())
 		.encoder(PacketDataRemoved::toBytes)
 		.decoder(PacketDataRemoved::new)
-		.consumerMainThread(PacketDataRemoved::handle)
+		.consumer(PacketDataRemoved::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketSyncItemProperty.class, nextID())
 		.encoder(PacketSyncItemProperty::toBytes)
 		.decoder(PacketSyncItemProperty::new)
-		.consumerMainThread(PacketSyncItemProperty::handle)
+		.consumer(PacketSyncItemProperty::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketOpenItemPropertyMenu.class, nextID())
 		.encoder(PacketOpenItemPropertyMenu::toBytes)
 		.decoder(PacketOpenItemPropertyMenu::new)
-		.consumerMainThread(PacketOpenItemPropertyMenu::handle)
+		.consumer(PacketOpenItemPropertyMenu::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketMultiToolLaserBreakBlock.class, nextID())
 		.encoder(PacketMultiToolLaserBreakBlock::toBytes)
 		.decoder(PacketMultiToolLaserBreakBlock::new)
-		.consumerMainThread(PacketMultiToolLaserBreakBlock::handle)
+		.consumer(PacketMultiToolLaserBreakBlock::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketFireLaserBullet.class, nextID())
 		.encoder(PacketFireLaserBullet::toBytes)
 		.decoder(PacketFireLaserBullet::new)
-		.consumerMainThread(PacketFireLaserBullet::handle)
+		.consumer(PacketFireLaserBullet::handle)
 		.add();
 		
 		INSTANCE.messageBuilder(PacketLaserToolTagUpdate.class, nextID())
 		.encoder(PacketLaserToolTagUpdate::toBytes)
 		.decoder(PacketLaserToolTagUpdate::new)
-		.consumerMainThread(PacketLaserToolTagUpdate::handle)
+		.consumer(PacketLaserToolTagUpdate::handle)
 		.add();
-
+		
 		INSTANCE.messageBuilder(PacketSyncTileEntity.class, nextID())
 		.encoder(PacketSyncTileEntity::toBytes)
 		.decoder(PacketSyncTileEntity::new)
-		.consumerMainThread(PacketSyncTileEntity::handle)
+		.consumer(PacketSyncTileEntity::handle)
 		.add();
 	}
 	

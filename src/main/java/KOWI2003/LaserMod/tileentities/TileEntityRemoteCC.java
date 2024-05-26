@@ -50,7 +50,6 @@ import net.minecraftforge.common.util.LazyOptional;
 
 public class TileEntityRemoteCC extends TileEntityLaserController {
 
-	
 	public final ConcurrentHashMap<BlockPos, BlockEntity> map = new ConcurrentHashMap<>(); 
 
 	CCInterfacePeripheral peripheral;
@@ -568,7 +567,7 @@ public class TileEntityRemoteCC extends TileEntityLaserController {
 							return MethodResult.of("Advanced Laser");
 						
 						default:
-							return MethodResult.of(getLevel().getBlockState(controlPos).getBlock().getName().toString());
+							return MethodResult.of(getLevel().getBlockState(controlPos).getBlock().getRegistryName().toString());
 					}
 				}else
 					throw new LuaException("Expected no arguments");
@@ -655,7 +654,7 @@ public class TileEntityRemoteCC extends TileEntityLaserController {
 	        		if(args.getAll().length == 0) {
 	        			if(!isConnected())
 	        				throw new LuaException("No Connected Device!");
-	        			return MethodResult.of(getLevel().getBlockState(controlPos).getBlock().getName().toString());
+	        			return MethodResult.of(getLevel().getBlockState(controlPos).getBlock().getRegistryName().toString());
 	        		}else
 	    				throw new LuaException("Expected no arguments");
 	        	}
@@ -691,5 +690,4 @@ public class TileEntityRemoteCC extends TileEntityLaserController {
 	}
 	
 	}
-
 }

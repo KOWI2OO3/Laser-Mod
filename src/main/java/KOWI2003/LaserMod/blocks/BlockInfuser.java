@@ -51,7 +51,7 @@ public class BlockInfuser extends BlockHorizontal {
 		if(!world.isClientSide) {
 			BlockEntity te = world.getBlockEntity(pos);
 			if(te instanceof TileEntityInfuser) {
-				NetworkHooks.openScreen((ServerPlayer)player, (TileEntityInfuser) te, pos);
+				NetworkHooks.openGui((ServerPlayer)player, (TileEntityInfuser) te, pos);
 //				NetworkHooks.openGui((ServerPlayer)player, (TileEntityInfuser) te, pos);
 				return InteractionResult.SUCCESS;
 			}

@@ -1,9 +1,8 @@
 package KOWI2003.LaserMod;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -23,7 +22,7 @@ public class DamageSourceLaser extends DamageSource {
 	
 	@Override
 	public Component getLocalizedDeathMessage(LivingEntity entityLivingBaseIn) {
-		return MutableComponent.create(new TranslatableContents("death.block.laser", entityLivingBaseIn.getDisplayName()));
+		return new TranslatableComponent("death.block.laser", entityLivingBaseIn.getDisplayName());
 	}
 	
 	public static class DamageSourceLaserArmor extends DamageSource {
@@ -50,11 +49,11 @@ public class DamageSourceLaser extends DamageSource {
 		
 		@Override
 		public Component getLocalizedDeathMessage(LivingEntity entityLivingBaseIn) {
-			return MutableComponent.create(new TranslatableContents("death.armor.laser", entityLivingBaseIn.getDisplayName(), getEntityName()));
+			return new TranslatableComponent("death.armor.laser", entityLivingBaseIn.getDisplayName(), getEntityName());
 		}
 		
 		Component getEntityName() { 
-			return defender != null ? defender.getDisplayName() : MutableComponent.create(new LiteralContents("someone"));
+			return defender != null ? defender.getDisplayName() : new TextComponent("someone");
 		}
 		
 	}

@@ -8,8 +8,7 @@ import KOWI2003.LaserMod.network.PacketOpenItemPropertyMenu;
 import KOWI2003.LaserMod.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -24,7 +23,7 @@ public class ItemProperty extends DataProperty<ItemStack> {
 	public ItemProperty(int x, int y, int width, int height, String displayName, ItemStack value, GuiLaserProjector gui) {
 		super(x, y, width, height, displayName, value);
 		this.gui = gui;
-		openMenu = new Button(x + 35, y, width - 40, height, MutableComponent.create(new LiteralContents("Edit")), (button) -> {onOpenMenu();});
+		openMenu = new Button(x + 35, y, width - 40, height, new TextComponent("Edit"), (button) -> {onOpenMenu();});
 	}
 	
 	void onOpenMenu() {

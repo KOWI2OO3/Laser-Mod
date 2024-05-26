@@ -8,7 +8,7 @@ import KOWI2003.LaserMod.items.render.RenderMultiTool;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.client.IItemRenderProperties;
 
 public class ItemLaserMutliTool extends LaserItem {
 	
@@ -24,7 +24,7 @@ public class ItemLaserMutliTool extends LaserItem {
 	}
 	
 	@Override
-	public int getMaxStackSize(ItemStack stack) {
+	public int getItemStackLimit(ItemStack stack) {
 		return 1;
 	}
 
@@ -34,14 +34,14 @@ public class ItemLaserMutliTool extends LaserItem {
 	}
 	
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		consumer.accept(new IClientItemExtensions() {
-			
-			@Override
-			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-				return RenderMultiTool.get();
-			}
-		});
+	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+	  consumer.accept(new IItemRenderProperties() {
+
+	    @Override
+	    public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+	      return RenderMultiTool.get();
+	    }
+	  });
 	}
 	
 	@Override

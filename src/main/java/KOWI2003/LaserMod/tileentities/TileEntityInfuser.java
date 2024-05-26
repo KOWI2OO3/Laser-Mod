@@ -10,8 +10,7 @@ import KOWI2003.LaserMod.recipes.infuser.InfuserRecipeHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -89,7 +88,7 @@ public class TileEntityInfuser extends SyncableBlockEntity implements BlockEntit
 
 	@Override
 	public Component getDisplayName() {
-		return MutableComponent.create(new TranslatableContents("container.lasermod.infuser"));
+		return new TranslatableComponent("container.lasermod.infuser");
 	}
 	
 	public ItemStackHandler getUpgradeInv() {

@@ -3,6 +3,7 @@ package KOWI2003.LaserMod.tileentities;
 import KOWI2003.LaserMod.init.ModTileTypes;
 import KOWI2003.LaserMod.tileentities.projector.ProjectorGuiContext;
 import KOWI2003.LaserMod.tileentities.projector.ProjectorTemplates;
+import KOWI2003.LaserMod.utils.ModChecker;
 import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -34,14 +35,13 @@ public class TileEntityLaserProjector extends SyncableBlockEntity implements Blo
 	
 	@Override
 	public void tick(Level level, BlockPos pos, BlockState state, TileEntityLaserProjector tile) {
-		if(isActive) {
-			sync();
-		}
-		
+		if(!(ModChecker.isComputercraftLoaded() && isRemoteControlled))
+			if(isActive)
+				sync();
+
 		if(!isRemoteControlled) {
-			if(isActive != Utils.isBlockPowered(getBlockPos(), getLevel())) {
+			if(isActive != Utils.isBlockPowered(getBlockPos(), getLevel()))
 				isActive = Utils.isBlockPowered(getBlockPos(), getLevel());
-			}
 		}
 	}
 

@@ -17,7 +17,7 @@ public class ProjectorTextData extends ProjectorWidgetData {
 //	public float[] textColor = new float[] {1, 1, 1};
 	
 	public ProjectorTextData() {
-		super(ProjectorWidgetTypes.Text);
+		this(0, 0, 0, "Unknown");
 	}
 
 	public ProjectorTextData(float x, float y, float z, String text) {

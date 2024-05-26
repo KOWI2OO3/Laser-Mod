@@ -111,7 +111,7 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 						matrix.mulPose(Vector3f.XP.rotation(rotation.x));
 						matrix.translate(-.5f, 0.05f, 0);
 						
-						buffer.vertex(matrix2, ll, 0F, 0F).color(r, g, b, a).uv(0, 0).endVertex();
+						buffer.vertex(matrix2, ll, 0F, 0F).color(r,g, b, a).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, ll, (float) distance, 0F).color(r, g, b, a).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, lr, (float) distance, 0F).color(r, g, b, a).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, lr, 0, 0F).color(r, g, b, a).uv(0, 0).endVertex();
@@ -129,7 +129,7 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 		        }else if(te.mode == MODE.POWER) {
 		        	matrix.pushPose();
 		        	 
-						VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_POWER_NEW);
+						VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_POWER);
 						Matrix4f matrix2 = matrix.last().pose();
 		
 							matrix.translate(.5f, .5f, .5f);
@@ -146,19 +146,19 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 							
 							distance += .5d;
 							
-							buffer.vertex(matrix2, 0, 0.1F, 0.5F).color(r, g, b, a).uv(0, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0, (float)distance, 0.5F).color(r, g, b, a).uv(1, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 1F, (float)distance, 0.5F).color(r, g, b, a).uv(1, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 1F, 0.1F, 0.5F).color(r, g, b, a).uv(0, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
+							buffer.vertex(matrix2, 0, 0.1F, 0.5F).color(r,g, b, a).uv(0, 0).endVertex();
+							buffer.vertex(matrix2, 0, (float)distance, 0.5F).color(r,g, b, a).uv(1, 0).endVertex();
+							buffer.vertex(matrix2, 1F, (float)distance, 0.5F).color(r,g, b, a).uv(1, 1).endVertex();
+							buffer.vertex(matrix2, 1F, 0.1F, 0.5F).color(r,g, b, a).uv(0, 1).endVertex();
 			    			
-					        buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_POWER_NEW);
+					        buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_POWER);
 			    			
 					        matrix.translate(0, 0, 0f);
 
-							buffer.vertex(matrix2, 0.5F, 0.1F, 0).color(r,g, b, a).uv(0, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, (float)distance, 0).color(r,g, b, a).uv(1, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, (float)distance, 0 + 1F).color(r,g, b, a).uv(1, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, 0.1F, 0 + 1F).color(r,g, b, a).uv(0, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
+							buffer.vertex(matrix2, 0.5F, 0.1F, 0).color(r,g, b, a).uv(0, 0).endVertex();
+							buffer.vertex(matrix2, 0.5F, (float)distance, 0).color(r,g, b, a).uv(1, 0).endVertex();
+							buffer.vertex(matrix2, 0.5F, (float)distance, 0 + 1F).color(r,g, b, a).uv(1, 1).endVertex();
+							buffer.vertex(matrix2, 0.5F, 0.1F, 0 + 1F).color(r,g, b, a).uv(0, 1).endVertex();
 			    			
 							buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_BEAM);
 
@@ -166,16 +166,16 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 							r2 = g2 = b2 = 1.0f;
 							float a2 = 1.0f;
 							float s = 0.126f;
-							buffer.vertex(matrix2, 0.5f - s/2f, 0.1F, 0.5F).color(r2, g2, b2, a2).uv(0, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5f - s/2f, (float) distance, 0.5F).color(r2, g2, b2, a2).uv(1, 0).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5f + s/2f, (float) distance, 0.5F).color(r2, g2, b2, a2).uv(1, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5f + s/2f, 0.1F, 0.5F).color(r2, g2, b2, a2).uv(0, 1).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
+							buffer.vertex(matrix2, 0.5f - s/2f, 0.1F, 0.5F).color(r2, g2, b2, a2).uv(0, 0).endVertex();
+							buffer.vertex(matrix2, 0.5f - s/2f, (float) distance, 0.5F).color(r2, g2, b2, a2).uv(1, 0).endVertex();
+							buffer.vertex(matrix2, 0.5f + s/2f, (float) distance, 0.5F).color(r2, g2, b2, a2).uv(1, 1).endVertex();
+							buffer.vertex(matrix2, 0.5f + s/2f, 0.1F, 0.5F).color(r2, g2, b2, a2).uv(0, 1).endVertex();
 							
 
-							buffer.vertex(matrix2, 0.5F, 0.1F, 0.5f - s/2f).uv(0, 0).color(r2, g2, b2, a2).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, (float) distance, 0.5f - s/2f).uv(1, 0).color(r2, g2, b2, a2).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, (float) distance, 0.5f + s/2f).uv(1, 1).color(r2, g2, b2, a2).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
-							buffer.vertex(matrix2, 0.5F, 0.1F, 0.5f + s/2f).uv(0, 1).color(r2, g2, b2, a2).overlayCoords(combinedOverlayIn).uv2(combinedLightIn).normal(0, 1, 0).endVertex();
+							buffer.vertex(matrix2, 0.5F, 0.1F, 0.5f - s/2f).uv(0, 0).color(r2, g2, b2, a2).endVertex();
+							buffer.vertex(matrix2, 0.5F, (float) distance, 0.5f - s/2f).uv(1, 0).color(r2, g2, b2, a2).endVertex();
+							buffer.vertex(matrix2, 0.5F, (float) distance, 0.5f + s/2f).uv(1, 1).color(r2, g2, b2, a2).endVertex();
+							buffer.vertex(matrix2, 0.5F, 0.1F, 0.5f + s/2f).uv(0, 1).color(r2, g2, b2, a2).endVertex();
 							
 				        matrix.popPose();
 		        	
@@ -220,7 +220,7 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 		        }else if(te.mode == MODE.NEW_POWER) { 
 		        	 matrix.pushPose();
 		        	 
-						VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER);
+						VertexConsumer buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER_BEAM);
 						Matrix4f matrix2 = matrix.last().pose();
 							
 						thickness *= 2f;
@@ -248,9 +248,6 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 						buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, 0F, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.48f).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.48f).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.52f).endVertex();
-						
-						buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, 0F, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.48f).endVertex();
-		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(1f, 1f, 1f, 1f).uv(1, 0.48f).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, 0, 0F).color(1f, 1f, 1f, 1f).uv(0, 0.52f).endVertex();
 		    			
 		    			buffer = bufferIn.getBuffer(LaserRenderType.LASER_RENDER);
@@ -258,16 +255,10 @@ public class RenderAdvancedLaser implements BlockEntityRenderer<TileEntityAdvanc
 						buffer.vertex(matrix2, ll, 0F, 0F).color(r,g, b, 0f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, ll, (float) distance, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
-
-						buffer.vertex(matrix2, ll, 0F, 0F).color(r,g, b, 0f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f-centerThickness, 0, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, 0F, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, (float) distance, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
-		    			buffer.vertex(matrix2, lr, (float) distance, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
-
-		    			buffer.vertex(matrix2, (lr+ll)/2f+centerThickness, 0F, 0F).color(r, g, b, 1f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, lr, (float) distance, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
 		    			buffer.vertex(matrix2, lr, 0, 0F).color(r, g, b, 0f).uv(0, 0).endVertex();
 		    			

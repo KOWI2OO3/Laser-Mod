@@ -7,9 +7,8 @@ import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
-import net.minecraftforge.client.gui.widget.ForgeSlider;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraftforge.client.gui.widget.Slider;
 
 public class FloatProperty extends DataProperty<Float> {
 
@@ -18,34 +17,32 @@ public class FloatProperty extends DataProperty<Float> {
 	Button Lower;
 	
 	boolean hasRange = false;
-	ForgeSlider rangeSlider;
+	Slider rangeSlider;
 	
 	public FloatProperty(int x, int y, int width, int height, String name, float value, float min, float max) {
 		this(x, y, width, height, name, value);
 		hasRange = min < max;
 		
-		rangeSlider = new ForgeSlider(x + 35, y, width - 37, height, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), min, max, value, .001f, 0, false);
-//		rangeSlider = new Slider(x, y, MutableComponent.create(new LiteralContents(""), min, max, value, (button) -> {}, (button) -> {});
+		rangeSlider = new Slider(x + 35, y, width - 37, height, new TextComponent(""), new TextComponent(""), min, max, value, false, false, (button) -> {});
+//		rangeSlider = new Slider(x, y, new TextComponent(""), min, max, value, (button) -> {}, (button) -> {});
 	}
 	
 	public FloatProperty(int x, int y, int width, int height, String name, float value) {
 		super(x, y, width, 21, name, value);
 		int localX = (name.length() <= 3 ? 0 : Minecraft.getInstance().font.width(getDisplayName())/2);
-		intText = new EditBox(Minecraft.getInstance().font, x+30 + localX, y + 2, 50 - localX, 16, MutableComponent.create(new LiteralContents("intText")));
+		intText = new EditBox(Minecraft.getInstance().font, x+30 + localX, y + 2, 50 - localX, 16, new TextComponent("intText"));
 		intText.setValue(String.format("%.02f", value).replace(".", ","));
 		
-		Raise = new Button(x + localX + 80 - localX, y, 10, 20, MutableComponent.create(new LiteralContents(">")), (button) -> {
+		Raise = new Button(x + localX + 80 - localX, y, 10, 20, new TextComponent(">"), (button) -> {
 			this.value += (Utils.isShiftDown() ? (Utils.isCtrlDown() ? 0.1f : 10f) : (Utils.isCtrlDown() ? 100f : 1f));
 			intText.setValue(String.format("%.02f", this.value).replace(".", ","));
 			setHasChanged();
 		});
-		
-		Lower = new Button(x + localX + 20, y, 10, 20, MutableComponent.create(new LiteralContents("<")), (button) -> {
+		Lower = new Button(x + localX + 20, y, 10, 20, new TextComponent("<"), (button) -> {
 			this.value -= (Utils.isShiftDown() ? (Utils.isCtrlDown() ? 0.1f : 10f) : (Utils.isCtrlDown() ? 100f : 1f));
 			intText.setValue(String.format("%.02f", this.value).replace(".", ","));
 			setHasChanged();
 		});
-		
 	}
 	
 	@Override
@@ -74,19 +71,13 @@ public class FloatProperty extends DataProperty<Float> {
 	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int button) {
 		boolean check = false;
-		if(isMouseOver(mouseX, mouseY)) {
-			if(hasRange) {
-				setHasChanged();
-				if(rangeSlider.isMouseOver(mouseX, mouseY))
-					check = rangeSlider.mouseClicked(mouseX, mouseY, button);
-			}else {
-				if(intText.isMouseOver(mouseX, mouseY))
-					check = intText.mouseClicked(mouseX, mouseY, button) || check;
-				if(Raise.isMouseOver(mouseX, mouseY))
-					check = Raise.mouseClicked(mouseX, mouseY, button) || check;
-				if(Lower.isMouseOver(mouseX, mouseY))
-					check = Lower.mouseClicked(mouseX, mouseY, button) || check;
-			}
+		if(hasRange) {
+			setHasChanged();
+			check = rangeSlider.mouseClicked(mouseX, mouseY, button);
+		}else {
+			check = intText.mouseClicked(mouseX, mouseY, button) || check;
+			check = Raise.mouseClicked(mouseX, mouseY, button) || check;
+			check = Lower.mouseClicked(mouseX, mouseY, button) || check;
 		}
 		return check;
 	}
@@ -123,12 +114,11 @@ public class FloatProperty extends DataProperty<Float> {
 	
 	@Override
 	public boolean mouseDragged(double p_93645_, double p_93646_, int p_93647_, double p_93648_, double p_93649_) {
-		boolean i = false;
 		if(hasRange) {
 			setHasChanged();
-			i = rangeSlider.mouseDragged(p_93645_, p_93646_, p_93647_, p_93648_, p_93649_);
+			rangeSlider.mouseDragged(p_93645_, p_93646_, p_93647_, p_93648_, p_93649_);
 		}
-		return i || super.mouseDragged(p_93645_, p_93646_, p_93647_, p_93648_, p_93649_);
+		return super.mouseDragged(p_93645_, p_93646_, p_93647_, p_93648_, p_93649_);
 	}
 	
 	@Override

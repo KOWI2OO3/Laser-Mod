@@ -9,8 +9,7 @@ import KOWI2003.LaserMod.utils.LaserItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -107,7 +106,7 @@ public class TileEntityModStation extends SyncableBlockEntity implements MenuPro
 
 	@Override
 	public Component getDisplayName() {
-		return MutableComponent.create(new TranslatableContents("block.lasermod.mod_station"));
+		return new TranslatableComponent("block.lasermod.mod_station");
 	}
 
 }

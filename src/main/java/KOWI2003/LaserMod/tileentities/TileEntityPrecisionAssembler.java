@@ -10,8 +10,7 @@ import KOWI2003.LaserMod.recipes.precisionAssembler.PrecisionAssemblerRecipeHand
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -94,7 +93,7 @@ public class TileEntityPrecisionAssembler extends SyncableBlockEntity implements
 
 	@Override
 	public Component getDisplayName() {
-		return MutableComponent.create(new TranslatableContents("container.lasermod.precision_assembler"));
+		return new TranslatableComponent("container.lasermod.precision_assembler");
 	}
 	
 	public ItemStackHandler getUpgradeInv() {

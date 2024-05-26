@@ -32,19 +32,19 @@ public class PrecisionAssemblerRenderer implements BlockEntityRenderer<TileEntit
 		matrix.pushPose();
 		try {
 			matrix.translate(0.375, 0.0615f, -0.4408); //left-right / up-down / forward-backward
-			float height = (float)te.handler.getStackInSlot(0).getCount()/(float)te.handler.getStackInSlot(0).getItem().getMaxStackSize(te.handler.getStackInSlot(0)) * 0.12f;
+			float height = (float)te.handler.getStackInSlot(0).getCount()/(float)te.handler.getStackInSlot(0).getItem().getItemStackLimit(te.handler.getStackInSlot(0)) * 0.12f;
 			RenderUtils.renderQuad(matrix, 0, 0, 0, 0.035f, height, 0, 1.0f, 0);
 			
 			matrix.translate(-0.05, 0, 0); //left-right / up-down / forward-backward
-			height = (float)te.handler.getStackInSlot(1).getCount()/(float)te.handler.getStackInSlot(1).getItem().getMaxStackSize(te.handler.getStackInSlot(1)) * 0.12f;
+			height = (float)te.handler.getStackInSlot(1).getCount()/(float)te.handler.getStackInSlot(1).getItem().getItemStackLimit(te.handler.getStackInSlot(1)) * 0.12f;
 			RenderUtils.renderQuad(matrix, 0, 0, 0, 0.035f, height, 0, 1.0f, 0);
 			
 			matrix.translate(-0.05, 0, 0); //left-right / up-down / forward-backward
-			height = (float)te.handler.getStackInSlot(2).getCount()/(float)te.handler.getStackInSlot(2).getItem().getMaxStackSize(te.handler.getStackInSlot(2)) * 0.12f;
+			height = (float)te.handler.getStackInSlot(2).getCount()/(float)te.handler.getStackInSlot(2).getItem().getItemStackLimit(te.handler.getStackInSlot(2)) * 0.12f;
 			RenderUtils.renderQuad(matrix, 0, 0, 0, 0.035f, height, 0, 1.0f, 0);
 			
 			matrix.translate(-0.625, 0, 0); //left-right / up-down / forward-backward
-			height = (float)te.handler.getStackInSlot(4).getCount()/(float)te.handler.getStackInSlot(4).getItem().getMaxStackSize(te.handler.getStackInSlot(4)) * 0.12f;
+			height = (float)te.handler.getStackInSlot(4).getCount()/(float)te.handler.getStackInSlot(4).getItem().getItemStackLimit(te.handler.getStackInSlot(4)) * 0.12f;
 			RenderUtils.renderQuad(matrix, 0, 0, 0, 0.035f, height, 0, 1.0f, 0);
 		}catch(Exception e) {}
 		matrix.popPose();

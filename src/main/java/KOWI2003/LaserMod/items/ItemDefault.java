@@ -1,5 +1,6 @@
 package KOWI2003.LaserMod.items;
 
+import KOWI2003.LaserMod.MainMod;
 import net.minecraft.world.item.Item;
 
 public class ItemDefault extends Item {
@@ -9,7 +10,7 @@ public class ItemDefault extends Item {
 	}
 	
 	public ItemDefault() {
-		super(new Item.Properties());
+		super(new Item.Properties().tab(MainMod.blocks));
 	}
 
 }

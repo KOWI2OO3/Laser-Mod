@@ -38,7 +38,7 @@ public class SyncableBlockEntity extends BlockEntity {
 	}
 	
 	@Override
-	public CompoundTag getPersistentData() {
+	public CompoundTag getTileData() {
 		return this.serializeNBT();
 	}
 	

@@ -19,7 +19,6 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
@@ -28,10 +27,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.event.InputEvent.ClickInputEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.client.event.RenderLevelLastEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -45,7 +44,7 @@ public class LaserMultiToolEvents {
 	
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
-	public void onClickInput(InputEvent.InteractionKeyMappingTriggered event) 
+	public void onClickInput(ClickInputEvent event) 
 	{
 		Player player = Minecraft.getInstance().player;
 		
@@ -60,10 +59,10 @@ public class LaserMultiToolEvents {
 		}
 	}
 	
-	private void onAttack(InputEvent.InteractionKeyMappingTriggered event, Player player) {
+	private void onAttack(ClickInputEvent event, Player player) {
 		event.setCanceled(true);
 		event.setSwingHand(false);
-		
+
 		if(isAttacking)
 			return;
 		
@@ -76,9 +75,9 @@ public class LaserMultiToolEvents {
 			stack = LaserItemUtils.setCharge(stack, LaserItemUtils.getCharge(stack)-1);
 			PacketHandler.sendToServer(new PacketLaserToolTagUpdate(slot, stack.getTag()));
 		}
-		
+
 		isAttacking = true;
-		
+
 		if(ModConfig.GetConfig().useMultiToolRecoil)
 			totalOffset -= 2;
 	}
@@ -89,7 +88,7 @@ public class LaserMultiToolEvents {
 	static float destroyProgress = 0;
 	static float destroyTicks = 0;
 	
-	private void onItemUse(InputEvent.InteractionKeyMappingTriggered event, Player player) {
+	private void onItemUse(ClickInputEvent event, Player player) {
 		event.setSwingHand(false);
 		event.setCanceled(true);
 	}
@@ -158,9 +157,9 @@ public class LaserMultiToolEvents {
 	
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
-	public void lastRender(RenderLevelStageEvent event) {
+	public void lastRender(RenderLevelLastEvent event) {
 		Player player = Minecraft.getInstance().player;
-		
+
 		if(ModConfig.GetConfig().useMultiToolRecoil) {
 			if(totalOffset != 0) {
 				totalOffset += 0.025f * event.getPartialTick();
@@ -196,7 +195,7 @@ public class LaserMultiToolEvents {
 					}
 					if (destroyTicks % 4.0F == 0.0F) {
 						SoundType soundtype = state.getSoundType(Minecraft.getInstance().level, bpos, player);
-						Minecraft.getInstance().getSoundManager().play(new SimpleSoundInstance(soundtype.getHitSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 8.0F, soundtype.getPitch() * 0.5F, RandomSource.create(), bpos));
+						Minecraft.getInstance().getSoundManager().play(new SimpleSoundInstance(soundtype.getHitSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 8.0F, soundtype.getPitch() * 0.5F, bpos));
 					}
 					++destroyTicks;
 					destroyProgress += state.getDestroyProgress(player, level, bpos);
@@ -229,7 +228,7 @@ public class LaserMultiToolEvents {
 	
 	@SubscribeEvent
 	public void onPlayerHarvestCheck(PlayerEvent.HarvestCheck event) {
-		if(event.getEntity().getMainHandItem().getItem() == ModItems.LaserMultiTool.get()) {
+		if(event.getPlayer().getMainHandItem().getItem() == ModItems.LaserMultiTool.get()) {
 //			Player player = event.getPlayer();
 			event.setCanHarvest(true);
 		}
@@ -237,8 +236,8 @@ public class LaserMultiToolEvents {
 	
 	@SubscribeEvent
 	public void onBreakSpeedCheck(PlayerEvent.BreakSpeed event) {
-		if(event.getEntity().getMainHandItem().getItem() == ModItems.LaserMultiTool.get()) {
-			LaserProperties properties = LaserItemUtils.getProperties(event.getEntity().getMainHandItem());
+		if(event.getPlayer().getMainHandItem().getItem() == ModItems.LaserMultiTool.get()) {
+			LaserProperties properties = LaserItemUtils.getProperties(event.getPlayer().getMainHandItem());
 			event.setNewSpeed(properties.getProperty(Properties.SPEED));
 //			event.setNewSpeed(1.4f);
 		}
@@ -246,8 +245,7 @@ public class LaserMultiToolEvents {
 	
 	@SubscribeEvent
 	public void onRenderPlayer(RenderPlayerEvent.Pre event) {
-		Player player = event.getEntity();
-		
+		Player player = event.getPlayer();
 		InteractionHand hand = getHandWithItem(player);
 		if(hand != null) {
 			ItemStack stack = player.getItemInHand(hand);

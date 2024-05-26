@@ -7,8 +7,7 @@ import KOWI2003.LaserMod.gui.widgets.properties.ItemProperty;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -50,7 +49,7 @@ public class PacketOpenItemPropertyMenu {
 	        	
 	        }else {
 	        	ServerPlayer sender = ctx.get().getSender();
-				NetworkHooks.openScreen(sender, (new MenuProvider() {
+				NetworkHooks.openGui(sender, (new MenuProvider() {
 	    			
 	    			@Override
 	    			public AbstractContainerMenu createMenu(int p_39954_, Inventory p_39955_, Player p_39956_) {
@@ -59,7 +58,7 @@ public class PacketOpenItemPropertyMenu {
 	    			
 	    			@Override
 	    			public Component getDisplayName() {
-	    				return MutableComponent.create(new LiteralContents(title));
+	    				return new TextComponent(title);
 	    			}
 	    		}), new BlockPos(0, 0, 0));
 	        }

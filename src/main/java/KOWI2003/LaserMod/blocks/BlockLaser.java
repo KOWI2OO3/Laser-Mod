@@ -55,7 +55,7 @@ public class BlockLaser extends BlockRotatable {
 		if(!world.isClientSide) {
 			BlockEntity te = world.getBlockEntity(pos);
 			if(te instanceof TileEntityLaser) {
-				NetworkHooks.openScreen((ServerPlayer)player, (TileEntityLaser)te, pos);
+				NetworkHooks.openGui((ServerPlayer)player, (TileEntityLaser)te, pos);
 				return InteractionResult.SUCCESS;
 			}
 		}

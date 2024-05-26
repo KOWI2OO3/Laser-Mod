@@ -11,8 +11,6 @@ import KOWI2003.LaserMod.tileentities.TileEntityInfuser;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
-import oshi.util.tuples.Pair;
 
 public class InfuserRecipeHandler {
 
@@ -21,7 +19,7 @@ public class InfuserRecipeHandler {
 	public static void register() {
 		registerRecipe("laser_crystal", new ItemStack(ModItems.LaserCrystal.get()), new ItemStack(Items.REDSTONE, 4), new ItemStack(Items.DIAMOND));
 		registerRecipe("tool_charger", new InfuserRecipeChargingTool());
-		registerRecipe("silicon", new ItemStack(ModItems.Silicon.get()), Ingredient.of(new ItemStack(Items.IRON_NUGGET)), Ingredient.of(ItemTags.SAND));
+		registerRecipe("silicon", new ItemStack(ModItems.Silicon.get()), new ItemStack(Items.IRON_NUGGET), ItemTags.SAND);
 	}
 	
 //	public static void registerOD() {
@@ -56,20 +54,13 @@ public class InfuserRecipeHandler {
 //			}
 //		}
 //	}
-	public static void registerRecipe(String id, ItemStack output, Ingredient input1, Ingredient input2, float speed) {
+	
+	public static void registerRecipe(String id, ItemStack output, Object input1, Object input2, float speed) {
 		recipes.put(id, new InfuserRecipeBase(input1, input2, output, speed));
 	}
 	
-	public static void registerRecipe(String id, ItemStack output, Ingredient input1, Ingredient input2) {
+	public static void registerRecipe(String id, ItemStack output, Object input1, Object input2) {
 		recipes.put(id, new InfuserRecipeBase(input1, input2, output));
-	}
-	
-	public static void registerRecipe(String id, ItemStack output, ItemStack input1, ItemStack input2, float speed) {
-		recipes.put(id, new InfuserRecipeBase(Ingredient.of(input1), Ingredient.of(input2), output, speed));
-	}
-	
-	public static void registerRecipe(String id, ItemStack output, ItemStack input1, ItemStack input2) {
-		recipes.put(id, new InfuserRecipeBase(Ingredient.of(input1), Ingredient.of(input2), output));
 	}
 	
 	public static void registerRecipe(String id, IInfuserRecipe recipe) {
@@ -86,7 +77,7 @@ public class InfuserRecipeHandler {
 	}
 	
 	public static void handleRecipeEnd(IInfuserRecipe recipe, TileEntityInfuser te) {
-		Pair<Ingredient, Integer>[] inputs = recipe.getInputs(te);
+		Object[] inputs = recipe.getInputs(te);
 		ItemStack output = recipe.getOutput(te);
 		if(te.handler.getStackInSlot(2).getItem() == output.getItem())
 			te.handler.setStackInSlot(2, new ItemStack(te.handler.getStackInSlot(2).getItem(), 
@@ -95,17 +86,25 @@ public class InfuserRecipeHandler {
 			te.handler.setStackInSlot(2, output.copy());
 		
 		if(inputs.length >= 2) {
-			if(inputs[0] != null && !inputs[0].getA().isEmpty())
-				te.handler.extractItem(0, inputs[0].getB(), false);
-			if(inputs[1] != null && !inputs[1].getA().isEmpty())
-				te.handler.extractItem(1, inputs[1].getB(), false);
+			if(inputs[0] != null) {
+				if(inputs[0] instanceof ItemStack)
+					te.handler.extractItem(0, ((ItemStack)inputs[0]).getCount(), false);
+				else
+					te.handler.extractItem(0, 1, false);
+			}if(inputs[1] != null) {
+				if(inputs[1] instanceof ItemStack)
+					te.handler.extractItem(1, ((ItemStack)inputs[1]).getCount(), false);
+				else
+					te.handler.extractItem(1, 1, false);
+			}
 		}
 	}
 	
 	public static List<IInfuserRecipe> getAllRecipes() {
 		List<IInfuserRecipe> list = new ArrayList<>();
-		for (String key : recipes.keySet())
+		for (String key : recipes.keySet()) {
 			list.add(recipes.get(key));
+		}
 		
 		return list;
 	}
@@ -113,8 +112,9 @@ public class InfuserRecipeHandler {
 	@SafeVarargs
 	public static <T extends IInfuserRecipe> List<IInfuserRecipe> getRecipes(Class<? extends T> ... exluding) {
 		List<Class<? extends T>> exRecipe = new ArrayList<>();
-		for (Class<? extends T> recipeType : exluding)
+		for (Class<? extends T> recipeType : exluding) {
 			exRecipe.add(recipeType);
+		}
 		
 		List<IInfuserRecipe> list = new ArrayList<>();
 		for (String key : recipes.keySet()) {

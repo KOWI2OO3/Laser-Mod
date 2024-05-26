@@ -1,6 +1,7 @@
 package KOWI2003.LaserMod.items;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,6 +9,7 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 import KOWI2003.LaserMod.LaserProperties;
+import KOWI2003.LaserMod.MainMod;
 import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.init.ModBlocks;
 import KOWI2003.LaserMod.tileentities.ILaserAccess;
@@ -15,12 +17,12 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -80,7 +82,7 @@ public class ItemUpgradeBase extends ItemDefault /*implements SubItems*/ {
 	}
 	
 	public ItemUpgradeBase(Block... blocks) {
-		super(new Item.Properties());
+		super(new Item.Properties().tab(MainMod.upgrades));
 		for (Block block : blocks) {
 			if(block == ModBlocks.AdvancedLaser.get() || block == ModBlocks.Laser.get()) {
 				setCanBeUsedForLaser(true);
@@ -90,7 +92,7 @@ public class ItemUpgradeBase extends ItemDefault /*implements SubItems*/ {
 	}
 	
 	public ItemUpgradeBase(String[] AbilityNames, float[] AbilityNameColor, Block... blocks) {
-		this(new Item.Properties(), AbilityNames, AbilityNameColor);
+		this(new Item.Properties().tab(MainMod.upgrades), AbilityNames, AbilityNameColor);
 		for (Block block : blocks) {
 			if(block == ModBlocks.AdvancedLaser.get() || block == ModBlocks.Laser.get()) {
 				setCanBeUsedForLaser(true);
@@ -117,8 +119,14 @@ public class ItemUpgradeBase extends ItemDefault /*implements SubItems*/ {
 		return getAbilityNames();
 	}
 	
+
 	@Override
-	public int getMaxStackSize(ItemStack stack) {
+	public Collection<CreativeModeTab> getCreativeTabs() {
+		return java.util.Collections.singletonList(MainMod.upgrades);
+	}
+	
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
 		return 1;
 	}
 	
@@ -222,7 +230,7 @@ public class ItemUpgradeBase extends ItemDefault /*implements SubItems*/ {
 	@Override
 	public Component getName(ItemStack stack) {
 		if(hasTier())
-				return MutableComponent.create(new TranslatableContents("item." + Reference.MODID + ".upgrade_" + getUpgradeBaseName()));
+				return new TranslatableComponent("item." + Reference.MODID + ".upgrade_" + getUpgradeBaseName());
 		return super.getName(stack);
 	}
 	
@@ -259,45 +267,45 @@ public class ItemUpgradeBase extends ItemDefault /*implements SubItems*/ {
 
 	@Override
 	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		Component text = MutableComponent.create(new TranslatableContents("r"));
+		Component text = new TranslatableComponent("r");
 		Style st = text.getStyle().applyFormat(ChatFormatting.GRAY);
 		
 		if(hasTier()) {
-			tooltip.add(MutableComponent.create(new TranslatableContents("item.upgrade.tooltip.tier", tier)).plainCopy().setStyle(st));
+			tooltip.add(new TranslatableComponent("item.upgrade.tooltip.tier", tier).plainCopy().setStyle(st));
 		}
 		
-		tooltip.add(MutableComponent.create(new TranslatableContents("item.upgrade.tooltip")).plainCopy().setStyle(st));
+		tooltip.add(new TranslatableComponent("item.upgrade.tooltip").plainCopy().setStyle(st));
 		if(this.isUsefullForLaser())
-			tooltip.add(MutableComponent.create(new TranslatableContents("block.lasermod.laser")).plainCopy().setStyle(st));
+			tooltip.add(new TranslatableComponent("block.lasermod.laser").plainCopy().setStyle(st));
 		if(this.isUsefullForLaserTool(LaserTools.ALL))
-			tooltip.add(MutableComponent.create(new TranslatableContents("item.upgrade.tooltip.laser_tool")).plainCopy().setStyle(st));
+			tooltip.add(new TranslatableComponent("item.upgrade.tooltip.laser_tool").plainCopy().setStyle(st));
 		else {
 			if(this.isUsefullForLaserTool(LaserTools.SWORD))
-				tooltip.add(MutableComponent.create(new TranslatableContents("item.lasermod.laser_sword")).plainCopy().setStyle(st));
+				tooltip.add(new TranslatableComponent("item.lasermod.laser_sword").plainCopy().setStyle(st));
 			if(this.isUsefullForLaserTool(LaserTools.PICKAXE))
-				tooltip.add(MutableComponent.create(new TranslatableContents("item.lasermod.laser_pickaxe")).plainCopy().setStyle(st));
+				tooltip.add(new TranslatableComponent("item.lasermod.laser_pickaxe").plainCopy().setStyle(st));
 			if(this.isUsefullForLaserTool(LaserTools.AXE))
-				tooltip.add(MutableComponent.create(new TranslatableContents("item.lasermod.laser_axe")).plainCopy().setStyle(st));
+				tooltip.add(new TranslatableComponent("item.lasermod.laser_axe").plainCopy().setStyle(st));
 			if(this.isUsefullForLaserTool(LaserTools.SHOVEL))
-				tooltip.add(MutableComponent.create(new TranslatableContents("item.lasermod.laser_shovel")).plainCopy().setStyle(st));
+				tooltip.add(new TranslatableComponent("item.lasermod.laser_shovel").plainCopy().setStyle(st));
 			if(this.isUsefullForLaserTool(LaserTools.HOE))
-				tooltip.add(MutableComponent.create(new TranslatableContents("item.lasermod.laser_hoe")).plainCopy().setStyle(st));
+				tooltip.add(new TranslatableComponent("item.lasermod.laser_hoe").plainCopy().setStyle(st));
 		}
 		if(this.isUsefullForLaserTool(LaserTools.OMNI))
-			tooltip.add(MutableComponent.create(new TranslatableContents("item.lasermod.laser_multitool")).plainCopy().setStyle(st));
+			tooltip.add(new TranslatableComponent("item.lasermod.laser_multitool").plainCopy().setStyle(st));
 		
 		if(canBeUsedForAnyArmor()) {
 			if(canBeUsedOnAllArmor()) {
-				tooltip.add(MutableComponent.create(new TranslatableContents("item.upgrade.tooltip.laser_armor")).plainCopy().setStyle(st));
+				tooltip.add(new TranslatableComponent("item.upgrade.tooltip.laser_armor").plainCopy().setStyle(st));
 			}else {
 				if(this.isUsefullForLaserArmor(0))
-					tooltip.add(MutableComponent.create(new TranslatableContents("item.upgrade.tooltip.laser_helmet")).plainCopy().setStyle(st));
+					tooltip.add(new TranslatableComponent("item.upgrade.tooltip.laser_helmet").plainCopy().setStyle(st));
 				if(this.isUsefullForLaserArmor(1))
-					tooltip.add(MutableComponent.create(new TranslatableContents("item.upgrade.tooltip.laser_chestplate")).plainCopy().setStyle(st));
+					tooltip.add(new TranslatableComponent("item.upgrade.tooltip.laser_chestplate").plainCopy().setStyle(st));
 				if(this.isUsefullForLaserArmor(2))
-					tooltip.add(MutableComponent.create(new TranslatableContents("item.upgrade.tooltip.laser_leggings")).plainCopy().setStyle(st));
+					tooltip.add(new TranslatableComponent("item.upgrade.tooltip.laser_leggings").plainCopy().setStyle(st));
 				if(this.isUsefullForLaserArmor(3))
-					tooltip.add(MutableComponent.create(new TranslatableContents("item.upgrade.tooltip.laser_boots")).plainCopy().setStyle(st));
+					tooltip.add(new TranslatableComponent("item.upgrade.tooltip.laser_boots").plainCopy().setStyle(st));
 			}
 		}
 		

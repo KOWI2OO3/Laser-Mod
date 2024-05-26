@@ -6,11 +6,10 @@ import KOWI2003.LaserMod.gui.manual.data.widget.TextBoxComponent;
 import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.contents.LiteralContents;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class ManualTextBox extends ManualComponent<TextBoxComponent> {
 	
@@ -32,7 +31,7 @@ public class ManualTextBox extends ManualComponent<TextBoxComponent> {
 	public void renderComponent(PoseStack stack, int mouseX, int mouseY) {
 		if(data.Text != null && !data.Text.isEmpty()) {
 			float[] color = Utils.parseColor(data.TextColor);
-			MutableComponent s = MutableComponent.create(new TranslatableContents(data.Text));
+			TextComponent s = new TextComponent(data.Text);
 			Style sty = Style.EMPTY;
 			sty.withColor(TextColor.fromRgb(Utils.getHexIntFromRGB(color)));
 			s.setStyle(sty);
@@ -46,7 +45,6 @@ public class ManualTextBox extends ManualComponent<TextBoxComponent> {
 		}
 	}
 	
-	
 	@Override
 	public void updateOnSizeChanged() {
 		int height = (Minecraft.getInstance().font.split(getComponent(), width).size() + 1) * Minecraft.getInstance().font.lineHeight;
@@ -55,7 +53,7 @@ public class ManualTextBox extends ManualComponent<TextBoxComponent> {
 	}
 
 	private Component getComponent() {
-		return data.arguments != null && data.arguments.size() > 0 ? Component.translatable(msg, data.getArguments()) : Component.translatable(msg);
+		return data.arguments != null && data.arguments.size() > 0 ? new TranslatableComponent(msg, data.getArguments()) : new TranslatableComponent(msg);
 	}
 	
 	@Override

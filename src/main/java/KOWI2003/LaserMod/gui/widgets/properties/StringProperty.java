@@ -5,8 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import KOWI2003.LaserMod.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 
 public class StringProperty extends DataProperty<String> {
 
@@ -19,7 +18,7 @@ public class StringProperty extends DataProperty<String> {
 				x + 5
 				, y - 1
 				+18
-				, 70, 20, MutableComponent.create(new LiteralContents("")));
+				, 70, 20, new TextComponent(""));
 		text.setValue(value);
 		text.setEditable(true);
 	}

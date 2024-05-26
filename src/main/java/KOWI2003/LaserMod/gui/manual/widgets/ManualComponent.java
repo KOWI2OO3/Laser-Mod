@@ -8,8 +8,7 @@ import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TextComponent;
 
 public class ManualComponent<T extends WidgetBase> extends AbstractWidget {
 
@@ -26,7 +25,7 @@ public class ManualComponent<T extends WidgetBase> extends AbstractWidget {
 	}
 	
 	private ManualComponent(int x, int y, int width, int heigth, String name) {
-		this(x, y, width, heigth, MutableComponent.create(new TranslatableContents(name)));
+		this(x, y, width, heigth, new TextComponent(name));
 	}
 
 	@Override
@@ -45,6 +44,16 @@ public class ManualComponent<T extends WidgetBase> extends AbstractWidget {
 	
 	public void renderComponent(PoseStack stack, int mouseX, int mouseY) {
 		
+	}
+	
+	@Override
+	public void renderToolTip(PoseStack stack, int mouseX, int mouseY) {
+		if(data.Tooltip != null && !data.Tooltip.isEmpty() && isHovered) {
+//			float[] color = new float[] {1, 1, 1, 1};
+//			if(data.TooltipColor != null)
+//				color = Utils.parseColor(data.TooltipColor);
+//			String s = data.Tooltip;
+		}
 	}
 	
 	@Override
@@ -81,6 +90,9 @@ public class ManualComponent<T extends WidgetBase> extends AbstractWidget {
 			double deltaY) {
 		return super.mouseDragged(mouseX, mouseY, buttonId, deltaX, deltaY);
 	}
+
+	@Override
+	public void updateNarration(NarrationElementOutput output) {}
 	
 	public T getData() {
 		return data;
@@ -93,17 +105,13 @@ public class ManualComponent<T extends WidgetBase> extends AbstractWidget {
 	}
 	
 	public int getX() {
-		return super.x + data.X;
+		return x + data.X;
 	}
 	
 	public int getY() {
-		return super.y + data.Y;
+		return y + data.Y;
 	}
 	
 //	public void updateComponent() {}
 	public void updateOnSizeChanged() {}
-
-	@Override
-	public void updateNarration(NarrationElementOutput p_169152_) {}
-
 }

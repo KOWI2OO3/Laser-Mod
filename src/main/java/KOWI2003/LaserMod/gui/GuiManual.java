@@ -6,6 +6,7 @@ import java.util.List;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import KOWI2003.LaserMod.Reference;
+import KOWI2003.LaserMod.gui.manual.ManualHandler;
 import KOWI2003.LaserMod.gui.manual.data.GuiContext;
 import KOWI2003.LaserMod.gui.manual.data.WidgetBase;
 import KOWI2003.LaserMod.gui.manual.data.widget.ButtonComponent;
@@ -28,9 +29,7 @@ import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 
 public class GuiManual extends Screen {
@@ -40,14 +39,14 @@ public class GuiManual extends Screen {
 	
 	List<AbstractWidget> buttons;
 	GuiContext gui;
+	
+	public static GuiContext openMenu;
 
 	protected int imageWidth = 176;
 	protected int imageHeight = 166;
 	
-	public static GuiContext openMenu;
-	
 	public GuiManual(GuiContext gui) {
-		super(Component.translatable(gui.getId()));
+		super(new TextComponent(gui.getId()));
 		buttons = new ArrayList<>();
 		this.minecraft = Minecraft.getInstance();
 		
@@ -72,9 +71,8 @@ public class GuiManual extends Screen {
 	@Override
 	protected void init() {
 		super.init();
-		gui.init();
 		clearWidgets();
-  
+		
 		for (WidgetBase base : gui.getComponents()) {
 			switch (base.type) {
 				case None:
@@ -116,10 +114,9 @@ public class GuiManual extends Screen {
 			}else if(widget instanceof ManualComponent<?>) {
 				data = ((ManualComponent<?>)widget).getData();
 			}
-			
 			if(data != null) {
-				widget.x = (posx + data.X);
-				widget.y = (posy + data.Y);
+				widget.x = posx + data.X;
+				widget.y = posy + data.Y;
 			}
 			
 			if(widget instanceof ManualComponent<?>)
@@ -128,7 +125,9 @@ public class GuiManual extends Screen {
 	}
 	
 	public void render(PoseStack matrix, int mouseX, int mouseY, float partialTicks) {
-//		init(); //Debugging command
+		openMenu.init();
+		init();
+		
 		this.renderBackground(matrix);
 		renderBg(matrix, partialTicks, mouseX, mouseY);
 		super.render(matrix, mouseX, mouseY, partialTicks);

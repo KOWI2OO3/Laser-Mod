@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import KOWI2003.LaserMod.MainMod;
 import KOWI2003.LaserMod.Reference;
 import KOWI2003.LaserMod.handlers.ColorHandler;
 import KOWI2003.LaserMod.items.HiddenItem;
@@ -12,6 +13,7 @@ import KOWI2003.LaserMod.items.ItemDefault;
 import KOWI2003.LaserMod.items.ItemIRGlasses;
 import KOWI2003.LaserMod.items.ItemLaserArmorBase;
 import KOWI2003.LaserMod.items.ItemLaserArmorBase.LaserArmorMaterial;
+import KOWI2003.LaserMod.items.ItemLaserDirector;
 import KOWI2003.LaserMod.items.ItemLaserMutliTool;
 import KOWI2003.LaserMod.items.ItemLaserTool;
 import KOWI2003.LaserMod.items.ItemLinker;
@@ -29,7 +31,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -52,20 +54,21 @@ public class ModItems {
 	public static final RegistryObject<Item> LaserCrystal = register("laser_crystal", () -> new ItemDefault());
 	public static final RegistryObject<Item> LaserToolShell = register("laser_tool_base", () -> new ItemLaserTool());
 	
-	public static final RegistryObject<Item> LaserSword = register("laser_sword", () -> new ToolLaserSword(new Item.Properties(), 8f, 6f, 2000));
-	public static final RegistryObject<Item> LaserPickaxe = register("laser_pickaxe", () -> new ToolLaserPickaxe(new Item.Properties(), 8f, 3f, 2000, 2));
-	public static final RegistryObject<Item> LaserAxe = register("laser_axe", () -> new ToolLaserAxe(new Item.Properties(), 8f, 3f, 2000));
-	public static final RegistryObject<Item> LaserShovel = register("laser_shovel", () -> new ToolLaserShovel(new Item.Properties(), 8f, 3f, 2000));
-	public static final RegistryObject<Item> LaserHoe = register("laser_hoe", () -> new ToolLaserHoe(new Item.Properties(), 8f, 6f, 2000));
-	public static final RegistryObject<Item> LaserMultiTool = register("laser_multitool", () -> new ItemLaserMutliTool(new Item.Properties(), 1000));
+	public static final RegistryObject<Item> LaserSword = register("laser_sword", () -> new ToolLaserSword(new Item.Properties().tab(MainMod.blocks), 8f, 6f, 2000));
+	public static final RegistryObject<Item> LaserPickaxe = register("laser_pickaxe", () -> new ToolLaserPickaxe(new Item.Properties().tab(MainMod.blocks), 8f, 3f, 2000, 2));
+	public static final RegistryObject<Item> LaserAxe = register("laser_axe", () -> new ToolLaserAxe(new Item.Properties().tab(MainMod.blocks), 8f, 3f, 2000));
+	public static final RegistryObject<Item> LaserShovel = register("laser_shovel", () -> new ToolLaserShovel(new Item.Properties().tab(MainMod.blocks), 8f, 3f, 2000));
+	public static final RegistryObject<Item> LaserHoe = register("laser_hoe", () -> new ToolLaserHoe(new Item.Properties().tab(MainMod.blocks), 8f, 6f, 2000));
+	public static final RegistryObject<Item> LaserMultiTool = register("laser_multitool", () -> new ItemLaserMutliTool(new Item.Properties().tab(MainMod.blocks), 1000));
 	
-	public static final RegistryObject<Item> LaserHelmet = register("laser_helmet", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.HEAD, new Item.Properties()));
-	public static final RegistryObject<Item> LaserChestplate = register("laser_chestplate", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.CHEST, new Item.Properties()));
-	public static final RegistryObject<Item> LaserLeggings = register("laser_leggings", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.LEGS, new Item.Properties()));
-	public static final RegistryObject<Item> LaserBoots = register("laser_boots", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.FEET, new Item.Properties()));
+	public static final RegistryObject<Item> LaserHelmet = register("laser_helmet", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.HEAD, new Item.Properties().tab(MainMod.blocks)));
+	public static final RegistryObject<Item> LaserChestplate = register("laser_chestplate", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.CHEST, new Item.Properties().tab(MainMod.blocks)));
+	public static final RegistryObject<Item> LaserLeggings = register("laser_leggings", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.LEGS, new Item.Properties().tab(MainMod.blocks)));
+	public static final RegistryObject<Item> LaserBoots = register("laser_boots", () -> new ItemLaserArmorBase(new LaserArmorMaterial(), EquipmentSlot.FEET, new Item.Properties().tab(MainMod.blocks)));
 	
 	public static final RegistryObject<Item> IR_Glasses = register("ir_glasses", () -> new ItemIRGlasses());
 	public static final RegistryObject<Item> Linker = register("linker", () -> new ItemLinker());
+	public static final RegistryObject<Item> LaserDirector = registerHidden("laser_director", () -> new ItemLaserDirector());
     
 	public static final RegistryObject<Item> Silicon = register("silicon", () -> new ItemDefault());
 	public static final RegistryObject<Item> SiliconBase = register("silicon_plate", () -> new ItemDefault());
@@ -85,6 +88,7 @@ public class ModItems {
 	public static final RegistryObject<Item> LaserShovelOpen = registerHidden("hi-lso", () -> new ItemLaserToolOpend()); //Hidden Item - Laser Shovel Opened
 	public static final RegistryObject<Item> LaserHoeOpen = registerHidden("hi-lho", () -> new ItemLaserToolOpend()); //Hidden Item - Laser Hoe Opened
 	public static final RegistryObject<Item> LaserMultiToolOpen = registerHidden("hi-lmto", () -> new ItemLaserToolOpend()); //Hidden Item - Laser Multi Tool
+	
 	
 	private static RegistryObject<Item> register(String name, final Supplier<? extends Item> item) {
 		RegistryObject<Item> toReturn = ITEMS.register(name, item);
@@ -148,8 +152,7 @@ public class ModItems {
 	
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
-	@SuppressWarnings("deprecation")
-	public static void registerBlockColors(RegisterColorHandlersEvent.Item event){
+	public static void registerBlockColors(ColorHandlerEvent.Item event){
 		event.getItemColors().register(new ColorHandler.Item(), 
 				ModItems.LaserPickaxe.get(), ModItems.LaserSword.get(), ModItems.LaserHoe.get(), ModItems.LaserAxe.get(), ModItems.LaserShovel.get(), ModItems.LaserMultiTool.get(),
 				ModItems.LaserToolOpened.get(), ModItems.LaserHelmetOpened.get(), ModItems.LaserChestplateOpened.get(), ModItems.LaserLegginsOpened.get(), ModItems.LaserBootsOpened.get(),

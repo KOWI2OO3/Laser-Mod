@@ -8,7 +8,7 @@ import KOWI2003.LaserMod.utils.Utils;
 import net.minecraft.nbt.CompoundTag;
 
 public class ProjectorWidgetData {
-	
+
 	public UUID id = UUID.randomUUID();
 
 	public float x = 0;
@@ -48,6 +48,9 @@ public class ProjectorWidgetData {
 	}
 
 	public final CompoundTag serializeNBT() {
+		if(id == null)
+			id = UUID.randomUUID();
+
 		CompoundTag tag = new CompoundTag();
 		tag.putInt("Type", type.ordinal());
 		tag.putFloat("X", x);
@@ -94,7 +97,7 @@ public class ProjectorWidgetData {
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof ProjectorWidgetData) {
-			return ((ProjectorWidgetData) obj).internalID == internalID;
+			return ((ProjectorWidgetData) obj).id.equals(id);
 		}
 		return super.equals(obj);
 	}

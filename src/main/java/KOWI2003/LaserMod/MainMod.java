@@ -55,7 +55,7 @@ public class MainMod {
 		}
     };
 	
-	public static final CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+	public static final CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 	
 	public MainMod() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

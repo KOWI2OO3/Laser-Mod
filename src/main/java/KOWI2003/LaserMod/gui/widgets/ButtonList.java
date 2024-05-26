@@ -15,8 +15,7 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 
 public class ButtonList extends AbstractWidget {
 
@@ -34,7 +33,7 @@ public class ButtonList extends AbstractWidget {
 	}
 	
 	public ButtonList(int x, int y, int width, int heigth) {
-		this(x, y, width, heigth, MutableComponent.create(new LiteralContents("Null")));
+		this(x, y, width, heigth, new TextComponent("Null"));
 	}
 	
 	public void resetScrollSpeed() {

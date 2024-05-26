@@ -24,8 +24,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.MenuProvider;
@@ -167,7 +166,6 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 	
 	public void setColor(float red, float green, float blue) {
 		setColor(0, new float[] {red, green, blue});
-		
 		TileEntityUtils.syncColorToClient(this);
 		
 		if(!level.isClientSide) {
@@ -364,7 +362,7 @@ public class TileEntityLaser extends SyncableBlockEntity implements BlockEntityT
 	
 	@Override
 	public Component getDisplayName() {
-		return MutableComponent.create(new TranslatableContents("container.lasermod.laser"));
+		return new TranslatableComponent("container.lasermod.laser");
 	}
 	
 public static enum MODE {

@@ -8,8 +8,7 @@ import KOWI2003.LaserMod.container.ContainerItemStackProperty;
 import KOWI2003.LaserMod.gui.widgets.properties.ItemProperty;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
@@ -23,7 +22,7 @@ public class ItemStackPropertyGui extends BetterAbstractContainerScreen<Containe
 	String propertyName;
 	
 	public ItemStackPropertyGui(ContainerItemStackProperty container, Inventory inv, Component title) {
-		super(container, inv, MutableComponent.create(new LiteralContents("")));
+		super(container, inv, new TextComponent(""));
 		closeAction = () -> {ItemProperty.openInstance.onCloseMenu();};
 		propertyName = title.getString();
 	}
