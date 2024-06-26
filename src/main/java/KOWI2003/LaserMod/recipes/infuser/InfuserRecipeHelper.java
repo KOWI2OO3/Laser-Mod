@@ -13,7 +13,7 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 public class InfuserRecipeHelper {
 
-	@SuppressWarnings({ "null", "resource" })
+	@SuppressWarnings({ "null" })
 	public static IInfuserRecipe getRecipe(@Nonnull TileEntityInfuser tile) {
 		return (IInfuserRecipe) tile.getLevel().getRecipeManager()
 			.getAllRecipesFor(ModRecipeTypes.INFUSER.getType())

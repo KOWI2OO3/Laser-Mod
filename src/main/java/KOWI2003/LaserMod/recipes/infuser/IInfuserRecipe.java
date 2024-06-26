@@ -21,21 +21,21 @@ public interface IInfuserRecipe extends Recipe<Container> {
 	public default boolean isRecipeValid(@Nonnull Container container) {
 		if(getInputs(container).length >= 2) {
 			if(getInputs(container)[0] != null && getInputs(container)[1] != null && getOutput(container) != null) {
-				boolean con1  = false;
+				boolean conditionSlot1  = false;
 				if(!getInputs(container)[0].getA().isEmpty())
-					con1 = getInputs(container)[0].getA().test(container.getItem(0)) && container.getItem(0).getCount() >= getInputs(container)[0].getB();
+					conditionSlot1 = getInputs(container)[0].getA().test(container.getItem(0)) && container.getItem(0).getCount() >= getInputs(container)[0].getB();
 				else
-					con1 = container.getItem(0).isEmpty();
+					conditionSlot1 = container.getItem(0).isEmpty();
 				
-				boolean con2 = false;
+				boolean conditionSlot2 = false;
 				if(!getInputs(container)[1].getA().isEmpty())
-					con2 = getInputs(container)[1].getA().test(container.getItem(1)) && container.getItem(1).getCount() >= getInputs(container)[0].getB();
+					conditionSlot2 = getInputs(container)[1].getA().test(container.getItem(1)) && container.getItem(1).getCount() >= getInputs(container)[1].getB();
 				else
-					con2 = container.getItem(1).isEmpty();
+					conditionSlot2 = container.getItem(1).isEmpty();
 				
 				boolean out = (container.getItem(2).getItem() == getOutput(container).getItem() && 
 						container.getItem(2).getCount() + getOutput(container).getCount() <= container.getItem(2).getItem().getMaxStackSize(container.getItem(2))) || container.getItem(2).isEmpty();
-				return con1 && con2 && out;
+				return conditionSlot1 && conditionSlot2 && out;
 			}
 		}
 		return false;	
