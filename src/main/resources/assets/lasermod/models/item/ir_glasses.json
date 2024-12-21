@@ -1,0 +1,89 @@
+{
+    "textures": {
+        "ir_glasses": "lasermod:items/ir_glasses"
+    },
+    "display": {
+        "gui": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 2.025, 2.025, 2.025 ]
+        },
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 3, 0 ],
+            "scale": [ 0.65, 0.65, 0.65 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 0, 4 ],
+            "scale": [ 2, 2, 0.1 ]
+        },
+        "head": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, -0.7, 0 ],
+            "scale": [ 1.7, 1.7, 1.7 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 339, 31, 0 ],
+            "translation": [ 0, 2.1, 1.5 ],
+            "scale": [ 0.6, 0.6, 0.3 ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 75, 315, 0 ],
+            "translation": [ 0, 1.3, 0 ],
+            "scale": [ 0.575, 0.575, 0.575 ]
+        }
+    },
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 4, 5, 4 ], 
+            "to": [ 12, 10, 4 ], 
+            "faces": {
+                "north": { "texture": "#ir_glasses", "uv": [ 0.9, 9, 11, 15 ] },
+                "east": { "texture": "#ir_glasses", "uv": [ 0, 0, 0, 5 ] },
+                "south": { "texture": "#ir_glasses", "uv": [ 0.9, 9, 11, 15 ] },
+                "west": { "texture": "#ir_glasses", "uv": [ 0, 0, 0, 5 ] },
+                "up": { "texture": "#ir_glasses", "uv": [ 0, 0, 8, 0 ] },
+                "down": { "texture": "#ir_glasses", "uv": [ 0, 0, 8, 0 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 4, 7.5, 4.01 ], 
+            "to": [ 4.4, 7.9, 12.01 ], 
+            "faces": {
+                "north": { "texture": "#ir_glasses", "uv": [ 15, 0, 15.4, 0.4 ] },
+                "east": { "texture": "#ir_glasses", "uv": [ 14, 0, 15, 0.5 ] },
+                "south": { "texture": "#ir_glasses", "uv": [ 15, 0, 15.4, 0.4 ] },
+                "west": { "texture": "#ir_glasses", "uv": [ 13, 0, 15, 0.5 ] },
+                "up": { "texture": "#ir_glasses", "uv": [ 15, 0, 15.4, 1 ] },
+                "down": { "texture": "#ir_glasses", "uv": [ 15, 0, 15.4, 2 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 11.6, 7.5, 4.01 ], 
+            "to": [ 12, 7.9, 12.01 ], 
+            "faces": {
+                "north": { "texture": "#ir_glasses", "uv": [ 15, 0, 15.4, 0.4 ] },
+                "east": { "texture": "#ir_glasses", "uv": [ 13, 0, 15, 0.5 ] },
+                "south": { "texture": "#ir_glasses", "uv": [ 15, 0, 15.4, 0.4 ] },
+                "west": { "texture": "#ir_glasses", "uv": [ 13, 0, 15, 0.5 ] },
+                "up": { "texture": "#ir_glasses", "uv": [ 15, 0, 15.4, 2 ] },
+                "down": { "texture": "#ir_glasses", "uv": [ 15, 0, 15.4, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 4, 7.5, 11.61 ], 
+            "to": [ 12, 7.9, 12.01 ], 
+            "faces": {
+                "north": { "texture": "#ir_glasses", "uv": [ 15, 0, 16, 0.4 ] },
+                "south": { "texture": "#ir_glasses", "uv": [ 15, 0, 16, 0.4 ] },
+                "up": { "texture": "#ir_glasses", "uv": [ 15, 0, 15.4, 2 ] },
+                "down": { "texture": "#ir_glasses", "uv": [ 15, 0, 15.4, 1 ] }
+            }
+        }
+    ]
+}

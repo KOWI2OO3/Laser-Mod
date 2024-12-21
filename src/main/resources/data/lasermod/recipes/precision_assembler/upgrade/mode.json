@@ -1,0 +1,16 @@
+{
+    "type": "lasermod:precision_assembler_shapeless",
+    "base_input": {
+        "item": "lasermod:printed_circuit_board"
+    },
+    "inputs": [
+        {
+            "tag": "forge:glass"
+        },
+        {
+            "item": "minecraft:paper"
+        }
+    ],
+    "output": "lasermod:upgrade_mode",
+    "speed": 1
+}

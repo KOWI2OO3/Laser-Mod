@@ -1,0 +1,19 @@
+{
+    "type": "lasermod:precision_assembler_shapeless",
+    "base_input": {
+        "item": "lasermod:printed_circuit_board"
+    },
+    "inputs": [
+        {
+            "tag": "forge:dyes/red"
+        },
+        {
+            "tag": "forge:dyes/blue"
+        },
+        {
+            "tag": "forge:dyes/green"
+        }
+    ],
+    "output": "lasermod:upgrade_color",
+    "speed": 1
+}

@@ -1,0 +1,15 @@
+{
+    "type": "lasermod:infuser",
+    "inputs": [
+        {
+            "item": "minecraft:redstone",
+            "count": 4
+        },
+        {
+            "tag": "forge:gems/diamond",
+            "count": 1
+        }
+    ],
+    "output": "lasermod:laser_crystal",
+    "speed": 1.0
+}

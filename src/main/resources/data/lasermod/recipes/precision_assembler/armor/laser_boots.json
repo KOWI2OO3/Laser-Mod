@@ -1,0 +1,21 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "minecraft:iron_boots"
+    },
+    "inputs": [
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        }
+    ],
+    "output": {
+        "item": "lasermod:laser_boots"
+    },
+    "speed": 1
+}

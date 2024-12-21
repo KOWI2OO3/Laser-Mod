@@ -1,0 +1,21 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "minecraft:iron_block"
+    },
+    "inputs": [
+        {
+            "item": "minecraft:lever"
+        },
+        {
+            "item": "lasermod:printed_circuit_board"
+        },
+        {
+            "item": "minecraft:redstone"
+        }
+    ],
+    "output": {
+        "item": "lasermod:laser_controller"
+    },
+    "speed": 1
+}

@@ -1,0 +1,21 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "lasermod:laser_tool_base"
+    },
+    "inputs": [
+        {
+            "item": "minecraft:iron_pickaxe"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        }
+    ],
+    "output": {
+        "item": "lasermod:laser_pickaxe"
+    },
+    "speed": 1
+}

@@ -1,0 +1,19 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "lasermod:upgrade_capacity_2"
+    },
+    "inputs": [
+        {
+            "tag": "forge:glass"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        {
+            "tag": "forge:ingots/iron"
+        }
+    ],
+    "output": "lasermod:upgrade_capacity_3",
+    "speed": 1
+}

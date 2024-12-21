@@ -1,0 +1,15 @@
+{
+    "type": "lasermod:infuser",
+    "inputs": [
+        {
+            "tag": "forge:nuggets/iron",
+            "count": 1
+        },
+        {
+            "tag": "forge:sand",
+            "count": 1
+        }
+    ],
+    "output": "lasermod:silicon",
+    "speed": 1.0
+}

@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=south": { "model": "lasermod:tool_charger", "y": 180 },
+        "facing=west": { "model": "lasermod:tool_charger", "y": 270 },
+        "facing=north": { "model": "lasermod:tool_charger" },
+        "facing=east": { "model": "lasermod:tool_charger", "y": 90 }
+    }
+}

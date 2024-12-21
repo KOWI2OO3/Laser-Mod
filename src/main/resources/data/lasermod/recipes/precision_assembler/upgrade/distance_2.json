@@ -1,0 +1,17 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "lasermod:upgrade_distance_1"
+    },
+    "inputs": [
+        {
+            "tag": "forge:glass"
+        },
+        {},
+        {
+            "tag": "forge:glass"
+        }
+    ],
+    "output": "lasermod:upgrade_distance_2",
+    "speed": 1
+}

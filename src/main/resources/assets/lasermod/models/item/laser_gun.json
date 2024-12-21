@@ -1,0 +1,330 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+    "textures": {
+        "laser_tool_head": "lasermod:items/laser_tool_head",
+        "laser_tools": "lasermod:items/laser_tools",
+        "anvil_base": "minecraft:blocks/anvil_base"
+    },
+    "display": {
+        "gui": {
+            "rotation": [ 30, 45, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.825, 0.825, 0.825 ]
+        },
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 3, 0 ],
+            "scale": [ 0.65, 0.65, 0.65 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 90, 0 ],
+            "translation": [ 2.1, 1.8, -0.3 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "head": {
+            "rotation": [ 0, 180, 7 ],
+            "translation": [ 4.5, 4, -1 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 0, 160, 0 ],
+            "translation": [ 2, 4.5, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 3, -1.7 ],
+            "scale": [ 0.975, 0.975, 0.975 ]
+        }
+    },
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 7, 5, 0 ], 
+            "to": [ 9, 8, 11 ], 
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 2, 3 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 11, 3 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 2, 3 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 11, 3 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 2, 11 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 2, 11 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6.99, 5.25, 0.25 ], 
+            "to": [ 9.01, 7.75, 10.75 ], 
+            "faces": {
+                "north": { "texture": "#laser_tool_head", "uv": [ 6, 3, 9.01, 6 ], "tintindex": 1 },
+                "east": { "texture": "#laser_tool_head", "uv": [ 6, 3, 9, 6 ], "tintindex": 1 },
+                "south": { "texture": "#laser_tool_head", "uv": [ 6, 3, 9.01, 6 ], "tintindex": 1 },
+                "west": { "texture": "#laser_tool_head", "uv": [ 6, 3, 9, 6 ], "tintindex": 1 },
+                "up": { "texture": "#laser_tool_head", "uv": [ 6, 3, 9.01, 6 ], "tintindex": 1 },
+                "down": { "texture": "#laser_tool_head", "uv": [ 6, 3, 9.01, 6 ], "tintindex": 1 }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6.98, 5, 0 ], 
+            "to": [ 9.02, 6, 11 ], 
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 1 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 11, 1 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 1 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 11, 1 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 11 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 11 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6.98, 5, 0 ], 
+            "to": [ 9.02, 8, 1 ], 
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 3 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 1, 3 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 3 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 1, 3 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 1 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6.98, 6.5, 0 ], 
+            "to": [ 9.02, 7, 11 ], 
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 0.5 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 11, 0.5 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 0.5 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 11, 0.5 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 11 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 11 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6.98, 5, 10 ], 
+            "to": [ 9.02, 8, 11 ], 
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 3 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 1, 3 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 3 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 1, 3 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 1 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6.98, 6.5, 1 ], 
+            "to": [ 9.02, 7, 8.5 ], 
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 0.5 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 7.5, 0.5 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 0.5 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 7.5, 0.5 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 7.5 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 7.5 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 6.98, 6.42, 7.88 ], 
+            "to": [ 9.02, 6.92, 10.31 ], 
+            "rotation": { "origin": [ 8, 8, 8 ], "axis": "x", "angle": -22.5 },
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 0.5 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 2.43, 0.5 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 0.5 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 2.43, 0.5 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 2.43 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 2.04, 2.43 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.1, 5.1, 11 ], 
+            "to": [ 8.9, 5.6, 11.3 ], 
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 1.8, 0.5 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 0.3, 0.5 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 1.8, 0.5 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 0.3, 0.5 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 1.8, 0.3 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 1.8, 0.3 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.1, 7.4, 11 ], 
+            "to": [ 8.9, 7.9, 11.3 ], 
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 1.8, 0.5 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 0.3, 0.5 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 1.8, 0.5 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 0.3, 0.5 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 1.8, 0.3 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 1.8, 0.3 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.1, 5.4, 11 ], 
+            "to": [ 7.6, 7.4, 11.3 ], 
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 0.5, 2 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 0.3, 2 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 0.5, 2 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 0.3, 2 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 0.5, 0.3 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 0.5, 0.3 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 8.4, 5.4, 11 ], 
+            "to": [ 8.9, 7.4, 11.3 ], 
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 0.5, 2 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 0.3, 2 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 0.5, 2 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 0.3, 2 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 0.5, 0.3 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 0.5, 0.3 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.4, 5.4, 10.9 ], 
+            "to": [ 8.6, 7.6, 11.2 ], 
+            "faces": {
+                "north": { "texture": "#laser_tool_head", "uv": [ 6, 3, 9.2, 6.2 ] },
+                "east": { "texture": "#laser_tool_head", "uv": [ 6, 3, 8.3, 6.2 ] },
+                "south": { "texture": "#laser_tool_head", "uv": [ 6, 3, 8.2, 5.2 ], "tintindex": 1 },
+                "west": { "texture": "#laser_tool_head", "uv": [ 0, 0, 0.3, 2.2 ] },
+                "up": { "texture": "#laser_tool_head", "uv": [ 0, 0, 1.2, 0.3 ] },
+                "down": { "texture": "#laser_tool_head", "uv": [ 0, 0, 1.2, 0.3 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.45, 1.7, 5 ], 
+            "to": [ 8.45, 5.7, 6 ], 
+            "faces": {
+                "north": { "texture": "#anvil_base", "uv": [ 0, 0, 1, 4 ] },
+                "east": { "texture": "#anvil_base", "uv": [ 0, 0, 1, 4 ] },
+                "south": { "texture": "#anvil_base", "uv": [ 0, 0, 1, 4 ] },
+                "west": { "texture": "#anvil_base", "uv": [ 0, 0, 1, 4 ] },
+                "up": { "texture": "#anvil_base", "uv": [ 0, 0, 1, 1 ] },
+                "down": { "texture": "#anvil_base", "uv": [ 0, 0, 1, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.55, 4.5, 6 ], 
+            "to": [ 8.35, 4.9, 6.1 ], 
+            "faces": {
+                "north": { "texture": "#laser_tools", "uv": [ 13, 10, 13.8, 10.4 ] },
+                "east": { "texture": "#laser_tools", "uv": [ 13, 11, 13.1, 11.4 ] },
+                "south": { "texture": "#laser_tools", "uv": [ 14, 10, 14.8, 10.4 ] },
+                "west": { "texture": "#laser_tools", "uv": [ 14, 11, 14.1, 11.4 ] },
+                "up": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] },
+                "down": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.55, 4, 6 ], 
+            "to": [ 8.35, 4.4, 6.1 ], 
+            "faces": {
+                "north": { "texture": "#laser_tools", "uv": [ 13, 10, 13.8, 10.4 ] },
+                "east": { "texture": "#laser_tools", "uv": [ 13, 10, 13.1, 10.4 ] },
+                "south": { "texture": "#laser_tools", "uv": [ 14, 10, 14.8, 10.4 ] },
+                "west": { "texture": "#laser_tools", "uv": [ 14, 11, 14.1, 11.4 ] },
+                "up": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] },
+                "down": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.55, 3.5, 6 ], 
+            "to": [ 8.35, 3.9, 6.1 ], 
+            "faces": {
+                "north": { "texture": "#laser_tools", "uv": [ 13, 10, 13.8, 10.4 ] },
+                "east": { "texture": "#laser_tools", "uv": [ 14, 11, 14.1, 11.4 ] },
+                "south": { "texture": "#laser_tools", "uv": [ 14, 10, 14.8, 10.4 ] },
+                "west": { "texture": "#laser_tools", "uv": [ 14, 11, 14.1, 11.4 ] },
+                "up": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] },
+                "down": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.55, 3, 6 ], 
+            "to": [ 8.35, 3.4, 6.1 ], 
+            "faces": {
+                "north": { "texture": "#laser_tools", "uv": [ 13, 10, 13.8, 10.4 ] },
+                "east": { "texture": "#laser_tools", "uv": [ 13, 10, 13.1, 10.4 ] },
+                "south": { "texture": "#laser_tools", "uv": [ 14, 10, 14.8, 10.4 ] },
+                "west": { "texture": "#laser_tools", "uv": [ 14, 11, 14.1, 11.4 ] },
+                "up": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] },
+                "down": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.55, 2.5, 6 ], 
+            "to": [ 8.35, 2.9, 6.1 ], 
+            "faces": {
+                "north": { "texture": "#laser_tools", "uv": [ 13, 10, 13.8, 10.4 ] },
+                "east": { "texture": "#laser_tools", "uv": [ 15, 11, 15.1, 11.4 ] },
+                "south": { "texture": "#laser_tools", "uv": [ 14, 10, 14.8, 10.4 ] },
+                "west": { "texture": "#laser_tools", "uv": [ 14, 11, 14.1, 11.4 ] },
+                "up": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] },
+                "down": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.55, 2, 6 ], 
+            "to": [ 8.35, 2.4, 6.1 ], 
+            "faces": {
+                "north": { "texture": "#laser_tools", "uv": [ 13, 10, 13.8, 10.4 ] },
+                "east": { "texture": "#laser_tools", "uv": [ 14, 11, 14.1, 11.4 ] },
+                "south": { "texture": "#laser_tools", "uv": [ 14, 10, 14.8, 10.4 ] },
+                "west": { "texture": "#laser_tools", "uv": [ 14, 11, 14.1, 11.4 ] },
+                "up": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] },
+                "down": { "texture": "#laser_tools", "uv": [ 13, 11, 13.8, 11.1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.75, 4.71, 6.87 ], 
+            "to": [ 7.95, 6.01, 7.07 ], 
+            "faces": {
+                "north": { "texture": "#laser_tools", "uv": [ 13, 13, 13.2, 14.3 ] },
+                "east": { "texture": "#laser_tools", "uv": [ 14, 13, 14.2, 14.3 ] },
+                "south": { "texture": "#laser_tools", "uv": [ 14, 13, 14.2, 14.3 ] },
+                "west": { "texture": "#laser_tools", "uv": [ 14, 13, 14.2, 14.3 ] },
+                "up": { "texture": "#laser_tools", "uv": [ 14, 14, 14.2, 14.2 ] },
+                "down": { "texture": "#laser_tools", "uv": [ 13, 14, 13.2, 14.2 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 7.75, 5, 5.7 ], 
+            "to": [ 7.95, 5.4, 5.9 ], 
+            "rotation": { "origin": [ 8, 8, 8 ], "axis": "x", "angle": -22.5 },
+            "faces": {
+                "north": { "texture": "#laser_tools", "uv": [ 13, 13, 13.2, 13.4 ] },
+                "east": { "texture": "#laser_tools", "uv": [ 13, 13, 13.2, 13.4 ] },
+                "south": { "texture": "#laser_tools", "uv": [ 14, 13, 14.2, 13.4 ] },
+                "west": { "texture": "#laser_tools", "uv": [ 14, 13, 14.2, 13.4 ] },
+                "up": { "texture": "#laser_tools", "uv": [ 14, 14, 14.2, 14.2 ] },
+                "down": { "texture": "#laser_tools", "uv": [ 13, 14, 13.2, 14.2 ] }
+            }
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[40,)" 
+license="All Rights Reserved unless otherwise explicitly stated"
+
+[[mods]]
+modId="lasermod"
+version="1.1.0"
+displayName="KOWI's Laser Mod"
+logoFile="logo.png"
+authors="KOWI2003"
+description="A Mod that adds working lasers and laser related items to minecraft"
+
+[[dependencies.lasermod]]
+    modId="forge"
+    mandatory=true 
+    versionRange="[40,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.lasermod]]
+    modId="minecraft"
+    mandatory=true
+	versionRange="[1.19,1.19.3]"
+    ordering="NONE"
+    side="BOTH"

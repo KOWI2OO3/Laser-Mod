@@ -1,0 +1,21 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "lasermod:laser"
+    },
+    "inputs": [
+        {
+            "tag": "forge:ingots/iron"
+        },
+        {
+            "item": "lasermod:printed_circuit_board"
+        },
+        {
+            "item": "lasermod:laser_crystal"
+        }
+    ],
+    "output": {
+        "item": "lasermod:laser_projector"
+    },
+    "speed": 1
+}

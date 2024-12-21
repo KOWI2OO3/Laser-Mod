@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+		"ccc",
+        "glc",
+        "ccc"
+    ],
+    "key":
+    {
+        "c":
+        {
+            "tag": "stone_crafting_materials"
+        },
+        "l":
+        {
+            "item": "lasermod:laser_crystal"
+        },
+        "g":
+        {
+            "tag": "forge:glass"
+        }
+    },
+    "result":
+    {
+        "item": "lasermod:laser_catcher",
+        "count": 1
+    }
+}

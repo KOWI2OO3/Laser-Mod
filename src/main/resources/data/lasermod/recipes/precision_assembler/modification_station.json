@@ -1,0 +1,21 @@
+{
+    "type": "lasermod:precision_assembler_shaped",
+    "base_input": {
+        "item": "minecraft:heavy_weighted_pressure_plate"
+    },
+    "inputs": [
+        {
+            "tag": "forge:ingots/iron"
+        },
+        {
+            "item": "lasermod:printed_circuit_board"
+        },
+        {
+            "tag": "forge:ingots/iron"
+        }
+    ],
+    "output": {
+        "item": "lasermod:mod_station"
+    },
+    "speed": 1
+}

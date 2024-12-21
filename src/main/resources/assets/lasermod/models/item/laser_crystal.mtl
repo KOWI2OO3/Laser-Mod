@@ -1,0 +1,4 @@
+newmtl Standard (Instance)
+Kd 1.00 1.00 1.00
+Ka 1.00 1.00 1.00
+map_Kd lasermod:items/time_crystal
